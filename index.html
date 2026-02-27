@@ -634,30 +634,75 @@ section {
   border-radius: 4px;
 }
 
-/* Format output info */
-.format-info {
-  text-align: center;
+/* Format toggle */
+.format-toggle-container {
   margin-bottom: 1.5rem;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.format-toggle-label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--indigo-300);
+  margin-bottom: 0.75rem;
+}
+
+.format-toggle-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
 
-.format-info.format-enseignant {
-  background: rgba(99, 102, 241, 0.12);
+.format-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.15);
   color: var(--indigo-300);
-  border: 1px solid rgba(99, 102, 241, 0.15);
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
 }
 
-.format-info.format-parent {
-  background: rgba(250, 204, 21, 0.1);
-  color: var(--gold-300);
-  border: 1px solid rgba(250, 204, 21, 0.15);
+.format-btn:hover {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.2);
+}
+
+.format-btn.active {
+  border-color: var(--indigo-500);
+  background: rgba(79, 70, 229, 0.15);
+  color: white;
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.15);
+}
+
+.format-icon {
+  font-size: 1.4rem;
+}
+
+.format-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.format-text strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.format-text small {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-weight: 500;
 }
 
 .form-header {
@@ -1316,8 +1361,24 @@ footer {
         </div>
       </div>
 
-      <div class="format-info format-enseignant" id="format-info">
-        🖨️ Format optimisé pour l'impression — Fiche exercice + Fiche outil séparée
+      <div class="format-toggle-container">
+        <div class="format-toggle-label">Format de sortie</div>
+        <div class="format-toggle-group">
+          <button type="button" class="format-btn active" id="format-print" onclick="setFormat('impression')">
+            <span class="format-icon">🖨️</span>
+            <span class="format-text">
+              <strong>Impression</strong>
+              <small>Fiche exercice + Fiche outil séparée</small>
+            </span>
+          </button>
+          <button type="button" class="format-btn" id="format-digital" onclick="setFormat('digital')">
+            <span class="format-icon">💻</span>
+            <span class="format-text">
+              <strong>Digital</strong>
+              <small>Aides cliquables intégrées</small>
+            </span>
+          </button>
+        </div>
       </div>
 
       <div class="form-header">
@@ -1513,7 +1574,9 @@ form.addEventListener('submit', async (e) => {
   }
 
   // Build the message
-  let message = `Profil : ${currentProfile === 'enseignant' ? 'Enseignant (format impression avec fiche outil séparée)' : 'Parent (format digital interactif avec aides cliquables)'}`;
+  const profilLabel = currentProfile === 'enseignant' ? 'Enseignant' : 'Parent d élève';
+  const formatLabel = currentFormat === 'impression' ? 'Impression (fiche exercice + fiche outil séparée, sans aides cliquables)' : 'Digital interactif (aides intégrées cliquables dans chaque exercice)';
+  let message = `Profil : ${profilLabel}\nFormat : ${formatLabel}`;
   message += `\nMatière : ${matiere}\nDegré : ${degre}`;
   if (voie) message += `\nVoie : ${voie}`;
   if (difficulte) message += `\nNiveau de la classe : ${difficulte}`;
@@ -1607,23 +1670,18 @@ degreSelect.addEventListener('change', () => {
 
 // ==================== PROFILE TOGGLE ====================
 let currentProfile = 'enseignant';
+let currentFormat = 'impression';
 
 function setProfile(profile) {
   currentProfile = profile;
-  
-  // Update toggle buttons
   document.getElementById('toggle-enseignant').classList.toggle('active', profile === 'enseignant');
   document.getElementById('toggle-parent').classList.toggle('active', profile === 'parent');
-  
-  // Update format info
-  const formatInfo = document.getElementById('format-info');
-  if (profile === 'enseignant') {
-    formatInfo.className = 'format-info format-enseignant';
-    formatInfo.innerHTML = '🖨️ Format optimisé pour l\'impression — Fiche exercice + Fiche outil séparée';
-  } else {
-    formatInfo.className = 'format-info format-parent';
-    formatInfo.innerHTML = '💻 Format interactif digital — Exercices cliquables avec aides intégrées';
-  }
+}
+
+function setFormat(format) {
+  currentFormat = format;
+  document.getElementById('format-print').classList.toggle('active', format === 'impression');
+  document.getElementById('format-digital').classList.toggle('active', format === 'digital');
 }
 </script>
 
