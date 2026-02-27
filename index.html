@@ -1259,9 +1259,24 @@ footer {
             </select>
           </div>
 
+          <div class="form-group" id="voie-group" style="display:none;">
+            <label for="voie"><span class="label-icon">📊</span> Voie / Niveau</label>
+            <select id="voie" name="voie">
+              <option value="">Non spécifié</option>
+              <option value="VP (voie prégymnasiale)">VP (Prégymnasiale)</option>
+              <option value="VG niveau 1 (exigences de base)">VG Niveau 1 (bases)</option>
+              <option value="VG niveau 2 (exigences supérieures)">VG Niveau 2 (supérieur)</option>
+            </select>
+          </div>
+
           <div class="form-group full-width">
-            <label for="sujet"><span class="label-icon">🎯</span> Sujet / Objectif</label>
-            <textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — savoir comparer et additionner des fractions simples" required></textarea>
+            <label for="sujet"><span class="label-icon">🎯</span> Objectif d'apprentissage</label>
+            <textarea id="sujet" name="sujet" placeholder="Ex : Sprechen über Reiseziele / Les fractions — comparer et additionner / Raconter un récit au passé composé" required></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="theme"><span class="label-icon">📝</span> Thème / Vocabulaire visé <span style="font-weight:400; text-transform:none; letter-spacing:0; opacity:0.6;">(optionnel)</span></label>
+            <textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge, Ferien / Les volcans et les plaques tectoniques / Le vocabulaire du conte"></textarea>
           </div>
 
           <div class="form-separator"></div>
@@ -1366,7 +1381,9 @@ form.addEventListener('submit', async (e) => {
   // Collect form data
   const matiere = document.getElementById('matiere').value;
   const degre = document.getElementById('degre').value;
+  const voie = document.getElementById('voie').value;
   const sujet = document.getElementById('sujet').value;
+  const theme = document.getElementById('theme').value;
   const code = document.getElementById('code').value;
   
   const adaptations = [];
@@ -1380,7 +1397,10 @@ form.addEventListener('submit', async (e) => {
   }
 
   // Build the message
-  let message = `Matière : ${matiere}\nDegré : ${degre}\nSujet : ${sujet}`;
+  let message = `Matière : ${matiere}\nDegré : ${degre}`;
+  if (voie) message += `\nVoie : ${voie}`;
+  message += `\nObjectif : ${sujet}`;
+  if (theme) message += `\nThème / Vocabulaire visé : ${theme}`;
   if (adaptations.length > 0) {
     message += `\nAdaptations BEP : ${adaptations.join(', ')}`;
   }
@@ -1396,7 +1416,9 @@ form.addEventListener('submit', async (e) => {
     const formData = new FormData();
     formData.append('matiere', matiere);
     formData.append('degre', degre);
+    formData.append('voie', voie);
     formData.append('sujet', sujet);
+    formData.append('theme', theme);
     formData.append('code', code);
     formData.append('adaptations', adaptations.join(', '));
     formData.append('message', message);
@@ -1450,6 +1472,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       behavior: 'smooth'
     });
   });
+});
+
+// ==================== VOIE VISIBILITY ====================
+const degreSelect = document.getElementById('degre');
+const voieGroup = document.getElementById('voie-group');
+
+degreSelect.addEventListener('change', () => {
+  const val = degreSelect.value;
+  const isCycle3 = val.startsWith('9H') || val.startsWith('10H') || val.startsWith('11H');
+  voieGroup.style.display = isCycle3 ? 'flex' : 'none';
+  if (!isCycle3) document.getElementById('voie').value = '';
 });
 </script>
 
