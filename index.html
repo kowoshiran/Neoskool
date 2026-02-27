@@ -1269,6 +1269,16 @@ footer {
             </select>
           </div>
 
+          <div class="form-group" id="difficulte-group">
+            <label for="difficulte"><span class="label-icon">🎚️</span> Niveau de la classe</label>
+            <select id="difficulte" name="difficulte">
+              <option value="">Non spécifié</option>
+              <option value="Débutants">🟢 Débutants</option>
+              <option value="Initiés">🟡 Initiés</option>
+              <option value="Motivés">🔴 Motivés</option>
+            </select>
+          </div>
+
           <div class="form-group full-width">
             <label for="sujet"><span class="label-icon">🎯</span> Objectif d'apprentissage</label>
             <textarea id="sujet" name="sujet" placeholder="Ex : Sprechen über Reiseziele / Les fractions — comparer et additionner / Raconter un récit au passé composé" required></textarea>
@@ -1382,6 +1392,7 @@ form.addEventListener('submit', async (e) => {
   const matiere = document.getElementById('matiere').value;
   const degre = document.getElementById('degre').value;
   const voie = document.getElementById('voie').value;
+  const difficulte = document.getElementById('difficulte').value;
   const sujet = document.getElementById('sujet').value;
   const theme = document.getElementById('theme').value;
   const code = document.getElementById('code').value;
@@ -1399,6 +1410,7 @@ form.addEventListener('submit', async (e) => {
   // Build the message
   let message = `Matière : ${matiere}\nDegré : ${degre}`;
   if (voie) message += `\nVoie : ${voie}`;
+  if (difficulte) message += `\nNiveau de la classe : ${difficulte}`;
   message += `\nObjectif : ${sujet}`;
   if (theme) message += `\nThème / Vocabulaire visé : ${theme}`;
   if (adaptations.length > 0) {
@@ -1417,6 +1429,7 @@ form.addEventListener('submit', async (e) => {
     formData.append('matiere', matiere);
     formData.append('degre', degre);
     formData.append('voie', voie);
+    formData.append('difficulte', difficulte);
     formData.append('sujet', sujet);
     formData.append('theme', theme);
     formData.append('code', code);
