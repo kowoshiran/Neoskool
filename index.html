@@ -574,6 +574,92 @@ section {
   pointer-events: none;
 }
 
+/* Profile toggle */
+.profile-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.toggle-group {
+  display: flex;
+  background: rgba(0,0,0,0.25);
+  border-radius: 14px;
+  padding: 4px;
+  gap: 4px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 11px;
+  border: none;
+  background: transparent;
+  color: var(--indigo-300);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.toggle-btn:hover {
+  color: white;
+}
+
+.toggle-btn.active {
+  background: linear-gradient(135deg, var(--indigo-600), var(--indigo-500));
+  color: white;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.4);
+}
+
+.toggle-btn .toggle-icon {
+  font-size: 1.2rem;
+}
+
+.toggle-btn .toggle-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--gold-400);
+  color: var(--indigo-950);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+/* Format output info */
+.format-info {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.format-info.format-enseignant {
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--indigo-300);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.format-info.format-parent {
+  background: rgba(250, 204, 21, 0.1);
+  color: var(--gold-300);
+  border: 1px solid rgba(250, 204, 21, 0.15);
+}
+
 .form-header {
   text-align: center;
   margin-bottom: 2.5rem;
@@ -1215,6 +1301,25 @@ footer {
     <p class="section-subtitle">Remplissez le formulaire, cliquez, et récupérez votre mission pédagogique en 30 secondes.</p>
 
     <div class="form-card">
+      <!-- Profile Toggle -->
+      <div class="profile-toggle">
+        <div class="toggle-group">
+          <button type="button" class="toggle-btn active" id="toggle-enseignant" onclick="setProfile('enseignant')">
+            <span class="toggle-icon">🧑‍🏫</span>
+            Enseignant·e
+          </button>
+          <button type="button" class="toggle-btn" id="toggle-parent" onclick="setProfile('parent')">
+            <span class="toggle-icon">👨‍👩‍👧</span>
+            Parent d'élève
+            <span class="toggle-badge">Nouveau</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="format-info format-enseignant" id="format-info">
+        🖨️ Format optimisé pour l'impression — Fiche exercice + Fiche outil séparée
+      </div>
+
       <div class="form-header">
         <h3>⚡ Créez votre mission</h3>
         <p>Remplissez le formulaire et recevez un exercice complet en 30 secondes</p>
@@ -1408,7 +1513,8 @@ form.addEventListener('submit', async (e) => {
   }
 
   // Build the message
-  let message = `Matière : ${matiere}\nDegré : ${degre}`;
+  let message = `Profil : ${currentProfile === 'enseignant' ? 'Enseignant (format impression avec fiche outil séparée)' : 'Parent (format digital interactif avec aides cliquables)'}`;
+  message += `\nMatière : ${matiere}\nDegré : ${degre}`;
   if (voie) message += `\nVoie : ${voie}`;
   if (difficulte) message += `\nNiveau de la classe : ${difficulte}`;
   message += `\nObjectif : ${sujet}`;
@@ -1426,6 +1532,7 @@ form.addEventListener('submit', async (e) => {
   try {
     // Send to n8n webhook via form POST
     const formData = new FormData();
+    formData.append('profil', currentProfile);
     formData.append('matiere', matiere);
     formData.append('degre', degre);
     formData.append('voie', voie);
@@ -1497,6 +1604,27 @@ degreSelect.addEventListener('change', () => {
   voieGroup.style.display = isCycle3 ? 'flex' : 'none';
   if (!isCycle3) document.getElementById('voie').value = '';
 });
+
+// ==================== PROFILE TOGGLE ====================
+let currentProfile = 'enseignant';
+
+function setProfile(profile) {
+  currentProfile = profile;
+  
+  // Update toggle buttons
+  document.getElementById('toggle-enseignant').classList.toggle('active', profile === 'enseignant');
+  document.getElementById('toggle-parent').classList.toggle('active', profile === 'parent');
+  
+  // Update format info
+  const formatInfo = document.getElementById('format-info');
+  if (profile === 'enseignant') {
+    formatInfo.className = 'format-info format-enseignant';
+    formatInfo.innerHTML = '🖨️ Format optimisé pour l\'impression — Fiche exercice + Fiche outil séparée';
+  } else {
+    formatInfo.className = 'format-info format-parent';
+    formatInfo.innerHTML = '💻 Format interactif digital — Exercices cliquables avec aides intégrées';
+  }
+}
 </script>
 
 </body>
