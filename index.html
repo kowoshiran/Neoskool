@@ -1069,22 +1069,18 @@ section {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  text-align: left;
+  text-align: center;
+  align-items: center;
 }
 .loading-step {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 0.82rem;
-  color: var(--slate-300);
-  font-weight: 600;
-  transition: all 0.4s ease;
-}
-.loading-step.active {
   color: var(--indigo-700);
-}
-.loading-step.done {
-  color: var(--slate-400);
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+  justify-content: center;
 }
 .loading-step-icon {
   width: 22px;
@@ -1620,28 +1616,8 @@ footer {
     <div class="progress-percent" id="progress-percent">0%</div>
     <div class="loading-steps" id="loading-steps">
       <div class="loading-step active" data-step="0">
-        <span class="loading-step-icon">⏳</span>
-        <span>Initialisation du processus...</span>
-      </div>
-      <div class="loading-step" data-step="1">
-        <span class="loading-step-icon">⏳</span>
-        <span>Analyse du programme scolaire...</span>
-      </div>
-      <div class="loading-step" data-step="2">
-        <span class="loading-step-icon">⏳</span>
-        <span>Préparation des exercices...</span>
-      </div>
-      <div class="loading-step" data-step="3">
-        <span class="loading-step-icon">⏳</span>
-        <span>Création de la fiche outil...</span>
-      </div>
-      <div class="loading-step" data-step="4">
-        <span class="loading-step-icon">⏳</span>
-        <span>Vérification du résultat par des chatons...</span>
-      </div>
-      <div class="loading-step" data-step="5">
-        <span class="loading-step-icon">⏳</span>
-        <span>Envoi du résultat par nos lutins...</span>
+        <span class="loading-step-icon">✅</span>
+        <span class="loading-step-text">Initialisation du processus...</span>
       </div>
     </div>
   </div>
@@ -1817,47 +1793,52 @@ form.addEventListener('submit', async (e) => {
   const progressPercent = document.getElementById('progress-percent');
   const loadingEmoji = document.getElementById('loading-emoji');
   const loadingMessage = document.getElementById('loading-message');
-  const steps = document.querySelectorAll('.loading-step');
 
   const loadingStages = [
-    { pct: 5,  emoji: '🚀', msg: 'Initialisation du processus...' },
-    { pct: 18, emoji: '📚', msg: 'Analyse du programme scolaire...' },
-    { pct: 40, emoji: '✏️', msg: 'Préparation des exercices...' },
+    { pct: 3,  emoji: '🚀', msg: 'Initialisation du processus...' },
+    { pct: 10, emoji: '📚', msg: 'Analyse du programme scolaire...' },
+    { pct: 18, emoji: '🧠', msg: 'Activation des sciences cognitives...' },
+    { pct: 27, emoji: '🎯', msg: 'Adaptation au niveau de l\'élève...' },
+    { pct: 36, emoji: '✏️', msg: 'Préparation des exercices...' },
+    { pct: 45, emoji: '🎮', msg: 'Ajout de la gamification...' },
+    { pct: 53, emoji: '💡', msg: 'Intégration des aides différenciées...' },
     { pct: 62, emoji: '🔧', msg: 'Création de la fiche outil...' },
-    { pct: 80, emoji: '🐱', msg: 'Vérification du résultat par des chatons...' },
+    { pct: 70, emoji: '📝', msg: 'Rédaction du corrigé détaillé...' },
+    { pct: 78, emoji: '🎨', msg: 'Application du design Neoskool...' },
+    { pct: 85, emoji: '🐱', msg: 'Vérification du résultat par des chatons...' },
     { pct: 92, emoji: '🧝', msg: 'Envoi du résultat par nos lutins...' },
   ];
 
   let currentStage = 0;
-  // Reset all steps
-  steps.forEach((s, i) => {
-    s.classList.remove('active', 'done');
-    s.querySelector('.loading-step-icon').textContent = '⏳';
-  });
-  steps[0].classList.add('active');
-  progressFill.style.width = '5%';
-  progressPercent.textContent = '5%';
+  const stepEl = document.querySelector('.loading-step');
+  const stepText = stepEl.querySelector('.loading-step-text');
+  const stepIcon = stepEl.querySelector('.loading-step-icon');
+  progressFill.style.width = '3%';
+  progressPercent.textContent = '3%';
   loadingEmoji.textContent = '🚀';
   loadingMessage.textContent = loadingStages[0].msg;
+  stepText.textContent = loadingStages[0].msg;
+  stepIcon.textContent = '✅';
   loadingOverlay.classList.add('visible');
   loadingOverlay.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   const stageInterval = setInterval(() => {
     if (currentStage < loadingStages.length - 1) {
-      // Mark current as done
-      steps[currentStage].classList.remove('active');
-      steps[currentStage].classList.add('done');
-      steps[currentStage].querySelector('.loading-step-icon').textContent = '✅';
-      // Advance
       currentStage++;
-      steps[currentStage].classList.add('active');
       const stage = loadingStages[currentStage];
       progressFill.style.width = stage.pct + '%';
       progressPercent.textContent = stage.pct + '%';
       loadingEmoji.textContent = stage.emoji;
       loadingMessage.textContent = stage.msg;
+      // Fade transition on step text
+      stepEl.style.opacity = '0';
+      setTimeout(() => {
+        stepText.textContent = stage.msg;
+        stepIcon.textContent = '✅';
+        stepEl.style.opacity = '1';
+      }, 200);
     }
-  }, 4500);
+  }, 3500);
 
   try {
     const formData = new FormData();
@@ -1886,15 +1867,13 @@ form.addEventListener('submit', async (e) => {
     
     // Complete the loading bar
     clearInterval(stageInterval);
-    steps.forEach(s => {
-      s.classList.remove('active');
-      s.classList.add('done');
-      s.querySelector('.loading-step-icon').textContent = '✅';
-    });
     progressFill.style.width = '100%';
     progressPercent.textContent = '100%';
     loadingEmoji.textContent = '🎉';
     loadingMessage.textContent = 'C\'est prêt !';
+    stepText.textContent = 'Fiche générée avec succès !';
+    stepIcon.textContent = '🎉';
+    stepEl.style.opacity = '1';
     
     // Small pause to show 100%, then show result
     await new Promise(r => setTimeout(r, 800));
