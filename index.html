@@ -1517,7 +1517,7 @@ footer {
     <div class="result-header">
       <h2 class="section-title">Votre mission est prête !</h2>
       <div class="result-actions">
-        <button class="btn-action btn-print" onclick="document.getElementById('result-iframe').contentWindow.print()">🖨️ Imprimer</button>
+        <button class="btn-action btn-print" onclick="printFiche()">🖨️ Imprimer</button>
         <button class="btn-action btn-new" onclick="newGeneration()">✨ Nouvelle génération</button>
       </div>
     </div>
@@ -1731,6 +1731,18 @@ form.addEventListener('submit', async (e) => {
 function showStatus(message, type) {
   statusMsg.textContent = message;
   statusMsg.className = `status-message ${type}`;
+}
+
+function printFiche() {
+  const iframe = document.getElementById('result-iframe');
+  const htmlContent = iframe.srcdoc;
+  if (!htmlContent) return;
+  const printWindow = window.open('', '_blank');
+  printWindow.document.write(htmlContent);
+  printWindow.document.close();
+  printWindow.onload = function() {
+    printWindow.print();
+  };
 }
 
 function newGeneration() {
