@@ -1049,6 +1049,15 @@ section {
 
 .btn-new:hover { background: var(--slate-100); }
 
+.result-iframe {
+  width: 100%;
+  min-height: 800px;
+  border: 1px solid var(--slate-200);
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
 .result-frame {
   background: white;
   border-radius: 16px;
@@ -1508,13 +1517,11 @@ footer {
     <div class="result-header">
       <h2 class="section-title">Votre mission est prête !</h2>
       <div class="result-actions">
-        <button class="btn-action btn-print" onclick="window.print()">🖨️ Imprimer</button>
+        <button class="btn-action btn-print" onclick="document.getElementById('result-iframe').contentWindow.print()">🖨️ Imprimer</button>
         <button class="btn-action btn-new" onclick="newGeneration()">✨ Nouvelle génération</button>
       </div>
     </div>
-    <div class="result-frame" id="result-content">
-      <!-- Le contenu généré apparaîtra ici -->
-    </div>
+    <iframe id="result-iframe" class="result-iframe" sandbox="allow-same-origin allow-popups" title="Fiche générée"></iframe>
   </div>
 </section>
 
@@ -1588,7 +1595,7 @@ const form = document.getElementById('neoskool-form');
 const btn = document.getElementById('btn-generate');
 const statusMsg = document.getElementById('status-message');
 const resultSection = document.getElementById('result-section');
-const resultContent = document.getElementById('result-content');
+const resultContent = document.getElementById('result-iframe');
 const degreSelect = document.getElementById('degre');
 const matiereSelect = document.getElementById('matiere');
 const voieGroup = document.getElementById('voie-group');
@@ -1694,7 +1701,17 @@ form.addEventListener('submit', async (e) => {
 
     const html = await response.text();
     
-    resultContent.innerHTML = html;
+    resultContent.srcdoc = html;
+    resultContent.onload = function() {
+      // Auto-resize iframe to fit content
+      try {
+        const iframeDoc = resultContent.contentDocument || resultContent.contentWindow.document;
+        const height = iframeDoc.documentElement.scrollHeight + 40;
+        resultContent.style.height = height + 'px';
+      } catch(e) {
+        resultContent.style.height = '2000px';
+      }
+    };
     resultSection.classList.add('visible');
     resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
