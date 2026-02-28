@@ -88,7 +88,6 @@ body {
   50% { transform: translateY(-40px) scale(1.05); }
 }
 
-/* Grid pattern overlay */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -222,7 +221,6 @@ body {
   margin-top: 0.25rem;
 }
 
-/* Scroll indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 2rem;
@@ -338,10 +336,6 @@ section {
   font-size: 0.95rem;
   color: var(--slate-600);
   line-height: 1.6;
-}
-
-.step-arrow {
-  display: none;
 }
 
 /* ==================== SCIENCES ==================== */
@@ -560,7 +554,6 @@ section {
     0 0 120px rgba(79, 70, 229, 0.08);
 }
 
-/* Subtle gradient border glow */
 .form-card::before {
   content: '';
   position: absolute;
@@ -574,7 +567,6 @@ section {
   pointer-events: none;
 }
 
-/* Profile toggle */
 .profile-toggle {
   display: flex;
   justify-content: center;
@@ -634,7 +626,6 @@ section {
   border-radius: 4px;
 }
 
-/* Format toggle */
 .format-toggle-container {
   margin-bottom: 1.5rem;
   padding-bottom: 1.5rem;
@@ -810,7 +801,6 @@ section {
   line-height: 1.6;
 }
 
-/* Adaptation chips - premium redesign */
 .adaptations-group {
   display: flex;
   flex-wrap: wrap;
@@ -871,7 +861,6 @@ section {
   transition: all 0.3s ease;
 }
 
-/* Code input special styling */
 .code-input-wrapper {
   position: relative;
 }
@@ -890,7 +879,6 @@ section {
   font-style: italic;
 }
 
-/* Separator */
 .form-separator {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
@@ -898,7 +886,6 @@ section {
   grid-column: 1 / -1;
 }
 
-/* Generate button - premium gold */
 .btn-generate {
   position: relative;
   display: flex;
@@ -1171,12 +1158,12 @@ footer {
     <div class="hero-badge">Bêta — Canton de Vaud</div>
     <h1>L'école mérite<br>sa <span class="gold">révolution</span></h1>
     <p class="hero-subtitle">
-      Neoskool génère des exercices pédagogiques fondés sur <strong>7 principes scientifiques d'apprentissage</strong>. Gamifiés, adaptés à chaque élève, prêts en 30 secondes.
+      Neoskool génère des exercices pédagogiques fondés sur <strong>10 principes scientifiques d'apprentissage</strong>. Gamifiés, adaptés à chaque élève, prêts en 30 secondes.
     </p>
     <a href="#generer" class="hero-cta">Générer un exercice</a>
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="hero-stat-number">7</div>
+        <div class="hero-stat-number">10</div>
         <div class="hero-stat-label">Principes cognitifs</div>
       </div>
       <div class="hero-stat">
@@ -1222,7 +1209,7 @@ footer {
 <section class="sciences">
   <div class="container">
     <div class="section-label">✦ Fondements scientifiques</div>
-    <h2 class="section-title">Chaque exercice intègre 7 principes<br>prouvés par la recherche</h2>
+    <h2 class="section-title">Chaque exercice intègre 10 principes<br>prouvés par la recherche</h2>
     <p class="section-subtitle">Neoskool n'est pas un générateur de fiches. C'est un outil de conception pédagogique fondé sur les sciences cognitives.</p>
     <div class="science-grid">
       <div class="science-card">
@@ -1298,7 +1285,7 @@ footer {
 
           <span class="badge">🏆 Badges à débloquer</span>
           <span class="badge">⭐ 3 niveaux</span>
-          <span class="badge">🧠 7 principes actifs</span>
+          <span class="badge">🧠 10 principes actifs</span>
 
           <h3>🔥 Rappel Express — Active tes neurones !</h3>
           <p>Avant de commencer, rappelle-toi : une fraction, c'est un partage. Si tu coupes une tablette en 4 morceaux égaux et que tu en prends 3, tu as pris <strong>3/4</strong> de la tablette.</p>
@@ -1445,6 +1432,14 @@ footer {
             </select>
           </div>
 
+          <!-- NOUVEAU : Sélecteur de chapitre (apparaît pour Allemand + Cycle 3) -->
+          <div class="form-group" id="chapitre-group" style="display:none;">
+            <label for="chapitre"><span class="label-icon">📖</span> Chapitre</label>
+            <select id="chapitre" name="chapitre">
+              <option value="">Tous les chapitres</option>
+            </select>
+          </div>
+
           <div class="form-group full-width">
             <label for="sujet"><span class="label-icon">🎯</span> Objectif d'apprentissage</label>
             <textarea id="sujet" name="sujet" placeholder="Ex : Sprechen über Reiseziele / Les fractions — comparer et additionner / Raconter un récit au passé composé" required></textarea>
@@ -1541,26 +1536,112 @@ footer {
 
 <script>
 // ==================== CONFIGURATION ====================
-// ⚠️ REMPLACEZ PAR VOTRE URL WEBHOOK N8N
 const WEBHOOK_URL = 'https://kowoshiran.app.n8n.cloud/webhook/pedagoia-generate';
 
-// ==================== FORM HANDLING ====================
+// ==================== PROFILE & FORMAT ====================
+let currentProfile = 'enseignant';
+let currentFormat = 'impression';
+
+function setProfile(profile) {
+  currentProfile = profile;
+  document.getElementById('toggle-enseignant').classList.toggle('active', profile === 'enseignant');
+  document.getElementById('toggle-parent').classList.toggle('active', profile === 'parent');
+}
+
+function setFormat(format) {
+  currentFormat = format;
+  document.getElementById('format-print').classList.toggle('active', format === 'impression');
+  document.getElementById('format-digital').classList.toggle('active', format === 'digital');
+}
+
+// ==================== CHAPITRES ALLEMAND ====================
+const chapitresAllemand = {
+  '9H': [
+    { value: '1', label: 'Ch.1 — Die neue Schule (école, matières)' },
+    { value: '2', label: 'Ch.2 — Meine Stadt (ville, chemin)' },
+    { value: '3', label: 'Ch.3 — Meine Familie (famille, maison, métiers)' },
+    { value: '4', label: 'Ch.4 — Alles Gute! (fêtes, date, santé)' },
+    { value: '5', label: 'Ch.5 — Wir fahren weg! (voyages, restaurant)' },
+    { value: '6', label: 'Ch.6 — Klassenfahrt nach Basel (voyage scolaire, passé)' },
+    { value: '7', label: 'Ch.7 — Freunde haben (amitié, caractère)' },
+    { value: '8', label: 'Ch.8 — Bei uns zu Hause (logement, meubles)' }
+  ],
+  '10H': [
+    { value: '1', label: 'Ch.1 — Los geht\'s! (vacances, échange, DACH)' },
+    { value: '2', label: 'Ch.2 — Mein Alltag (routine, heure)' },
+    { value: '3', label: 'Ch.3 — Gefühle (sentiments, s\'excuser)' },
+    { value: '4', label: 'Ch.4 — Kaufen, verkaufen, leihen (vêtements, mode)' },
+    { value: '5', label: 'Ch.5 — Schmeckt\'s? (alimentation, recette)' },
+    { value: '6', label: 'Ch.6 — Lies mal wieder! (livres, séries)' },
+    { value: '7', label: 'Ch.7 — Geld allein macht nicht glücklich (argent)' },
+    { value: '8', label: 'Ch.8 — Talente gesucht (talents, shows)' }
+  ],
+  '11H': [
+    { value: '1', label: 'Ch.1 — Meine Stärken, meine Schwächen (forces, modèles)' },
+    { value: '2', label: 'Ch.2 — Wir und die Medien (médias, apps)' },
+    { value: '3', label: 'Ch.3 — Für die Umwelt (environnement)' },
+    { value: '4', label: 'Ch.4 — Ich, du, wir (préjugés, conflits)' },
+    { value: '5', label: 'Ch.5 — Ich wünsche mir… (souhaits, consommation)' },
+    { value: '6', label: 'Ch.6 — Wir tun was! (engagement, conflits)' },
+    { value: '7', label: 'Ch.7 — So war es – so ist es jetzt (histoire, passé)' },
+    { value: '8', label: 'Ch.8 — Wie geht\'s weiter? (plans, avenir)' }
+  ]
+};
+
+// ==================== DYNAMIC FORM FIELDS ====================
 const form = document.getElementById('neoskool-form');
 const btn = document.getElementById('btn-generate');
 const statusMsg = document.getElementById('status-message');
 const resultSection = document.getElementById('result-section');
 const resultContent = document.getElementById('result-content');
+const degreSelect = document.getElementById('degre');
+const matiereSelect = document.getElementById('matiere');
+const voieGroup = document.getElementById('voie-group');
+const chapitreGroup = document.getElementById('chapitre-group');
+const chapitreSelect = document.getElementById('chapitre');
 
+function updateDynamicFields() {
+  const matVal = matiereSelect.value;
+  const degVal = degreSelect.value;
+  const degreKey = degVal.split(' ')[0]; // "9H (12-13 ans)" → "9H"
+  
+  // Afficher voie si cycle 3
+  const isCycle3 = degVal.startsWith('9H') || degVal.startsWith('10H') || degVal.startsWith('11H');
+  voieGroup.style.display = isCycle3 ? 'flex' : 'none';
+  if (!isCycle3) document.getElementById('voie').value = '';
+  
+  // Afficher chapitres si Allemand + cycle 3
+  if (matVal === 'Allemand' && chapitresAllemand[degreKey]) {
+    chapitreGroup.style.display = 'flex';
+    
+    // Remplir les options dynamiquement
+    chapitreSelect.innerHTML = '<option value="">Tous les chapitres</option>';
+    chapitresAllemand[degreKey].forEach(ch => {
+      const opt = document.createElement('option');
+      opt.value = ch.value;
+      opt.textContent = ch.label;
+      chapitreSelect.appendChild(opt);
+    });
+  } else {
+    chapitreGroup.style.display = 'none';
+    chapitreSelect.innerHTML = '<option value="">Tous les chapitres</option>';
+  }
+}
+
+degreSelect.addEventListener('change', updateDynamicFields);
+matiereSelect.addEventListener('change', updateDynamicFields);
+
+// ==================== FORM SUBMISSION ====================
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   
-  // Collect form data
   const matiere = document.getElementById('matiere').value;
   const degre = document.getElementById('degre').value;
   const voie = document.getElementById('voie').value;
   const difficulte = document.getElementById('difficulte').value;
   const sujet = document.getElementById('sujet').value;
   const theme = document.getElementById('theme').value;
+  const chapitre = document.getElementById('chapitre').value;
   const code = document.getElementById('code').value;
   
   const adaptations = [];
@@ -1574,12 +1655,13 @@ form.addEventListener('submit', async (e) => {
   }
 
   // Build the message
-  const profilLabel = currentProfile === 'enseignant' ? 'Enseignant' : 'Parent d élève';
+  const profilLabel = currentProfile === 'enseignant' ? 'Enseignant' : 'Parent d\'élève';
   const formatLabel = currentFormat === 'impression' ? 'Impression (fiche exercice + fiche outil séparée, sans aides cliquables)' : 'Digital interactif (aides intégrées cliquables dans chaque exercice)';
   let message = `Profil : ${profilLabel}\nFormat : ${formatLabel}`;
   message += `\nMatière : ${matiere}\nDegré : ${degre}`;
   if (voie) message += `\nVoie : ${voie}`;
   if (difficulte) message += `\nNiveau de la classe : ${difficulte}`;
+  if (chapitre) message += `\nChapitre : ${chapitre}`;
   message += `\nObjectif : ${sujet}`;
   if (theme) message += `\nThème / Vocabulaire visé : ${theme}`;
   if (adaptations.length > 0) {
@@ -1593,7 +1675,6 @@ form.addEventListener('submit', async (e) => {
   resultSection.classList.remove('visible');
 
   try {
-    // Send to n8n webhook via form POST
     const formData = new FormData();
     formData.append('profil', currentProfile);
     formData.append('matiere', matiere);
@@ -1602,6 +1683,7 @@ form.addEventListener('submit', async (e) => {
     formData.append('difficulte', difficulte);
     formData.append('sujet', sujet);
     formData.append('theme', theme);
+    formData.append('chapitre', chapitre);
     formData.append('code', code);
     formData.append('adaptations', adaptations.join(', '));
     formData.append('message', message);
@@ -1617,11 +1699,8 @@ form.addEventListener('submit', async (e) => {
 
     const html = await response.text();
     
-    // Display result
     resultContent.innerHTML = html;
     resultSection.classList.add('visible');
-    
-    // Scroll to result
     resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   } catch (error) {
@@ -1656,33 +1735,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
   });
 });
-
-// ==================== VOIE VISIBILITY ====================
-const degreSelect = document.getElementById('degre');
-const voieGroup = document.getElementById('voie-group');
-
-degreSelect.addEventListener('change', () => {
-  const val = degreSelect.value;
-  const isCycle3 = val.startsWith('9H') || val.startsWith('10H') || val.startsWith('11H');
-  voieGroup.style.display = isCycle3 ? 'flex' : 'none';
-  if (!isCycle3) document.getElementById('voie').value = '';
-});
-
-// ==================== PROFILE TOGGLE ====================
-let currentProfile = 'enseignant';
-let currentFormat = 'impression';
-
-function setProfile(profile) {
-  currentProfile = profile;
-  document.getElementById('toggle-enseignant').classList.toggle('active', profile === 'enseignant');
-  document.getElementById('toggle-parent').classList.toggle('active', profile === 'parent');
-}
-
-function setFormat(format) {
-  currentFormat = format;
-  document.getElementById('format-print').classList.toggle('active', format === 'impression');
-  document.getElementById('format-digital').classList.toggle('active', format === 'digital');
-}
 </script>
 
 </body>
