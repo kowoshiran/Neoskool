@@ -996,6 +996,102 @@ section {
   text-decoration: none;
 }
 
+/* ==================== LOADING BAR ==================== */
+.loading-overlay {
+  display: none;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.loading-overlay.visible {
+  display: block;
+  animation: fadeUp 0.5s ease-out;
+}
+.loading-card {
+  max-width: 520px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 40px rgba(79, 70, 229, 0.12);
+  border: 1px solid var(--indigo-100);
+}
+.loading-emoji {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: bounce 1s ease infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.loading-message {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--indigo-900);
+  margin-bottom: 0.4rem;
+  min-height: 1.5em;
+}
+.loading-sub {
+  font-size: 0.85rem;
+  color: var(--slate-500);
+  margin-bottom: 1.5rem;
+}
+.progress-track {
+  width: 100%;
+  height: 14px;
+  background: var(--slate-100);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--indigo-500), #8B5CF6, var(--indigo-600));
+  background-size: 200% 100%;
+  border-radius: 100px;
+  transition: width 0.8s ease;
+  animation: shimmer 2s ease infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.progress-percent {
+  font-family: 'JetBrains Mono', 'Outfit', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--indigo-600);
+  margin-top: 0.75rem;
+}
+.loading-steps {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+.loading-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--slate-300);
+  font-weight: 600;
+  transition: all 0.4s ease;
+}
+.loading-step.active {
+  color: var(--indigo-700);
+}
+.loading-step.done {
+  color: var(--slate-400);
+}
+.loading-step-icon {
+  width: 22px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
 /* ==================== RESULT ==================== */
 .result-section {
   display: none;
@@ -1512,6 +1608,45 @@ footer {
 </section>
 
 <!-- ==================== RESULT ==================== -->
+<!-- LOADING OVERLAY -->
+<section class="loading-overlay" id="loading-overlay">
+  <div class="loading-card">
+    <div class="loading-emoji" id="loading-emoji">🚀</div>
+    <div class="loading-message" id="loading-message">Initialisation du processus...</div>
+    <div class="loading-sub">Nos lutins pédagogiques sont au travail</div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+    <div class="progress-percent" id="progress-percent">0%</div>
+    <div class="loading-steps" id="loading-steps">
+      <div class="loading-step active" data-step="0">
+        <span class="loading-step-icon">⏳</span>
+        <span>Initialisation du processus...</span>
+      </div>
+      <div class="loading-step" data-step="1">
+        <span class="loading-step-icon">⏳</span>
+        <span>Analyse du programme scolaire...</span>
+      </div>
+      <div class="loading-step" data-step="2">
+        <span class="loading-step-icon">⏳</span>
+        <span>Préparation des exercices...</span>
+      </div>
+      <div class="loading-step" data-step="3">
+        <span class="loading-step-icon">⏳</span>
+        <span>Création de la fiche outil...</span>
+      </div>
+      <div class="loading-step" data-step="4">
+        <span class="loading-step-icon">⏳</span>
+        <span>Vérification du résultat par des chatons...</span>
+      </div>
+      <div class="loading-step" data-step="5">
+        <span class="loading-step-icon">⏳</span>
+        <span>Envoi du résultat par nos lutins...</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="result-section" id="result-section">
   <div class="container">
     <div class="result-header">
@@ -1676,6 +1811,54 @@ form.addEventListener('submit', async (e) => {
   statusMsg.style.display = 'none';
   resultSection.classList.remove('visible');
 
+  // Loading animation
+  const loadingOverlay = document.getElementById('loading-overlay');
+  const progressFill = document.getElementById('progress-fill');
+  const progressPercent = document.getElementById('progress-percent');
+  const loadingEmoji = document.getElementById('loading-emoji');
+  const loadingMessage = document.getElementById('loading-message');
+  const steps = document.querySelectorAll('.loading-step');
+
+  const loadingStages = [
+    { pct: 5,  emoji: '🚀', msg: 'Initialisation du processus...' },
+    { pct: 18, emoji: '📚', msg: 'Analyse du programme scolaire...' },
+    { pct: 40, emoji: '✏️', msg: 'Préparation des exercices...' },
+    { pct: 62, emoji: '🔧', msg: 'Création de la fiche outil...' },
+    { pct: 80, emoji: '🐱', msg: 'Vérification du résultat par des chatons...' },
+    { pct: 92, emoji: '🧝', msg: 'Envoi du résultat par nos lutins...' },
+  ];
+
+  let currentStage = 0;
+  // Reset all steps
+  steps.forEach((s, i) => {
+    s.classList.remove('active', 'done');
+    s.querySelector('.loading-step-icon').textContent = '⏳';
+  });
+  steps[0].classList.add('active');
+  progressFill.style.width = '5%';
+  progressPercent.textContent = '5%';
+  loadingEmoji.textContent = '🚀';
+  loadingMessage.textContent = loadingStages[0].msg;
+  loadingOverlay.classList.add('visible');
+  loadingOverlay.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  const stageInterval = setInterval(() => {
+    if (currentStage < loadingStages.length - 1) {
+      // Mark current as done
+      steps[currentStage].classList.remove('active');
+      steps[currentStage].classList.add('done');
+      steps[currentStage].querySelector('.loading-step-icon').textContent = '✅';
+      // Advance
+      currentStage++;
+      steps[currentStage].classList.add('active');
+      const stage = loadingStages[currentStage];
+      progressFill.style.width = stage.pct + '%';
+      progressPercent.textContent = stage.pct + '%';
+      loadingEmoji.textContent = stage.emoji;
+      loadingMessage.textContent = stage.msg;
+    }
+  }, 4500);
+
   try {
     const formData = new FormData();
     formData.append('profil', currentProfile);
@@ -1701,6 +1884,22 @@ form.addEventListener('submit', async (e) => {
 
     const html = await response.text();
     
+    // Complete the loading bar
+    clearInterval(stageInterval);
+    steps.forEach(s => {
+      s.classList.remove('active');
+      s.classList.add('done');
+      s.querySelector('.loading-step-icon').textContent = '✅';
+    });
+    progressFill.style.width = '100%';
+    progressPercent.textContent = '100%';
+    loadingEmoji.textContent = '🎉';
+    loadingMessage.textContent = 'C\'est prêt !';
+    
+    // Small pause to show 100%, then show result
+    await new Promise(r => setTimeout(r, 800));
+    loadingOverlay.classList.remove('visible');
+
     resultContent.srcdoc = html;
     resultContent.onload = function() {
       // Auto-resize iframe to fit content
@@ -1717,6 +1916,8 @@ form.addEventListener('submit', async (e) => {
 
   } catch (error) {
     console.error('Erreur:', error);
+    clearInterval(stageInterval);
+    loadingOverlay.classList.remove('visible');
     if (error.message.includes('Failed to fetch')) {
       showStatus('Impossible de contacter le serveur. Vérifiez votre connexion internet.', 'error');
     } else {
