@@ -1816,18 +1816,34 @@ form.addEventListener('submit', async (e) => {
   const loadingMessage = document.getElementById('loading-message');
 
   const loadingStages = [
+    // Phase 1 : Sérieuse (0-40s)
     { pct: 3,  emoji: '🚀', msg: 'Initialisation du processus...' },
-    { pct: 10, emoji: '📚', msg: 'Analyse du programme scolaire...' },
-    { pct: 18, emoji: '🧠', msg: 'Activation des sciences cognitives...' },
-    { pct: 27, emoji: '🎯', msg: 'Adaptation au niveau de l\'élève...' },
-    { pct: 36, emoji: '✏️', msg: 'Préparation des exercices...' },
-    { pct: 45, emoji: '🎮', msg: 'Ajout de la gamification...' },
-    { pct: 53, emoji: '💡', msg: 'Intégration des aides différenciées...' },
-    { pct: 62, emoji: '🔧', msg: 'Création de la fiche outil...' },
-    { pct: 70, emoji: '📝', msg: 'Rédaction du corrigé détaillé...' },
-    { pct: 78, emoji: '🎨', msg: 'Application du design Neoskool...' },
-    { pct: 85, emoji: '🐱', msg: 'Vérification du résultat par des chatons...' },
-    { pct: 92, emoji: '🧝', msg: 'Envoi du résultat par nos lutins...' },
+    { pct: 8,  emoji: '📚', msg: 'Analyse du programme scolaire...' },
+    { pct: 14, emoji: '🧠', msg: 'Activation des sciences cognitives...' },
+    { pct: 20, emoji: '🎯', msg: 'Adaptation au niveau de l\'élève...' },
+    { pct: 26, emoji: '✏️', msg: 'Rédaction des exercices Niveau 1...' },
+    { pct: 32, emoji: '✏️', msg: 'Rédaction des exercices Niveau 2...' },
+    { pct: 37, emoji: '✏️', msg: 'Rédaction des exercices Niveau 3...' },
+    { pct: 42, emoji: '🎮', msg: 'Ajout de la gamification...' },
+    { pct: 47, emoji: '💡', msg: 'Intégration des aides différenciées...' },
+    { pct: 52, emoji: '🔧', msg: 'Création de la fiche outil...' },
+    { pct: 57, emoji: '📝', msg: 'Rédaction du corrigé détaillé...' },
+    { pct: 62, emoji: '🎨', msg: 'Application du design Neoskool...' },
+    // Phase 2 : Les lutins (45-65s)
+    { pct: 66, emoji: '🧝', msg: 'Les lutins assemblent ta fiche...' },
+    { pct: 70, emoji: '☕', msg: 'Pause café des lutins... hey, revenez !' },
+    { pct: 73, emoji: '😤', msg: 'Ça commence à faire long...' },
+    { pct: 76, emoji: '📢', msg: 'Sanctions disciplinaires en cours...' },
+    { pct: 79, emoji: '🔒', msg: 'Mise en cage des lutins rebelles...' },
+    // Phase 3 : Travail forcé (65-85s)
+    { pct: 82, emoji: '⛏️', msg: 'Travail forcé activé. Plus vite !' },
+    { pct: 85, emoji: '🏃', msg: 'Les lutins transpirent à grosses gouttes...' },
+    { pct: 87, emoji: '😅', msg: 'Un lutin demande grâce. Refusé.' },
+    { pct: 89, emoji: '🐱', msg: 'Vérification par les chatons superviseurs...' },
+    // Phase 4 : Finale (85s+)
+    { pct: 91, emoji: '🏁', msg: 'Les lutins ont capitulé. Livraison imminente !' },
+    { pct: 93, emoji: '🎁', msg: 'Emballage cadeau de ta fiche...' },
+    { pct: 95, emoji: '🧝‍♂️', msg: 'Le chef lutin inspecte le travail final...' },
   ];
 
   let currentStage = 0;
