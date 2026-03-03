@@ -92,7 +92,7 @@ footer{background:var(--slate-900);padding:3rem 2rem;text-align:center}.footer-b
 <section class="how-it-works"><div class="container"><div class="section-label">✦ Comment ça marche</div><h2 class="section-title">Trois étapes. Trente secondes.</h2><p class="section-subtitle">Fini les heures passées à créer des exercices différenciés.</p><div class="steps"><div class="step"><div class="step-number">1</div><h3>Décrivez votre besoin</h3><p>Matière, sujet, degré scolaire, adaptations…</p></div><div class="step"><div class="step-number">2</div><h3>L'IA génère la mission</h3><p>Exercice complet basé sur les sciences cognitives, gamifié.</p></div><div class="step"><div class="step-number">3</div><h3>Imprimez et distribuez</h3><p>3 niveaux, quiz, auto-évaluation, corrections incluses.</p></div></div></div></section>
 <section class="sciences"><div class="container"><div class="section-label">✦ Fondements scientifiques</div><h2 class="section-title">10 principes prouvés par la recherche</h2><p class="section-subtitle">Un outil de conception pédagogique fondé sur les sciences cognitives.</p><div class="science-grid"><div class="science-card"><div class="science-icon">🧠</div><div><h4>Retrieval Practice</h4><p>Récupérer l'info renforce l'apprentissage.</p></div></div><div class="science-card"><div class="science-icon">📅</div><div><h4>Pratique espacée</h4><p>Ancrer les connaissances dans le temps.</p></div></div><div class="science-card"><div class="science-icon">🔀</div><div><h4>Interleaving</h4><p>Mélanger développe la flexibilité.</p></div></div><div class="science-card"><div class="science-icon">🎮</div><div><h4>Gamification</h4><p>Motivation par points et niveaux.</p></div></div><div class="science-card"><div class="science-icon">🏋️</div><div><h4>Difficultés désirables</h4><p>Effort calibré = rétention.</p></div></div><div class="science-card"><div class="science-icon">🎨</div><div><h4>Double codage</h4><p>Texte + visuels = double mémorisation.</p></div></div><div class="science-card"><div class="science-icon">💬</div><div><h4>Feedback élaboré</h4><p>Corrections détaillées = apprentissage.</p></div></div><div class="science-card"><div class="science-icon">❓</div><div><h4>Interrogation élaborative</h4><p>Pourquoi ? = connexions profondes.</p></div></div><div class="science-card"><div class="science-icon">🪞</div><div><h4>Métacognition</h4><p>Réfléchir sur sa pensée = autonomie.</p></div></div><div class="science-card"><div class="science-icon">🚀</div><div><h4>Transfert</h4><p>Nouveau contexte = vraie maîtrise.</p></div></div></div></div></section>
 <section class="example-section"><div class="container"><div class="section-label">✦ Exemple réel</div><h2 class="section-title">Voici ce que Neoskool génère</h2><div class="example-wrapper"><div class="example-browser"><div class="example-browser-bar"><div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div><div class="browser-url">neoskool.com/resultat</div></div><div class="example-content"><h2>🍫 MISSION FRACTION</h2><p>La fabrique Cailler a besoin de toi !</p><span class="badge">🏆 Badges</span><span class="badge">⭐ 3 niveaux</span><span class="badge">🧠 10 principes</span><div class="level-box"><h4>⭐ NIVEAU 1</h4><p>3/4 de 12 dl de lait = ?</p></div><div class="level-box"><h4>⭐⭐ NIVEAU 2</h4><p>180 tablettes, 2/5 lait, 1/3 noires. Blanches ?</p></div><div class="level-box"><h4>⭐⭐⭐ NIVEAU 3</h4><p>Invente ta recette en fractions !</p></div></div></div><div class="example-fade"></div></div></div></section>
-<section class="generator" id="generer"><div class="container"><div class="section-label">✦ Générateur</div><h2 class="section-title">Créez votre exercice</h2><p class="section-subtitle">Remplissez le formulaire et récupérez votre mission.</p><div class="form-card"><div class="profile-toggle"><div class="toggle-group"><button type="button" class="toggle-btn active" id="toggle-enseignant" onclick="setProfile('enseignant')"><span class="toggle-icon">🧑‍🏫</span> Enseignant·e</button><button type="button" class="toggle-btn" id="toggle-parent" onclick="setProfile('parent')"><span class="toggle-icon">👨‍👩‍👧</span> Parent <span class="toggle-badge">Nouveau</span></button></div></div><div class="format-toggle-container"><div class="format-toggle-label">Format de sortie</div><div class="format-toggle-group"><button type="button" class="format-btn active" id="format-print" onclick="setFormat('impression')"><span class="format-icon">🖨️</span><span class="format-text"><strong>Impression</strong><small>Fiche + outil</small></span></button><button type="button" class="format-btn" id="format-digital" onclick="setFormat('digital')"><span class="format-icon">💻</span><span class="format-text"><strong>Digital</strong><small>Aides cliquables</small></span></button></div></div><div class="form-header"><h3>⚡ Créez votre mission</h3><p>Exercice complet en quelques secondes</p></div><form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere" required><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre" required><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner" required></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX" required></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form></div></div></section>
+<section class="generator" id="generer"><div class="container"><div class="section-label">✦ Générateur</div><h2 class="section-title">Créez votre exercice</h2><p class="section-subtitle">Remplissez le formulaire et récupérez votre mission.</p><div class="form-card"><div class="profile-toggle"><div class="toggle-group"><button type="button" class="toggle-btn active" id="toggle-enseignant" onclick="setProfile('enseignant')"><span class="toggle-icon">🧑‍🏫</span> Enseignant·e</button><button type="button" class="toggle-btn" id="toggle-parent" onclick="setProfile('parent')"><span class="toggle-icon">👨‍👩‍👧</span> Parent <span class="toggle-badge">Nouveau</span></button></div></div><div class="format-toggle-container"><div class="format-toggle-label">Format de sortie</div><div class="format-toggle-group"><button type="button" class="format-btn active" id="format-print" onclick="setFormat('impression')"><span class="format-icon">🖨️</span><span class="format-text"><strong>Impression</strong><small>Fiche + outil</small></span></button><button type="button" class="format-btn" id="format-digital" onclick="setFormat('digital')"><span class="format-icon">💻</span><span class="format-text"><strong>Digital</strong><small>Aides cliquables</small></span></button></div></div><div class="form-header"><h3>⚡ Créez votre mission</h3><p>Exercice complet en quelques secondes</p></div><form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere" required><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre" required><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group" id="domaine-group" style="display:none"><label for="domaine"><span class="label-icon">📂</span> Domaine</label><select id="domaine" name="domaine"><option value="">Choisir un domaine…</option></select></div><div class="form-group" id="soustheme-group" style="display:none"><label for="soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="soustheme" name="soustheme"><option value="">Choisir un sous-thème…</option></select></div><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner" required></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX" required></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form></div></div></section>
 
 <!-- ==================== CINEMATIC REVEAL ==================== -->
 <section class="cinema-container" id="cinema-container">
@@ -237,6 +237,136 @@ const chapitresAllemand = {
   ]
 };
 
+
+// ==================== DOMAINES / SOUS-THEMES FRANCAIS ====================
+const domainesFrancais = [
+  { value: 'Grammaire', label: 'Grammaire de la phrase' },
+  { value: 'Conjugaison', label: 'Conjugaison' },
+  { value: 'Orthographe', label: 'Orthographe' },
+  { value: 'Vocabulaire', label: 'Vocabulaire' },
+  { value: 'Texte', label: 'De la phrase au texte' },
+];
+
+const sousThemesFrancais = {
+  'Grammaire': {
+    '9H': [
+      { value: 'GRAM-1 Classes grammaticales', label: 'Classes grammaticales (10 classes)' },
+      { value: 'GRAM-2 Groupes syntaxiques', label: 'Groupes syntaxiques (GN, GV, GAdj)' },
+      { value: 'GRAM-3 Fonctions', label: 'Fonctions (sujet, predicat, CP, CVD, CVI)' },
+      { value: 'GRAM-4 Types et formes de phrase', label: 'Types et formes de phrase' },
+      { value: 'GRAM-5 Phrase complexe', label: 'Phrase complexe (amorce)' },
+    ],
+    '10H': [
+      { value: 'GRAM-1 Classes grammaticales', label: 'Classes grammaticales \u2014 approfondissement' },
+      { value: 'GRAM-2 Groupes syntaxiques', label: 'Groupes syntaxiques \u2014 approfondissement' },
+      { value: 'GRAM-3 Fonctions', label: 'Fonctions \u2014 approfondissement (CN, attr. CVD)' },
+      { value: 'GRAM-4 Types et formes de phrase', label: 'Types et formes \u2014 passive, impersonnelle' },
+      { value: 'GRAM-5 Phrase complexe', label: 'Phrase complexe \u2014 developpement' },
+      { value: 'GRAM-6 Pronominalisation', label: 'Pronominalisation (CVD, CVI, en, y)' },
+    ],
+    '11H': [
+      { value: 'GRAM-1 Classes grammaticales', label: 'Classes grammaticales \u2014 maitrise' },
+      { value: 'GRAM-2 Groupes syntaxiques', label: 'Groupes syntaxiques \u2014 maitrise' },
+      { value: 'GRAM-3 Fonctions', label: 'Fonctions \u2014 maitrise et synthese' },
+      { value: 'GRAM-4 Types et formes de phrase', label: 'Types et formes \u2014 maitrise' },
+      { value: 'GRAM-5 Phrase complexe', label: 'Phrase complexe \u2014 maitrise' },
+      { value: 'GRAM-6 Pronominalisation', label: 'Pronominalisation \u2014 maitrise' },
+    ],
+  },
+  'Conjugaison': {
+    '9H': [
+      { value: 'CONJ-1 Systeme temps et modes', label: 'Systeme des temps et des modes' },
+      { value: 'CONJ-2 Temps indicatif', label: "Temps de l'indicatif" },
+      { value: 'CONJ-3 Imperatif', label: 'Imperatif' },
+      { value: 'CONJ-4 Conditionnel', label: 'Conditionnel' },
+      { value: 'CONJ-5 Subjonctif', label: 'Subjonctif (amorce)' },
+      { value: 'CONJ-6 Valeurs des temps', label: 'Valeurs des temps' },
+    ],
+    '10H': [
+      { value: 'CONJ-1 Systeme verbal', label: 'Systeme verbal \u2014 consolidation' },
+      { value: 'CONJ-2 Temps indicatif', label: "Temps de l'indicatif \u2014 maitrise" },
+      { value: 'CONJ-3 Imperatif', label: 'Imperatif \u2014 approfondissement' },
+      { value: 'CONJ-4 Conditionnel', label: 'Conditionnel \u2014 approfondissement' },
+      { value: 'CONJ-5 Subjonctif', label: 'Subjonctif \u2014 developpement' },
+      { value: 'CONJ-6 Valeurs des temps', label: 'Valeurs des temps \u2014 approfondissement' },
+    ],
+    '11H': [
+      { value: 'CONJ-1 Systeme verbal', label: 'Systeme verbal \u2014 synthese' },
+      { value: 'CONJ-2 Temps indicatif', label: "Temps de l'indicatif \u2014 maitrise complete" },
+      { value: 'CONJ-3 Imperatif', label: 'Imperatif \u2014 maitrise' },
+      { value: 'CONJ-4 Conditionnel', label: 'Conditionnel \u2014 maitrise' },
+      { value: 'CONJ-5 Subjonctif', label: 'Subjonctif \u2014 maitrise' },
+      { value: 'CONJ-6 Valeurs des temps', label: 'Valeurs des temps \u2014 synthese' },
+    ],
+  },
+  'Orthographe': {
+    '9H': [
+      { value: 'ORTH-1 Accord sujet-verbe', label: 'Accord sujet-verbe' },
+      { value: 'ORTH-2 Accords dans le GN', label: 'Accords dans le GN' },
+      { value: 'ORTH-3 Participe passe', label: 'Participe passe' },
+      { value: 'ORTH-4 Homophones grammaticaux', label: 'Homophones grammaticaux' },
+      { value: 'ORTH-5 Orthographe lexicale', label: 'Orthographe lexicale' },
+    ],
+    '10H': [
+      { value: 'ORTH-1 Accord sujet-verbe', label: 'Accord sujet-verbe \u2014 cas complexes' },
+      { value: 'ORTH-2 Accords dans le GN', label: 'Accords dans le GN \u2014 approfondissement' },
+      { value: 'ORTH-3 Participe passe', label: 'Participe passe \u2014 developpement' },
+      { value: 'ORTH-4 Homophones grammaticaux', label: 'Homophones \u2014 approfondissement' },
+      { value: 'ORTH-5 Orthographe lexicale', label: 'Orthographe lexicale \u2014 approfondissement' },
+    ],
+    '11H': [
+      { value: 'ORTH-1 Accord sujet-verbe', label: 'Accord sujet-verbe \u2014 maitrise' },
+      { value: 'ORTH-2 Accords dans le GN', label: 'Accords dans le GN \u2014 maitrise' },
+      { value: 'ORTH-3 Participe passe', label: 'Participe passe \u2014 maitrise complete' },
+      { value: 'ORTH-4 Homophones grammaticaux', label: 'Homophones \u2014 maitrise' },
+      { value: 'ORTH-5 Orthographe lexicale', label: 'Orthographe lexicale \u2014 maitrise' },
+    ],
+  },
+  'Vocabulaire': {
+    '9H': [
+      { value: 'VOC-1 Morphologie des mots', label: 'Morphologie (prefixe, radical, suffixe)' },
+      { value: 'VOC-2 Sens des mots', label: 'Sens des mots (synonymes, polysemie)' },
+      { value: 'VOC-3 Figures de style', label: 'Figures de style' },
+      { value: 'VOC-4 Registres de langue', label: 'Registres de langue' },
+    ],
+    '10H': [
+      { value: 'VOC-1 Morphologie des mots', label: 'Morphologie \u2014 approfondissement' },
+      { value: 'VOC-2 Sens des mots', label: 'Sens des mots \u2014 approfondissement' },
+      { value: 'VOC-3 Figures de style', label: 'Figures de style \u2014 developpement' },
+      { value: 'VOC-4 Registres de langue', label: 'Registres de langue \u2014 approfondissement' },
+    ],
+    '11H': [
+      { value: 'VOC-1 Morphologie des mots', label: 'Morphologie \u2014 maitrise' },
+      { value: 'VOC-2 Sens des mots', label: 'Sens des mots \u2014 maitrise' },
+      { value: 'VOC-3 Figures de style', label: 'Figures de style \u2014 maitrise' },
+      { value: 'VOC-4 Registres de langue', label: 'Registres de langue \u2014 maitrise' },
+    ],
+  },
+  'Texte': {
+    '9H': [
+      { value: 'TEXTE-1 Enonciation', label: 'Enonciation' },
+      { value: 'TEXTE-2 Discours rapporte', label: 'Discours rapporte' },
+      { value: 'TEXTE-3 Connecteurs', label: 'Connecteurs et organisation textuelle' },
+      { value: 'TEXTE-4 Temps du recit', label: 'Temps du recit' },
+    ],
+    '10H': [
+      { value: 'TEXTE-1 Enonciation', label: 'Enonciation \u2014 approfondissement' },
+      { value: 'TEXTE-2 Discours rapporte', label: 'Discours rapporte \u2014 developpement' },
+      { value: 'TEXTE-3 Connecteurs', label: 'Connecteurs \u2014 approfondissement' },
+      { value: 'TEXTE-4 Temps du recit', label: 'Temps du recit \u2014 approfondissement' },
+      { value: 'TEXTE-5 Texte argumentatif', label: 'Texte argumentatif (nouveau)' },
+    ],
+    '11H': [
+      { value: 'TEXTE-1 Enonciation', label: 'Enonciation \u2014 maitrise' },
+      { value: 'TEXTE-2 Discours rapporte', label: 'Discours rapporte \u2014 maitrise' },
+      { value: 'TEXTE-3 Connecteurs', label: 'Connecteurs \u2014 maitrise' },
+      { value: 'TEXTE-4 Temps du recit', label: 'Temps du recit \u2014 maitrise' },
+      { value: 'TEXTE-5 Texte argumentatif', label: 'Texte argumentatif \u2014 maitrise' },
+      { value: 'TEXTE-6 Coherence textuelle', label: 'Coherence textuelle (nouveau)' },
+    ],
+  },
+};
+
 // ==================== WRAPPER TEMPLATE ====================
 function buildFullHTML(content, metadata) {
   const anneeClean = (metadata.degre || '').split(' ')[0];
@@ -296,8 +426,15 @@ function updateDynamicFields() {
   const degVal = degreSelect.value;
   const degreKey = degVal.split(' ')[0];
   const isCycle3 = degVal.startsWith('9H') || degVal.startsWith('10H') || degVal.startsWith('11H');
+  const domaineGroup = document.getElementById('domaine-group');
+  const domaineSelect = document.getElementById('domaine');
+  const sousthemeGroup = document.getElementById('soustheme-group');
+  const sousthemeSelect = document.getElementById('soustheme');
+
   voieGroup.style.display = isCycle3 ? 'flex' : 'none';
   if (!isCycle3) document.getElementById('voie').value = '';
+
+  // Allemand: chapitres
   if (matVal === 'Allemand' && chapitresAllemand[degreKey]) {
     chapitreGroup.style.display = 'flex';
     chapitreSelect.innerHTML = '<option value="">Tous les chapitres</option>';
@@ -311,10 +448,52 @@ function updateDynamicFields() {
     chapitreGroup.style.display = 'none';
     chapitreSelect.innerHTML = '<option value="">Tous les chapitres</option>';
   }
+
+  // Francais: domaine + sous-theme
+  if (matVal === 'Fran\u00e7ais' && isCycle3) {
+    domaineGroup.style.display = 'flex';
+    domaineSelect.innerHTML = '<option value="">Choisir un domaine\u2026</option>';
+    domainesFrancais.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d.value;
+      opt.textContent = d.label;
+      domaineSelect.appendChild(opt);
+    });
+    updateSousThemes();
+  } else {
+    domaineGroup.style.display = 'none';
+    sousthemeGroup.style.display = 'none';
+    domaineSelect.innerHTML = '<option value="">Choisir un domaine\u2026</option>';
+    sousthemeSelect.innerHTML = '<option value="">Choisir un sous-th\u00e8me\u2026</option>';
+  }
+}
+
+function updateSousThemes() {
+  const domaineSelect = document.getElementById('domaine');
+  const sousthemeGroup = document.getElementById('soustheme-group');
+  const sousthemeSelect = document.getElementById('soustheme');
+  const domVal = domaineSelect.value;
+  const degVal = degreSelect.value;
+  const degreKey = degVal.split(' ')[0];
+
+  if (domVal && sousThemesFrancais[domVal] && sousThemesFrancais[domVal][degreKey]) {
+    sousthemeGroup.style.display = 'flex';
+    sousthemeSelect.innerHTML = '<option value="">Tous les sous-th\u00e8mes</option>';
+    sousThemesFrancais[domVal][degreKey].forEach(st => {
+      const opt = document.createElement('option');
+      opt.value = st.value;
+      opt.textContent = st.label;
+      sousthemeSelect.appendChild(opt);
+    });
+  } else {
+    sousthemeGroup.style.display = 'none';
+    sousthemeSelect.innerHTML = '<option value="">Choisir un sous-th\u00e8me\u2026</option>';
+  }
 }
 
 degreSelect.addEventListener('change', updateDynamicFields);
 matiereSelect.addEventListener('change', updateDynamicFields);
+document.getElementById('domaine').addEventListener('change', updateSousThemes);
 
 // ==================== CONFETTI ENGINE ====================
 function launchConfetti() {
@@ -427,6 +606,8 @@ form.addEventListener('submit', async (e) => {
   const sujet = document.getElementById('sujet').value;
   const theme = document.getElementById('theme').value;
   const chapitre = document.getElementById('chapitre').value;
+  const domaine = document.getElementById('domaine').value;
+  const soustheme = document.getElementById('soustheme').value;
   const code = document.getElementById('code').value;
   
   const adaptations = [];
@@ -446,6 +627,8 @@ form.addEventListener('submit', async (e) => {
   if (voie) message += `\nVoie : ${voie}`;
   if (difficulte) message += `\nNiveau de la classe : ${difficulte}`;
   if (chapitre) message += `\nChapitre : ${chapitre}`;
+  if (domaine) message += `\nDomaine : ${domaine}`;
+  if (soustheme) message += `\nSous-theme : ${soustheme}`;
   message += `\nObjectif : ${sujet}`;
   if (theme) message += `\nThème / Vocabulaire visé : ${theme}`;
   if (adaptations.length > 0) message += `\nAdaptations BEP : ${adaptations.join(', ')}`;
