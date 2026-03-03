@@ -1,6 +1,6 @@
 export const block2 = `=== ENSEIGNEMENT DU FRANÇAIS — FONCTIONNEMENT DE LA LANGUE ===
 
-=== NIVEAUX DE MAÎTRISE PAR VOIE ===
+=== NIVEAUX DE  MAÎTRISE PAR VOIE ===
 
 En français, tous les élèves travaillent le MÊME CONTENU (mêmes manuels, mêmes thèmes). La voie détermine la PROFONDEUR, la COMPLEXITÉ et le degré d'AUTONOMIE attendu.
 
