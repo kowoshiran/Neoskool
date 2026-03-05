@@ -86,7 +86,7 @@ CRITIQUE : Génère une fiche COMPLÈTE mais CONCISE. Règles strictes :
 - Consignes : 1 phrase. Si 2 phrases nécessaires, fusionne.
 - EXERCICES DENSES : chaque exercice doit contenir suffisamment d'items pour que l'élève PRATIQUE et RÉPÈTE. Minimum par exercice : 6 mots à relier, 6 phrases à trous, 5 phrases à remettre en ordre, etc. L'élève apprend par la répétition — un exercice avec 3 items ne sert à rien.
 - Corrigé ULTRA-CONCIS : juste la réponse correcte. Ajoute 1 phrase UNIQUEMENT si piège fréquent. NE recopie JAMAIS les textes/consignes dans le corrigé.
-- Fiche Outil ULTRA-COURTE : MAX 5-8 éléments. Uniquement les règles/vocabulaire DIRECTEMENT nécessaires pour faire les exercices de cette fiche. PAS un résumé de tout le chapitre. 1 grammar-card max, 1 vocab-table courte (8-10 mots max), 1-2 tips. Si la fiche outil dépasse 15 lignes HTML, c'est TROP.
+- Fiche Outil = UNIQUEMENT grammaire. 1 grammar-card avec la règle clé du chapitre + 1-2 tips/astuces mémoire. PAS de vocabulaire (les aides dans les exercices suffisent). PAS de traduction. MAX 10 lignes HTML.
 - Dans la fiche outil, NE RÉPÈTE PAS les aides (elles sont dans les exercices).
 - NE génère PAS de CSS, <style>, ni d'attributs style inline.
 - HTML compact : pas de lignes vides entre les éléments, pas de commentaires HTML.
@@ -102,7 +102,7 @@ recall-box > recall-header > recall-icon + recall-title, recall-content
 level-card level-1|2|3 > level-banner > level-name > level-star + level-label, level-xp ; level-body
 exercise-item > exercise-number + exercise-type + exercise-instruction (consigne en <strong> pour être bien visible)
 word-bank > word-chip (par mot)
-gap-sentence > span.gap (trous : simples traits bas ____ pour écrire, PAS de double ligne ni de cadre au milieu du texte)
+gap-sentence : texte avec des trous marqués par ____ (4 underscores). Le trou est un simple espace vide dans le texte, l'élève écrit PAR-DESSUS. PAS de span.gap, PAS de cadre, PAS de trait au milieu du texte — juste ____.
 match-grid > match-left + match-arrow(→) + match-right (droite TOUJOURS en ORDRE ALÉATOIRE, l'élève TRACE des TRAITS pour relier — PAS de lignes de réécriture en dessous)
 answer-zone > answer-line > answer-label + answer-blank
 trap-box > trap-icon(⚠️) + explication
