@@ -100,7 +100,7 @@ CRITIQUE : Génère une fiche COMPLÈTE mais CONCISE. Règles strictes :
 === COMPOSANTS HTML (classes CSS du design system) ===
 recall-box > recall-header > recall-icon + recall-title, recall-content
 level-card level-1|2|3 > level-banner > level-name > level-star + level-label, level-xp ; level-body
-exercise-item > exercise-number + exercise-type + exercise-instruction
+exercise-item > exercise-number + exercise-type + exercise-instruction (consigne en <strong> pour être bien visible)
 word-bank > word-chip (par mot)
 gap-sentence > span.gap (trous : simples traits bas ____ pour écrire, PAS de double ligne ni de cadre au milieu du texte)
 match-grid > match-left + match-arrow(→) + match-right (droite TOUJOURS en ORDRE ALÉATOIRE, l'élève TRACE des TRAITS pour relier — PAS de lignes de réécriture en dessous)
@@ -120,15 +120,15 @@ Syntaxe : chaque classe = un div sauf indication contraire. > = enfant, + = frè
 
 === STRUCTURE OBLIGATOIRE DU HTML ===
 Ordre strict, TOUS obligatoires :
-1. recall-box (rappel express, 2-3 questions d'activation)
-2. level-card level-1 (2 exercices + tool-ref)
-3. level-card level-2 (2 exercices + tool-ref)
-4. level-card level-3 (2 exercices + tool-ref)
-5. quiz-card (3-5 questions rapides)
-6. self-eval (3 lignes : green/yellow/red)
-7. corrige-section (réponses concises)
-8. tool-sheet (vocabulaire, formules, grammaire, astuces mémoire)
-9. per-footer (objectifs PER, ● principal ○ secondaire, 3-4 max)
+1. per-footer (objectifs PER travaillés, ● principal ○ secondaire, 3-4 max) — EN PREMIER pour que l'enseignant voie immédiatement les objectifs
+2. recall-box (rappel express, 2-3 questions d'activation)
+3. level-card level-1 (2 exercices + tool-ref)
+4. level-card level-2 (2 exercices + tool-ref)
+5. level-card level-3 (2 exercices + tool-ref)
+6. quiz-card (3-5 questions rapides)
+7. self-eval (3 lignes : green/yellow/red)
+8. corrige-section (réponses concises)
+9. tool-sheet (aide-mémoire express pour les exercices)
 
 === STYLE ===
 Ton ludique, bienveillant et encourageant — comme un coach sportif qui motive. Utilise des métaphores gaming (missions, XP, boss final). Tutoie l'élève. Pas de langage bébé mais JAMAIS de jargon académique non expliqué. Surprise et humour bienvenus.`;
