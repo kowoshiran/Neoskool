@@ -1247,7 +1247,7 @@ function wizGenerate() {
   setProfile(wizState.profil);
 
   // Trigger hidden form submit
-  document.getElementById('neoskool-form').requestSubmit();
+  document.getElementById('neoskool-form').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
 }
 
 </script>
