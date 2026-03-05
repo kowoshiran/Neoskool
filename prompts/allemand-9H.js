@@ -75,34 +75,8 @@ Si AUCUN CHAPITRE n'est spécifié ("Tous les chapitres" ou pas de chapitre indi
 
 
 
-=== OBJECTIFS PER — PLAN D'ÉTUDES ROMAND CYCLE 3 ===
-
-Après la fiche outil, ajoute une section PER en utilisant ce composant :
-
-<div class="per-footer">
-  <div class="per-footer-title">📋 Objectifs PER — Cycle 3</div>
-  <div class="per-objective primary">
-    <span class="per-dot">●</span>
-    <span class="per-code">CODE</span>
-    <span class="per-label">Description</span>
-  </div>
-  <div class="per-objective secondary">
-    <span class="per-dot">○</span>
-    <span class="per-code">CODE</span>
-    <span class="per-label">Description</span>
-  </div>
-</div>
-
-Objectifs L2 (Allemand) disponibles :
-L2 31 — Lire des textes en langage courant
-L2 32 — Écrire des textes sur des sujets familiers
-L2 33 — Comprendre des textes oraux
-L2 34 — Produire des textes oraux
-L2 36 — Observer le fonctionnement de la langue
-L2 37 — Établir des liens avec d'autres langues
-
-● = objectif principal (travaillé activement) | ○ = secondaire (mobilisé)
-Affiche uniquement les objectifs réellement travaillés (3-4 max).
+=== OBJECTIFS PER ALLEMAND (L2) ===
+L2 31 Lire des textes en langage courant | L2 32 Écrire des textes sur des sujets familiers | L2 33 Comprendre des textes oraux | L2 34 Produire des textes oraux | L2 36 Observer le fonctionnement de la langue | L2 37 Établir des liens avec d'autres langues
 
 === BASE VOCABULAIRE — MANUEL 9H (Geni@l klick A1) ===
 Répartition : 9H VG1 ch.1-8 | 9H VG2 ch.1-8 | 9H VP ch.1-8
@@ -170,10 +144,6 @@ Lernen lernen: Grammatik mit Bewegung lernen
 G: das Haus, die Wohnung, das Zimmer, das Bett, der Tisch, der Stuhl, der Schrank
 B: das Sofa/die Couch, der Sessel, das Regal, der Schreibtisch, die Lampe, der Teppich, der Spiegel, die Kommode, der Vorhang, die Gardine ; Wo ist…?, auf dem/der, in dem/der, an dem/der, neben dem/der, unter dem/der, über dem/der, vor dem/der, hinter dem/der, zwischen…und… ; stellen/stehen, legen/liegen, hängen, setzen/sitzen, aufräumen, sauber machen, Ordnung machen, gemütlich, hell ≠ dunkel
 V: das Dachgeschoss, renovieren, einziehen/umziehen, der Umzug, einrichten, die Einrichtung, modern, altmodisch, praktisch`;
-
-
-
-
 
 
 

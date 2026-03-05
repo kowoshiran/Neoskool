@@ -88,8 +88,8 @@ export default async function handler(req) {
       if (adaptations) userMessage += `\nAdaptations BEP : ${adaptations}`;
     }
 
-    // Determine max_tokens based on matiere
-    const maxTokens = matiereNorm === 'mathematiques' ? 12288 : 8192;
+    // max_tokens: assez haut pour ne jamais couper une fiche, le prompt contrôle la concision
+    const maxTokens = 12288;
 
     // Call Anthropic with streaming
     const anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {

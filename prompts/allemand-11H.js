@@ -75,34 +75,8 @@ Si AUCUN CHAPITRE n'est spécifié ("Tous les chapitres" ou pas de chapitre indi
 
 
 
-=== OBJECTIFS PER — PLAN D'ÉTUDES ROMAND CYCLE 3 ===
-
-Après la fiche outil, ajoute une section PER en utilisant ce composant :
-
-<div class="per-footer">
-  <div class="per-footer-title">📋 Objectifs PER — Cycle 3</div>
-  <div class="per-objective primary">
-    <span class="per-dot">●</span>
-    <span class="per-code">CODE</span>
-    <span class="per-label">Description</span>
-  </div>
-  <div class="per-objective secondary">
-    <span class="per-dot">○</span>
-    <span class="per-code">CODE</span>
-    <span class="per-label">Description</span>
-  </div>
-</div>
-
-Objectifs L2 (Allemand) disponibles :
-L2 31 — Lire des textes en langage courant
-L2 32 — Écrire des textes sur des sujets familiers
-L2 33 — Comprendre des textes oraux
-L2 34 — Produire des textes oraux
-L2 36 — Observer le fonctionnement de la langue
-L2 37 — Établir des liens avec d'autres langues
-
-● = objectif principal (travaillé activement) | ○ = secondaire (mobilisé)
-Affiche uniquement les objectifs réellement travaillés (3-4 max).
+=== OBJECTIFS PER ALLEMAND (L2) ===
+L2 31 Lire des textes en langage courant | L2 32 Écrire des textes sur des sujets familiers | L2 33 Comprendre des textes oraux | L2 34 Produire des textes oraux | L2 36 Observer le fonctionnement de la langue | L2 37 Établir des liens avec d'autres langues
 
 === BASE VOCABULAIRE — MANUEL 11H (Geni@l klick B1) ===
 Répartition : 11H VG2 ch.1-8 | 11H VP ch.1-8

@@ -47,35 +47,9 @@ RÈGLES D'UTILISATION :
 
 Les notions 9H et 10H sont considérées comme DISPONIBLES. En 11H, l'accent est sur la MAÎTRISE, la SYNTHÈSE et les DERNIÈRES NOTIONS du cycle. Pour chaque sous-thème, les prérequis sont résumés et ce qui est spécifique à 11H est identifié.
 
-=== OBJECTIFS PER — PLAN D'ÉTUDES ROMAND CYCLE 3 ===
-
-Après la fiche outil, ajoute une section PER en utilisant ce composant :
-
-<div class="per-footer">
-  <div class="per-footer-title">Objectifs PER — Cycle 3</div>
-  <div class="per-objective primary">
-    <span class="per-dot">●</span>
-    <span class="per-code">CODE</span>
-    <span class="per-label">Description</span>
-  </div>
-  <div class="per-objective secondary">
-    <span class="per-dot">○</span>
-    <span class="per-code">CODE</span>
-    <span class="per-label">Description</span>
-  </div>
-</div>
-
-Objectifs L1 (Français) disponibles :
-L1 31 — Lire et analyser des textes de genres différents
-L1 32 — Écrire des textes de genres différents
-L1 33 — Comprendre et analyser des textes oraux
-L1 34 — Produire des textes oraux de genres différents
-L1 35 — Apprécier et analyser des productions littéraires
-L1 36 — Analyser le fonctionnement de la langue
-L1 37 — Enrichir sa compréhension et sa pratique langagière par l'établissement de liens avec des langues différentes
-L1 38 — Exploiter l'écriture et les instruments de la communication
-
-L1 36 est TOUJOURS objectif principal pour les fiches de fonctionnement de la langue. Affiche uniquement les objectifs réellement travaillés (3-4 max).
+=== OBJECTIFS PER FRANÇAIS (L1) ===
+L1 31 Lire et analyser des textes | L1 32 Écrire des textes | L1 33 Comprendre des textes oraux | L1 34 Produire des textes oraux | L1 35 Apprécier des productions littéraires | L1 36 Analyser le fonctionnement de la langue | L1 37 Liens avec d'autres langues | L1 38 Exploiter l'écriture et la communication
+L1 36 est TOUJOURS objectif principal pour les fiches de fonctionnement de la langue.
 
 === CONTENU 11H PAR DOMAINE ===
 

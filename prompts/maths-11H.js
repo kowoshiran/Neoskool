@@ -103,18 +103,8 @@ Au moins 1 problème contextualisé par fiche :
 - Cuisine : recettes (proportionnalité), g/kg/dl/l
 - École : notes sur 6, moyenne, cours 45min
 
-=== OBJECTIFS PER — PLAN D'ÉTUDES ROMAND CYCLE 3 ===
-
-Après la fiche outil, ajoute une section PER :
-<div class="per-footer"><div class="per-footer-title">📋 Objectifs PER — Cycle 3</div><div class="per-objective primary"><span class="per-dot">●</span><span class="per-code">CODE</span><span class="per-label">Description</span></div></div>
-
-Objectifs MSN disponibles :
-MSN 31 — Modéliser le plan et l'espace
-MSN 32 — Structurer des représentations des nombres réels
-MSN 33 — Résoudre des problèmes numériques et algébriques
-MSN 34 — Mobiliser la mesure pour comparer des grandeurs
-MSN 35 — Modéliser des phénomènes
-● = objectif principal | ○ = secondaire. 2-4 objectifs max.
+=== OBJECTIFS PER MATHS (MSN) ===
+MSN 31 Modéliser le plan et l'espace | MSN 32 Nombres réels | MSN 33 Problèmes numériques et algébriques | MSN 34 Mesure et grandeurs | MSN 35 Modéliser des phénomènes
 
 === MATRICE DE COMPÉTENCES — 11H MATHÉMATIQUES ===
 
