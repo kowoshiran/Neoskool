@@ -67,13 +67,14 @@ L'apprentissage est CUMULATIF. Quand un chapitre est demandé :
 
 PRÄTERITUM de sein/haben = INTERDIT AVANT CH4. Les formes war/waren, hatte/hatten ne sont disponibles qu'à partir du CH4. Pour CH1-3, utilise uniquement le PRÉSENT.
 
-PERFEKT = INTERDIT AVANT CH5. Le Perfekt (haben/sein + Partizip II) n'est introduit qu'au CH5. Pour les chapitres 1-4, PAS de Perfekt. Même pour les VP, ne PAS anticiper le Perfekt.
+PERFEKT = INTERDIT AVANT CH6. Le Perfekt (regelmässig) n'est introduit qu'au CH6. Le Perfekt unregelmässig + Verben mit haben/sein arrive au CH7. Pour les chapitres 1-5, PAS de Perfekt. Même pour les VP, ne PAS anticiper le Perfekt.
 
 Exemples :
-- CH3 demandé → grammaire disponible : CH1 (Vokalwechsel, Artikel, W-Fragen) + CH2 (Dativ-Präpositionen, Imperativ) + CH3 (Possessivartikel, Akkusativ). PRÉSENT uniquement. PAS de Präteritum, PAS de Perfekt.
-- CH4 demandé → Präteritum sein/haben disponible (war/hatte). PAS de Perfekt.
-- CH5 demandé → le Perfekt est enfin disponible.
-- CH6 demandé → Perfekt avec sein (gefahren, gegangen…) s'ajoute.
+- CH3 demandé → grammaire : CH1-3 cumulée (Vokalwechsel, Artikel, W-Fragen, Dativ-Präpositionen, Imperativ, Possessivartikel, Akkusativ). PRÉSENT uniquement. PAS de Präteritum, PAS de Perfekt.
+- CH4 demandé → + Präteritum sein/haben (war/hatte). PAS de Perfekt.
+- CH5 demandé → + Verben mit Vorsilben (trennbar/untrennbar). PAS de Perfekt.
+- CH6 demandé → Perfekt (regelmässig) enfin disponible.
+- CH7 demandé → + Perfekt (unregelmässig) + Verben mit haben und sein.
 
 Pour les VP : tu peux demander une MAÎTRISE plus approfondie des structures disponibles (exercices plus complexes avec les mêmes outils grammaticaux) mais tu n'ajoutes PAS de nouvelles structures.
 
@@ -121,7 +122,7 @@ V: der Brauch, die Tradition, typisch, religiös, das Kostüm, der Fasching/Karn
 
 [CH5] Wir fahren weg!
 Objectifs: Voyages, commander au restaurant, opinions
-Grammaire: Perfekt (regelmässig/unregelmässig), Verben mit Vorsilben (trennbar/untrennbar)
+Grammaire: Verben mit Vorsilben (trennbar/untrennbar)
 Lernen lernen: Verben systematisch lernen (Infinitiv – Partizip II)
 G: fahren, fliegen, der Zug, das Auto, das Flugzeug, das Fahrrad, die Ferien, der Urlaub, das Hotel, das Meer, der Strand, die Berge
 B: die Reise, reisen, die Jugendherberge, der Campingplatz, zelten, der Koffer, packen, der Reisepass, die Landkarte, abfahren/ankommen, umsteigen, die Verspätung ; die Speisekarte, bestellen, Vorspeise/Hauptspeise/Nachspeise, das Getränk, die Rechnung, Zahlen bitte!, der Kellner/die Kellnerin, Ich hätte gern…, schmecken, lecker ; Das war toll/super/langweilig/schrecklich, Es hat mir (nicht) gefallen, Am besten war…
@@ -129,7 +130,7 @@ V: die Unterkunft, die Ferienwohnung, die Kreuzfahrt, übernachten, Sehenswürdi
 
 [CH6] Klassenfahrt nach Basel
 Objectifs: Raconter un voyage scolaire, passé, visites
-Grammaire: Perfekt avec sein (gefahren, gegangen, geblieben…), Zeitangaben
+Grammaire: Perfekt (regelmässig), Zeitangaben
 Lernen lernen: Texte strukturieren mit Zeitangaben
 G: die Klasse, die Klassenfahrt, der Bus, das Programm, besichtigen, besuchen
 B: die Stadtführung, das Münster, der Zoo, der Rhein, das Schiff, die Führung, teilnehmen an, übernachten, die Jugendherberge ; zuerst, dann, danach, später, zum Schluss, am Morgen/Nachmittag/Abend, Wir haben…besucht/besichtigt/gesehen, Wir sind…gefahren/gegangen/gewandert ; Am besten hat mir…gefallen, Das Highlight war…, Es war langweilig/spannend/lustig, Ich habe viel gelernt
@@ -137,7 +138,7 @@ V: die Ausstellung, das Kunstmuseum, beeindruckend, die Erfahrung, das Erlebnis,
 
 [CH7] Freunde haben – Freunde finden
 Objectifs: Décrire amis, caractère, activités au passé
-Grammaire: Perfekt (unregelmässig vertieft), Adjektive Personenbeschreibung
+Grammaire: Perfekt (unregelmässig), Verben mit haben und sein, Adjektive Personenbeschreibung
 Lernen lernen: Adjektive mit Gegenteil lernen
 G: der Freund/die Freundin, der beste Freund, mein bester Freund ist…, zusammen, spielen, lachen
 B: nett ≠ gemein, lustig ≠ ernst, ehrlich ≠ unehrlich, mutig ≠ ängstlich, faul ≠ fleissig, freundlich ≠ unfreundlich, hilfsbereit, treu, geduldig ≠ ungeduldig, zuverlässig, egoistisch ≠ grosszügig ; sich verstehen mit, sich streiten mit, sich vertragen, Geheimnisse teilen, vertrauen, zusammenhalten, helfen, zuhören, Spass zusammen haben, seit…Jahren/Monaten ; Er/Sie ist…, Er/Sie hat…Haare/Augen, Er/Sie sieht…aus, gross ≠ klein, schlank, sportlich
