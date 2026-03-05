@@ -218,6 +218,14 @@ footer{background:var(--slate-900);padding:3rem 2rem;text-align:center}.footer-b
 <div class="wiz-choice compact" onclick="wizSelect(this,'voie','VP')"><div class="wc-icon">🔵</div><div class="wc-text"><span class="wc-label">VP</span><span class="wc-sub">Prégymnasiale</span></div></div>
 </div>
 </div>
+<div id="wiz-niveau-section" style="margin-top:1.25rem;">
+<div style="font-size:.85rem;font-weight:700;color:var(--indigo-200);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;text-align:center;">Niveau de la classe</div>
+<div class="wiz-grid cols-3">
+<div class="wiz-choice compact" onclick="wizSelect(this,'difficulte','Débutants')"><div class="wc-icon">🟢</div><div class="wc-text"><span class="wc-label">Débutants</span></div></div>
+<div class="wiz-choice compact" onclick="wizSelect(this,'difficulte','Initiés')"><div class="wc-icon">🟡</div><div class="wc-text"><span class="wc-label">Initiés</span></div></div>
+<div class="wiz-choice compact" onclick="wizSelect(this,'difficulte','Motivés')"><div class="wc-icon">🔴</div><div class="wc-text"><span class="wc-label">Motivés</span></div></div>
+</div>
+</div>
 <div class="wiz-nav"><button class="wiz-back" onclick="wizPrev()">← Retour</button><button class="wiz-next" id="wn-3" disabled onclick="wizNext()">Suivant →</button></div>
 </div>
 
@@ -1095,7 +1103,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // ==================== WIZARD LOGIC ====================
 let wizStep = 1;
-const wizState = { profil:'enseignant', matiere:'', degre:'', voie:'', format:'impression' };
+const wizState = { profil:'enseignant', matiere:'', degre:'', voie:'', difficulte:'', format:'impression' };
 const degreMap = {'7-8H':'7-8H (10-12 ans)','9H':'9H (12-13 ans)','10H':'10H (13-14 ans)','11H':'11H (14-15 ans)'};
 const voieMap = {'VG1':'VG niveau 1 (exigences de base)','VG2':'VG niveau 2 (exigences supérieures)','VP':'VP (voie prégymnasiale)'};
 
@@ -1194,6 +1202,7 @@ function wizBuildSummary() {
   let rows = '<div class="wiz-sum-row"><span class="wiz-sum-label">Profil</span><span class="wiz-sum-value">'+(wizState.profil==='enseignant'?'\U0001f9d1\u200d\U0001f3eb Enseignant·e':'\U0001f468\u200d\U0001f469\u200d\U0001f467 Parent')+'</span></div>';
   rows += '<div class="wiz-sum-row"><span class="wiz-sum-label">Matière</span><span class="wiz-sum-value">'+wizState.matiere+'</span></div>';
   rows += '<div class="wiz-sum-row"><span class="wiz-sum-label">Degré</span><span class="wiz-sum-value">'+wizState.degre+(wizState.voie?' · '+wizState.voie:'')+'</span></div>';
+  if (wizState.difficulte) rows += '<div class="wiz-sum-row"><span class="wiz-sum-label">Niveau</span><span class="wiz-sum-value">'+wizState.difficulte+'</span></div>';
   rows += '<div class="wiz-sum-row"><span class="wiz-sum-label">Objectif</span><span class="wiz-sum-value" style="font-size:.82rem;">'+sujet+'</span></div>';
   s.innerHTML = rows;
 }
@@ -1203,6 +1212,7 @@ function wizGenerate() {
   document.getElementById('matiere').value = wizState.matiere;
   document.getElementById('degre').value = degreMap[wizState.degre] || wizState.degre;
   document.getElementById('voie').value = voieMap[wizState.voie] || '';
+  document.getElementById('difficulte').value = wizState.difficulte || '';
   document.getElementById('sujet').value = document.getElementById('wiz-sujet').value;
   document.getElementById('theme').value = document.getElementById('wiz-theme') ? document.getElementById('wiz-theme').value : '';
   document.getElementById('code').value = document.getElementById('wiz-code').value;
