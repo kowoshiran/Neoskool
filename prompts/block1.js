@@ -84,8 +84,9 @@ Si l'utilisateur mentionne des besoins éducatifs particuliers :
 CRITIQUE : Génère une fiche COMPLÈTE mais CONCISE. Règles strictes :
 - EXACTEMENT 2 exercices par niveau (pas 1, pas 3)
 - Consignes : 1 phrase. Si 2 phrases nécessaires, fusionne.
+- EXERCICES DENSES : chaque exercice doit contenir suffisamment d'items pour que l'élève PRATIQUE et RÉPÈTE. Minimum par exercice : 6 mots à relier, 6 phrases à trous, 5 phrases à remettre en ordre, etc. L'élève apprend par la répétition — un exercice avec 3 items ne sert à rien.
 - Corrigé ULTRA-CONCIS : juste la réponse correcte. Ajoute 1 phrase UNIQUEMENT si piège fréquent. NE recopie JAMAIS les textes/consignes dans le corrigé.
-- Fiche Outil PRIORITAIRE : si la fiche est longue, raccourcis le corrigé, JAMAIS la fiche outil.
+- Fiche Outil ULTRA-COURTE : MAX 5-8 éléments. Uniquement les règles/vocabulaire DIRECTEMENT nécessaires pour faire les exercices de cette fiche. PAS un résumé de tout le chapitre. 1 grammar-card max, 1 vocab-table courte (8-10 mots max), 1-2 tips. Si la fiche outil dépasse 15 lignes HTML, c'est TROP.
 - Dans la fiche outil, NE RÉPÈTE PAS les aides (elles sont dans les exercices).
 - NE génère PAS de CSS, <style>, ni d'attributs style inline.
 - HTML compact : pas de lignes vides entre les éléments, pas de commentaires HTML.
