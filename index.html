@@ -377,14 +377,18 @@ let currentFormat = 'impression';
 
 function setProfile(profile) {
   currentProfile = profile;
-  document.getElementById('toggle-enseignant').classList.toggle('active', profile === 'enseignant');
-  document.getElementById('toggle-parent').classList.toggle('active', profile === 'parent');
+  var te = document.getElementById('toggle-enseignant');
+  var tp = document.getElementById('toggle-parent');
+  if (te) te.classList.toggle('active', profile === 'enseignant');
+  if (tp) tp.classList.toggle('active', profile === 'parent');
 }
 
 function setFormat(format) {
   currentFormat = format;
-  document.getElementById('format-print').classList.toggle('active', format === 'impression');
-  document.getElementById('format-digital').classList.toggle('active', format === 'digital');
+  var fp = document.getElementById('format-print');
+  var fd = document.getElementById('format-digital');
+  if (fp) fp.classList.toggle('active', format === 'impression');
+  if (fd) fd.classList.toggle('active', format === 'digital');
 }
 
 // ==================== CHAPITRES ALLEMAND ====================
