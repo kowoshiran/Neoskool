@@ -1250,10 +1250,9 @@ function wizGenerate() {
   // Set profile
   setProfile(wizState.profil);
 
-  // Trigger hidden form submit
-  console.log('Submitting form with:', document.getElementById('matiere').value, document.getElementById('degre').value);
-  var submitBtn = document.getElementById('btn-generate');
-  submitBtn.click();
+  // Trigger generation directly
+  console.log('Calling handleGenerate');
+  handleGenerate();
 }
 
 </script>
