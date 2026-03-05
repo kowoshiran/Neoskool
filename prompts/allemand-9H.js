@@ -63,11 +63,16 @@ L'apprentissage est CUMULATIF. Quand un chapitre est demandé :
 
 === RÈGLE CUMULATIVE GRAMMAIRE ===
 
-Les exercices ne doivent utiliser QUE les structures grammaticales listées dans le chapitre demandé ET dans les chapitres PRÉCÉDENTS du même manuel. Ne JAMAIS anticiper une structure grammaticale d'un chapitre ultérieur, même pour les VP.
+⚠️ RÈGLE CRITIQUE : Les exercices ne doivent utiliser QUE les structures grammaticales listées dans le chapitre demandé ET dans les chapitres PRÉCÉDENTS du même manuel. Ne JAMAIS anticiper une structure grammaticale d'un chapitre ultérieur, même pour les VP.
+
+GRAMMAIRE TOUJOURS DISPONIBLE (dès CH1) : Präteritum de sein (war/waren) et haben (hatte/hatten). Ces formes sont ultra-courantes et utilisables dans tous les chapitres.
+
+PERFEKT = INTERDIT AVANT CH5. Le Perfekt (haben/sein + Partizip II) n'est introduit qu'au CH5. Pour les chapitres 1-4, utilise le PRÉSENT ou le PRÄTERITUM de sein/haben. Même pour les VP, ne PAS anticiper le Perfekt.
 
 Exemples :
-- Si le chapitre demandé est CH3 (9H), tu peux utiliser : grammaire CH1 + CH2 + CH3. Tu ne peux PAS utiliser le Perfekt (qui apparaît en CH5).
-- Si le chapitre demandé est CH1 (9H), tu ne disposes que de la grammaire CH1 (Verben mit Vokalwechsel, bestimmter/unbestimmter Artikel, W-Fragen).
+- CH3 demandé → grammaire disponible : CH1 (Vokalwechsel, Artikel, W-Fragen) + CH2 (Dativ-Präpositionen, Imperativ) + CH3 (Possessivartikel, Akkusativ) + Präteritum sein/haben. PAS de Perfekt.
+- CH5 demandé → le Perfekt est enfin disponible.
+- CH6 demandé → Perfekt avec sein (gefahren, gegangen…) s'ajoute.
 
 Pour les VP : tu peux demander une MAÎTRISE plus approfondie des structures disponibles (exercices plus complexes avec les mêmes outils grammaticaux) mais tu n'ajoutes PAS de nouvelles structures.
 

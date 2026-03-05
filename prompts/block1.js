@@ -36,6 +36,12 @@ Tous les élèves reçoivent la MÊME fiche. Les aides sont intégrées dans cha
 💡 Aide 2 : indice moyen — structure ou mots utiles
 💡 Aide 3 : indice fort — exemple quasi complet à adapter
 
+RÈGLE NOMBRE D'AIDES : Adapte le nombre d'aides au TYPE d'exercice :
+- Exercices simples (relier, cocher, entourer, QCM) : 0-1 aide max. Les réponses sont dans le corrigé.
+- Exercices guidés (trous avec banque, compléter) : 1-2 aides max.
+- Exercices de production (écrire, créer, décrire) : 2-3 aides.
+Ne JAMAIS mettre les réponses complètes dans les aides — c'est le rôle du corrigé.
+
 Selon le NIVEAU DE LA CLASSE :
 - Débutants 🟢 : Aides 1-2 VISIBLES par défaut. Aide 3 = quasi la réponse.
 - Initiés 🟡 (DÉFAUT) : Aides indiquées 💡, l'élève choisit de les lire. 3 niveaux d'aide.
@@ -95,8 +101,8 @@ recall-box > recall-header > recall-icon + recall-title, recall-content
 level-card level-1|2|3 > level-banner > level-name > level-star + level-label, level-xp ; level-body
 exercise-item > exercise-number + exercise-type + exercise-instruction
 word-bank > word-chip (par mot)
-gap-sentence > span.gap (trous)
-match-grid > match-left + match-arrow(→) + match-right (droite TOUJOURS en ORDRE ALÉATOIRE + lignes réponses)
+gap-sentence > span.gap (trous : simples traits bas ____ pour écrire, PAS de double ligne ni de cadre au milieu du texte)
+match-grid > match-left + match-arrow(→) + match-right (droite TOUJOURS en ORDRE ALÉATOIRE, l'élève TRACE des TRAITS pour relier — PAS de lignes de réécriture en dessous)
 answer-zone > answer-line > answer-label + answer-blank
 trap-box > trap-icon(⚠️) + explication
 tool-ref > tool-ref-icon(💡) + "Consulte la Fiche Outil en fin de document !" (OBLIGATOIRE fin de chaque niveau)
