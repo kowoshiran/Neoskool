@@ -270,8 +270,8 @@ footer{background:var(--slate-900);padding:3rem 2rem;text-align:center}.footer-b
 </div>
 
 <!-- Hidden form for API compatibility -->
-<div style="display:none;">
-<form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere" required><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre" required><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group" id="domaine-group" style="display:none"><label for="domaine"><span class="label-icon">📂</span> Domaine</label><select id="domaine" name="domaine"><option value="">Choisir un domaine…</option></select></div><div class="form-group" id="soustheme-group" style="display:none"><label for="soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="soustheme" name="soustheme"><option value="">Choisir un sous-thème…</option></select></div><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner" required></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX" required></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form>
+<div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
+<form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere"><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre"><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group" id="domaine-group" style="display:none"><label for="domaine"><span class="label-icon">📂</span> Domaine</label><select id="domaine" name="domaine"><option value="">Choisir un domaine…</option></select></div><div class="form-group" id="soustheme-group" style="display:none"><label for="soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="soustheme" name="soustheme"><option value="">Choisir un sous-thème…</option></select></div><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner"></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX"></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form>
 </div>
 
 </div>
@@ -780,8 +780,8 @@ const loadingStages = [
   { pct: 94, emoji: '🎪', msg: 'Le rideau va bientôt se lever...' },
 ];
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
+async function handleGenerate(e) {
+  if (e) e.preventDefault();
   
   const matiere = document.getElementById('matiere').value;
   const degre = document.getElementById('degre').value;
@@ -1057,12 +1057,15 @@ form.addEventListener('submit', async (e) => {
     btn.classList.remove('loading');
     btn.disabled = false;
   }
-});
+}
+form.addEventListener('submit', handleGenerate);
 
 // ==================== UTILITIES ====================
 function showStatus(message, type) {
   statusMsg.textContent = message;
   statusMsg.className = `status-message ${type}`;
+  const wizSt = document.getElementById('wiz-status');
+  if (wizSt) { wizSt.textContent = message; wizSt.className = `status-message ${type}`; }
 }
 
 function printFiche() {
@@ -1209,6 +1212,7 @@ function wizBuildSummary() {
 
 function wizGenerate() {
   // Populate hidden form fields from wizard state
+  console.log('wizGenerate called', wizState);
   document.getElementById('matiere').value = wizState.matiere;
   document.getElementById('degre').value = degreMap[wizState.degre] || wizState.degre;
   document.getElementById('voie').value = voieMap[wizState.voie] || '';
@@ -1247,7 +1251,9 @@ function wizGenerate() {
   setProfile(wizState.profil);
 
   // Trigger hidden form submit
-  document.getElementById('neoskool-form').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
+  console.log('Submitting form with:', document.getElementById('matiere').value, document.getElementById('degre').value);
+  var submitBtn = document.getElementById('btn-generate');
+  submitBtn.click();
 }
 
 </script>
