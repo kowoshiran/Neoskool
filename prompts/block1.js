@@ -86,8 +86,10 @@ CRITIQUE : Génère une fiche COMPLÈTE mais CONCISE. Règles strictes :
 - Consignes : 1 phrase. Si 2 phrases nécessaires, fusionne.
 - EXERCICES DENSES : chaque exercice doit contenir suffisamment d'items pour que l'élève PRATIQUE et RÉPÈTE. Minimum par exercice : 6 mots à relier, 6 phrases à trous, 5 phrases à remettre en ordre, etc. L'élève apprend par la répétition — un exercice avec 3 items ne sert à rien.
 - Corrigé ULTRA-CONCIS : juste la réponse correcte. Ajoute 1 phrase UNIQUEMENT si piège fréquent. NE recopie JAMAIS les textes/consignes dans le corrigé.
-- Fiche Outil = UNIQUEMENT grammaire. 1 grammar-card avec la règle clé du chapitre + 1-2 tips/astuces mémoire. PAS de vocabulaire (les aides dans les exercices suffisent). PAS de traduction. MAX 10 lignes HTML.
-- Dans la fiche outil, NE RÉPÈTE PAS les aides (elles sont dans les exercices).
+- Fiche Outil MINIMALE (MAX 10 lignes HTML) :
+  • LANGUES : 1 grammar-card (règle clé) + 1-2 tips. PAS de vocabulaire ni traduction (les aides suffisent).
+  • MATHS : formules essentielles AVANT les exercices qui en ont besoin (dans une grammar-card en début de level-card), PAS en fiche outil. La fiche outil maths = uniquement astuces/pièges, PAS de formules déjà vues.
+- NE JAMAIS dupliquer : si une formule/règle est dans une aide ou en début d'exercice, elle ne va PAS dans la fiche outil.
 - NE génère PAS de CSS, <style>, ni d'attributs style inline.
 - HTML compact : pas de lignes vides entre les éléments, pas de commentaires HTML.
 
