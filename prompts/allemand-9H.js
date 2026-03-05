@@ -65,12 +65,13 @@ L'apprentissage est CUMULATIF. Quand un chapitre est demandé :
 
 ⚠️ RÈGLE CRITIQUE : Les exercices ne doivent utiliser QUE les structures grammaticales listées dans le chapitre demandé ET dans les chapitres PRÉCÉDENTS du même manuel. Ne JAMAIS anticiper une structure grammaticale d'un chapitre ultérieur, même pour les VP.
 
-GRAMMAIRE TOUJOURS DISPONIBLE (dès CH1) : Präteritum de sein (war/waren) et haben (hatte/hatten). Ces formes sont ultra-courantes et utilisables dans tous les chapitres.
+PRÄTERITUM de sein/haben = INTERDIT AVANT CH4. Les formes war/waren, hatte/hatten ne sont disponibles qu'à partir du CH4. Pour CH1-3, utilise uniquement le PRÉSENT.
 
-PERFEKT = INTERDIT AVANT CH5. Le Perfekt (haben/sein + Partizip II) n'est introduit qu'au CH5. Pour les chapitres 1-4, utilise le PRÉSENT ou le PRÄTERITUM de sein/haben. Même pour les VP, ne PAS anticiper le Perfekt.
+PERFEKT = INTERDIT AVANT CH5. Le Perfekt (haben/sein + Partizip II) n'est introduit qu'au CH5. Pour les chapitres 1-4, PAS de Perfekt. Même pour les VP, ne PAS anticiper le Perfekt.
 
 Exemples :
-- CH3 demandé → grammaire disponible : CH1 (Vokalwechsel, Artikel, W-Fragen) + CH2 (Dativ-Präpositionen, Imperativ) + CH3 (Possessivartikel, Akkusativ) + Präteritum sein/haben. PAS de Perfekt.
+- CH3 demandé → grammaire disponible : CH1 (Vokalwechsel, Artikel, W-Fragen) + CH2 (Dativ-Präpositionen, Imperativ) + CH3 (Possessivartikel, Akkusativ). PRÉSENT uniquement. PAS de Präteritum, PAS de Perfekt.
+- CH4 demandé → Präteritum sein/haben disponible (war/hatte). PAS de Perfekt.
 - CH5 demandé → le Perfekt est enfin disponible.
 - CH6 demandé → Perfekt avec sein (gefahren, gegangen…) s'ajoute.
 
@@ -112,7 +113,7 @@ V: das Erdgeschoss, der Stock, das Dach, die Wohngemeinschaft (WG), der Nachbar/
 
 [CH4] Alles Gute!
 Objectifs: Féliciter, fêtes, date, santé
-Grammaire: Ordinalzahlen, Modalverben (dürfen, sollen), Datumsangaben
+Grammaire: Ordinalzahlen, Modalverben (dürfen, sollen), Datumsangaben, Präteritum von sein/haben (war/hatte)
 Lernen lernen: Wörter mit Assoziationen lernen
 G: Alles Gute!, Herzlichen Glückwunsch!, der Geburtstag, Wann hast du Geburtstag?, die Party/Feier/das Fest, Weihnachten, Ostern, einladen
 B: Silvester/Neujahr, Valentinstag, Muttertag, Nationalfeiertag, feiern, die Einladung, Dekoration/schmücken, Luftballon, Kerze, Geschenk, schenken, Karten schreiben, Frohe Weihnachten!, Frohes neues Jahr! ; Heute ist der…, Am…, im Januar-Dezember, im Frühling/Sommer/Herbst/Winter ; Wie geht es dir?, Mir geht es (nicht) gut, Kopfschmerzen/Bauchschmerzen/Halsschmerzen/Fieber, Mir ist schlecht/kalt/warm, krank ≠ gesund, Medikamente nehmen, sich ausruhen, du sollst…/du darfst nicht…
