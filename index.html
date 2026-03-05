@@ -85,14 +85,190 @@ footer{background:var(--slate-900);padding:3rem 2rem;text-align:center}.footer-b
 
 @media(max-width:768px){.steps{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.hero-stats{gap:1.5rem;flex-wrap:wrap}.form-card{padding:2rem 1.5rem}.result-header{flex-direction:column;gap:1rem}section{padding:4rem 1.25rem}.lutins-stage.compact .lutins-card{flex-wrap:wrap;justify-content:center}.lutins-stage.compact .lutins-message{max-width:100%}.celebration-card{flex-direction:column;text-align:center}.celebration-actions{justify-content:center}}
 @media print{.hero,.how-it-works,.sciences,.example-section,.generator,footer,.cinema-container,.celebration-bar{display:none!important}.result-section{display:block!important;padding:0}.result-section .result-iframe{filter:none;opacity:1}}
+
+/* ==================== WIZARD ==================== */
+.wiz-progress{display:flex;align-items:center;gap:0;margin-bottom:2rem;padding:0 1rem;max-width:680px;margin-left:auto;margin-right:auto}
+.wiz-prog-step{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;font-size:.85rem;font-weight:800;flex-shrink:0;border:2px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.3);background:transparent;transition:all .4s}
+.wiz-prog-step.active{border-color:var(--gold-400);color:var(--gold-400);box-shadow:0 0 20px rgba(250,204,21,0.2)}
+.wiz-prog-step.done{border-color:var(--indigo-400);background:var(--indigo-400);color:white}
+.wiz-prog-line{flex-grow:1;height:2px;background:rgba(255,255,255,0.1);position:relative}
+.wiz-fill{position:absolute;left:0;top:0;height:100%;background:var(--indigo-400);transition:width .6s cubic-bezier(.16,1,.3,1);width:0}
+.wiz-step{display:none;animation:wizIn .4s ease-out}
+.wiz-step.active{display:block}
+@keyframes wizIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.ws-question{font-size:1.4rem;font-weight:800;color:white;text-align:center;margin-bottom:.4rem}
+.ws-hint{font-size:.9rem;color:var(--indigo-300);text-align:center;margin-bottom:1.75rem;font-family:'Source Serif 4',serif}
+.wiz-grid{display:grid;gap:.75rem}
+.wiz-grid.cols-2{grid-template-columns:1fr 1fr}
+.wiz-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+.wiz-grid.cols-4{grid-template-columns:1fr 1fr 1fr 1fr}
+.wiz-choice{display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:1.2rem 1rem;background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.08);border-radius:16px;cursor:pointer;transition:all .3s cubic-bezier(.16,1,.3,1);text-align:center}
+.wiz-choice:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);transform:translateY(-2px)}
+.wiz-choice.selected{border-color:var(--gold-400);background:rgba(250,204,21,0.08);box-shadow:0 0 25px rgba(250,204,21,0.1)}
+.wiz-choice.compact{flex-direction:row;padding:1rem 1.25rem;gap:.75rem;text-align:left}
+.wiz-choice.compact .wc-text{display:flex;flex-direction:column}
+.wc-icon{font-size:1.8rem}
+.wc-label{font-size:.9rem;font-weight:700;color:white}
+.wc-sub{font-size:.7rem;color:var(--indigo-300)}
+.wiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.75rem}
+.wiz-back{display:flex;align-items:center;gap:.5rem;padding:.7rem 1.25rem;border-radius:12px;border:1.5px solid rgba(255,255,255,0.1);background:transparent;color:var(--indigo-300);font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
+.wiz-back:hover{border-color:rgba(255,255,255,0.25);color:white}
+.wiz-next{display:flex;align-items:center;gap:.5rem;padding:.8rem 1.75rem;border-radius:14px;border:none;background:linear-gradient(135deg,var(--gold-400),var(--amber-500));color:var(--indigo-950);font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:800;cursor:pointer;transition:all .3s;box-shadow:0 4px 20px rgba(250,204,21,0.25);text-transform:uppercase;letter-spacing:.04em}
+.wiz-next:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(250,204,21,0.35)}
+.wiz-next:disabled{opacity:.3;cursor:not-allowed;transform:none;box-shadow:none}
+.wiz-textarea{width:100%;font-family:'Outfit',sans-serif;font-size:1.05rem;padding:1.15rem;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);border-radius:14px;color:white;resize:none;min-height:100px;outline:none;line-height:1.6;transition:all .3s}
+.wiz-textarea:focus{border-color:var(--indigo-400);background:rgba(255,255,255,0.07);box-shadow:0 0 0 4px rgba(99,102,241,0.15)}
+.wiz-textarea::placeholder{color:rgba(255,255,255,0.25)}
+.wiz-suggestions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem;justify-content:center}
+.wiz-sug{padding:.45rem .9rem;background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2);border-radius:100px;color:var(--indigo-300);font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s}
+.wiz-sug:hover{background:rgba(99,102,241,0.2);color:white;border-color:rgba(99,102,241,0.4)}
+.wiz-summary{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.wiz-sum-row{display:flex;justify-content:space-between;align-items:center;padding:.65rem .9rem;background:rgba(255,255,255,0.04);border-radius:10px;border:1px solid rgba(255,255,255,0.06)}
+.wiz-sum-label{font-size:.75rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em}
+.wiz-sum-value{font-size:.9rem;font-weight:700;color:white;max-width:55%;text-align:right}
+.wiz-formats{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.5rem}
+.wiz-format{display:flex;align-items:center;gap:10px;padding:1rem;border-radius:12px;border:2px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);cursor:pointer;transition:all .3s}
+.wiz-format:hover{border-color:rgba(255,255,255,0.15)}
+.wiz-format.selected{border-color:var(--indigo-400);background:rgba(79,70,229,0.12)}
+.wf-icon{font-size:1.4rem}
+.wf-text{display:flex;flex-direction:column}
+.wf-text strong{font-size:.85rem;font-weight:700;color:white}
+.wf-text small{font-size:.7rem;color:var(--indigo-300)}
+.wiz-adapts{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+.wiz-adapt{padding:.5rem 1rem;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--indigo-300);font-size:.85rem;font-weight:500;cursor:pointer;transition:all .3s}
+.wiz-adapt:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.05)}
+.wiz-adapt.on{background:rgba(250,204,21,0.08);border-color:rgba(250,204,21,0.3);color:var(--gold-300)}
+.wiz-code{width:100%;font-family:'Courier New',monospace;font-size:1.1rem;padding:1rem;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);border-radius:14px;color:white;outline:none;transition:all .3s;letter-spacing:.1em;text-transform:uppercase;text-align:center}
+.wiz-code:focus{border-color:var(--indigo-400);background:rgba(255,255,255,0.07);box-shadow:0 0 0 4px rgba(99,102,241,0.15)}
+.wiz-code::placeholder{color:rgba(255,255,255,0.25);text-transform:none;letter-spacing:normal;font-family:'Outfit',sans-serif;font-size:.95rem}
+.wiz-select{width:100%;font-family:'Outfit',sans-serif;font-size:.95rem;padding:.9rem 1rem;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);border-radius:12px;color:white;outline:none;-webkit-appearance:none;transition:all .3s;margin-bottom:.6rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23818cf8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.wiz-select:focus{border-color:var(--indigo-400);background:rgba(255,255,255,0.07);box-shadow:0 0 0 4px rgba(99,102,241,0.15)}
+.wiz-select option{background:var(--indigo-900);color:white}
+@media(max-width:768px){.wiz-grid.cols-3,.wiz-grid.cols-4{grid-template-columns:1fr 1fr}.ws-question{font-size:1.15rem}}
 </style>
 </head>
 <body>
-<section class="hero"><div class="hero-grid"></div><div class="hero-content"><div class="hero-badge">Bêta — Canton de Vaud</div><h1>L'école mérite<br>sa <span class="gold">révolution</span></h1><p class="hero-subtitle">Neoskool génère des exercices pédagogiques fondés sur <strong>10 principes scientifiques d'apprentissage</strong>. Gamifiés, adaptés à chaque élève, prêts en 30 secondes.</p><a href="#generer" class="hero-cta">Générer un exercice</a><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-number">10</div><div class="hero-stat-label">Principes cognitifs</div></div><div class="hero-stat"><div class="hero-stat-number">30s</div><div class="hero-stat-label">Par génération</div></div><div class="hero-stat"><div class="hero-stat-number">∞</div><div class="hero-stat-label">Différenciation</div></div></div></div><div class="scroll-indicator"><span></span></div></section>
+<section class="hero"><div class="hero-grid"></div><div class="hero-content"><div class="hero-badge">Bêta — Canton de Vaud</div><h1>Chaque élève mérite<br>de <span class="gold">réussir</span></h1><p class="hero-subtitle">Neoskool génère des exercices sur mesure, fondés sur les <strong>sciences cognitives</strong>. Adaptés à chaque niveau, prêts en 30 secondes.</p><a href="#generer" class="hero-cta">Générer un exercice</a><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-number">10</div><div class="hero-stat-label">Principes cognitifs</div></div><div class="hero-stat"><div class="hero-stat-number">30s</div><div class="hero-stat-label">Par génération</div></div><div class="hero-stat"><div class="hero-stat-number">∞</div><div class="hero-stat-label">Différenciation</div></div></div></div><div class="scroll-indicator"><span></span></div></section>
 <section class="how-it-works"><div class="container"><div class="section-label">✦ Comment ça marche</div><h2 class="section-title">Trois étapes. Trente secondes.</h2><p class="section-subtitle">Fini les heures passées à créer des exercices différenciés.</p><div class="steps"><div class="step"><div class="step-number">1</div><h3>Décrivez votre besoin</h3><p>Matière, sujet, degré scolaire, adaptations…</p></div><div class="step"><div class="step-number">2</div><h3>L'IA génère la mission</h3><p>Exercice complet basé sur les sciences cognitives, gamifié.</p></div><div class="step"><div class="step-number">3</div><h3>Imprimez et distribuez</h3><p>3 niveaux, quiz, auto-évaluation, corrections incluses.</p></div></div></div></section>
 <section class="sciences"><div class="container"><div class="section-label">✦ Fondements scientifiques</div><h2 class="section-title">10 principes prouvés par la recherche</h2><p class="section-subtitle">Un outil de conception pédagogique fondé sur les sciences cognitives.</p><div class="science-grid"><div class="science-card"><div class="science-icon">🧠</div><div><h4>Retrieval Practice</h4><p>Récupérer l'info renforce l'apprentissage.</p></div></div><div class="science-card"><div class="science-icon">📅</div><div><h4>Pratique espacée</h4><p>Ancrer les connaissances dans le temps.</p></div></div><div class="science-card"><div class="science-icon">🔀</div><div><h4>Interleaving</h4><p>Mélanger développe la flexibilité.</p></div></div><div class="science-card"><div class="science-icon">🎮</div><div><h4>Gamification</h4><p>Motivation par points et niveaux.</p></div></div><div class="science-card"><div class="science-icon">🏋️</div><div><h4>Difficultés désirables</h4><p>Effort calibré = rétention.</p></div></div><div class="science-card"><div class="science-icon">🎨</div><div><h4>Double codage</h4><p>Texte + visuels = double mémorisation.</p></div></div><div class="science-card"><div class="science-icon">💬</div><div><h4>Feedback élaboré</h4><p>Corrections détaillées = apprentissage.</p></div></div><div class="science-card"><div class="science-icon">❓</div><div><h4>Interrogation élaborative</h4><p>Pourquoi ? = connexions profondes.</p></div></div><div class="science-card"><div class="science-icon">🪞</div><div><h4>Métacognition</h4><p>Réfléchir sur sa pensée = autonomie.</p></div></div><div class="science-card"><div class="science-icon">🚀</div><div><h4>Transfert</h4><p>Nouveau contexte = vraie maîtrise.</p></div></div></div></div></section>
-<section class="example-section"><div class="container"><div class="section-label">✦ Exemple réel</div><h2 class="section-title">Voici ce que Neoskool génère</h2><div class="example-wrapper"><div class="example-browser"><div class="example-browser-bar"><div class="browser-dot red"></div><div class="browser-dot yellow"></div><div class="browser-dot green"></div><div class="browser-url">neoskool.com/resultat</div></div><div class="example-content"><h2>🍫 MISSION FRACTION</h2><p>La fabrique Cailler a besoin de toi !</p><span class="badge">🏆 Badges</span><span class="badge">⭐ 3 niveaux</span><span class="badge">🧠 10 principes</span><div class="level-box"><h4>⭐ NIVEAU 1</h4><p>3/4 de 12 dl de lait = ?</p></div><div class="level-box"><h4>⭐⭐ NIVEAU 2</h4><p>180 tablettes, 2/5 lait, 1/3 noires. Blanches ?</p></div><div class="level-box"><h4>⭐⭐⭐ NIVEAU 3</h4><p>Invente ta recette en fractions !</p></div></div></div><div class="example-fade"></div></div></div></section>
-<section class="generator" id="generer"><div class="container"><div class="section-label">✦ Générateur</div><h2 class="section-title">Créez votre exercice</h2><p class="section-subtitle">Remplissez le formulaire et récupérez votre mission.</p><div class="form-card"><div class="profile-toggle"><div class="toggle-group"><button type="button" class="toggle-btn active" id="toggle-enseignant" onclick="setProfile('enseignant')"><span class="toggle-icon">🧑‍🏫</span> Enseignant·e</button><button type="button" class="toggle-btn" id="toggle-parent" onclick="setProfile('parent')"><span class="toggle-icon">👨‍👩‍👧</span> Parent <span class="toggle-badge">Nouveau</span></button></div></div><div class="format-toggle-container"><div class="format-toggle-label">Format de sortie</div><div class="format-toggle-group"><button type="button" class="format-btn active" id="format-print" onclick="setFormat('impression')"><span class="format-icon">🖨️</span><span class="format-text"><strong>Impression</strong><small>Fiche + outil</small></span></button><button type="button" class="format-btn" id="format-digital" onclick="setFormat('digital')"><span class="format-icon">💻</span><span class="format-text"><strong>Digital</strong><small>Aides cliquables</small></span></button></div></div><div class="form-header"><h3>⚡ Créez votre mission</h3><p>Exercice complet en quelques secondes</p></div><form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere" required><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre" required><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group" id="domaine-group" style="display:none"><label for="domaine"><span class="label-icon">📂</span> Domaine</label><select id="domaine" name="domaine"><option value="">Choisir un domaine…</option></select></div><div class="form-group" id="soustheme-group" style="display:none"><label for="soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="soustheme" name="soustheme"><option value="">Choisir un sous-thème…</option></select></div><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner" required></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX" required></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form></div></div></section>
+
+<!-- ==================== WIZARD GENERATOR ==================== -->
+<section class="generator" id="generer">
+<div class="container">
+<div style="text-align:center;margin-bottom:1rem;">
+<div class="section-label" style="color:var(--gold-400);">✦ Générateur</div>
+<h2 class="section-title" style="color:white;">Créez votre exercice</h2>
+<p class="section-subtitle" style="color:var(--indigo-300);margin:0 auto 2.5rem;">Répondez à quelques questions. On s’occupe du reste.</p>
+</div>
+
+<!-- Wizard Progress -->
+<div class="wiz-progress">
+<div class="wiz-prog-step active" id="wp-1">1</div><div class="wiz-prog-line"><div class="wiz-fill" id="wf-1"></div></div>
+<div class="wiz-prog-step" id="wp-2">2</div><div class="wiz-prog-line"><div class="wiz-fill" id="wf-2"></div></div>
+<div class="wiz-prog-step" id="wp-3">3</div><div class="wiz-prog-line"><div class="wiz-fill" id="wf-3"></div></div>
+<div class="wiz-prog-step" id="wp-4">4</div><div class="wiz-prog-line"><div class="wiz-fill" id="wf-4"></div></div>
+<div class="wiz-prog-step" id="wp-5">5</div>
+</div>
+
+<div class="form-card">
+<!-- STEP 1: Profil -->
+<div class="wiz-step active" id="ws-1">
+<div class="ws-question">Qui êtes-vous ?</div>
+<div class="ws-hint">Cela adapte le format et le vocabulaire de la fiche</div>
+<div class="wiz-grid cols-2">
+<div class="wiz-choice selected" onclick="wizSelect(this,'profil','enseignant')"><div class="wc-icon">🧑‍🏫</div><div class="wc-label">Enseignant·e</div><div class="wc-sub">Fiche complète avec outil</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'profil','parent')"><div class="wc-icon">👨‍👩‍👧</div><div class="wc-label">Parent</div><div class="wc-sub">Exercice adapté à la maison</div></div>
+</div>
+<div class="wiz-nav"><div></div><button class="wiz-next" onclick="wizNext()">Suivant →</button></div>
+</div>
+
+<!-- STEP 2: Matière -->
+<div class="wiz-step" id="ws-2">
+<div class="ws-question">Quelle matière ?</div>
+<div class="ws-hint">Choisissez la discipline</div>
+<div class="wiz-grid cols-4">
+<div class="wiz-choice" onclick="wizSelect(this,'matiere','Mathématiques')"><div class="wc-icon">📐</div><div class="wc-label">Maths</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'matiere','Français')"><div class="wc-icon">📖</div><div class="wc-label">Français</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'matiere','Allemand')"><div class="wc-icon">🇩🇪</div><div class="wc-label">Allemand</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'matiere','Anglais')"><div class="wc-icon">🇬🇧</div><div class="wc-label">Anglais</div></div>
+</div>
+<div class="wiz-grid cols-3" style="margin-top:.75rem;">
+<div class="wiz-choice" onclick="wizSelect(this,'matiere','Sciences de la nature')"><div class="wc-icon">🔬</div><div class="wc-label">Sciences</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'matiere','Histoire')"><div class="wc-icon">🏛️</div><div class="wc-label">Histoire</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'matiere','Géographie')"><div class="wc-icon">🌍</div><div class="wc-label">Géo</div></div>
+</div>
+<div class="wiz-nav"><button class="wiz-back" onclick="wizPrev()">← Retour</button><button class="wiz-next" id="wn-2" disabled onclick="wizNext()">Suivant →</button></div>
+</div>
+
+<!-- STEP 3: Degré + Voie -->
+<div class="wiz-step" id="ws-3">
+<div class="ws-question">Quel degré ?</div>
+<div class="ws-hint">Sélectionnez le degré et la voie</div>
+<div class="wiz-grid cols-4" style="margin-bottom:1.25rem;">
+<div class="wiz-choice" onclick="wizSelect(this,'degre','7-8H')"><div class="wc-icon">📗</div><div class="wc-label">7-8H</div><div class="wc-sub">Cycle 2</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'degre','9H')"><div class="wc-icon">📘</div><div class="wc-label">9H</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'degre','10H')"><div class="wc-icon">📙</div><div class="wc-label">10H</div></div>
+<div class="wiz-choice" onclick="wizSelect(this,'degre','11H')"><div class="wc-icon">📕</div><div class="wc-label">11H</div></div>
+</div>
+<div id="wiz-voie-section" style="display:none;">
+<div style="font-size:.85rem;font-weight:700;color:var(--indigo-200);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem;text-align:center;">Voie</div>
+<div class="wiz-grid cols-3">
+<div class="wiz-choice compact" onclick="wizSelect(this,'voie','VG1')"><div class="wc-icon">🟢</div><div class="wc-text"><span class="wc-label">VG1</span><span class="wc-sub">Exigences de base</span></div></div>
+<div class="wiz-choice compact" onclick="wizSelect(this,'voie','VG2')"><div class="wc-icon">🟡</div><div class="wc-text"><span class="wc-label">VG2</span><span class="wc-sub">Exigences supérieures</span></div></div>
+<div class="wiz-choice compact" onclick="wizSelect(this,'voie','VP')"><div class="wc-icon">🔵</div><div class="wc-text"><span class="wc-label">VP</span><span class="wc-sub">Prégymnasiale</span></div></div>
+</div>
+</div>
+<div class="wiz-nav"><button class="wiz-back" onclick="wizPrev()">← Retour</button><button class="wiz-next" id="wn-3" disabled onclick="wizNext()">Suivant →</button></div>
+</div>
+
+<!-- STEP 4: Objectif -->
+<div class="wiz-step" id="ws-4">
+<div class="ws-question">Que voulez-vous travailler ?</div>
+<div class="ws-hint">Décrivez l’objectif de l’exercice</div>
+<div id="wiz-context-fields"></div>
+<textarea class="wiz-textarea" id="wiz-sujet" placeholder="Ex : L’accord du participe passé avec avoir — cas où le CVD est placé avant le verbe"></textarea>
+<div id="wiz-suggestions" class="wiz-suggestions"></div>
+<div style="margin-top:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Thème / contexte (optionnel)</div>
+<textarea class="wiz-textarea" id="wiz-theme" placeholder="Ex : Reiseziele, Jugendherberge" style="min-height:60px;font-size:.95rem;"></textarea></div>
+<div class="wiz-nav"><button class="wiz-back" onclick="wizPrev()">← Retour</button><button class="wiz-next" onclick="wizNext()">Suivant →</button></div>
+</div>
+
+<!-- STEP 5: Summary + Generate -->
+<div class="wiz-step" id="ws-5">
+<div class="ws-question">Tout est bon ?</div>
+<div class="ws-hint">Vérifiez et lancez la génération</div>
+<div class="wiz-summary" id="wiz-summary"></div>
+<div style="font-size:.8rem;font-weight:700;color:var(--indigo-200);text-transform:uppercase;letter-spacing:.1em;margin:.75rem 0 .5rem;">Format de sortie</div>
+<div class="wiz-formats">
+<div class="wiz-format selected" onclick="wizFormat(this,'impression')"><span class="wf-icon">🖨️</span><div class="wf-text"><strong>Impression</strong><small>Fiche + outil séparé</small></div></div>
+<div class="wiz-format" onclick="wizFormat(this,'digital')"><span class="wf-icon">💻</span><div class="wf-text"><strong>Digital</strong><small>Aides cliquables</small></div></div>
+</div>
+<div style="font-size:.8rem;font-weight:700;color:var(--indigo-200);text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .5rem;">Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></div>
+<div class="wiz-adapts">
+<span class="wiz-adapt" onclick="this.classList.toggle('on')" data-val="TDAH">🧠 TDAH</span>
+<span class="wiz-adapt" onclick="this.classList.toggle('on')" data-val="Dyslexie">📝 Dyslexie</span>
+<span class="wiz-adapt" onclick="this.classList.toggle('on')" data-val="HPI">⚡ HPI</span>
+<span class="wiz-adapt" onclick="this.classList.toggle('on')" data-val="Allophonie">🌍 Allophonie</span>
+<span class="wiz-adapt" onclick="this.classList.toggle('on')" data-val="Dyscalculie">🔢 Dyscalculie</span>
+</div>
+<div style="font-size:.8rem;font-weight:700;color:var(--indigo-200);text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .5rem;">Code d’accès</div>
+<input type="text" class="wiz-code" id="wiz-code" placeholder="BETA-XXXXXX">
+<div class="wiz-nav" style="flex-direction:column;gap:.75rem;margin-top:1.5rem;">
+<button class="btn-generate" id="wiz-generate" onclick="wizGenerate()">⚡ Générer ma mission</button>
+<button class="wiz-back" onclick="wizPrev()" style="align-self:center;">← Modifier mes choix</button>
+</div>
+<div id="wiz-status" class="status-message"></div>
+</div>
+</div>
+
+<!-- Hidden form for API compatibility -->
+<div style="display:none;">
+<form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere" required><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre" required><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group" id="domaine-group" style="display:none"><label for="domaine"><span class="label-icon">📂</span> Domaine</label><select id="domaine" name="domaine"><option value="">Choisir un domaine…</option></select></div><div class="form-group" id="soustheme-group" style="display:none"><label for="soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="soustheme" name="soustheme"><option value="">Choisir un sous-thème…</option></select></div><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner" required></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX" required></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form>
+</div>
+
+</div>
+</section>
+
 
 <!-- ==================== CINEMATIC REVEAL ==================== -->
 <section class="cinema-container" id="cinema-container">
@@ -915,6 +1091,155 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+
+// ==================== WIZARD LOGIC ====================
+let wizStep = 1;
+const wizState = { profil:'enseignant', matiere:'', degre:'', voie:'', format:'impression' };
+const degreMap = {'7-8H':'7-8H (10-12 ans)','9H':'9H (12-13 ans)','10H':'10H (13-14 ans)','11H':'11H (14-15 ans)'};
+const voieMap = {'VG1':'VG niveau 1 (exigences de base)','VG2':'VG niveau 2 (exigences supérieures)','VP':'VP (voie prégymnasiale)'};
+
+function wizSelect(el, key, val) {
+  el.parentElement.querySelectorAll('.wiz-choice').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  wizState[key] = val;
+  const btn = document.getElementById('wn-' + wizStep);
+  if (btn) btn.disabled = false;
+  if (key === 'degre') {
+    const vs = document.getElementById('wiz-voie-section');
+    if (['9H','10H','11H'].includes(val)) { vs.style.display = 'block'; } else { vs.style.display = 'none'; wizState.voie = ''; }
+    // Trigger hidden form update for chapter/domaine population
+    document.getElementById('matiere').value = wizState.matiere;
+    document.getElementById('degre').value = degreMap[val] || val;
+    if (typeof updateDynamicFields === 'function') updateDynamicFields();
+  }
+  if (key === 'matiere') {
+    document.getElementById('matiere').value = val;
+    if (wizState.degre) {
+      document.getElementById('degre').value = degreMap[wizState.degre] || wizState.degre;
+      if (typeof updateDynamicFields === 'function') updateDynamicFields();
+    }
+  }
+}
+
+function wizFormat(el, val) {
+  document.querySelectorAll('.wiz-format').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  wizState.format = val;
+  setFormat(val === 'impression' ? 'impression' : 'digital');
+}
+
+function wizNext() {
+  if (wizStep >= 5) return;
+  document.getElementById('ws-' + wizStep).classList.remove('active');
+  document.getElementById('wp-' + wizStep).classList.remove('active');
+  document.getElementById('wp-' + wizStep).classList.add('done');
+  document.getElementById('wp-' + wizStep).textContent = '\u2713';
+  document.getElementById('wf-' + wizStep).style.width = '100%';
+  wizStep++;
+  document.getElementById('ws-' + wizStep).classList.add('active');
+  document.getElementById('wp-' + wizStep).classList.add('active');
+  if (wizStep === 4) wizBuildStep4();
+  if (wizStep === 5) wizBuildSummary();
+}
+
+function wizPrev() {
+  if (wizStep <= 1) return;
+  document.getElementById('ws-' + wizStep).classList.remove('active');
+  document.getElementById('wp-' + wizStep).classList.remove('active');
+  wizStep--;
+  document.getElementById('ws-' + wizStep).classList.add('active');
+  document.getElementById('wp-' + wizStep).classList.remove('done');
+  document.getElementById('wp-' + wizStep).classList.add('active');
+  document.getElementById('wp-' + wizStep).textContent = wizStep;
+  document.getElementById('wf-' + wizStep).style.width = '0%';
+}
+
+function wizBuildStep4() {
+  const ctx = document.getElementById('wiz-context-fields');
+  ctx.innerHTML = '';
+  const mat = wizState.matiere;
+  const deg = wizState.degre;
+  const isCycle3 = ['9H','10H','11H'].includes(deg);
+
+  if (mat === 'Allemand' && isCycle3 && typeof chapitresAllemand !== 'undefined' && chapitresAllemand[deg]) {
+    let html = '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Chapitre</div><select class="wiz-select" id="wiz-chapitre"><option value="">Tous les chapitres</option>';
+    chapitresAllemand[deg].forEach(ch => { html += '<option value="'+ch.value+'">'+ch.label+'</option>'; });
+    html += '</select></div>';
+    ctx.innerHTML = html;
+  }
+  if (mat === 'Français' && isCycle3 && typeof domainesFrancais !== 'undefined') {
+    let html = '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Domaine</div><select class="wiz-select" id="wiz-domaine" onchange="wizUpdateSousThemes()"><option value="">Choisir un domaine…</option>';
+    domainesFrancais.forEach(d => { html += '<option value="'+d.value+'">'+d.label+'</option>'; });
+    html += '</select></div><div id="wiz-soustheme-wrap"></div>';
+    ctx.innerHTML = html;
+  }
+}
+
+function wizUpdateSousThemes() {
+  const wrap = document.getElementById('wiz-soustheme-wrap');
+  const domVal = document.getElementById('wiz-domaine').value;
+  const deg = wizState.degre;
+  if (domVal && sousThemesFrancais[domVal] && sousThemesFrancais[domVal][deg]) {
+    let html = '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Sous-thème</div><select class="wiz-select" id="wiz-soustheme"><option value="">Tous les sous-thèmes</option>';
+    sousThemesFrancais[domVal][deg].forEach(st => { html += '<option value="'+st.value+'">'+st.label+'</option>'; });
+    html += '</select></div>';
+    wrap.innerHTML = html;
+  } else { wrap.innerHTML = ''; }
+}
+
+function wizBuildSummary() {
+  const s = document.getElementById('wiz-summary');
+  const sujet = document.getElementById('wiz-sujet').value || 'Non spécifié';
+  let rows = '<div class="wiz-sum-row"><span class="wiz-sum-label">Profil</span><span class="wiz-sum-value">'+(wizState.profil==='enseignant'?'\U0001f9d1\u200d\U0001f3eb Enseignant·e':'\U0001f468\u200d\U0001f469\u200d\U0001f467 Parent')+'</span></div>';
+  rows += '<div class="wiz-sum-row"><span class="wiz-sum-label">Matière</span><span class="wiz-sum-value">'+wizState.matiere+'</span></div>';
+  rows += '<div class="wiz-sum-row"><span class="wiz-sum-label">Degré</span><span class="wiz-sum-value">'+wizState.degre+(wizState.voie?' · '+wizState.voie:'')+'</span></div>';
+  rows += '<div class="wiz-sum-row"><span class="wiz-sum-label">Objectif</span><span class="wiz-sum-value" style="font-size:.82rem;">'+sujet+'</span></div>';
+  s.innerHTML = rows;
+}
+
+function wizGenerate() {
+  // Populate hidden form fields from wizard state
+  document.getElementById('matiere').value = wizState.matiere;
+  document.getElementById('degre').value = degreMap[wizState.degre] || wizState.degre;
+  document.getElementById('voie').value = voieMap[wizState.voie] || '';
+  document.getElementById('sujet').value = document.getElementById('wiz-sujet').value;
+  document.getElementById('theme').value = document.getElementById('wiz-theme') ? document.getElementById('wiz-theme').value : '';
+  document.getElementById('code').value = document.getElementById('wiz-code').value;
+
+  // Chapitre (Allemand)
+  const wizChap = document.getElementById('wiz-chapitre');
+  document.getElementById('chapitre').value = wizChap ? wizChap.value : '';
+
+  // Domaine / Sous-theme (Français)
+  const wizDom = document.getElementById('wiz-domaine');
+  const wizSt = document.getElementById('wiz-soustheme');
+  document.getElementById('domaine').value = wizDom ? wizDom.value : '';
+  document.getElementById('soustheme').value = wizSt ? wizSt.value : '';
+
+  // Adaptations
+  document.querySelectorAll('input[name="adaptations"]').forEach(cb => cb.checked = false);
+  document.querySelectorAll('.wiz-adapt.on').forEach(el => {
+    const val = el.getAttribute('data-val');
+    const cb = document.querySelector('input[name="adaptations"][value="'+val+'"]');
+    if (cb) cb.checked = true;
+  });
+
+  // Validation
+  if (!wizState.matiere || !wizState.degre || !document.getElementById('wiz-sujet').value || !document.getElementById('wiz-code').value) {
+    const st = document.getElementById('wiz-status');
+    st.textContent = 'Veuillez remplir tous les champs obligatoires.';
+    st.className = 'status-message error';
+    return;
+  }
+
+  // Set profile
+  setProfile(wizState.profil);
+
+  // Trigger hidden form submit
+  document.getElementById('neoskool-form').requestSubmit();
+}
+
 </script>
 </body>
 </html>
