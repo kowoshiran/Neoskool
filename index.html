@@ -383,20 +383,20 @@ const API_URL = '/api/generate';
 // ==================== SUPABASE AUTH ====================
 const SUPABASE_URL = 'https://nniyltlejcdoyqtgctql.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5uaXlsdGxlamNkb3lxdGdjdHFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDY2NjIsImV4cCI6MjA4ODM4MjY2Mn0.-AWmnnKvyL4rL5TVfKuvq0jT7i8r7yY-NMlsH5sNF3M';
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let currentUser = null;
 let isBetaUser = false;
 const FREE_SHEETS_PER_MONTH = 5;
 
 // Check for existing session on page load
 (async function initAuth() {
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await sbClient.auth.getSession();
   if (session) {
     currentUser = session.user;
     console.log('User authenticated:', currentUser.email);
   }
   // Listen for auth changes (magic link callback)
-  supabase.auth.onAuthStateChange((event, session) => {
+  sbClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' && session) {
       currentUser = session.user;
       console.log('Auth state changed — signed in:', currentUser.email);
@@ -454,7 +454,7 @@ async function handleEmailGate() {
 
   try {
     // Send magic link via Supabase
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error } = await sbClient.auth.signInWithOtp({
       email: email,
       options: { emailRedirectTo: window.location.origin }
     });
@@ -508,7 +508,7 @@ async function saveSheetToSupabase(metadata) {
   if (!htmlContent) return;
 
   try {
-    await supabase.from('sheets').insert({
+    await sbClient.from('sheets').insert({
       user_id: currentUser.id,
       matiere: metadata.matiere || '',
       degre: metadata.degre || '',
