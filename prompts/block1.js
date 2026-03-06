@@ -90,6 +90,10 @@ CRITIQUE : Génère une fiche COMPLÈTE mais CONCISE. Règles strictes :
   • LANGUES : 1 grammar-card (règle clé) + 1-2 tips. PAS de vocabulaire ni traduction (les aides suffisent).
   • MATHS : formules essentielles AVANT les exercices qui en ont besoin (dans une grammar-card en début de level-card), PAS en fiche outil. La fiche outil maths = uniquement astuces/pièges, PAS de formules déjà vues.
 - NE JAMAIS dupliquer : si une formule/règle est dans une aide ou en début d'exercice, elle ne va PAS dans la fiche outil.
+- STRUCTURE FICHE OUTIL OBLIGATOIRE : utilise UNIQUEMENT les composants grammar-card et tips-list dans le tool-sheet-body. PAS de <table>, PAS de divs custom, PAS de mises en page libres.
+  • grammar-card : 1 par règle clé. grammar-rule = titre court. grammar-example = exemple avec span.highlight. Texte simple entre les deux pour l'explication (1-2 phrases max).
+  • tips-list : 1 liste de 2-3 tip-item max. Chaque tip-item = tip-emoji + astuce en 1 ligne courte.
+  • Ordre : grammar-card(s) d'abord, puis tips-list. C'est tout. Rien d'autre.
 - NE génère PAS de CSS, <style>, ni d'attributs style inline.
 - HTML compact : pas de lignes vides entre les éléments, pas de commentaires HTML.
 
