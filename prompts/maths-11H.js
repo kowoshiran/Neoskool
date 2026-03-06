@@ -154,4 +154,24 @@ Volume+aire sphère : VG1 ❌ | VG2 ❌ | VP ✅
 Volume solide composé : tous ✅
 Pythagore espace : VG1 ❌ | VG2 ❌ | VP ✅
 Thalès formel : VG1 ❌ | VG2 ❌ | VP ✅
-Thalès proportionnalité consolidation : VG1 ❌ | VG2 🔶 | VP 🔶`;
+Thalès proportionnalité consolidation : VG1 ❌ | VG2 🔶 | VP 🔶
+
+=== PRÉPARATION AUX EXAMENS — 11H MATHÉMATIQUES ===
+
+En 11H, les élèves passent des examens cantonaux (ECR pour VG, examen cantonal pour VP). Si le thème ou l'objectif de l'enseignant concerne la préparation aux examens :
+
+FORMAT EXAMEN CANTONAL :
+- Durée : 2h (VG) / 2h30 (VP), avec et sans calculatrice
+- Structure : partie 1 SANS calculatrice (calcul mental, fractions, algèbre) + partie 2 AVEC calculatrice (problèmes, géométrie, fonctions)
+- Barème : points par question, total sur 60-80 points, note sur 6
+
+COMPÉTENCES CLÉS ÉVALUÉES :
+- VG1 : calcul mental, fractions Q+, équations 1er degré, proportionnalité, aires/volumes simples, Pythagore plan
+- VG2 : + puissances, notation scientifique, polynômes, fonctions affines, Thalès, volumes composés
+- VP : + identités remarquables, systèmes d'équations, fonctions avancées, démonstrations, Pythagore espace
+
+CONSIGNES SPÉCIFIQUES :
+- Exercices type examen = problèmes multi-étapes avec barème indicatif (+X points)
+- Inclure des exercices "sans calculatrice" explicitement marqués 🧠
+- Varier : calcul pur, mise en équation, géométrie avec figure, lecture graphique, problème contextualisé
+- Pour VP : au moins 1 exercice de démonstration/preuve`;

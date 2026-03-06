@@ -35,6 +35,22 @@ Quand la matière est ALLEMAND :
 - Éléments culturels DACH
 - Erreurs typiques francophones (genre, position verbe, prépositions)
 - Structures grammaticales signalées mais pas cours de grammaire
+- LERNEN LERNEN : chaque chapitre indique une stratégie d'apprentissage (Wörter ordnen, Wörter im Kontext lernen, etc.). Quand c'est pertinent, intègre subtilement une micro-stratégie dans un exercice (ex: mnémotechnique pour retenir un mot, technique de mémorisation, astuce pour identifier un genre). Pas systématique — seulement quand ça enrichit naturellement l'exercice.
+
+=== TYPES D'EXERCICES RECOMMANDÉS — ALLEMAND ===
+
+Types à varier dans chaque fiche (minimum 3 types différents). Tu peux aussi inventer des formats créatifs adaptés au thème.
+
+1. LÜCKENTEXT (texte à trous) : phrases avec mots manquants + banque de mots. Idéal vocabulaire/grammaire.
+2. ZUORDNUNG (association) : relier mots/images/définitions. Match-grid avec traits à tracer.
+3. SATZPUZZLE (puzzle de phrases) : remettre les mots dans l'ordre (position du verbe !).
+4. RICHTIG/FALSCH (vrai/faux) : affirmations à évaluer + justifier/corriger. Bon pour compréhension.
+5. DIALOG ERGÄNZEN : compléter un dialogue avec des répliques cohérentes. Compétence communicative.
+6. BILDBESCHREIBUNG (description d'image) : décrire une scène/situation avec le vocabulaire du chapitre.
+7. TEXTPRODUKTION : écrire un court texte guidé (mail, carte postale, description). Adapté au niveau.
+8. FEHLERSUCHE (chasse aux erreurs) : trouver et corriger les erreurs dans un texte. Excellent pour la grammaire.
+9. KATEGORISIEREN (catégoriser) : classer des mots par thème, genre, catégorie grammaticale.
+10. INTERVIEW/UMFRAGE : questions-réponses structurées sur le thème du chapitre.
 
 === SYSTÈME DE COULEURS DU VOCABULAIRE ===
 
