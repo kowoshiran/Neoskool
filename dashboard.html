@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neoskool — Mon espace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{--indigo-950:#1e1b4b;--indigo-900:#312e81;--indigo-800:#3730a3;--indigo-700:#4338ca;--indigo-600:#4f46e5;--indigo-500:#6366f1;--indigo-400:#818cf8;--indigo-300:#a5b4fc;--indigo-200:#c7d2fe;--indigo-100:#e0e7ff;--indigo-50:#eef2ff;--gold-500:#eab308;--gold-400:#facc15;--gold-300:#fde047;--amber-500:#f59e0b;--amber-400:#fbbf24;--slate-50:#f8fafc;--slate-100:#f1f5f9;--slate-200:#e2e8f0;--slate-300:#cbd5e1;--slate-600:#475569;--slate-700:#334155;--slate-800:#1e293b;--slate-900:#0f172a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--slate-50);color:var(--slate-800);min-height:100vh}
+.dash-nav{background:linear-gradient(135deg,var(--indigo-950),var(--indigo-900));padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.dash-brand{font-size:1.3rem;font-weight:800;color:white}.dash-brand span{background:linear-gradient(135deg,var(--gold-400),var(--amber-400));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.dash-nav-right{display:flex;align-items:center;gap:1rem}
+.dash-user{color:var(--indigo-300);font-size:.85rem;font-weight:500}
+.dash-btn{padding:.5rem 1.25rem;border-radius:10px;font-family:'Outfit',sans-serif;font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:all .2s}
+.dash-btn-primary{background:linear-gradient(135deg,var(--gold-400),var(--amber-500));color:var(--indigo-950)}.dash-btn-primary:hover{transform:translateY(-1px)}
+.dash-btn-ghost{background:rgba(255,255,255,0.1);color:var(--indigo-200);border:1px solid rgba(255,255,255,0.15)}.dash-btn-ghost:hover{background:rgba(255,255,255,0.15)}
+.dash-btn-danger{background:rgba(239,68,68,0.1);color:#fca5a5;border:1px solid rgba(239,68,68,0.2)}.dash-btn-danger:hover{background:rgba(239,68,68,0.15)}
+.dash-container{max-width:1000px;margin:0 auto;padding:2rem}
+.dash-header{margin-bottom:2rem}
+.dash-header h1{font-size:1.8rem;font-weight:800;color:var(--slate-900);margin-bottom:.25rem}
+.dash-header p{color:var(--slate-600);font-size:.95rem}
+.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.dash-stat{background:white;border:1px solid var(--slate-200);border-radius:16px;padding:1.5rem;text-align:center}
+.dash-stat-value{font-size:2rem;font-weight:800;color:var(--indigo-600)}
+.dash-stat-label{font-size:.8rem;color:var(--slate-600);text-transform:uppercase;letter-spacing:.08em;margin-top:.25rem}
+.dash-stat-bar{height:6px;background:var(--slate-200);border-radius:3px;margin-top:.75rem;overflow:hidden}
+.dash-stat-fill{height:100%;background:linear-gradient(90deg,var(--indigo-500),var(--indigo-400));border-radius:3px;transition:width .5s}
+.dash-section-title{font-size:1.2rem;font-weight:700;color:var(--slate-900);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.dash-sheets{display:flex;flex-direction:column;gap:.75rem}
+.dash-sheet{background:white;border:1px solid var(--slate-200);border-radius:14px;padding:1.25rem;display:flex;align-items:center;gap:1rem;transition:all .2s}
+.dash-sheet:hover{border-color:var(--indigo-300);box-shadow:0 4px 12px rgba(79,70,229,0.08)}
+.dash-sheet-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.dash-sheet-icon.maths{background:var(--indigo-100)}.dash-sheet-icon.allemand{background:#FEF3C7}.dash-sheet-icon.francais{background:#DBEAFE}.dash-sheet-icon.default{background:var(--slate-100)}
+.dash-sheet-info{flex-grow:1}
+.dash-sheet-title{font-weight:700;font-size:.95rem;color:var(--slate-900)}
+.dash-sheet-meta{font-size:.8rem;color:var(--slate-600);margin-top:.15rem}
+.dash-sheet-actions{display:flex;gap:.5rem}
+.dash-sheet-btn{padding:.4rem .8rem;border-radius:8px;font-size:.8rem;font-weight:600;border:1px solid var(--slate-200);background:white;color:var(--slate-700);cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif}
+.dash-sheet-btn:hover{border-color:var(--indigo-300);color:var(--indigo-600)}
+.dash-sheet-btn.delete{color:#ef4444;border-color:#fecaca}.dash-sheet-btn.delete:hover{background:#fef2f2}
+.dash-empty{text-align:center;padding:3rem;color:var(--slate-500);font-size:.95rem}
+.dash-empty-icon{font-size:3rem;margin-bottom:.75rem}
+.dash-loading{text-align:center;padding:3rem;color:var(--slate-500)}
+.dash-not-auth{text-align:center;padding:4rem 2rem}
+.dash-not-auth h2{font-size:1.5rem;font-weight:800;color:var(--slate-900);margin-bottom:.5rem}
+.dash-not-auth p{color:var(--slate-600);margin-bottom:1.5rem}
+@media(max-width:768px){.dash-stats{grid-template-columns:1fr}.dash-sheet{flex-direction:column;align-items:flex-start}.dash-sheet-actions{width:100%}}
+</style>
+</head>
+<body>
+
+<nav class="dash-nav">
+  <a href="/" style="text-decoration:none"><div class="dash-brand">neo<span>skool</span></div></a>
+  <div class="dash-nav-right">
+    <span class="dash-user" id="dash-email"></span>
+    <a href="/" class="dash-btn dash-btn-primary">Nouvelle fiche</a>
+    <button class="dash-btn dash-btn-danger" onclick="handleLogout()">Quitter</button>
+  </div>
+</nav>
+
+<div class="dash-container">
+  <!-- Not authenticated state -->
+  <div id="dash-not-auth" class="dash-not-auth" style="display:none;">
+    <h2>Connecte-toi pour voir tes fiches</h2>
+    <p>Tu dois avoir un compte pour acceder a ton espace personnel.</p>
+    <a href="/" class="dash-btn dash-btn-primary" style="padding:.75rem 2rem;font-size:1rem;text-decoration:none;display:inline-block;border-radius:14px;">Retour a Neoskool</a>
+  </div>
+
+  <!-- Authenticated state -->
+  <div id="dash-content" style="display:none;">
+    <div class="dash-header">
+      <h1>Mon espace</h1>
+      <p>Retrouve toutes tes fiches generees</p>
+    </div>
+
+    <div class="dash-stats">
+      <div class="dash-stat">
+        <div class="dash-stat-value" id="dash-total">0</div>
+        <div class="dash-stat-label">Fiches ce mois</div>
+        <div class="dash-stat-bar"><div class="dash-stat-fill" id="dash-quota-bar" style="width:0%"></div></div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-value" id="dash-plan">Gratuit</div>
+        <div class="dash-stat-label">Plan actuel</div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-value" id="dash-all-time">0</div>
+        <div class="dash-stat-label">Total depuis le debut</div>
+      </div>
+    </div>
+
+    <div class="dash-section-title">📚 Mes fiches</div>
+    <div class="dash-sheets" id="dash-sheets">
+      <div class="dash-loading">Chargement...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://nniyltlejcdoyqtgctql.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5uaXlsdGxlamNkb3lxdGdjdHFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDY2NjIsImV4cCI6MjA4ODM4MjY2Mn0.-AWmnnKvyL4rL5TVfKuvq0jT7i8r7yY-NMlsH5sNF3M';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const FREE_LIMIT = 5;
+
+const matiereIcons = {
+  'Allemand': '🇩🇪', 'Mathematiques': '🔢', 'Mathématiques': '🔢',
+  'Francais': '📝', 'Français': '📝', 'Anglais': '🇬🇧',
+  'Sciences': '🔬', 'Histoire': '📜', 'Géographie': '🌍'
+};
+
+function getMatiereClass(m) {
+  const n = (m||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (n.includes('math')) return 'maths';
+  if (n.includes('allemand')) return 'allemand';
+  if (n.includes('franc')) return 'francais';
+  return 'default';
+}
+
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    document.getElementById('dash-not-auth').style.display = '';
+    return;
+  }
+
+  document.getElementById('dash-content').style.display = '';
+  document.getElementById('dash-email').textContent = session.user.email;
+
+  // Load sheets
+  const { data: sheets, error } = await sb.from('sheets')
+    .select('id, matiere, degre, voie, sujet, created_at, metadata')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    console.error('Error loading sheets:', error);
+    document.getElementById('dash-sheets').innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">⚠️</div>Erreur de chargement</div>';
+    return;
+  }
+
+  // Stats
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  const thisMonth = sheets.filter(s => s.created_at.startsWith(currentMonth));
+  document.getElementById('dash-total').textContent = thisMonth.length;
+  document.getElementById('dash-all-time').textContent = sheets.length;
+  document.getElementById('dash-quota-bar').style.width = Math.min(100, (thisMonth.length / FREE_LIMIT) * 100) + '%';
+
+  // Load profile for plan
+  const { data: profile } = await sb.from('profiles').select('plan').single();
+  if (profile) {
+    const planLabels = { free: 'Gratuit', pro: 'Pro', beta: 'Beta' };
+    document.getElementById('dash-plan').textContent = planLabels[profile.plan] || 'Gratuit';
+  }
+
+  // Render sheets
+  const container = document.getElementById('dash-sheets');
+  if (!sheets.length) {
+    container.innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">📭</div>Aucune fiche sauvegardee. Genere ta premiere fiche !</div>';
+    return;
+  }
+
+  container.innerHTML = sheets.map(s => {
+    const icon = matiereIcons[s.matiere] || '📄';
+    const cls = getMatiereClass(s.matiere);
+    const date = new Date(s.created_at).toLocaleDateString('fr-CH', { day: 'numeric', month: 'short', year: 'numeric' });
+    const meta = [s.degre, s.voie].filter(Boolean).join(' · ');
+    return `<div class="dash-sheet">
+      <div class="dash-sheet-icon ${cls}">${icon}</div>
+      <div class="dash-sheet-info">
+        <div class="dash-sheet-title">${s.matiere || 'Fiche'} — ${s.sujet || 'Sans titre'}</div>
+        <div class="dash-sheet-meta">${meta} · ${date}</div>
+      </div>
+      <div class="dash-sheet-actions">
+        <button class="dash-sheet-btn" onclick="viewSheet('${s.id}')">Voir</button>
+        <button class="dash-sheet-btn" onclick="printSheet('${s.id}')">🖨️</button>
+        <button class="dash-sheet-btn delete" onclick="deleteSheet('${s.id}')">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function viewSheet(id) {
+  const { data } = await sb.from('sheets').select('html_content').eq('id', id).single();
+  if (!data) return;
+  const w = window.open('', '_blank');
+  w.document.write(data.html_content);
+  w.document.close();
+}
+
+async function printSheet(id) {
+  const { data } = await sb.from('sheets').select('html_content').eq('id', id).single();
+  if (!data) return;
+  const w = window.open('', '_blank');
+  w.document.write(data.html_content);
+  w.document.close();
+  w.onload = function() { w.print(); };
+}
+
+async function deleteSheet(id) {
+  if (!confirm('Supprimer cette fiche ?')) return;
+  await sb.from('sheets').delete().eq('id', id);
+  init(); // Reload
+}
+
+async function handleLogout() {
+  await sb.auth.signOut();
+  window.location.href = '/';
+}
+
+init();
+</script>
+</body>
+</html>
