@@ -165,10 +165,26 @@ footer{background:var(--slate-900);padding:3rem 2rem;text-align:center}.footer-b
 .wiz-select{width:100%;font-family:'Outfit',sans-serif;font-size:.95rem;padding:.9rem 1rem;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);border-radius:12px;color:white;outline:none;-webkit-appearance:none;transition:all .3s;margin-bottom:.6rem;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23818cf8' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
 .wiz-select:focus{border-color:var(--indigo-400);background:rgba(255,255,255,0.07);box-shadow:0 0 0 4px rgba(99,102,241,0.15)}
 .wiz-select option{background:var(--indigo-900);color:white}
+/* Auth bar */
+.auth-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:9000;background:linear-gradient(135deg,var(--indigo-900),var(--indigo-800));padding:.5rem 1.5rem;font-size:.82rem;color:var(--indigo-200)}
+.auth-bar.visible{display:flex;align-items:center;justify-content:space-between}
+.auth-bar-left{display:flex;align-items:center;gap:.5rem}
+.auth-bar-dot{width:8px;height:8px;border-radius:50%;background:#00B894}
+.auth-bar-links{display:flex;gap:.75rem}
+.auth-bar-link{color:var(--gold-300);text-decoration:none;font-weight:600;transition:opacity .2s}.auth-bar-link:hover{opacity:.8}
+.auth-bar-btn{background:none;border:1px solid rgba(255,255,255,0.15);color:var(--indigo-300);padding:3px 10px;border-radius:6px;font-size:.75rem;cursor:pointer;font-family:'Outfit',sans-serif}.auth-bar-btn:hover{background:rgba(255,255,255,0.05)}
+body.has-auth-bar{padding-top:36px}
 @media(max-width:768px){.wiz-grid.cols-3,.wiz-grid.cols-4{grid-template-columns:1fr 1fr}.ws-question{font-size:1.15rem}}
 </style>
 </head>
 <body>
+<div class="auth-bar" id="auth-bar">
+  <div class="auth-bar-left"><span class="auth-bar-dot"></span><span id="auth-bar-email"></span></div>
+  <div class="auth-bar-links">
+    <a href="/dashboard.html" class="auth-bar-link">Mon espace</a>
+    <button class="auth-bar-btn" onclick="handleLogout()">Quitter</button>
+  </div>
+</div>
 <section class="hero"><div class="hero-grid"></div><div class="hero-content"><div class="hero-badge">Bêta — Canton de Vaud</div><h1>Chaque élève mérite<br>de <span class="gold">réussir</span></h1><p class="hero-subtitle">Neoskool génère des exercices sur mesure, fondés sur les <strong>sciences cognitives</strong>. Adaptés à chaque niveau, prêts en 30 secondes.</p><a href="#generer" class="hero-cta">Générer un exercice</a><div class="hero-stats"><div class="hero-stat"><div class="hero-stat-number">10</div><div class="hero-stat-label">Principes cognitifs</div></div><div class="hero-stat"><div class="hero-stat-number">30s</div><div class="hero-stat-label">Par génération</div></div><div class="hero-stat"><div class="hero-stat-number">∞</div><div class="hero-stat-label">Différenciation</div></div></div></div><div class="scroll-indicator"><span></span></div></section>
 <section class="how-it-works"><div class="container"><div class="section-label">✦ Comment ça marche</div><h2 class="section-title">Trois étapes. Trente secondes.</h2><p class="section-subtitle">Fini les heures passées à créer des exercices différenciés.</p><div class="steps"><div class="step"><div class="step-number">1</div><h3>Décrivez votre besoin</h3><p>Matière, sujet, degré scolaire, adaptations…</p></div><div class="step"><div class="step-number">2</div><h3>L'IA génère la mission</h3><p>Exercice complet basé sur les sciences cognitives, gamifié.</p></div><div class="step"><div class="step-number">3</div><h3>Imprimez et distribuez</h3><p>3 niveaux, quiz, auto-évaluation, corrections incluses.</p></div></div></div></section>
 <section class="sciences"><div class="container"><div class="section-label">✦ Fondements scientifiques</div><h2 class="section-title">10 principes prouvés par la recherche</h2><p class="section-subtitle">Un outil de conception pédagogique fondé sur les sciences cognitives.</p><div class="science-grid"><div class="science-card"><div class="science-icon">🧠</div><div><h4>Retrieval Practice</h4><p>Récupérer l'info renforce l'apprentissage.</p></div></div><div class="science-card"><div class="science-icon">📅</div><div><h4>Pratique espacée</h4><p>Ancrer les connaissances dans le temps.</p></div></div><div class="science-card"><div class="science-icon">🔀</div><div><h4>Interleaving</h4><p>Mélanger développe la flexibilité.</p></div></div><div class="science-card"><div class="science-icon">🎮</div><div><h4>Gamification</h4><p>Motivation par points et niveaux.</p></div></div><div class="science-card"><div class="science-icon">🏋️</div><div><h4>Difficultés désirables</h4><p>Effort calibré = rétention.</p></div></div><div class="science-card"><div class="science-icon">🎨</div><div><h4>Double codage</h4><p>Texte + visuels = double mémorisation.</p></div></div><div class="science-card"><div class="science-icon">💬</div><div><h4>Feedback élaboré</h4><p>Corrections détaillées = apprentissage.</p></div></div><div class="science-card"><div class="science-icon">❓</div><div><h4>Interrogation élaborative</h4><p>Pourquoi ? = connexions profondes.</p></div></div><div class="science-card"><div class="science-icon">🪞</div><div><h4>Métacognition</h4><p>Réfléchir sur sa pensée = autonomie.</p></div></div><div class="science-card"><div class="science-icon">🚀</div><div><h4>Transfert</h4><p>Nouveau contexte = vraie maîtrise.</p></div></div></div></div></section>
@@ -389,22 +405,42 @@ let isBetaUser = false;
 const FREE_SHEETS_PER_MONTH = 5;
 
 // Check for existing session on page load
+function showAuthBar() {
+  if (!currentUser) return;
+  const bar = document.getElementById('auth-bar');
+  document.getElementById('auth-bar-email').textContent = currentUser.email;
+  bar.classList.add('visible');
+  document.body.classList.add('has-auth-bar');
+}
+
+function hideAuthBar() {
+  document.getElementById('auth-bar').classList.remove('visible');
+  document.body.classList.remove('has-auth-bar');
+}
+
+async function handleLogout() {
+  await sbClient.auth.signOut();
+  currentUser = null;
+  hideAuthBar();
+  localStorage.removeItem('nsk_email');
+}
+
 (async function initAuth() {
   const { data: { session } } = await sbClient.auth.getSession();
   if (session) {
     currentUser = session.user;
-    console.log('User authenticated:', currentUser.email);
+    showAuthBar();
   }
   // Listen for auth changes (magic link callback)
   sbClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' && session) {
       currentUser = session.user;
-      console.log('Auth state changed — signed in:', currentUser.email);
-      // Save any pending sheet
+      showAuthBar();
       savePendingSheet();
     }
     if (event === 'SIGNED_OUT') {
       currentUser = null;
+      hideAuthBar();
     }
   });
 })();
