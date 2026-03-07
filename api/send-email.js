@@ -7,7 +7,7 @@ const BREVO_BASE = 'https://api.brevo.com/v3';
 const SENDER = { name: 'Neoskool', email: 'contact@neoskool.com' };
 
 // Brevo list ID for Neoskool users (create list "Neoskool Users" in Brevo, ID = 2 by default)
-const BREVO_LIST_ID = 2;
+const BREVO_LIST_ID = 3;
 
 function brevoHeaders() {
   return {
