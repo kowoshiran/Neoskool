@@ -73,6 +73,12 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 .mf-scroll-area{max-height:480px;overflow-y:auto;position:relative}
 .mf-scroll-area::-webkit-scrollbar{width:4px}
 .mf-scroll-area::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.mf-scroll-wrap{position:relative}
+.mf-scroll-fade{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,rgba(249,249,251,0.95));display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;pointer-events:none;z-index:2;transition:opacity .4s}
+.mf-scroll-fade.hidden{opacity:0}
+.mf-scroll-hint{pointer-events:auto;display:flex;align-items:center;gap:6px;font-size:.62rem;font-weight:700;color:var(--v-600);background:white;border:1.5px solid var(--v-200);padding:5px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(124,58,237,0.1);cursor:pointer;animation:mf-bounce 2s ease-in-out infinite}
+@keyframes mf-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.mf-scroll-hint svg{width:14px;height:14px}
 .mini-fiche{display:none}
 .mini-fiche.active{display:block}
 
@@ -620,49 +626,304 @@ body.has-auth-bar{padding-top:36px}
             <button class="subject-btn" onclick="switchSubject('maths',this)">📐 Maths</button>
           </div>
         </div>
+        <div class="mf-scroll-wrap">
         <div class="mf-scroll-area" id="mf-scroll-area">
 
           <!-- ALLEMAND -->
           <div class="mini-fiche active" id="mf-allemand">
-            <div class="mf-header"><div class="mf-badge">🎮 Mission Allemand · 9H VP · Ch.6</div><div class="mf-title">🚂 Das Perfekt — Reise in die Vergangenheit!</div><div class="mf-xp-bar"><div class="mf-xp-fill"></div></div><div class="mf-xp-label">0 / 100 XP</div></div>
+            <div class="mf-header">
+              <div class="mf-badge">🎮 Mission Allemand · 9H VP · Ch.6 — Geni@l klick</div>
+              <div class="mf-title">🚂 Das Perfekt — Reise in die Vergangenheit!</div>
+              <div class="mf-xp-bar"><div class="mf-xp-fill" style="width:0%"></div></div>
+              <div class="mf-xp-label">0 / 100 XP · 🏆 Badge : Zeitreisender</div>
+            </div>
             <div class="mf-body">
-              <div class="mf-pretest"><div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong></div><div class="mf-pretest-item">Ich ___ gestern nach Basel ___ . (fahren)</div><div class="mf-pretest-item" style="margin-top:4px">Wir ___ Pizza ___ . (essen)</div></div>
+              <!-- Pretest (retrieval practice) -->
+              <div class="mf-pretest">
+                <div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong> <span style="font-size:.55rem;opacity:.7">(retrieval practice)</span></div>
+                <div class="mf-pretest-item">Ich ___ gestern nach Basel ___ . (fahren)</div>
+                <div class="mf-pretest-item" style="margin-top:4px">Wir ___ Pizza ___ . (essen)</div>
+                <div class="mf-pretest-item" style="margin-top:4px">Er ___ drei Stunden ___ . (schlafen)</div>
+              </div>
+
+              <!-- Rappel Express -->
               <div class="mf-recall"><div class="mf-recall-head">⚡ <strong>Rappel Express — Das Perfekt</strong></div></div>
-              <div class="mf-formula"><div class="mf-f-block mf-f-subj">Subjekt</div><div class="mf-f-plus">+</div><div class="mf-f-block mf-f-aux">haben/sein</div><div class="mf-f-plus">+</div><div class="mf-f-block mf-f-comp">...</div><div class="mf-f-plus">+</div><div class="mf-f-block mf-f-part">Partizip II</div></div>
-              <div class="mf-tree"><div class="mf-tree-q">🌳 Déplacement ou changement d'état ?</div><div class="mf-tree-branches"><div class="mf-tree-b"><span class="mf-tree-yes">✅ OUI → sein</span><div class="mf-tree-ex">fahren, gehen, kommen</div></div><div class="mf-tree-b"><span class="mf-tree-no">❌ NON → haben</span><div class="mf-tree-ex">spielen, essen, kaufen</div></div></div></div>
-              <div class="mf-level mf-l1"><div class="mf-level-bar"><span>⭐ Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div><div class="mf-exercise"><span class="mf-ex-num">1</span><span class="mf-ex-type">haben oder sein?</span></div><div class="mf-exercise-text">a) Ich ___ nach Zürich <strong>gefahren</strong>.</div><div class="mf-exercise-text">b) Wir ___ Schokolade <strong>gekauft</strong>.</div></div>
-              <div class="mf-level mf-l2"><div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div><div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Phrases complètes</span></div><div class="mf-exercise-text">(ich / nach Basel / fahren) → ___</div></div>
-              <div class="mf-meta"><div class="mf-meta-head">🪞 <strong>Réfléchis</strong></div><div class="mf-meta-q">1. Stratégie haben/sein ?</div><div class="mf-meta-q">2. Le Perfekt en UNE phrase ?</div></div>
-              <div class="mf-footer">Généré par <strong>Neoskool</strong> — Sciences cognitives</div>
+
+              <!-- Formule visuelle (dual coding) -->
+              <div class="mf-formula">
+                <div class="mf-f-block mf-f-subj">Subjekt</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-aux">haben/sein</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-comp">...</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-part">Partizip II</div>
+              </div>
+
+              <!-- Partizip II breakdown -->
+              <div style="text-align:center;font-size:.6rem;font-weight:700;color:#5341D6;margin-bottom:.3rem">Comment former le Partizip II ?</div>
+              <div class="mf-partizip">
+                <div class="mf-pz-part mf-pz-pre">ge-</div>
+                <div class="mf-pz-part mf-pz-stem">spiel</div>
+                <div class="mf-pz-part mf-pz-suf">-t</div>
+              </div>
+              <div class="mf-pz-ex">spielen → ge·spiel·t (régulier) · fahren → ge·fahr·<strong>en</strong> (irrégulier)</div>
+
+              <!-- Conjugation table (haben vs sein) -->
+              <div class="mf-conj-title">📋 Conjugaison : haben &amp; sein au présent</div>
+              <div class="mf-conj-grid">
+                <div class="mf-cg-h"></div><div class="mf-cg-h mf-cg-haben">haben</div><div class="mf-cg-h mf-cg-sein">sein</div>
+                <div class="mf-cg-p">ich</div><div class="mf-cg-v mf-cg-hl"><strong>habe</strong></div><div class="mf-cg-v mf-cg-sl"><strong>bin</strong></div>
+                <div class="mf-cg-p">du</div><div class="mf-cg-v mf-cg-hl">hast</div><div class="mf-cg-v mf-cg-sl">bist</div>
+                <div class="mf-cg-p">er/sie</div><div class="mf-cg-v mf-cg-hl">hat</div><div class="mf-cg-v mf-cg-sl">ist</div>
+                <div class="mf-cg-p">wir</div><div class="mf-cg-v mf-cg-hl">haben</div><div class="mf-cg-v mf-cg-sl">sind</div>
+                <div class="mf-cg-p">ihr</div><div class="mf-cg-v mf-cg-hl">habt</div><div class="mf-cg-v mf-cg-sl">seid</div>
+                <div class="mf-cg-p">sie/Sie</div><div class="mf-cg-v mf-cg-hl">haben</div><div class="mf-cg-v mf-cg-sl">sind</div>
+              </div>
+
+              <!-- Arbre décisionnel -->
+              <div class="mf-tree">
+                <div class="mf-tree-q">🌳 Déplacement ou changement d'état ?</div>
+                <div class="mf-tree-branches">
+                  <div class="mf-tree-b"><span class="mf-tree-yes">✅ OUI → sein</span><div class="mf-tree-ex">fahren, gehen, kommen, fliegen</div></div>
+                  <div class="mf-tree-b"><span class="mf-tree-no">❌ NON → haben</span><div class="mf-tree-ex">spielen, essen, kaufen, lesen</div></div>
+                </div>
+              </div>
+
+              <!-- Word order -->
+              <div style="text-align:center;font-size:.6rem;font-weight:700;color:#5341D6;margin-bottom:.3rem">📐 Ordre des mots au Perfekt</div>
+              <div class="mf-word-order">
+                <div class="mf-wo-slot mf-wo-1"><div class="mf-wo-label">Pos. 1</div><div class="mf-wo-word">Ich</div></div>
+                <div class="mf-wo-slot mf-wo-2"><div class="mf-wo-label">Pos. 2</div><div class="mf-wo-word">bin</div></div>
+                <div class="mf-wo-slot mf-wo-3"><div class="mf-wo-label">Milieu</div><div class="mf-wo-word">nach Bern</div></div>
+                <div class="mf-wo-slot mf-wo-4"><div class="mf-wo-label">Fin</div><div class="mf-wo-word">gefahren</div></div>
+              </div>
+
+              <!-- Niveau 1 -->
+              <div class="mf-level mf-l1">
+                <div class="mf-level-bar"><span>⭐ Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num">1</span><span class="mf-ex-type">haben oder sein?</span></div>
+                <div class="mf-exercise-text">a) Ich ___ nach Zürich <strong>gefahren</strong>.</div>
+                <div class="mf-exercise-text">b) Wir ___ Schokolade <strong>gekauft</strong>.</div>
+                <div class="mf-exercise-text">c) Sie ___ nach Hause <strong>gekommen</strong>.</div>
+                <div class="mf-exercise"><span class="mf-ex-num">2</span><span class="mf-ex-type">Partizip II bilden</span></div>
+                <div class="mf-exercise-text">a) spielen → ge______ · b) lesen → ge______</div>
+              </div>
+
+              <!-- Niveau 2 -->
+              <div class="mf-level mf-l2">
+                <div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Phrases complètes</span></div>
+                <div class="mf-exercise-text">a) (ich / nach Basel / fahren) → ___</div>
+                <div class="mf-exercise-text">b) (wir / einen Film / sehen) → ___</div>
+                <div class="mf-trap">⚠️ Piège : « Ich habe nach Basel gefahren » — Pourquoi c'est faux ?</div>
+              </div>
+
+              <!-- Niveau 3 -->
+              <div class="mf-level mf-l3">
+                <div class="mf-level-bar l3"><span>⭐⭐⭐ Niveau 3 — Expert</span><span class="mf-level-xp">+50 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num">7</span><span class="mf-ex-type">Écriture libre</span></div>
+                <div class="mf-exercise-text">Raconte ton week-end en 5 phrases au Perfekt. Utilise sein ET haben.</div>
+              </div>
+
+              <!-- Métacognition -->
+              <div class="mf-meta">
+                <div class="mf-meta-head">🪞 <strong>Auto-évaluation</strong></div>
+                <div class="mf-meta-q">1. Ma stratégie pour choisir haben/sein ?</div>
+                <div class="mf-meta-q">2. Le Perfekt en UNE phrase ?</div>
+                <div class="mf-meta-q">3. 😊 Facile · 😐 Moyen · 😓 Difficile</div>
+              </div>
+
+              <div class="mf-footer">Généré par <strong>Neoskool</strong> · Retrieval practice · Dual coding · Gamification · Elaborated feedback</div>
             </div>
           </div>
 
           <!-- FRANÇAIS -->
           <div class="mini-fiche" id="mf-francais">
-            <div class="mf-header" style="background:linear-gradient(135deg,#4F46E5,#6366F1,#4338CA)"><div class="mf-badge">🎮 Mission Français · 10H VG2 · Orthographe</div><div class="mf-title">✍️ L'accord du PP avec avoir</div><div class="mf-xp-bar"><div class="mf-xp-fill"></div></div><div class="mf-xp-label">0 / 100 XP</div></div>
+            <div class="mf-header" style="background:linear-gradient(135deg,#4F46E5,#6366F1,#4338CA)">
+              <div class="mf-badge">🎮 Mission Français · 10H VG2 · Grammaire</div>
+              <div class="mf-title">✍️ L'accord du participe passé avec avoir — Chasseur d'accords</div>
+              <div class="mf-xp-bar"><div class="mf-xp-fill" style="width:0%"></div></div>
+              <div class="mf-xp-label">0 / 100 XP · 🏆 Badge : Grammairien·ne</div>
+            </div>
             <div class="mf-body">
-              <div class="mf-pretest"><div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong></div><div class="mf-pretest-item">Les fleurs que j'ai cueilli___ sont magnifiques.</div><div class="mf-pretest-item" style="margin-top:4px">Elle a mangé___ la pomme.</div></div>
-              <div class="mf-tree"><div class="mf-tree-q">🔍 Le CVD est-il AVANT le verbe ?</div><div class="mf-tree-branches"><div class="mf-tree-b"><span class="mf-tree-yes">OUI → ACCORD</span><div class="mf-tree-ex">Les fleurs que j'ai cueilli<strong>es</strong></div></div><div class="mf-tree-b"><span class="mf-tree-no">NON → PAS D'ACCORD</span><div class="mf-tree-ex">J'ai cueilli des fleurs</div></div></div></div>
-              <div class="mf-level mf-l1"><div class="mf-level-bar"><span>⭐ Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div><div class="mf-exercise"><span class="mf-ex-num">1</span><span class="mf-ex-type">Trouve le CVD</span></div><div class="mf-exercise-text">a) Elle a mangé la pomme. → CVD = ___</div><div class="mf-exercise-text">b) Les livres que j'ai lus. → CVD = ___</div></div>
-              <div class="mf-level mf-l2"><div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div><div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Transforme</span></div><div class="mf-exercise-text">J'ai acheté ces chaussures → Les chaussures que ___</div></div>
-              <div class="mf-meta"><div class="mf-meta-head">🪞 <strong>Réfléchis</strong></div><div class="mf-meta-q">1. Ta stratégie pour le CVD ?</div><div class="mf-meta-q">2. PP être vs PP avoir ?</div></div>
-              <div class="mf-footer">Généré par <strong>Neoskool</strong> — Sciences cognitives</div>
+              <!-- Pretest -->
+              <div class="mf-pretest">
+                <div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong> <span style="font-size:.55rem;opacity:.7">(retrieval practice)</span></div>
+                <div class="mf-pretest-item">Les fleurs que j'ai cueilli___ sont magnifiques.</div>
+                <div class="mf-pretest-item" style="margin-top:4px">Elle a mangé___ la pomme.</div>
+                <div class="mf-pretest-item" style="margin-top:4px">Les lettres que nous avons écrit___ sont parti___.</div>
+              </div>
+
+              <!-- Arbre décisionnel -->
+              <div class="mf-tree">
+                <div class="mf-tree-q">🔍 Le CVD est-il AVANT le verbe ?</div>
+                <div class="mf-tree-branches">
+                  <div class="mf-tree-b"><span class="mf-tree-yes">✅ OUI → ACCORD avec le CVD</span><div class="mf-tree-ex">Les fleurs que j'ai cueilli<strong>es</strong></div></div>
+                  <div class="mf-tree-b"><span class="mf-tree-no">❌ NON → PAS D'ACCORD</span><div class="mf-tree-ex">J'ai cueilli des fleurs (invariable)</div></div>
+                </div>
+              </div>
+
+              <!-- Anatomie de phrase (dual coding) -->
+              <div class="mf-anatomy">
+                <div class="mf-anatomy-title">🔬 Anatomie de la phrase</div>
+                <div class="mf-anatomy-sentence">
+                  <div class="mf-a-part mf-a-cvd">Les fleurs</div>
+                  <div class="mf-a-part mf-a-que">que</div>
+                  <div class="mf-a-part mf-a-subj">j'</div>
+                  <div class="mf-a-part mf-a-aux">ai</div>
+                  <div class="mf-a-part mf-a-pp">cueillies</div>
+                </div>
+                <div class="mf-anatomy-labels">
+                  <span class="mf-al" style="color:#2563EB">● CVD (f. pl.)</span>
+                  <span class="mf-al" style="color:#636E72">● pronom relatif</span>
+                  <span class="mf-al" style="color:#00A381">● sujet</span>
+                  <span class="mf-al" style="color:#B8860B">● auxiliaire</span>
+                  <span class="mf-al" style="color:#D63031">● PP accordé !</span>
+                </div>
+              </div>
+
+              <!-- Formule -->
+              <div class="mf-formula">
+                <div class="mf-f-block mf-f-subj">CVD avant</div><div class="mf-f-plus">→</div>
+                <div class="mf-f-block mf-f-aux">accord genre</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-part">accord nombre</div>
+              </div>
+
+              <!-- Niveau 1 -->
+              <div class="mf-level mf-l1" style="border-color:#4F46E5">
+                <div class="mf-level-bar" style="background:linear-gradient(135deg,#4F46E5,#6366F1)"><span>⭐ Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num" style="background:#4F46E5">1</span><span class="mf-ex-type" style="color:#4F46E5;background:#EEF2FF">Repère le CVD</span></div>
+                <div class="mf-exercise-text">a) Elle a mangé la pomme. → CVD = ___</div>
+                <div class="mf-exercise-text">b) Les livres que j'ai lus. → CVD = ___</div>
+                <div class="mf-exercise-text">c) Il a couru ce matin. → CVD = ___</div>
+                <div class="mf-exercise"><span class="mf-ex-num" style="background:#4F46E5">2</span><span class="mf-ex-type" style="color:#4F46E5;background:#EEF2FF">Accorde si nécessaire</span></div>
+                <div class="mf-exercise-text">a) La chanson que tu as chanté___ .</div>
+                <div class="mf-exercise-text">b) J'ai mangé___ des fruits.</div>
+              </div>
+
+              <!-- Niveau 2 -->
+              <div class="mf-level mf-l2">
+                <div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Transforme la phrase</span></div>
+                <div class="mf-exercise-text">a) J'ai acheté ces chaussures → Les chaussures que ___</div>
+                <div class="mf-exercise-text">b) Nous avons lu les lettres → Les lettres que ___</div>
+                <div class="mf-trap">⚠️ Piège : « Les gâteaux que j'ai mangé » — Trouve l'erreur !</div>
+              </div>
+
+              <!-- Niveau 3 -->
+              <div class="mf-level mf-l3">
+                <div class="mf-level-bar l3"><span>⭐⭐⭐ Niveau 3 — Expert</span><span class="mf-level-xp">+50 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num">7</span><span class="mf-ex-type">Rédaction</span></div>
+                <div class="mf-exercise-text">Écris 4 phrases avec le PP avoir : 2 avec accord, 2 sans. Souligne le CVD.</div>
+              </div>
+
+              <div class="mf-meta">
+                <div class="mf-meta-head">🪞 <strong>Auto-évaluation</strong></div>
+                <div class="mf-meta-q">1. Comment trouver le CVD à coup sûr ?</div>
+                <div class="mf-meta-q">2. PP avec être vs PP avec avoir : quelle différence ?</div>
+                <div class="mf-meta-q">3. 😊 Facile · 😐 Moyen · 😓 Difficile</div>
+              </div>
+
+              <div class="mf-footer">Généré par <strong>Neoskool</strong> · Terminologie PER (CVD, CVI, CP) · Elaborative interrogation · Desirable difficulties</div>
             </div>
           </div>
 
           <!-- MATHS -->
           <div class="mini-fiche" id="mf-maths">
-            <div class="mf-header" style="background:linear-gradient(135deg,#10B981,#34D399,#059669)"><div class="mf-badge">🎮 Mission Maths · 9H VP · Nombres</div><div class="mf-title">🍫 Les fractions — Mission Cailler !</div><div class="mf-xp-bar"><div class="mf-xp-fill"></div></div><div class="mf-xp-label">0 / 100 XP</div></div>
+            <div class="mf-header" style="background:linear-gradient(135deg,#10B981,#34D399,#059669)">
+              <div class="mf-badge">🎮 Mission Maths · 9H VP · Nombres et opérations</div>
+              <div class="mf-title">🍫 Les fractions — Mission Cailler !</div>
+              <div class="mf-xp-bar"><div class="mf-xp-fill" style="width:0%"></div></div>
+              <div class="mf-xp-label">0 / 100 XP · 🏆 Badge : Maître chocolatier</div>
+            </div>
             <div class="mf-body">
-              <div class="mf-pretest"><div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong></div><div class="mf-pretest-item">3/4 + 1/2 = ___</div><div class="mf-pretest-item" style="margin-top:4px">Simplifie 12/18 = ___</div></div>
-              <div class="mf-frac-visual"><div class="mf-frac-title">🎯 Visualise 3/4</div><div class="mf-frac-bars"><div class="mf-frac-bar-row"><div class="mf-frac-piece filled"></div><div class="mf-frac-piece filled"></div><div class="mf-frac-piece filled"></div><div class="mf-frac-piece empty"></div></div><div class="mf-frac-label">3 parts sur 4 = <strong>3/4</strong></div></div></div>
-              <div class="mf-level mf-l1" style="border-color:#10B981"><div class="mf-level-bar" style="background:linear-gradient(135deg,#10B981,#34D399)"><span>⭐ Niveau 1 — Apprenti chocolatier</span><span class="mf-level-xp">+30 XP</span></div><div class="mf-exercise"><span class="mf-ex-num" style="background:#10B981">1</span><span class="mf-ex-type" style="color:#059669;background:#D1FAE5">Simplifie</span></div><div class="mf-exercise-text">a) 12/18 = ___ · b) 8/20 = ___</div></div>
-              <div class="mf-level mf-l2"><div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div><div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Problème Cailler</span></div><div class="mf-exercise-text">180 tablettes : 2/5 lait, 1/3 noires. Blanches ?</div></div>
-              <div class="mf-meta"><div class="mf-meta-head">🪞 <strong>Réfléchis</strong></div><div class="mf-meta-q">1. Comment trouver le dénominateur commun ?</div><div class="mf-meta-q">2. Pourquoi toujours simplifier ?</div></div>
-              <div class="mf-footer">Généré par <strong>Neoskool</strong> — Sciences cognitives</div>
+              <!-- Pretest -->
+              <div class="mf-pretest">
+                <div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong> <span style="font-size:.55rem;opacity:.7">(retrieval practice)</span></div>
+                <div class="mf-pretest-item">3/4 + 1/2 = ___</div>
+                <div class="mf-pretest-item" style="margin-top:4px">Simplifie 12/18 = ___</div>
+                <div class="mf-pretest-item" style="margin-top:4px">2/3 × 5/4 = ___</div>
+              </div>
+
+              <!-- Fraction visual (dual coding) -->
+              <div class="mf-frac-visual">
+                <div class="mf-frac-title">🎯 Visualise 3/4</div>
+                <div class="mf-frac-bars">
+                  <div class="mf-frac-bar-row">
+                    <div class="mf-frac-piece filled"></div>
+                    <div class="mf-frac-piece filled"></div>
+                    <div class="mf-frac-piece filled"></div>
+                    <div class="mf-frac-piece empty"></div>
+                  </div>
+                  <div class="mf-frac-label">3 parts coloriées sur 4 = <strong>3/4</strong></div>
+                </div>
+              </div>
+
+              <!-- Method steps -->
+              <div class="mf-method">
+                <div class="mf-method-title">📐 Méthode : additionner deux fractions</div>
+                <div class="mf-method-steps">
+                  <div class="mf-method-step"><div class="mf-ms-num">1</div> Trouver le dénominateur commun (PPCM)</div>
+                  <div class="mf-method-step"><div class="mf-ms-num">2</div> Adapter chaque numérateur</div>
+                  <div class="mf-method-step"><div class="mf-ms-num">3</div> Additionner les numérateurs</div>
+                  <div class="mf-method-step"><div class="mf-ms-num">4</div> Simplifier si possible (PGDC)</div>
+                </div>
+                <div class="mf-method-example">
+                  <div class="mf-me-frac">3/4</div>
+                  <div class="mf-me-op">+</div>
+                  <div class="mf-me-frac">1/2</div>
+                  <div class="mf-me-op">=</div>
+                  <div class="mf-me-frac">3/4</div>
+                  <div class="mf-me-op">+</div>
+                  <div class="mf-me-frac">2/4</div>
+                  <div class="mf-me-op">=</div>
+                  <div class="mf-me-frac mf-me-result">5/4</div>
+                </div>
+              </div>
+
+              <!-- Niveau 1 -->
+              <div class="mf-level mf-l1" style="border-color:#10B981">
+                <div class="mf-level-bar" style="background:linear-gradient(135deg,#10B981,#34D399)"><span>⭐ Niveau 1 — Apprenti chocolatier</span><span class="mf-level-xp">+30 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num" style="background:#10B981">1</span><span class="mf-ex-type" style="color:#059669;background:#D1FAE5">Simplifie</span></div>
+                <div class="mf-exercise-text">a) 12/18 = ___ · b) 8/20 = ___ · c) 15/25 = ___</div>
+                <div class="mf-exercise"><span class="mf-ex-num" style="background:#10B981">2</span><span class="mf-ex-type" style="color:#059669;background:#D1FAE5">Additionne</span></div>
+                <div class="mf-exercise-text">a) 1/3 + 1/6 = ___ · b) 2/5 + 1/10 = ___</div>
+              </div>
+
+              <!-- Niveau 2 -->
+              <div class="mf-level mf-l2">
+                <div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Problème Cailler</span></div>
+                <div class="mf-exercise-text">L'usine Cailler produit 180 tablettes : 2/5 au lait, 1/3 noires. Combien de blanches ?</div>
+                <div class="mf-exercise"><span class="mf-ex-num">5</span><span class="mf-ex-type">Vrai ou Faux ?</span></div>
+                <div class="mf-exercise-text">a) 3/4 > 5/6 · b) 2/3 = 8/12 · c) 1/2 + 1/3 = 2/5</div>
+                <div class="mf-trap">⚠️ Piège : « 1/2 + 1/3 = 2/5 » — Pourquoi c'est faux ?</div>
+              </div>
+
+              <!-- Niveau 3 -->
+              <div class="mf-level mf-l3">
+                <div class="mf-level-bar l3"><span>⭐⭐⭐ Niveau 3 — Maître chocolatier</span><span class="mf-level-xp">+50 XP</span></div>
+                <div class="mf-exercise"><span class="mf-ex-num">7</span><span class="mf-ex-type">Défi multi-étapes</span></div>
+                <div class="mf-exercise-text">Une recette demande 3/4 kg de farine. Tu veux faire 2/3 de la recette. Combien de farine ?</div>
+              </div>
+
+              <div class="mf-meta">
+                <div class="mf-meta-head">🪞 <strong>Auto-évaluation</strong></div>
+                <div class="mf-meta-q">1. Comment trouver le dénominateur commun rapidement ?</div>
+                <div class="mf-meta-q">2. Pourquoi simplifier est important ?</div>
+                <div class="mf-meta-q">3. 😊 Facile · 😐 Moyen · 😓 Difficile</div>
+              </div>
+
+              <div class="mf-footer">Généré par <strong>Neoskool</strong> · Dual coding · Desirable difficulties · Transfer · Gamification</div>
             </div>
           </div>
 
+        </div>
+        <!-- Scroll affordance -->
+        <div class="mf-scroll-fade" id="mf-scroll-fade">
+          <div class="mf-scroll-hint" onclick="document.getElementById('mf-scroll-area').scrollBy({top:200,behavior:'smooth'})">
+            Défile pour voir toute la fiche
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -1103,8 +1364,22 @@ function switchSubject(subject, btn) {
   document.querySelectorAll('.subject-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('mf-' + subject).classList.add('active');
   btn.classList.add('active');
-  document.getElementById('mf-scroll-area').scrollTop = 0;
+  const sa = document.getElementById('mf-scroll-area');
+  sa.scrollTop = 0;
+  const fade = document.getElementById('mf-scroll-fade');
+  if (fade) fade.classList.remove('hidden');
 }
+// Scroll fade: hide when near bottom
+(function(){
+  const sa = document.getElementById('mf-scroll-area');
+  const fade = document.getElementById('mf-scroll-fade');
+  if (sa && fade) {
+    sa.addEventListener('scroll', function() {
+      const nearBottom = sa.scrollTop + sa.clientHeight >= sa.scrollHeight - 40;
+      fade.classList.toggle('hidden', nearBottom);
+    });
+  }
+})();
 
 // ==================== SUPABASE AUTH ====================
 const SUPABASE_URL = 'https://nniyltlejcdoyqtgctql.supabase.co';
