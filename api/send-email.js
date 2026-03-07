@@ -225,10 +225,17 @@ export default async function handler(req) {
         PRENOM: '',
         PROFIL: profil || 'enseignant',
         SIGNUP_DATE: new Date().toISOString(),
-        SHEETS_USED: 0,
+        SHEETS_USED: 1,
       });
       // 2. Send welcome email immediately
       emailData = templates.welcome(email);
+
+    } else if (type === 'sync_contact') {
+      // Just update SHEETS_USED in Brevo (no email sent)
+      await upsertContact(email, { SHEETS_USED: body.sheetsUsed || 0 });
+      return new Response(JSON.stringify({ success: true, synced: true }), {
+        status: 200, headers: { 'Content-Type': 'application/json' },
+      });
 
     } else if (type === 'quota_reminder') {
       const r = remaining ?? 0;
