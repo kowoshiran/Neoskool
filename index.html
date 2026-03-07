@@ -1167,7 +1167,7 @@ body.has-auth-bar{padding-top:36px}
     <div class="pricing-price"><span class="pricing-amount">0</span><span class="pricing-currency">CHF</span></div>
     <div class="pricing-period">pour toujours</div>
     <ul class="pricing-features">
-      <li>5 fiches par mois</li>
+      <li>3 fiches par mois</li>
       <li>Toutes les matières disponibles</li>
       <li>3 niveaux de difficulté</li>
       <li>10 principes cognitifs intégrés</li>
@@ -1543,7 +1543,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let currentUser = null;
 let isBetaUser = false;
-const FREE_SHEETS_PER_MONTH = 5;
+const FREE_SHEETS_PER_MONTH = 3;
 
 // Check for existing session on page load
 function showAuthBar() {

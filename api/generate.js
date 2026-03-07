@@ -36,7 +36,7 @@ export const config = {
 
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://nniyltlejcdoyqtgctql.supabase.co';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-const FREE_SHEETS_PER_MONTH = 5;
+const FREE_SHEETS_PER_MONTH = 3;
 
 async function checkQuota(userId, email) {
   if (!SUPABASE_SERVICE_KEY) return { allowed: true }; // Skip if no key configured

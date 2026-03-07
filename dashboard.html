@@ -105,7 +105,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
         <div class="dash-stat-value" id="dash-month-count">0</div>
         <div class="dash-stat-label">Fiches ce mois</div>
         <div class="dash-stat-bar"><div class="dash-stat-fill" id="dash-quota-bar" style="width:0%"></div></div>
-        <div class="dash-stat-sub" id="dash-quota-text">0 / 5 utilisées</div>
+        <div class="dash-stat-sub" id="dash-quota-text">0 / 3 utilisées</div>
       </div>
       <div class="dash-stat">
         <div class="dash-stat-value" id="dash-plan">Gratuit</div>
@@ -128,7 +128,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:
 const SUPABASE_URL = 'https://nniyltlejcdoyqtgctql.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5uaXlsdGxlamNkb3lxdGdjdHFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDY2NjIsImV4cCI6MjA4ODM4MjY2Mn0.-AWmnnKvyL4rL5TVfKuvq0jT7i8r7yY-NMlsH5sNF3M';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-const FREE_LIMIT = 5;
+const FREE_LIMIT = 3;
 
 const matiereIcons = {
   'Allemand': '🇩🇪', 'Mathematiques': '🔢', 'Mathématiques': '🔢',

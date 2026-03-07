@@ -24,7 +24,7 @@ const templates = {
   <div style="padding:32px;">
     <p style="font-size:16px;color:#0a0a0f;line-height:1.6;margin:0 0 16px;">Salut !</p>
     <p style="font-size:16px;color:#3a3a4a;line-height:1.6;margin:0 0 16px;">Merci de rejoindre Neoskool. Tu fais partie des premiers utilisateurs de la plateforme qui va transformer la facon dont les enseignants et parents creent des exercices.</p>
-    <p style="font-size:16px;color:#3a3a4a;line-height:1.6;margin:0 0 24px;">Tu peux generer <strong style="color:#7c3aed;">5 fiches gratuites par mois</strong>, chacune adaptee au niveau de l'eleve et fondee sur les sciences cognitives.</p>
+    <p style="font-size:16px;color:#3a3a4a;line-height:1.6;margin:0 0 24px;">Tu peux generer <strong style="color:#7c3aed;">3 fiches gratuites par mois</strong>, chacune adaptee au niveau de l'eleve et fondee sur les sciences cognitives.</p>
     <div style="text-align:center;margin:32px 0;">
       <a href="https://www.neoskool.com" style="display:inline-block;background:#7c3aed;color:white;padding:14px 32px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;">Generer ma premiere fiche</a>
     </div>
