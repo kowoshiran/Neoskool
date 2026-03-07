@@ -1586,14 +1586,82 @@ async function handleLogout() {
   });
 })();
 
-function getSheetCount() {
-  const data = JSON.parse(localStorage.getItem('nsk_usage') || '{}');
+let cachedSheetCount = null;
+let cachedSheetCountMonth = null;
+
+async function getSheetCount() {
   const currentMonth = new Date().toISOString().slice(0, 7);
+  // Return cache if same month and fresh
+  if (cachedSheetCount !== null && cachedSheetCountMonth === currentMonth) {
+    return cachedSheetCount;
+  }
+
+  const startOfMonth = currentMonth + '-01T00:00:00.000Z';
+  try {
+    if (currentUser) {
+      const { count, error } = await sbClient
+        .from('generations')
+        .select('*', { count: 'exact', head: true })
+        .eq('user_id', currentUser.id)
+        .gte('created_at', startOfMonth);
+      if (!error) {
+        cachedSheetCount = count || 0;
+        cachedSheetCountMonth = currentMonth;
+        return cachedSheetCount;
+      }
+    }
+    // Fallback for anonymous: check by email
+    const email = localStorage.getItem('nsk_email');
+    if (email) {
+      const { count, error } = await sbClient
+        .from('generations')
+        .select('*', { count: 'exact', head: true })
+        .eq('email', email)
+        .is('user_id', null)
+        .gte('created_at', startOfMonth);
+      if (!error) {
+        cachedSheetCount = count || 0;
+        cachedSheetCountMonth = currentMonth;
+        return cachedSheetCount;
+      }
+    }
+  } catch (err) {
+    console.error('Error fetching sheet count:', err);
+  }
+  // Fallback to localStorage if Supabase fails
+  const data = JSON.parse(localStorage.getItem('nsk_usage') || '{}');
   if (data.month !== currentMonth) return 0;
   return data.count || 0;
 }
 
-function incrementSheetCount() {
+async function recordGeneration(metadata) {
+  const row = {
+    matiere: metadata.matiere || '',
+    degre: metadata.degre || '',
+    voie: metadata.voie || '',
+    difficulte: metadata.difficulte || '',
+    sujet: metadata.sujet || '',
+    profil: metadata.profil || 'enseignant'
+  };
+
+  if (currentUser) {
+    row.user_id = currentUser.id;
+    row.email = currentUser.email;
+  } else {
+    row.email = localStorage.getItem('nsk_email') || 'anonymous';
+  }
+
+  try {
+    const { error } = await sbClient.from('generations').insert(row);
+    if (error) console.error('Failed to record generation:', error);
+  } catch (err) {
+    console.error('Failed to record generation:', err);
+  }
+
+  // Invalidate cache so next check is fresh
+  cachedSheetCount = null;
+
+  // Also update localStorage as fallback
   const currentMonth = new Date().toISOString().slice(0, 7);
   const data = JSON.parse(localStorage.getItem('nsk_usage') || '{}');
   if (data.month !== currentMonth) {
@@ -1604,18 +1672,17 @@ function incrementSheetCount() {
   }
 }
 
-function canGenerate() {
+async function canGenerate() {
   if (isBetaUser) return true;
-  return getSheetCount() < FREE_SHEETS_PER_MONTH;
+  const count = await getSheetCount();
+  return count < FREE_SHEETS_PER_MONTH;
 }
 
 function isEmailGated() {
   if (isBetaUser) return false;
   if (currentUser) return false;
   if (localStorage.getItem('nsk_email')) return false;
-  // First fiche ever = free, no gate
-  if (getSheetCount() <= 1) return false;
-  return true;
+  return false;
 }
 
 async function handleEmailGate() {
@@ -2206,7 +2273,7 @@ async function handleGenerate(e) {
   }
 
   // Check quota for non-beta users
-  if (!isBetaUser && !canGenerate()) {
+  if (!isBetaUser && !(await canGenerate())) {
     showStatus(`Tu as atteint la limite de ${FREE_SHEETS_PER_MONTH} fiches gratuites ce mois. Passe en Pro pour continuer !`, 'error');
     return;
   }
@@ -2316,12 +2383,25 @@ async function handleGenerate(e) {
     formData.append('code', code);
     formData.append('adaptations', adaptations.join(', '));
     formData.append('message', message);
+    if (currentUser) {
+      formData.append('user_id', currentUser.id);
+      formData.append('user_email', currentUser.email);
+    } else if (localStorage.getItem('nsk_email')) {
+      formData.append('user_email', localStorage.getItem('nsk_email'));
+    }
 
     const response = await fetch(API_URL, { method: 'POST', body: formData });
 
     if (!response.ok) {
-      const errText = await response.text();
-      throw new Error(`Erreur serveur (${response.status}): ${errText}`);
+      const errData = await response.text();
+      try {
+        const parsed = JSON.parse(errData);
+        if (parsed.error === 'quota_exceeded') {
+          showStatus(parsed.message, 'error');
+          return;
+        }
+      } catch(e) {}
+      throw new Error(`Erreur serveur (${response.status}): ${errData}`);
     }
 
     const reader = response.body.getReader();
@@ -2451,8 +2531,8 @@ async function handleGenerate(e) {
         celebrationBar.classList.add('visible');
         celebrationBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-        // Track usage and save sheet
-        incrementSheetCount();
+        // Track usage in Supabase + save sheet
+        recordGeneration(metadata);
         if (currentUser) {
           saveSheetToSupabase(metadata);
         } else {

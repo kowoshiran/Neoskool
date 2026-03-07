@@ -34,6 +34,45 @@ export const config = {
   maxDuration: 300, // 5 minutes max
 };
 
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://nniyltlejcdoyqtgctql.supabase.co';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+const FREE_SHEETS_PER_MONTH = 5;
+
+async function checkQuota(userId, email) {
+  if (!SUPABASE_SERVICE_KEY) return { allowed: true }; // Skip if no key configured
+
+  const startOfMonth = new Date().toISOString().slice(0, 7) + '-01T00:00:00.000Z';
+  let url, headers;
+
+  headers = {
+    'apikey': SUPABASE_SERVICE_KEY,
+    'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+    'Content-Type': 'application/json'
+  };
+
+  // Count generations this month for this user
+  if (userId) {
+    url = `${SUPABASE_URL}/rest/v1/generations?select=id&user_id=eq.${userId}&created_at=gte.${startOfMonth}`;
+  } else if (email) {
+    url = `${SUPABASE_URL}/rest/v1/generations?select=id&email=eq.${encodeURIComponent(email)}&user_id=is.null&created_at=gte.${startOfMonth}`;
+  } else {
+    return { allowed: true }; // No identity, allow (client will gate)
+  }
+
+  try {
+    const res = await fetch(url, {
+      headers: { ...headers, 'Prefer': 'count=exact', 'Range': '0-0' }
+    });
+    const countHeader = res.headers.get('content-range');
+    // Format: "0-0/5" or "*/0"
+    const total = countHeader ? parseInt(countHeader.split('/')[1]) || 0 : 0;
+    return { allowed: total < FREE_SHEETS_PER_MONTH, count: total, limit: FREE_SHEETS_PER_MONTH };
+  } catch (err) {
+    console.error('Quota check failed:', err);
+    return { allowed: true }; // Fail open
+  }
+}
+
 export default async function handler(req) {
   // Only accept POST
   if (req.method !== 'POST') {
@@ -56,6 +95,23 @@ export default async function handler(req) {
     const profil = formData.get('profil') || 'enseignant';
     const adaptations = formData.get('adaptations') || '';
     const message = formData.get('message') || '';
+    const code = formData.get('code') || '';
+    const userEmail = formData.get('user_email') || '';
+    const userId = formData.get('user_id') || '';
+
+    // Beta code bypasses quota
+    const isBeta = code && code.length > 0;
+
+    // Server-side quota check
+    if (!isBeta) {
+      const quota = await checkQuota(userId || null, userEmail || null);
+      if (!quota.allowed) {
+        return new Response(
+          JSON.stringify({ error: 'quota_exceeded', message: `Limite atteinte : ${quota.count}/${quota.limit} fiches ce mois.` }),
+          { status: 429, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+    }
 
     // Determine degree key: "9H (12-13 ans)" → "9H"
     const degreKey = degre.split(' ')[0];
