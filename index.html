@@ -1733,7 +1733,7 @@ async function handleEmailGate() {
     localStorage.setItem('nsk_email', email);
 
     // Send welcome email via Brevo
-    sendEmail('welcome', email);
+    sendEmail('welcome', email, { profil: (typeof wizState !== 'undefined' && wizState.profil) || 'enseignant' });
 
     // Show success state
     document.getElementById('email-modal-form').style.display = 'none';
