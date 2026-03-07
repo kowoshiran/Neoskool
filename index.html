@@ -62,7 +62,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 
 /* Hero preview (browser mock with mini-fiches) */
 .hero-preview-wrapper{max-width:900px;margin:0 auto;position:relative}
-.hero-preview{background:white;border-radius:16px;overflow:hidden;box-shadow:0 25px 80px rgba(0,0,0,0.08),0 0 0 1px rgba(0,0,0,0.04);transform:perspective(1200px) rotateY(-1deg) rotateX(1deg);transition:transform .6s}
+.hero-preview{background:white;border-radius:16px;overflow:hidden;box-shadow:0 25px 80px rgba(124,58,237,0.12),0 0 0 2px var(--v-200);transform:perspective(1200px) rotateY(-1deg) rotateX(1deg);transition:transform .6s}
 .hero-preview:hover{transform:perspective(1200px) rotateY(0) rotateX(0)}
 .preview-topbar{display:flex;align-items:center;gap:.5rem;padding:.6rem 1rem;background:var(--surface-raised);border-bottom:1px solid var(--border)}
 .preview-dot{width:8px;height:8px;border-radius:50%}.preview-dot.r{background:#ef4444}.preview-dot.y{background:#eab308}.preview-dot.g{background:#22c55e}
@@ -192,13 +192,13 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 .s-heading em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--v-600)}
 .s-desc{font-size:1rem;color:var(--ink-muted);line-height:1.7;max-width:550px}
 
-.problem{padding:6rem 2rem;background:var(--surface-raised)}
+.problem{padding:6rem 2rem;background:linear-gradient(180deg,var(--v-50) 0%,var(--surface-raised) 100%)}
 .problem-inner{max-width:1100px;margin:0 auto}
 .problem-split{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem}
-.problem-col{padding:2.5rem;border-radius:24px;position:relative;overflow:hidden;background:white;transition:all .3s}
-.problem-col:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.06)}
-.problem-col.teacher{border:1.5px solid var(--rose-100)}
-.problem-col.parent{border:1.5px solid var(--amber-100)}
+.problem-col{padding:2.5rem;border-radius:24px;position:relative;overflow:hidden;background:white;transition:all .3s;box-shadow:0 4px 16px rgba(0,0,0,0.04)}
+.problem-col:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.08)}
+.problem-col.teacher{border:2px solid var(--rose-100)}
+.problem-col.parent{border:2px solid var(--amber-100)}
 .problem-col.teacher:hover{border-color:var(--rose-500)}
 .problem-col.parent:hover{border-color:var(--amber-500)}
 .problem-col-icon{font-size:2.5rem;margin-bottom:1rem}
@@ -213,14 +213,15 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 .solution-section{padding:6rem 2rem;background:white}
 .solution-inner{max-width:1100px;margin:0 auto}
 .solution-center{text-align:center}
-.unified-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
-.uni-card{padding:1.75rem;background:var(--surface-raised);border:1px solid var(--border);border-radius:20px;transition:all .3s;position:relative}
-.uni-card:hover{border-color:var(--v-400);box-shadow:0 12px 30px rgba(124,58,237,0.08);transform:translateY(-3px)}
-.uni-icon{font-size:1.6rem;margin-bottom:.75rem}
-.uni-title{font-size:1.05rem;font-weight:800;color:var(--ink);margin-bottom:.4rem;letter-spacing:-.02em}
-.uni-text{font-size:.88rem;color:var(--ink-muted);line-height:1.6;margin-bottom:.75rem}
-.uni-tags{display:flex;gap:.4rem}
-.uni-tag{padding:.2rem .65rem;border-radius:100px;font-size:.6rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.solution-banner{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:linear-gradient(135deg,var(--v-600),var(--v-500));color:white;border-radius:100px;font-size:1rem;font-weight:800;box-shadow:0 4px 20px rgba(124,58,237,0.25);margin-bottom:2.5rem}
+.unified-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.uni-card{padding:1.25rem;background:var(--surface-raised);border:1px solid var(--border);border-radius:16px;transition:all .3s;position:relative}
+.uni-card:hover{border-color:var(--v-400);box-shadow:0 8px 24px rgba(124,58,237,0.08);transform:translateY(-2px)}
+.uni-icon{font-size:1.3rem;margin-bottom:.5rem}
+.uni-title{font-size:.9rem;font-weight:800;color:var(--ink);margin-bottom:.25rem;letter-spacing:-.02em}
+.uni-text{font-size:.8rem;color:var(--ink-muted);line-height:1.5;margin-bottom:.5rem}
+.uni-tags{display:flex;gap:.3rem}
+.uni-tag{padding:.15rem .5rem;border-radius:100px;font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 .uni-tag.teacher{background:var(--v-100);color:var(--v-600)}
 .uni-tag.parent{background:var(--amber-100);color:var(--amber-500)}
 
@@ -242,10 +243,18 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 .science-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:130px;height:130px;background:linear-gradient(135deg,var(--v-600),var(--v-500));border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;box-shadow:0 8px 30px rgba(124,58,237,0.25)}
 .science-center-num{font-size:2.5rem;font-weight:900;line-height:1}
 .science-center-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.8}
-.science-node{position:absolute;width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;border-radius:16px;border:1.5px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,0.04);transition:all .3s;cursor:default}
+.science-node{position:absolute;width:80px;height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:white;border-radius:16px;border:1.5px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,0.04);transition:all .3s;cursor:pointer}
 .science-node:hover{border-color:var(--v-300);box-shadow:0 8px 24px rgba(124,58,237,0.1);transform:scale(1.08)}
+.science-node.active{border-color:var(--v-500);box-shadow:0 8px 24px rgba(124,58,237,0.2);transform:scale(1.1);z-index:10}
 .science-node-emoji{font-size:1.3rem;margin-bottom:2px}
 .science-node-name{font-size:.58rem;font-weight:700;color:var(--ink-muted);text-align:center;line-height:1.2}
+.science-popover{position:absolute;z-index:20;width:260px;background:white;border:2px solid var(--v-200);border-radius:16px;padding:1.25rem;box-shadow:0 16px 40px rgba(124,58,237,0.15);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .25s,transform .25s}
+.science-popover.visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+.science-popover-title{font-size:.85rem;font-weight:800;color:var(--v-700);margin-bottom:.4rem;display:flex;align-items:center;gap:6px}
+.science-popover-result{font-size:.82rem;color:var(--ink-soft);line-height:1.5}
+.science-popover-result strong{color:var(--v-600);font-weight:700}
+.science-popover-close{position:absolute;top:8px;right:10px;background:none;border:none;font-size:1rem;color:var(--ink-muted);cursor:pointer;padding:2px}
+.science-hint{margin-top:1.5rem;font-size:.78rem;color:var(--ink-muted);opacity:.7}
 
 /* ===== TESTIMONIALS ===== */
 .testimonials{padding:6rem 2rem;background:var(--surface-raised)}
@@ -502,7 +511,7 @@ body.has-auth-bar .navbar{top:36px}
 
 @media(max-width:1024px){
   .hero-float{display:none}
-  .compare-grid{grid-template-columns:1fr;gap:1.5rem}.compare-vs{padding:0;font-size:1.2rem}
+  .unified-grid{grid-template-columns:repeat(2,1fr)}
   .steps-row,.t-grid{grid-template-columns:1fr}
   .metrics-inner{grid-template-columns:repeat(2,1fr)}
   .science-orbit{width:350px;height:350px}.science-node{width:70px;height:70px}.science-node-emoji{font-size:1.1rem}.science-center{width:110px;height:110px}
@@ -520,7 +529,8 @@ body.has-auth-bar .navbar{top:36px}
   .metrics-inner{grid-template-columns:1fr 1fr}
   .science-orbit{width:300px;height:300px}
   .problem-split{grid-template-columns:1fr}
-  .unified-grid{grid-template-columns:1fr}
+  .unified-grid{grid-template-columns:1fr 1fr}
+  .science-popover{width:220px;padding:1rem}
   .t-grid{grid-template-columns:1fr}
   .cta-box{padding:3rem 1.5rem;border-radius:24px}
   .hero-preview{transform:none}
@@ -1004,57 +1014,45 @@ body.has-auth-bar{padding-top:36px}
   <div class="solution-inner">
     <div class="solution-center">
       <div class="section-eyebrow" style="text-align:center;">La solution</div>
-      <h2 class="s-heading" style="text-align:center;max-width:700px;margin:0 auto .5rem;">Ce n'est plus à l'élève de <em>s'adapter</em>.<br>C'est l'exercice qui s'adapte à <em>l'élève</em>.</h2>
-      <p class="s-desc" style="text-align:center;margin:0 auto 3rem;max-width:600px;">Que vous soyez enseignant·e ou parent, Neoskool crée l'exercice parfait pour chaque élève. En 30 secondes.</p>
+      <h2 class="s-heading" style="text-align:center;max-width:700px;margin:0 auto .75rem;">Ce n'est plus à l'élève de <em>s'adapter</em>.<br>C'est l'exercice qui s'adapte à <em>l'élève</em>.</h2>
+      <div class="solution-banner">✦ En 30 secondes. Pour enseignants et parents.</div>
     </div>
     <div class="unified-grid">
       <div class="uni-card">
         <div class="uni-icon">⚡</div>
         <div class="uni-title">30 secondes, pas 3 heures</div>
-        <div class="uni-text">Plus besoin de créer ou chercher des exercices. Décrivez votre besoin, Neoskool fait le reste.</div>
+        <div class="uni-text">Décrivez votre besoin, Neoskool génère la fiche.</div>
         <div class="uni-tags"><span class="uni-tag teacher">Enseignant</span><span class="uni-tag parent">Parent</span></div>
       </div>
       <div class="uni-card">
         <div class="uni-icon">📊</div>
-        <div class="uni-title">VP, VG2, VG1 automatique</div>
-        <div class="uni-text">Chaque fiche s'adapte à la voie et au niveau de l'élève. Fini le manuel unique pour tous.</div>
-        <div class="uni-tags"><span class="uni-tag teacher">Enseignant</span><span class="uni-tag parent">Parent</span></div>
-      </div>
-      <div class="uni-card">
-        <div class="uni-icon">🧠</div>
-        <div class="uni-title">10 principes scientifiques</div>
-        <div class="uni-text">Retrieval practice, interleaving, double codage… intégrés invisiblement dans chaque exercice.</div>
+        <div class="uni-title">VP · VG2 · VG1 automatique</div>
+        <div class="uni-text">Fini le manuel unique pour tous. Chaque fiche s'adapte.</div>
         <div class="uni-tags"><span class="uni-tag teacher">Enseignant</span><span class="uni-tag parent">Parent</span></div>
       </div>
       <div class="uni-card">
         <div class="uni-icon">🎮</div>
         <div class="uni-title">Gamifié comme un jeu</div>
-        <div class="uni-text">XP, niveaux, missions. L'élève s'amuse et apprend sans s'en rendre compte. Fini les « j'ai pas envie ».</div>
+        <div class="uni-text">XP, missions, badges. Fini les « j'ai pas envie ».</div>
         <div class="uni-tags"><span class="uni-tag teacher">Enseignant</span><span class="uni-tag parent">Parent</span></div>
       </div>
       <div class="uni-card">
         <div class="uni-icon">📘</div>
         <div class="uni-title">100% PER, 100% vaudois</div>
-        <div class="uni-text">Terminologie officielle (CVD, prédicat, CP), programme aligné. Pas une plateforme américaine traduite.</div>
+        <div class="uni-text">CVD, prédicat, CP. Pas une plateforme traduite de l'étranger.</div>
         <div class="uni-tags"><span class="uni-tag teacher">Enseignant</span></div>
       </div>
       <div class="uni-card">
         <div class="uni-icon">💰</div>
         <div class="uni-title">10× moins cher qu'un répétiteur</div>
-        <div class="uni-text">Corrigé détaillé, aides intégrées, 3 niveaux progressifs. Votre enfant travaille en autonomie.</div>
+        <div class="uni-text">Corrigé, aides, 3 niveaux. Votre enfant travaille seul.</div>
         <div class="uni-tags"><span class="uni-tag parent">Parent</span></div>
       </div>
       <div class="uni-card">
         <div class="uni-icon">🧩</div>
-        <div class="uni-title">Adaptations BEP intégrées</div>
-        <div class="uni-text">TDAH, dyslexie, HPI, allophonie, dyscalculie. Chaque élève a des besoins différents.</div>
-        <div class="uni-tags"><span class="uni-tag teacher">Enseignant</span></div>
-      </div>
-      <div class="uni-card">
-        <div class="uni-icon">🏠</div>
-        <div class="uni-title">Révision autonome à la maison</div>
-        <div class="uni-text">Le bon exercice, au bon niveau, sur le bon chapitre. Sans avoir besoin de comprendre le programme.</div>
-        <div class="uni-tags"><span class="uni-tag parent">Parent</span></div>
+        <div class="uni-title">Adaptations BEP en un clic</div>
+        <div class="uni-text">TDAH, dyslexie, HPI, allophonie, dyscalculie.</div>
+        <div class="uni-tags"><span class="uni-tag teacher">Enseignant</span><span class="uni-tag parent">Parent</span></div>
       </div>
     </div>
   </div>
@@ -1093,20 +1091,23 @@ body.has-auth-bar{padding-top:36px}
 <section class="science reveal" id="science">
   <div class="science-inner">
     <div class="section-eyebrow">Fondements scientifiques</div>
-    <h2 class="s-heading">10 principes prouvés par la <em>recherche</em></h2>
-    <p class="s-desc" style="margin:0 auto 1rem;">Chaque fiche intègre invisiblement ces principes. Vos élèves apprennent mieux sans même le savoir.</p>
-    <div class="science-orbit">
+    <h2 class="s-heading">10 principes. <em>Des résultats prouvés.</em></h2>
+    <p class="s-desc" style="margin:0 auto 1rem;">Cliquez sur un principe pour découvrir son impact concret sur vos élèves.</p>
+    <div class="science-orbit" id="science-orbit">
       <div class="science-center"><div class="science-center-num">10</div><div class="science-center-label">Principes</div></div>
-      <div class="science-node" style="top:0;left:50%;transform:translateX(-50%);"><div class="science-node-emoji">🧠</div><div class="science-node-name">Retrieval</div></div>
-      <div class="science-node" style="top:9%;right:8%;"><div class="science-node-emoji">📅</div><div class="science-node-name">Espacée</div></div>
-      <div class="science-node" style="top:35%;right:-5%;"><div class="science-node-emoji">🔀</div><div class="science-node-name">Interleaving</div></div>
-      <div class="science-node" style="bottom:20%;right:2%;"><div class="science-node-emoji">🎮</div><div class="science-node-name">Gamification</div></div>
-      <div class="science-node" style="bottom:0;right:25%;"><div class="science-node-emoji">🏋️</div><div class="science-node-name">Difficultés</div></div>
-      <div class="science-node" style="bottom:0;left:25%;"><div class="science-node-emoji">🎨</div><div class="science-node-name">Double codage</div></div>
-      <div class="science-node" style="bottom:20%;left:2%;"><div class="science-node-emoji">💬</div><div class="science-node-name">Feedback</div></div>
-      <div class="science-node" style="top:35%;left:-5%;"><div class="science-node-emoji">❓</div><div class="science-node-name">Élaborative</div></div>
-      <div class="science-node" style="top:9%;left:8%;"><div class="science-node-emoji">🪞</div><div class="science-node-name">Méta-cognition</div></div>
+      <div class="science-node" style="top:-4%;left:50%;transform:translateX(-50%);" data-title="Retrieval Practice" data-result="L'élève qui se teste <strong>retient 80% de plus</strong> qu'en relisant ses notes. Chaque fiche commence par un pré-test."><div class="science-node-emoji">🧠</div><div class="science-node-name">Retrieval</div></div>
+      <div class="science-node" style="top:5%;right:5%;" data-title="Pratique espacée" data-result="La mémoire se consolide entre les sessions. <strong>Fini le bachotage</strong> la veille du test — l'élève retient durablement."><div class="science-node-emoji">📅</div><div class="science-node-name">Espacée</div></div>
+      <div class="science-node" style="top:30%;right:-7%;" data-title="Interleaving" data-result="Mélanger les types d'exercices force le cerveau à <strong>choisir la bonne stratégie</strong>. Résultat : +43% de transfert."><div class="science-node-emoji">🔀</div><div class="science-node-name">Interleaving</div></div>
+      <div class="science-node" style="bottom:15%;right:-3%;" data-title="Gamification" data-result="XP, badges, missions : l'élève <strong>redemande des exercices</strong> au lieu de les fuir. L'engagement explose."><div class="science-node-emoji">🎮</div><div class="science-node-name">Gamification</div></div>
+      <div class="science-node" style="bottom:-4%;right:18%;" data-title="Difficultés désirables" data-result="Un effort bien dosé <strong>renforce la mémorisation</strong>. 3 niveaux progressifs pour sortir de la zone de confort sans décourager."><div class="science-node-emoji">🏋️</div><div class="science-node-name">Difficultés</div></div>
+      <div class="science-node" style="bottom:-4%;left:18%;" data-title="Double codage" data-result="Schémas + texte = compréhension <strong>2× plus rapide</strong>. Chaque fiche combine visuels et explications."><div class="science-node-emoji">🎨</div><div class="science-node-name">Double codage</div></div>
+      <div class="science-node" style="bottom:15%;left:-3%;" data-title="Feedback élaboré" data-result="Un corrigé qui <strong>explique le pourquoi</strong>, pas juste le résultat. L'élève comprend ses erreurs et progresse."><div class="science-node-emoji">💬</div><div class="science-node-name">Feedback</div></div>
+      <div class="science-node" style="top:30%;left:-7%;" data-title="Interrogation élaborative" data-result="Demander « pourquoi ? » pousse l'élève à <strong>créer des liens</strong> entre les connaissances. La compréhension s'approfondit."><div class="science-node-emoji">❓</div><div class="science-node-name">Élaborative</div></div>
+      <div class="science-node" style="top:5%;left:5%;" data-title="Métacognition" data-result="L'élève apprend à <strong>évaluer sa propre compréhension</strong>. Il sait ce qu'il sait — et ce qu'il doit retravailler."><div class="science-node-emoji">🪞</div><div class="science-node-name">Méta-cognition</div></div>
+      <div class="science-node" style="top:-4%;left:25%;" data-title="Transfert" data-result="Appliquer ses connaissances dans <strong>des contextes nouveaux</strong>. L'élève ne récite plus — il comprend et utilise."><div class="science-node-emoji">🔄</div><div class="science-node-name">Transfert</div></div>
+      <div class="science-popover" id="science-popover"></div>
     </div>
+    <div class="science-hint">💡 Cliquez sur un principe pour en savoir plus</div>
   </div>
 </section>
 
@@ -1478,6 +1479,62 @@ function switchSubject(subject, btn) {
       fade.classList.toggle('hidden', nearBottom);
     });
   }
+})();
+
+// ==================== SCIENCE ORBIT POPOVER ====================
+(function(){
+  const orbit = document.getElementById('science-orbit');
+  if (!orbit) return;
+  const popover = document.getElementById('science-popover');
+  const nodes = orbit.querySelectorAll('.science-node');
+
+  function closePopover() {
+    popover.classList.remove('visible');
+    nodes.forEach(n => n.classList.remove('active'));
+  }
+
+  nodes.forEach(node => {
+    node.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const wasActive = node.classList.contains('active');
+      closePopover();
+      if (wasActive) return;
+
+      node.classList.add('active');
+      const title = node.dataset.title;
+      const result = node.dataset.result;
+      const emoji = node.querySelector('.science-node-emoji').textContent;
+
+      popover.innerHTML =
+        '<button class="science-popover-close" onclick="this.parentElement.classList.remove(\'visible\');document.querySelectorAll(\'.science-node\').forEach(n=>n.classList.remove(\'active\'))">&times;</button>' +
+        '<div class="science-popover-title">' + emoji + ' ' + title + '</div>' +
+        '<div class="science-popover-result">' + result + '</div>';
+
+      // Position popover near the node
+      const orbitRect = orbit.getBoundingClientRect();
+      const nodeRect = node.getBoundingClientRect();
+      const nodeX = nodeRect.left - orbitRect.left + nodeRect.width / 2;
+      const nodeY = nodeRect.top - orbitRect.top + nodeRect.height / 2;
+      const centerX = orbitRect.width / 2;
+      const centerY = orbitRect.height / 2;
+
+      // Place popover toward center from node
+      let left = nodeX > centerX ? nodeX - 270 : nodeX + 10;
+      let top = nodeY > centerY ? nodeY - 120 : nodeY + 50;
+
+      // Clamp within orbit bounds
+      left = Math.max(-40, Math.min(left, orbitRect.width - 230));
+      top = Math.max(-20, Math.min(top, orbitRect.height - 80));
+
+      popover.style.left = left + 'px';
+      popover.style.top = top + 'px';
+      popover.classList.add('visible');
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!orbit.contains(e.target)) closePopover();
+  });
 })();
 
 // ==================== SUPABASE AUTH ====================
