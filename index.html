@@ -239,9 +239,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 @media(max-width:768px){.subject-toggle{flex-direction:column;align-items:center}.subject-btn{width:100%;max-width:300px;text-align:center}.fiche-card{border-radius:14px}}
 
 /* ===== METRICS BAR ===== */
-.mid-cta{padding:4rem 2rem;text-align:center;background:var(--warm);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.mid-cta-title{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;color:var(--ink);letter-spacing:-.03em;margin-bottom:1.5rem}
-.mid-cta-title em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--v-600)}
+/* mid-cta removed — CTA now inside preview section */
 
 /* ===== PROBLEM / SOLUTION ===== */
 .section-eyebrow{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--v-500);margin-bottom:.75rem}
@@ -1178,13 +1176,12 @@ body.has-auth-bar{padding-top:36px}
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- MID CTA -->
-<section class="mid-cta reveal">
-  <h2 class="mid-cta-title">Créez <em>votre</em> fiche gratuitement</h2>
-  <a class="btn-primary" href="#generer">Générer un exercice <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/></svg></a>
+    <div style="text-align:center;padding:2.5rem 0 1rem">
+      <a class="btn-primary" href="#generer">Créez votre première fiche gratuitement <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"/></svg></a>
+    </div>
+
+  </div>
 </section>
 
 <!-- PROBLÈME -->
