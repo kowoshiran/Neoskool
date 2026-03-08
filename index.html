@@ -39,7 +39,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 /* ===== HERO ===== */
 .hero{min-height:100vh;position:relative;overflow:hidden;background:var(--warm);display:flex;flex-direction:column}
 .hero-paper{position:absolute;inset:0;background-image:linear-gradient(var(--sketch) 1px,transparent 1px),linear-gradient(90deg,var(--sketch) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 70% 65% at 50% 50%,black 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 70% 65% at 50% 50%,black 30%,transparent 100%)}
-.hero-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4.5rem 2rem 0;position:relative;z-index:2;text-align:center}
+.hero-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 2rem 0;position:relative;z-index:2;text-align:center}
 .hero h1{font-size:clamp(2rem,4.2vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:.5rem;animation:fadeUp .6s ease-out}
 .hero-underline{position:relative}
 .hero-underline::after{content:'';position:absolute;bottom:1px;left:0;right:0;height:3px;background:var(--v-600);border-radius:2px;opacity:.4;transform:rotate(-.5deg)}
@@ -101,16 +101,15 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 /* Fiche container with annotation space */
 .fiche-showcase{position:relative;display:flex;justify-content:center}
 .fiche-annotations{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:5}
-.fiche-annot{position:absolute;display:flex;align-items:center;gap:.5rem;opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
-.fiche-annot.right{flex-direction:row-reverse;transform:translateX(20px)}
+.fiche-annot{position:absolute;display:flex;align-items:center;gap:.6rem;opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
+.fiche-annot.right{justify-content:flex-end;transform:translateX(20px)}
 .fiche-annot.visible{opacity:1;transform:translateX(0)}
-.fiche-annot-arrow{width:32px;height:2px;background:var(--v-400);position:relative;flex-shrink:0}
-.fiche-annot.right .fiche-annot-arrow{background:var(--v-400)}
-.fiche-annot-arrow::after{content:'';position:absolute;right:-1px;top:-3px;border:4px solid transparent;border-left:6px solid var(--v-400)}
-.fiche-annot.right .fiche-annot-arrow::after{right:auto;left:-1px;border-left:none;border-right:6px solid var(--v-400)}
-.fiche-annot-label{background:white;border:1.5px solid var(--v-200);border-radius:10px;padding:.45rem .9rem;box-shadow:0 2px 12px rgba(124,58,237,0.08)}
-.fiche-annot-label strong{display:block;font-size:.78rem;font-weight:800;color:var(--v-600);letter-spacing:-.01em}
-.fiche-annot-label span{font-size:.65rem;color:var(--ink-muted);font-weight:500}
+.fiche-annot-arrow{width:38px;height:2.5px;background:var(--v-400);position:relative;flex-shrink:0}
+.fiche-annot-arrow::after{content:'';position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left:7px solid var(--v-400)}
+.fiche-annot.right .fiche-annot-arrow::after{right:auto;left:-1px;border-left:none;border-right:7px solid var(--v-400)}
+.fiche-annot-label{background:white;border:1.5px solid var(--v-200);border-radius:12px;padding:.55rem 1.1rem;box-shadow:0 3px 16px rgba(124,58,237,0.1)}
+.fiche-annot-label strong{display:block;font-size:.88rem;font-weight:800;color:var(--v-600);letter-spacing:-.01em}
+.fiche-annot-label span{font-size:.72rem;color:var(--ink-muted);font-weight:500}
 
 /* Fiche card */
 .fiche-card{width:600px;max-width:100%;background:white;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.08),0 0 0 1.5px var(--border)}
