@@ -38,6 +38,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 
 /* ===== HERO ===== */
 .hero{height:100vh;position:relative;overflow:hidden;background:var(--warm);display:flex;flex-direction:column;justify-content:center;padding-bottom:3.5rem}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 40%,rgba(124,58,237,0.07) 100%);pointer-events:none;z-index:1}
 .hero-paper{position:absolute;inset:0;background-image:linear-gradient(var(--sketch) 1px,transparent 1px),linear-gradient(90deg,var(--sketch) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 70% 65% at 50% 50%,black 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 70% 65% at 50% 50%,black 30%,transparent 100%)}
 .hero-main{display:flex;flex-direction:column;align-items:center;padding:0 2rem;position:relative;z-index:2;text-align:center}
 .hero h1{font-size:clamp(2rem,4.2vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:.5rem;animation:fadeUp .6s ease-out}
