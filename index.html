@@ -85,124 +85,159 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 
 /* ===== MINI-FICHE PREVIEW ===== */
 .preview-section{padding:5rem 2rem;background:var(--surface);position:relative;overflow:hidden}
-.preview-section-inner{max-width:900px;margin:0 auto;position:relative}
-.preview-section-title{text-align:center;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:900;color:var(--ink);letter-spacing:-.03em;margin-bottom:.5rem}
-.preview-section-sub{text-align:center;font-size:1rem;color:var(--ink-muted);margin-bottom:2.5rem}
-.hero-preview{background:white;border-radius:16px;overflow:hidden;box-shadow:0 25px 80px rgba(124,58,237,0.12),0 0 0 2px var(--v-200);transform:perspective(1200px) rotateY(-1deg) rotateX(1deg);transition:transform .6s}
-.hero-preview:hover{transform:perspective(1200px) rotateY(0) rotateX(0)}
-.preview-topbar{display:flex;align-items:center;gap:.5rem;padding:.6rem 1rem;background:var(--surface-raised);border-bottom:1px solid var(--border)}
-.preview-dot{width:8px;height:8px;border-radius:50%}.preview-dot.r{background:#ef4444}.preview-dot.y{background:#eab308}.preview-dot.g{background:#22c55e}
-.preview-url{margin-left:.75rem;padding:4px 12px;background:var(--surface-dim);border-radius:6px;color:var(--ink-muted);font-size:.72rem;font-family:'JetBrains Mono',monospace;flex-grow:0}
-.subject-toggle{margin-left:auto;display:flex;gap:4px;background:var(--surface-dim);border-radius:8px;padding:3px}
-.subject-btn{border:none;background:transparent;padding:5px 12px;border-radius:6px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:700;color:var(--ink-muted);cursor:pointer;transition:all .2s}
-.subject-btn.active{background:white;color:var(--v-600);box-shadow:0 1px 4px rgba(0,0,0,0.06)}
-.mf-scroll-area{max-height:480px;overflow-y:auto;position:relative}
-.mf-scroll-area::-webkit-scrollbar{width:4px}
-.mf-scroll-area::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.preview-section-inner{max-width:1100px;margin:0 auto;position:relative}
+.preview-section-title{text-align:center;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--ink);letter-spacing:-.03em;margin-bottom:.5rem}
+.preview-section-title em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--v-600)}
+.preview-section-sub{text-align:center;font-size:1.05rem;color:var(--ink-muted);margin-bottom:2.5rem;font-weight:500}
+
+/* Subject toggle */
+.subject-toggle{display:flex;justify-content:center;gap:.5rem;margin-bottom:2rem}
+.subject-btn{border:2px solid var(--border);background:white;padding:.7rem 1.8rem;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;font-weight:700;color:var(--ink-muted);cursor:pointer;transition:all .25s}
+.subject-btn:hover{border-color:var(--v-300);color:var(--v-600)}
+.subject-btn.active{background:var(--v-600);color:white;border-color:var(--v-600);box-shadow:0 4px 16px rgba(124,58,237,0.25)}
+.subject-btn[data-subject="francais"].active{background:#4F46E5;border-color:#4F46E5;box-shadow:0 4px 16px rgba(79,70,229,0.25)}
+.subject-btn[data-subject="maths"].active{background:#059669;border-color:#059669;box-shadow:0 4px 16px rgba(5,150,105,0.25)}
+
+/* Fiche container with annotation space */
+.fiche-showcase{position:relative;display:flex;justify-content:center}
+.fiche-annotations{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:5}
+.fiche-annot{position:absolute;display:flex;align-items:center;gap:.5rem;opacity:0;transform:translateX(-20px);transition:opacity .5s ease,transform .5s ease;pointer-events:none}
+.fiche-annot.right{flex-direction:row-reverse;transform:translateX(20px)}
+.fiche-annot.visible{opacity:1;transform:translateX(0)}
+.fiche-annot-arrow{width:32px;height:2px;background:var(--v-400);position:relative;flex-shrink:0}
+.fiche-annot.right .fiche-annot-arrow{background:var(--v-400)}
+.fiche-annot-arrow::after{content:'';position:absolute;right:-1px;top:-3px;border:4px solid transparent;border-left:6px solid var(--v-400)}
+.fiche-annot.right .fiche-annot-arrow::after{right:auto;left:-1px;border-left:none;border-right:6px solid var(--v-400)}
+.fiche-annot-label{background:white;border:1.5px solid var(--v-200);border-radius:10px;padding:.45rem .9rem;box-shadow:0 2px 12px rgba(124,58,237,0.08)}
+.fiche-annot-label strong{display:block;font-size:.78rem;font-weight:800;color:var(--v-600);letter-spacing:-.01em}
+.fiche-annot-label span{font-size:.65rem;color:var(--ink-muted);font-weight:500}
+
+/* Fiche card */
+.fiche-card{width:600px;max-width:100%;background:white;border-radius:20px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.08),0 0 0 1.5px var(--border)}
+.mf-scroll-area{max-height:620px;overflow-y:auto;position:relative;scroll-behavior:smooth}
+.mf-scroll-area::-webkit-scrollbar{width:5px}
+.mf-scroll-area::-webkit-scrollbar-thumb{background:var(--v-300);border-radius:3px}
+.mf-scroll-area::-webkit-scrollbar-track{background:transparent}
 .mf-scroll-wrap{position:relative}
-.mf-scroll-fade{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,rgba(249,249,251,0.95));display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;pointer-events:none;z-index:2;transition:opacity .4s}
+.mf-scroll-fade{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,0.95));display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;pointer-events:none;z-index:2;transition:opacity .4s}
 .mf-scroll-fade.hidden{opacity:0}
-.mf-scroll-hint{pointer-events:auto;display:flex;align-items:center;gap:6px;font-size:.62rem;font-weight:700;color:var(--v-600);background:white;border:1.5px solid var(--v-200);padding:5px 14px;border-radius:100px;box-shadow:0 2px 8px rgba(124,58,237,0.1);cursor:pointer;animation:mf-bounce 2s ease-in-out infinite}
+.mf-scroll-hint{pointer-events:auto;display:flex;align-items:center;gap:6px;font-size:.7rem;font-weight:700;color:var(--v-600);background:white;border:1.5px solid var(--v-200);padding:6px 16px;border-radius:100px;box-shadow:0 2px 8px rgba(124,58,237,0.1);cursor:pointer;animation:mf-bounce 2s ease-in-out infinite}
 @keyframes mf-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 .mf-scroll-hint svg{width:14px;height:14px}
-.mini-fiche{display:none}
+.mini-fiche{display:none;animation:mfFadeIn .4s ease}
 .mini-fiche.active{display:block}
-.mf-header{background:linear-gradient(135deg,#6C5CE7 0%,#8B7CF6 50%,#5341D6 100%);padding:1.25rem 1.5rem;color:white}
-.mf-badge{font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.8;display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.15);padding:3px 10px;border-radius:100px}
-.mf-title{font-family:'Instrument Serif',serif;font-size:1.2rem;margin-top:.4rem;font-weight:400}
-.mf-xp-bar{height:6px;background:rgba(255,255,255,0.15);border-radius:100px;overflow:hidden;margin-top:.75rem}
-.mf-xp-fill{height:100%;width:0%;background:linear-gradient(90deg,#FDCB6E,#F8B739);border-radius:100px}
-.mf-xp-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;opacity:.7;margin-top:.3rem}
-.mf-body{padding:1rem 1.25rem;background:#F9F9FB}
-.mf-pretest{background:linear-gradient(135deg,#FFF0F5,#FFE8F0);border:1.5px solid #FD79A8;border-radius:12px;padding:.75rem;margin-bottom:.75rem}
-.mf-pretest-head{font-size:.7rem;color:#C44569;margin-bottom:.3rem}
-.mf-pretest-item{font-size:.7rem;color:#A0526D;padding:.3rem .5rem;background:white;border-radius:6px;border:1px solid rgba(253,121,168,0.15)}
-.mf-recall{margin-bottom:.5rem}
-.mf-recall-head{font-size:.7rem;color:#B8860B}
-.mf-formula{display:flex;align-items:center;justify-content:center;gap:6px;margin:.75rem 0;flex-wrap:wrap}
-.mf-f-block{padding:6px 12px;border-radius:10px;font-size:.65rem;font-weight:800;text-align:center}
+@keyframes mfFadeIn{from{opacity:0}to{opacity:1}}
+
+/* Mini-fiche internal styles */
+.mf-header{background:linear-gradient(135deg,#6C5CE7 0%,#8B7CF6 50%,#5341D6 100%);padding:1.5rem 1.75rem;color:white}
+.mf-badge{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;opacity:.85;display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.15);padding:4px 12px;border-radius:100px}
+.mf-title{font-family:'Instrument Serif',serif;font-size:1.4rem;margin-top:.5rem;font-weight:400}
+.mf-xp-bar{height:7px;background:rgba(255,255,255,0.15);border-radius:100px;overflow:hidden;margin-top:.75rem}
+.mf-xp-fill{height:100%;width:0%;background:linear-gradient(90deg,#FDCB6E,#F8B739);border-radius:100px;transition:width 1.5s cubic-bezier(.16,1,.3,1)}
+.mf-xp-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:600;opacity:.7;margin-top:.35rem}
+.mf-body{padding:1.25rem 1.5rem;background:#F9F9FB}
+.mf-section-divider{display:flex;align-items:center;gap:.75rem;margin:1rem 0 .75rem}
+.mf-section-divider::before,.mf-section-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.mf-section-divider span{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-muted);white-space:nowrap}
+.mf-pretest{background:linear-gradient(135deg,#FFF0F5,#FFE8F0);border:1.5px solid #FD79A8;border-radius:14px;padding:1rem;margin-bottom:1rem}
+.mf-pretest-head{font-size:.8rem;color:#C44569;margin-bottom:.5rem;font-weight:700}
+.mf-pretest-item{font-size:.78rem;color:#A0526D;padding:.4rem .6rem;background:white;border-radius:8px;border:1px solid rgba(253,121,168,0.15);margin-top:5px}
+.mf-recall{margin-bottom:.75rem}
+.mf-recall-head{font-size:.8rem;color:#B8860B;font-weight:700}
+.mf-formula{display:flex;align-items:center;justify-content:center;gap:8px;margin:1rem 0;flex-wrap:wrap}
+.mf-f-block{padding:8px 14px;border-radius:10px;font-size:.75rem;font-weight:800;text-align:center}
 .mf-f-subj{background:#DFE6FF;border:1.5px solid #74B9FF;color:#2563EB}
 .mf-f-aux{background:#D4F5ED;border:1.5px solid #00B894;color:#00A381}
 .mf-f-part{background:#F0EDFF;border:1.5px solid #6C5CE7;color:#5341D6}
 .mf-f-comp{background:#FEF3C7;border:1.5px solid #FDCB6E;color:#B8860B}
-.mf-f-plus{font-size:.9rem;font-weight:800;color:#ccc}
-.mf-tree{background:white;border:1.5px solid #00CEC9;border-radius:12px;padding:.75rem;margin-bottom:.75rem}
-.mf-tree-q{text-align:center;font-size:.65rem;font-weight:800;color:#00B5B1;background:#E8FFFE;padding:5px 10px;border-radius:8px;margin-bottom:.5rem}
-.mf-tree-branches{display:flex;justify-content:center;gap:1rem}
+.mf-f-plus{font-size:1rem;font-weight:800;color:#ccc}
+.mf-tree{background:white;border:1.5px solid #00CEC9;border-radius:14px;padding:1rem;margin-bottom:1rem}
+.mf-tree-q{text-align:center;font-size:.75rem;font-weight:800;color:#00B5B1;background:#E8FFFE;padding:6px 12px;border-radius:8px;margin-bottom:.6rem}
+.mf-tree-branches{display:flex;justify-content:center;gap:1.25rem}
 .mf-tree-b{text-align:center}
-.mf-tree-yes{display:inline-block;font-size:.6rem;font-weight:800;background:#D4F5ED;color:#00A381;padding:3px 10px;border-radius:100px}
-.mf-tree-no{display:inline-block;font-size:.6rem;font-weight:800;background:#FFE0D6;color:#D63031;padding:3px 10px;border-radius:100px}
-.mf-tree-ex{font-size:.55rem;color:#636E72;margin-top:2px;font-style:italic}
-.mf-conj-title{font-size:.7rem;font-weight:800;color:#5341D6;margin:.75rem 0 .4rem}
-.mf-conj-grid{display:grid;grid-template-columns:auto 1fr 1fr;gap:2px;font-size:.62rem;background:white;border:1.5px solid #E8E8EF;border-radius:10px;overflow:hidden}
-.mf-cg-h{padding:5px 8px;background:#F0EDFF;font-weight:800;text-align:center;color:#5341D6}
+.mf-tree-yes{display:inline-block;font-size:.7rem;font-weight:800;background:#D4F5ED;color:#00A381;padding:4px 12px;border-radius:100px}
+.mf-tree-no{display:inline-block;font-size:.7rem;font-weight:800;background:#FFE0D6;color:#D63031;padding:4px 12px;border-radius:100px}
+.mf-tree-ex{font-size:.65rem;color:#636E72;margin-top:3px;font-style:italic}
+.mf-conj-title{font-size:.8rem;font-weight:800;color:#5341D6;margin:1rem 0 .5rem}
+.mf-conj-grid{display:grid;grid-template-columns:auto 1fr 1fr;gap:2px;font-size:.72rem;background:white;border:1.5px solid #E8E8EF;border-radius:12px;overflow:hidden}
+.mf-cg-h{padding:6px 10px;background:#F0EDFF;font-weight:800;text-align:center;color:#5341D6}
 .mf-cg-haben{background:#DFE6FF;color:#2563EB}
 .mf-cg-sein{background:#D4F5ED;color:#00A381}
-.mf-cg-p{padding:4px 8px;font-weight:700;background:#FAFAFA;color:#636E72}
-.mf-cg-v{padding:4px 8px;text-align:center;font-weight:600;color:#2D3436}
+.mf-cg-p{padding:5px 10px;font-weight:700;background:#FAFAFA;color:#636E72}
+.mf-cg-v{padding:5px 10px;text-align:center;font-weight:600;color:#2D3436}
 .mf-cg-hl{background:rgba(116,185,255,0.08)}
 .mf-cg-sl{background:rgba(0,206,201,0.08)}
-.mf-partizip{display:flex;justify-content:center;gap:2px;margin:.4rem 0}
-.mf-pz-part{padding:6px 14px;border-radius:8px;font-size:.7rem;font-weight:800}
+.mf-partizip{display:flex;justify-content:center;gap:3px;margin:.5rem 0}
+.mf-pz-part{padding:8px 16px;border-radius:10px;font-size:.8rem;font-weight:800}
 .mf-pz-pre{background:#D4F5ED;color:#00A381;border:1.5px solid #00B894}
 .mf-pz-stem{background:#F0EDFF;color:#5341D6;border:1.5px solid #6C5CE7}
 .mf-pz-suf{background:#FEF3C7;color:#B8860B;border:1.5px solid #FDCB6E}
-.mf-pz-ex{text-align:center;font-size:.6rem;color:#636E72;margin-top:.3rem}
-.mf-word-order{display:flex;gap:4px;margin:.5rem 0;justify-content:center}
-.mf-wo-slot{display:flex;flex-direction:column;align-items:center;gap:2px}
-.mf-wo-label{font-size:.5rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
-.mf-wo-word{padding:4px 10px;border-radius:6px;font-size:.62rem;font-weight:700}
+.mf-pz-ex{text-align:center;font-size:.7rem;color:#636E72;margin-top:.4rem}
+.mf-word-order{display:flex;gap:6px;margin:.6rem 0;justify-content:center}
+.mf-wo-slot{display:flex;flex-direction:column;align-items:center;gap:3px}
+.mf-wo-label{font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.mf-wo-word{padding:6px 12px;border-radius:8px;font-size:.72rem;font-weight:700}
 .mf-wo-1 .mf-wo-label{color:#636E72}.mf-wo-1 .mf-wo-word{background:#F0EDFF;color:#5341D6;border:1px solid #DDD6FE}
 .mf-wo-2 .mf-wo-label{color:#E17055}.mf-wo-2 .mf-wo-word{background:#FFE0D6;color:#D63031;border:1px solid #E17055}
 .mf-wo-3 .mf-wo-label{color:#636E72}.mf-wo-3 .mf-wo-word{background:#F9F9FB;color:#636E72;border:1px solid #E8E8EF}
 .mf-wo-4 .mf-wo-label{color:#00A381}.mf-wo-4 .mf-wo-word{background:#D4F5ED;color:#00A381;border:1px solid #00B894}
-.mf-level{margin-bottom:.5rem;background:white;border-radius:12px;overflow:hidden;border:1.5px solid #E8E8EF}
+.mf-level{margin-bottom:.75rem;background:white;border-radius:14px;overflow:hidden;border:1.5px solid #E8E8EF}
 .mf-l1{border-color:#00B894}
 .mf-l2{border-color:#74B9FF}
 .mf-l3{border-color:#E17055}
-.mf-level-bar{display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;color:white;font-size:.65rem;font-weight:800}
+.mf-level-bar{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;color:white;font-size:.75rem;font-weight:800}
 .mf-l1 .mf-level-bar{background:linear-gradient(135deg,#00B894,#55EFC4)}
 .mf-level-bar.l2{background:linear-gradient(135deg,#74B9FF,#A0C4FF)}
 .mf-level-bar.l3{background:linear-gradient(135deg,#E17055,#FF8A65)}
-.mf-level-xp{font-family:'JetBrains Mono',monospace;font-size:.55rem;background:rgba(0,0,0,0.15);padding:2px 8px;border-radius:100px}
-.mf-exercise{padding:.4rem .75rem;display:flex;align-items:center;gap:.4rem}
-.mf-ex-num{width:20px;height:20px;background:#6C5CE7;color:white;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;flex-shrink:0}
-.mf-ex-type{font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#6C5CE7;background:#F0EDFF;padding:2px 8px;border-radius:4px}
-.mf-exercise-text{font-size:.68rem;color:#636E72;padding:.15rem .75rem .15rem 2.25rem}
-.mf-trap{font-size:.62rem;color:#D63031;background:#FFE0D6;padding:5px 10px;margin:.3rem .75rem;border-radius:6px;font-weight:700}
-.mf-meta{background:white;border:1.5px solid #00CEC9;border-radius:10px;padding:.6rem;margin-top:.5rem}
-.mf-meta-head{font-size:.65rem;color:#00B5B1;margin-bottom:.3rem}
-.mf-meta-q{font-size:.6rem;color:#636E72;padding:.15rem 0}
-.mf-footer{text-align:center;font-size:.55rem;color:#B2BEC3;padding:.75rem;border-top:1px solid #E8E8EF;margin-top:.5rem}
-.mf-anatomy{background:white;border:1.5px solid #6C5CE7;border-radius:12px;padding:.75rem;margin-bottom:.75rem}
-.mf-anatomy-title{font-size:.7rem;font-weight:800;color:#5341D6;margin-bottom:.5rem}
-.mf-anatomy-sentence{display:flex;gap:4px;justify-content:center;margin-bottom:.4rem;flex-wrap:wrap}
-.mf-a-part{padding:4px 10px;border-radius:6px;font-size:.65rem;font-weight:700}
+.mf-level-xp{font-family:'JetBrains Mono',monospace;font-size:.62rem;background:rgba(0,0,0,0.15);padding:3px 10px;border-radius:100px}
+.mf-exercise{padding:.5rem 1rem;display:flex;align-items:center;gap:.5rem}
+.mf-ex-num{width:24px;height:24px;background:#6C5CE7;color:white;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;flex-shrink:0}
+.mf-ex-type{font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#6C5CE7;background:#F0EDFF;padding:3px 10px;border-radius:6px}
+.mf-exercise-text{font-size:.78rem;color:#636E72;padding:.2rem 1rem .2rem 2.75rem;line-height:1.5}
+.mf-trap{font-size:.72rem;color:#D63031;background:#FFE0D6;padding:8px 12px;margin:.4rem 1rem;border-radius:8px;font-weight:700}
+.mf-quiz{background:linear-gradient(135deg,#EEF2FF,#E8E8FF);border:1.5px solid #818CF8;border-radius:14px;padding:1rem;margin:.75rem 0}
+.mf-quiz-head{font-size:.8rem;color:#4F46E5;margin-bottom:.5rem;font-weight:800}
+.mf-quiz-item{font-size:.75rem;color:#4338CA;padding:.35rem .5rem;background:white;border-radius:8px;border:1px solid rgba(129,140,248,0.2);margin-top:4px}
+.mf-meta{background:white;border:1.5px solid #00CEC9;border-radius:14px;padding:.75rem 1rem;margin-top:.75rem}
+.mf-meta-head{font-size:.75rem;color:#00B5B1;margin-bottom:.4rem;font-weight:700}
+.mf-meta-q{font-size:.7rem;color:#636E72;padding:.2rem 0;line-height:1.4}
+.mf-corrige{background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:1.5px solid #10B981;border-radius:14px;padding:1rem;margin:.75rem 0}
+.mf-corrige-head{font-size:.8rem;color:#059669;margin-bottom:.5rem;font-weight:800}
+.mf-corrige-item{font-size:.75rem;color:#047857;padding:.3rem 0;line-height:1.5}
+.mf-tool-sheet{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border:1.5px solid #F59E0B;border-radius:14px;padding:1rem;margin:.75rem 0}
+.mf-tool-head{font-size:.8rem;color:#B45309;margin-bottom:.5rem;font-weight:800}
+.mf-tool-item{font-size:.75rem;color:#92400E;padding:.3rem 0;line-height:1.5}
+.mf-footer{text-align:center;font-size:.65rem;color:#B2BEC3;padding:1rem;border-top:1px solid #E8E8EF;margin-top:.75rem}
+.mf-anatomy{background:white;border:1.5px solid #6C5CE7;border-radius:14px;padding:1rem;margin-bottom:1rem}
+.mf-anatomy-title{font-size:.8rem;font-weight:800;color:#5341D6;margin-bottom:.6rem}
+.mf-anatomy-sentence{display:flex;gap:5px;justify-content:center;margin-bottom:.5rem;flex-wrap:wrap}
+.mf-a-part{padding:5px 12px;border-radius:8px;font-size:.75rem;font-weight:700}
 .mf-a-cvd{background:#DFE6FF;color:#2563EB;border:1px solid #74B9FF}
 .mf-a-que{background:#F9F9FB;color:#636E72;border:1px solid #E8E8EF}
 .mf-a-subj{background:#D4F5ED;color:#00A381;border:1px solid #00B894}
 .mf-a-aux{background:#FEF3C7;color:#B8860B;border:1px solid #FDCB6E}
 .mf-a-pp{background:#FFE0D6;color:#D63031;border:1px solid #E17055}
-.mf-anatomy-labels{display:flex;gap:8px;justify-content:center;font-size:.5rem;flex-wrap:wrap}
+.mf-anatomy-labels{display:flex;gap:10px;justify-content:center;font-size:.6rem;flex-wrap:wrap}
 .mf-al{font-weight:700}
-.mf-frac-visual{background:white;border:1.5px solid #10B981;border-radius:12px;padding:.75rem;margin-bottom:.75rem}
-.mf-frac-title{font-size:.7rem;font-weight:800;color:#059669;margin-bottom:.5rem}
+.mf-frac-visual{background:white;border:1.5px solid #10B981;border-radius:14px;padding:1rem;margin-bottom:1rem}
+.mf-frac-title{font-size:.8rem;font-weight:800;color:#059669;margin-bottom:.5rem}
 .mf-frac-bars{text-align:center}
-.mf-frac-bar-row{display:flex;justify-content:center;gap:4px}
-.mf-frac-piece{width:40px;height:24px;border-radius:4px;border:1.5px solid #10B981}
+.mf-frac-bar-row{display:flex;justify-content:center;gap:5px}
+.mf-frac-piece{width:48px;height:28px;border-radius:6px;border:1.5px solid #10B981}
 .mf-frac-piece.filled{background:#D1FAE5}
 .mf-frac-piece.empty{background:white}
-.mf-frac-label{font-size:.6rem;color:#636E72;margin-top:.3rem}
-.mf-method{background:white;border:1.5px solid var(--v-300);border-radius:12px;padding:.75rem;margin-bottom:.75rem}
-.mf-method-title{font-size:.7rem;font-weight:800;color:var(--v-600);margin-bottom:.4rem}
-.mf-method-steps{display:flex;flex-direction:column;gap:3px;margin-bottom:.5rem}
-.mf-method-step{display:flex;align-items:center;gap:6px;font-size:.62rem;color:var(--ink-soft)}
-.mf-ms-num{width:16px;height:16px;background:var(--v-100);color:var(--v-600);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:800;flex-shrink:0}
-.mf-method-example{display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}
-.mf-me-frac{padding:4px 10px;background:var(--v-50);border:1px solid var(--v-200);border-radius:6px;font-size:.65rem;font-weight:700;color:var(--v-600)}
-.mf-me-op{font-size:.7rem;color:var(--ink-muted);font-weight:800}
+.mf-frac-label{font-size:.7rem;color:#636E72;margin-top:.4rem}
+.mf-method{background:white;border:1.5px solid var(--v-300);border-radius:14px;padding:1rem;margin-bottom:1rem}
+.mf-method-title{font-size:.8rem;font-weight:800;color:var(--v-600);margin-bottom:.5rem}
+.mf-method-steps{display:flex;flex-direction:column;gap:4px;margin-bottom:.6rem}
+.mf-method-step{display:flex;align-items:center;gap:8px;font-size:.72rem;color:var(--ink-soft)}
+.mf-ms-num{width:20px;height:20px;background:var(--v-100);color:var(--v-600);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:800;flex-shrink:0}
+.mf-method-example{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap}
+.mf-me-frac{padding:5px 12px;background:var(--v-50);border:1px solid var(--v-200);border-radius:8px;font-size:.75rem;font-weight:700;color:var(--v-600)}
+.mf-me-op{font-size:.8rem;color:var(--ink-muted);font-weight:800}
 .mf-me-result{background:var(--emerald-100);border-color:#10B981;color:#059669}
-@media(max-width:768px){.subject-toggle{display:none}.hero-preview{transform:none}}
+@media(max-width:1024px){.fiche-annot{display:none !important}}
+@media(max-width:768px){.subject-toggle{flex-direction:column;align-items:center}.subject-btn{width:100%;max-width:300px;text-align:center}.fiche-card{border-radius:14px}}
 
 /* ===== METRICS BAR ===== */
 .metrics{padding:3rem 2rem;background:var(--surface-raised);border-bottom:1px solid var(--border)}
@@ -704,264 +739,446 @@ body.has-auth-bar{padding-top:36px}
 </section>
 
 <!-- MINI-FICHE PREVIEW -->
-<section class="preview-section reveal">
+<section class="preview-section reveal" id="demo">
   <div class="preview-section-inner">
-    <h2 class="preview-section-title">Découvrez nos fiches en action</h2>
-    <p class="preview-section-sub">Des exercices gamifiés, différenciés par niveau, prêts à imprimer.</p>
-    <div class="hero-preview">
-      <div class="preview-topbar">
-        <div class="preview-dot r"></div><div class="preview-dot y"></div><div class="preview-dot g"></div>
-        <div class="preview-url">neoskool.com/exercice</div>
-        <div class="subject-toggle">
-          <button class="subject-btn active" onclick="switchSubject('allemand',this)">Allemand</button>
-          <button class="subject-btn" onclick="switchSubject('francais',this)">Français</button>
-          <button class="subject-btn" onclick="switchSubject('maths',this)">Maths</button>
-        </div>
-      </div>
-      <div class="mf-scroll-wrap">
-      <div class="mf-scroll-area" id="mf-scroll-area">
+    <h2 class="preview-section-title">Jugez par <em>vous-même</em></h2>
+    <p class="preview-section-sub">Scrollez dans une vraie fiche générée par Neoskool. Chaque section est pensée pour faire progresser l'élève.</p>
 
-        <!-- ALLEMAND -->
+    <div class="subject-toggle">
+      <button class="subject-btn active" data-subject="allemand" onclick="switchSubject('allemand',this)">🇩🇪 Allemand 9H</button>
+      <button class="subject-btn" data-subject="francais" onclick="switchSubject('francais',this)">📖 Français 10H</button>
+      <button class="subject-btn" data-subject="maths" onclick="switchSubject('maths',this)">📐 Maths 9H</button>
+    </div>
+
+    <div class="fiche-showcase">
+      <!-- Annotations (positioned outside the fiche) -->
+      <div class="fiche-annotations" id="fiche-annotations">
+        <div class="fiche-annot left" data-section="pretest" style="top:3%;left:0"><div class="fiche-annot-label"><strong>Pré-test</strong><span>L'élève se teste avant d'apprendre</span></div><div class="fiche-annot-arrow"></div></div>
+        <div class="fiche-annot right" data-section="rappel" style="top:14%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>Rappel express</strong><span>L'essentiel en un coup d'œil</span></div></div>
+        <div class="fiche-annot left" data-section="level1" style="top:30%;left:0"><div class="fiche-annot-label"><strong>⭐ Découverte</strong><span>Exercices guidés pour démarrer</span></div><div class="fiche-annot-arrow"></div></div>
+        <div class="fiche-annot right" data-section="level2" style="top:42%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>⭐⭐ Approfondissement</strong><span>Montée en difficulté progressive</span></div></div>
+        <div class="fiche-annot left" data-section="level3" style="top:53%;left:0"><div class="fiche-annot-label"><strong>⭐⭐⭐ Expert</strong><span>Défis pour les plus avancés</span></div><div class="fiche-annot-arrow"></div></div>
+        <div class="fiche-annot right" data-section="quiz" style="top:63%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>Quiz rapide</strong><span>Vérification instantanée</span></div></div>
+        <div class="fiche-annot left" data-section="autoeval" style="top:72%;left:0"><div class="fiche-annot-label"><strong>Auto-évaluation</strong><span>Métacognition et réflexion</span></div><div class="fiche-annot-arrow"></div></div>
+        <div class="fiche-annot right" data-section="corrige" style="top:81%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>Corrigé complet</strong><span>Chaque réponse expliquée</span></div></div>
+        <div class="fiche-annot left" data-section="outil" style="top:92%;left:0"><div class="fiche-annot-label"><strong>Fiche outil</strong><span>Mémo à garder toute l'année</span></div><div class="fiche-annot-arrow"></div></div>
+      </div>
+
+      <div class="fiche-card">
+        <div class="mf-scroll-wrap">
+        <div class="mf-scroll-area" id="mf-scroll-area">
+
+        <!-- ========== ALLEMAND ========== -->
         <div class="mini-fiche active" id="mf-allemand">
           <div class="mf-header">
-            <div class="mf-badge">Mission Allemand · 9H VP · Ch.6 — Geni@l klick</div>
-            <div class="mf-title">Das Perfekt — Reise in die Vergangenheit!</div>
-            <div class="mf-xp-bar"><div class="mf-xp-fill" style="width:0%"></div></div>
-            <div class="mf-xp-label">0 / 100 XP · Badge : Zeitreisender</div>
+            <div class="mf-badge">🎮 Mission Allemand · 9H VP · Ch.6 — Geni@l klick</div>
+            <div class="mf-title">🚂 Das Perfekt — Reise in die Vergangenheit!</div>
+            <div class="mf-xp-bar"><div class="mf-xp-fill" data-width="75"></div></div>
+            <div class="mf-xp-label">0 / 100 XP · 🏆 Badge : Zeitreisender</div>
           </div>
           <div class="mf-body">
-            <div class="mf-pretest">
-              <div class="mf-pretest-head"><strong>Teste-toi d'abord !</strong> <span style="font-size:.55rem;opacity:.7">(retrieval practice)</span></div>
+            <!-- PRÉ-TEST -->
+            <div class="mf-pretest" data-annot="pretest">
+              <div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong> <span style="font-size:.6rem;opacity:.7">(retrieval practice)</span></div>
               <div class="mf-pretest-item">Ich ___ gestern nach Basel ___ . (fahren)</div>
-              <div class="mf-pretest-item" style="margin-top:4px">Wir ___ Pizza ___ . (essen)</div>
-              <div class="mf-pretest-item" style="margin-top:4px">Er ___ drei Stunden ___ . (schlafen)</div>
+              <div class="mf-pretest-item">Wir ___ Pizza ___ . (essen)</div>
+              <div class="mf-pretest-item">Er ___ drei Stunden ___ . (schlafen)</div>
             </div>
-            <div class="mf-recall"><div class="mf-recall-head"><strong>Rappel Express — Das Perfekt</strong></div></div>
-            <div class="mf-formula">
-              <div class="mf-f-block mf-f-subj">Subjekt</div><div class="mf-f-plus">+</div>
-              <div class="mf-f-block mf-f-aux">haben/sein</div><div class="mf-f-plus">+</div>
-              <div class="mf-f-block mf-f-comp">...</div><div class="mf-f-plus">+</div>
-              <div class="mf-f-block mf-f-part">Partizip II</div>
-            </div>
-            <div style="text-align:center;font-size:.6rem;font-weight:700;color:#5341D6;margin-bottom:.3rem">Comment former le Partizip II ?</div>
-            <div class="mf-partizip">
-              <div class="mf-pz-part mf-pz-pre">ge-</div>
-              <div class="mf-pz-part mf-pz-stem">spiel</div>
-              <div class="mf-pz-part mf-pz-suf">-t</div>
-            </div>
-            <div class="mf-pz-ex">spielen → ge·spiel·t (régulier) · fahren → ge·fahr·<strong>en</strong> (irrégulier)</div>
-            <div class="mf-conj-title">Conjugaison : haben &amp; sein au présent</div>
-            <div class="mf-conj-grid">
-              <div class="mf-cg-h"></div><div class="mf-cg-h mf-cg-haben">haben</div><div class="mf-cg-h mf-cg-sein">sein</div>
-              <div class="mf-cg-p">ich</div><div class="mf-cg-v mf-cg-hl"><strong>habe</strong></div><div class="mf-cg-v mf-cg-sl"><strong>bin</strong></div>
-              <div class="mf-cg-p">du</div><div class="mf-cg-v mf-cg-hl">hast</div><div class="mf-cg-v mf-cg-sl">bist</div>
-              <div class="mf-cg-p">er/sie</div><div class="mf-cg-v mf-cg-hl">hat</div><div class="mf-cg-v mf-cg-sl">ist</div>
-              <div class="mf-cg-p">wir</div><div class="mf-cg-v mf-cg-hl">haben</div><div class="mf-cg-v mf-cg-sl">sind</div>
-              <div class="mf-cg-p">ihr</div><div class="mf-cg-v mf-cg-hl">habt</div><div class="mf-cg-v mf-cg-sl">seid</div>
-              <div class="mf-cg-p">sie/Sie</div><div class="mf-cg-v mf-cg-hl">haben</div><div class="mf-cg-v mf-cg-sl">sind</div>
-            </div>
-            <div class="mf-tree">
-              <div class="mf-tree-q">Déplacement ou changement d'état ?</div>
-              <div class="mf-tree-branches">
-                <div class="mf-tree-b"><span class="mf-tree-yes">OUI → sein</span><div class="mf-tree-ex">fahren, gehen, kommen, fliegen</div></div>
-                <div class="mf-tree-b"><span class="mf-tree-no">NON → haben</span><div class="mf-tree-ex">spielen, essen, kaufen, lesen</div></div>
+
+            <!-- RAPPEL EXPRESS -->
+            <div data-annot="rappel">
+              <div class="mf-recall"><div class="mf-recall-head">⚡ <strong>Rappel Express — Das Perfekt</strong></div></div>
+              <div class="mf-formula">
+                <div class="mf-f-block mf-f-subj">Subjekt</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-aux">haben/sein</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-comp">...</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-part">Partizip II</div>
+              </div>
+              <div style="text-align:center;font-size:.7rem;font-weight:700;color:#5341D6;margin-bottom:.4rem">Comment former le Partizip II ?</div>
+              <div class="mf-partizip">
+                <div class="mf-pz-part mf-pz-pre">ge-</div>
+                <div class="mf-pz-part mf-pz-stem">spiel</div>
+                <div class="mf-pz-part mf-pz-suf">-t</div>
+              </div>
+              <div class="mf-pz-ex">spielen → ge·spiel·t (régulier) · fahren → ge·fahr·<strong>en</strong> (irrégulier)</div>
+              <div class="mf-conj-title">📋 Conjugaison : haben &amp; sein au présent</div>
+              <div class="mf-conj-grid">
+                <div class="mf-cg-h"></div><div class="mf-cg-h mf-cg-haben">haben</div><div class="mf-cg-h mf-cg-sein">sein</div>
+                <div class="mf-cg-p">ich</div><div class="mf-cg-v mf-cg-hl"><strong>habe</strong></div><div class="mf-cg-v mf-cg-sl"><strong>bin</strong></div>
+                <div class="mf-cg-p">du</div><div class="mf-cg-v mf-cg-hl">hast</div><div class="mf-cg-v mf-cg-sl">bist</div>
+                <div class="mf-cg-p">er/sie</div><div class="mf-cg-v mf-cg-hl">hat</div><div class="mf-cg-v mf-cg-sl">ist</div>
+                <div class="mf-cg-p">wir</div><div class="mf-cg-v mf-cg-hl">haben</div><div class="mf-cg-v mf-cg-sl">sind</div>
+                <div class="mf-cg-p">ihr</div><div class="mf-cg-v mf-cg-hl">habt</div><div class="mf-cg-v mf-cg-sl">seid</div>
+                <div class="mf-cg-p">sie/Sie</div><div class="mf-cg-v mf-cg-hl">haben</div><div class="mf-cg-v mf-cg-sl">sind</div>
+              </div>
+              <div class="mf-tree">
+                <div class="mf-tree-q">🌳 Déplacement ou changement d'état ?</div>
+                <div class="mf-tree-branches">
+                  <div class="mf-tree-b"><span class="mf-tree-yes">✅ OUI → sein</span><div class="mf-tree-ex">fahren, gehen, kommen, fliegen</div></div>
+                  <div class="mf-tree-b"><span class="mf-tree-no">❌ NON → haben</span><div class="mf-tree-ex">spielen, essen, kaufen, lesen</div></div>
+                </div>
+              </div>
+              <div style="text-align:center;font-size:.7rem;font-weight:700;color:#5341D6;margin-bottom:.4rem">📐 Ordre des mots au Perfekt</div>
+              <div class="mf-word-order">
+                <div class="mf-wo-slot mf-wo-1"><div class="mf-wo-label">Pos. 1</div><div class="mf-wo-word">Ich</div></div>
+                <div class="mf-wo-slot mf-wo-2"><div class="mf-wo-label">Pos. 2</div><div class="mf-wo-word">bin</div></div>
+                <div class="mf-wo-slot mf-wo-3"><div class="mf-wo-label">Milieu</div><div class="mf-wo-word">nach Bern</div></div>
+                <div class="mf-wo-slot mf-wo-4"><div class="mf-wo-label">Fin</div><div class="mf-wo-word">gefahren</div></div>
               </div>
             </div>
-            <div style="text-align:center;font-size:.6rem;font-weight:700;color:#5341D6;margin-bottom:.3rem">Ordre des mots au Perfekt</div>
-            <div class="mf-word-order">
-              <div class="mf-wo-slot mf-wo-1"><div class="mf-wo-label">Pos. 1</div><div class="mf-wo-word">Ich</div></div>
-              <div class="mf-wo-slot mf-wo-2"><div class="mf-wo-label">Pos. 2</div><div class="mf-wo-word">bin</div></div>
-              <div class="mf-wo-slot mf-wo-3"><div class="mf-wo-label">Milieu</div><div class="mf-wo-word">nach Bern</div></div>
-              <div class="mf-wo-slot mf-wo-4"><div class="mf-wo-label">Fin</div><div class="mf-wo-word">gefahren</div></div>
-            </div>
-            <div class="mf-level mf-l1">
-              <div class="mf-level-bar"><span>Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div>
+
+            <!-- NIVEAU 1 -->
+            <div class="mf-level mf-l1" data-annot="level1">
+              <div class="mf-level-bar"><span>⭐ Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div>
               <div class="mf-exercise"><span class="mf-ex-num">1</span><span class="mf-ex-type">haben oder sein?</span></div>
               <div class="mf-exercise-text">a) Ich ___ nach Zürich <strong>gefahren</strong>.</div>
               <div class="mf-exercise-text">b) Wir ___ Schokolade <strong>gekauft</strong>.</div>
               <div class="mf-exercise-text">c) Sie ___ nach Hause <strong>gekommen</strong>.</div>
+              <div class="mf-exercise-text">d) Er ___ einen Kuchen <strong>gebacken</strong>.</div>
               <div class="mf-exercise"><span class="mf-ex-num">2</span><span class="mf-ex-type">Partizip II bilden</span></div>
               <div class="mf-exercise-text">a) spielen → ge______ · b) lesen → ge______</div>
+              <div class="mf-exercise-text">c) kaufen → ge______ · d) schwimmen → ge______</div>
+              <div class="mf-exercise"><span class="mf-ex-num">3</span><span class="mf-ex-type">Ordne den Satz</span></div>
+              <div class="mf-exercise-text">a) gefahren / nach Bern / bin / Ich → ___</div>
+              <div class="mf-exercise-text">b) hat / Wir / gespielt / Fussball → ___</div>
             </div>
-            <div class="mf-level mf-l2">
-              <div class="mf-level-bar l2"><span>Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
+
+            <!-- NIVEAU 2 -->
+            <div class="mf-level mf-l2" data-annot="level2">
+              <div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
               <div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Phrases complètes</span></div>
               <div class="mf-exercise-text">a) (ich / nach Basel / fahren) → ___</div>
               <div class="mf-exercise-text">b) (wir / einen Film / sehen) → ___</div>
-              <div class="mf-trap">Piège : « Ich habe nach Basel gefahren » — Pourquoi c'est faux ?</div>
+              <div class="mf-exercise-text">c) (sie / nach Hause / laufen) → ___</div>
+              <div class="mf-exercise"><span class="mf-ex-num">5</span><span class="mf-ex-type">Fehler finden</span></div>
+              <div class="mf-exercise-text">a) Ich habe nach Basel gefahren. → ___</div>
+              <div class="mf-exercise-text">b) Er hat gestern gekommt. → ___</div>
+              <div class="mf-trap">⚠️ Piège : « Ich habe nach Basel gefahren » — fahren = déplacement → sein !</div>
             </div>
-            <div class="mf-level mf-l3">
-              <div class="mf-level-bar l3"><span>Niveau 3 — Expert</span><span class="mf-level-xp">+50 XP</span></div>
+
+            <!-- NIVEAU 3 -->
+            <div class="mf-level mf-l3" data-annot="level3">
+              <div class="mf-level-bar l3"><span>⭐⭐⭐ Niveau 3 — Expert</span><span class="mf-level-xp">+50 XP</span></div>
+              <div class="mf-exercise"><span class="mf-ex-num">6</span><span class="mf-ex-type">Übersetze</span></div>
+              <div class="mf-exercise-text">a) J'ai mangé une pizza hier. → ___</div>
+              <div class="mf-exercise-text">b) Nous sommes allés à Lausanne. → ___</div>
               <div class="mf-exercise"><span class="mf-ex-num">7</span><span class="mf-ex-type">Écriture libre</span></div>
-              <div class="mf-exercise-text">Raconte ton week-end en 5 phrases au Perfekt. Utilise sein ET haben.</div>
+              <div class="mf-exercise-text">Raconte ton week-end en 5 phrases au Perfekt. Utilise sein ET haben. Variété = +10 XP bonus !</div>
             </div>
-            <div class="mf-meta">
-              <div class="mf-meta-head"><strong>Auto-évaluation</strong></div>
+
+            <!-- QUIZ -->
+            <div class="mf-quiz" data-annot="quiz">
+              <div class="mf-quiz-head">⚡ Quiz rapide — 30 secondes !</div>
+              <div class="mf-quiz-item">1. Le Perfekt se forme avec ___ + Partizip II.</div>
+              <div class="mf-quiz-item">2. « fahren » utilise l'auxiliaire ___ car c'est un ___.</div>
+              <div class="mf-quiz-item">3. Partizip II de « essen » = ___.</div>
+              <div class="mf-quiz-item">4. Vrai ou Faux : « schlafen » utilise « sein ».</div>
+            </div>
+
+            <!-- AUTO-ÉVALUATION -->
+            <div class="mf-meta" data-annot="autoeval">
+              <div class="mf-meta-head">🪞 <strong>Auto-évaluation</strong></div>
               <div class="mf-meta-q">1. Ma stratégie pour choisir haben/sein ?</div>
-              <div class="mf-meta-q">2. Le Perfekt en UNE phrase ?</div>
+              <div class="mf-meta-q">2. Je peux expliquer le Perfekt en UNE phrase ?</div>
+              <div class="mf-meta-q">3. Mon niveau aujourd'hui : 😊 Facile · 😐 Moyen · 😓 Difficile</div>
+              <div class="mf-meta-q">4. Ce que je dois encore travailler : ___</div>
             </div>
-            <div class="mf-footer">Généré par <strong>Neoskool</strong> · Retrieval practice · Dual coding · Gamification · Elaborated feedback</div>
+
+            <!-- CORRIGÉ -->
+            <div class="mf-corrige" data-annot="corrige">
+              <div class="mf-corrige-head">✅ Corrigé complet</div>
+              <div class="mf-corrige-item"><strong>Pré-test :</strong> Ich <u>bin</u> nach Basel <u>gefahren</u>. / Wir <u>haben</u> Pizza <u>gegessen</u>. / Er <u>hat</u> drei Stunden <u>geschlafen</u>.</div>
+              <div class="mf-corrige-item"><strong>Ex. 1 :</strong> a) bin (déplacement) · b) haben (action) · c) bin (déplacement) · d) hat (action)</div>
+              <div class="mf-corrige-item"><strong>Ex. 2 :</strong> a) gespielt · b) gelesen · c) gekauft · d) geschwommen</div>
+              <div class="mf-corrige-item"><strong>Ex. 4 :</strong> a) Ich bin nach Basel gefahren. · b) Wir haben einen Film gesehen. · c) Sie ist nach Hause gelaufen.</div>
+              <div class="mf-corrige-item"><strong>Ex. 5 :</strong> a) « habe » → « bin » (fahren = sein) · b) « gekommt » → « gekommen » (irrégulier)</div>
+              <div class="mf-corrige-item"><strong>Quiz :</strong> 1. haben/sein · 2. sein, déplacement · 3. gegessen · 4. Faux (haben)</div>
+            </div>
+
+            <!-- FICHE OUTIL -->
+            <div class="mf-tool-sheet" data-annot="outil">
+              <div class="mf-tool-head">📌 Fiche outil — Das Perfekt</div>
+              <div class="mf-tool-item"><strong>Formation :</strong> Subjekt + haben/sein + ... + Partizip II</div>
+              <div class="mf-tool-item"><strong>sein :</strong> verbes de déplacement (fahren, gehen, kommen, fliegen, laufen) + changement d'état (werden, sterben)</div>
+              <div class="mf-tool-item"><strong>haben :</strong> tous les autres verbes (spielen, essen, kaufen, lesen, schlafen...)</div>
+              <div class="mf-tool-item"><strong>Partizip II régulier :</strong> ge- + radical + -t (spielen → gespielt)</div>
+              <div class="mf-tool-item"><strong>Partizip II irrégulier :</strong> ge- + radical modifié + -en (fahren → gefahren)</div>
+              <div class="mf-tool-item"><strong>Ordre :</strong> Pos. 2 = haben/sein · Fin de phrase = Partizip II</div>
+            </div>
+
+            <div class="mf-footer">Généré par <strong>Neoskool</strong> · Retrieval practice · Dual coding · Gamification · Elaborated feedback · Desirable difficulties</div>
           </div>
         </div>
 
-        <!-- FRANÇAIS -->
+        <!-- ========== FRANÇAIS ========== -->
         <div class="mini-fiche" id="mf-francais">
           <div class="mf-header" style="background:linear-gradient(135deg,#4F46E5,#6366F1,#4338CA)">
-            <div class="mf-badge">Mission Français · 10H VG2 · Grammaire</div>
-            <div class="mf-title">L'accord du participe passé avec avoir — Chasseur d'accords</div>
-            <div class="mf-xp-bar"><div class="mf-xp-fill" style="width:0%"></div></div>
-            <div class="mf-xp-label">0 / 100 XP · Badge : Grammairien·ne</div>
+            <div class="mf-badge">🎮 Mission Français · 10H VG2 · Grammaire</div>
+            <div class="mf-title">✍️ L'accord du participe passé avec avoir — Chasseur d'accords</div>
+            <div class="mf-xp-bar"><div class="mf-xp-fill" data-width="75"></div></div>
+            <div class="mf-xp-label">0 / 100 XP · 🏆 Badge : Grammairien·ne</div>
           </div>
           <div class="mf-body">
-            <div class="mf-pretest">
-              <div class="mf-pretest-head"><strong>Teste-toi d'abord !</strong> <span style="font-size:.55rem;opacity:.7">(retrieval practice)</span></div>
+            <!-- PRÉ-TEST -->
+            <div class="mf-pretest" data-annot="pretest">
+              <div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong></div>
               <div class="mf-pretest-item">Les fleurs que j'ai cueilli___ sont magnifiques.</div>
-              <div class="mf-pretest-item" style="margin-top:4px">Elle a mangé___ la pomme.</div>
-              <div class="mf-pretest-item" style="margin-top:4px">Les lettres que nous avons écrit___ sont parti___.</div>
+              <div class="mf-pretest-item">Elle a mangé___ la pomme.</div>
+              <div class="mf-pretest-item">Les lettres que nous avons écrit___ sont parti___.</div>
             </div>
-            <div class="mf-tree">
-              <div class="mf-tree-q">Le CVD est-il AVANT le verbe ?</div>
-              <div class="mf-tree-branches">
-                <div class="mf-tree-b"><span class="mf-tree-yes">OUI → ACCORD avec le CVD</span><div class="mf-tree-ex">Les fleurs que j'ai cueilli<strong>es</strong></div></div>
-                <div class="mf-tree-b"><span class="mf-tree-no">NON → PAS D'ACCORD</span><div class="mf-tree-ex">J'ai cueilli des fleurs (invariable)</div></div>
+
+            <!-- RAPPEL EXPRESS -->
+            <div data-annot="rappel">
+              <div class="mf-recall"><div class="mf-recall-head">⚡ <strong>Rappel Express — PP avec avoir</strong></div></div>
+              <div class="mf-tree">
+                <div class="mf-tree-q">🔍 Le CVD est-il AVANT le verbe ?</div>
+                <div class="mf-tree-branches">
+                  <div class="mf-tree-b"><span class="mf-tree-yes">✅ OUI → ACCORD</span><div class="mf-tree-ex">Les fleurs que j'ai cueilli<strong>es</strong></div></div>
+                  <div class="mf-tree-b"><span class="mf-tree-no">❌ NON → PAS D'ACCORD</span><div class="mf-tree-ex">J'ai cueilli des fleurs</div></div>
+                </div>
+              </div>
+              <div class="mf-anatomy">
+                <div class="mf-anatomy-title">🔬 Anatomie de la phrase</div>
+                <div class="mf-anatomy-sentence">
+                  <div class="mf-a-part mf-a-cvd">Les fleurs</div>
+                  <div class="mf-a-part mf-a-que">que</div>
+                  <div class="mf-a-part mf-a-subj">j'</div>
+                  <div class="mf-a-part mf-a-aux">ai</div>
+                  <div class="mf-a-part mf-a-pp">cueillies</div>
+                </div>
+                <div class="mf-anatomy-labels">
+                  <span class="mf-al" style="color:#2563EB">● CVD (f. pl.)</span>
+                  <span class="mf-al" style="color:#636E72">● pronom relatif</span>
+                  <span class="mf-al" style="color:#00A381">● sujet</span>
+                  <span class="mf-al" style="color:#B8860B">● auxiliaire</span>
+                  <span class="mf-al" style="color:#D63031">● PP accordé !</span>
+                </div>
+              </div>
+              <div class="mf-formula">
+                <div class="mf-f-block mf-f-subj">CVD avant</div><div class="mf-f-plus">→</div>
+                <div class="mf-f-block mf-f-aux">accord genre</div><div class="mf-f-plus">+</div>
+                <div class="mf-f-block mf-f-part">accord nombre</div>
               </div>
             </div>
-            <div class="mf-anatomy">
-              <div class="mf-anatomy-title">Anatomie de la phrase</div>
-              <div class="mf-anatomy-sentence">
-                <div class="mf-a-part mf-a-cvd">Les fleurs</div>
-                <div class="mf-a-part mf-a-que">que</div>
-                <div class="mf-a-part mf-a-subj">j'</div>
-                <div class="mf-a-part mf-a-aux">ai</div>
-                <div class="mf-a-part mf-a-pp">cueillies</div>
-              </div>
-              <div class="mf-anatomy-labels">
-                <span class="mf-al" style="color:#2563EB">CVD (f. pl.)</span>
-                <span class="mf-al" style="color:#636E72">pronom relatif</span>
-                <span class="mf-al" style="color:#00A381">sujet</span>
-                <span class="mf-al" style="color:#B8860B">auxiliaire</span>
-                <span class="mf-al" style="color:#D63031">PP accordé</span>
-              </div>
-            </div>
-            <div class="mf-formula">
-              <div class="mf-f-block mf-f-subj">CVD avant</div><div class="mf-f-plus">→</div>
-              <div class="mf-f-block mf-f-aux">accord genre</div><div class="mf-f-plus">+</div>
-              <div class="mf-f-block mf-f-part">accord nombre</div>
-            </div>
-            <div class="mf-level mf-l1" style="border-color:#4F46E5">
-              <div class="mf-level-bar" style="background:linear-gradient(135deg,#4F46E5,#6366F1)"><span>Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div>
+
+            <!-- NIVEAU 1 -->
+            <div class="mf-level mf-l1" style="border-color:#4F46E5" data-annot="level1">
+              <div class="mf-level-bar" style="background:linear-gradient(135deg,#4F46E5,#6366F1)"><span>⭐ Niveau 1 — Apprenti</span><span class="mf-level-xp">+30 XP</span></div>
               <div class="mf-exercise"><span class="mf-ex-num" style="background:#4F46E5">1</span><span class="mf-ex-type" style="color:#4F46E5;background:#EEF2FF">Repère le CVD</span></div>
               <div class="mf-exercise-text">a) Elle a mangé la pomme. → CVD = ___</div>
               <div class="mf-exercise-text">b) Les livres que j'ai lus. → CVD = ___</div>
+              <div class="mf-exercise-text">c) Il a couru ce matin. → CVD = ___</div>
               <div class="mf-exercise"><span class="mf-ex-num" style="background:#4F46E5">2</span><span class="mf-ex-type" style="color:#4F46E5;background:#EEF2FF">Accorde si nécessaire</span></div>
               <div class="mf-exercise-text">a) La chanson que tu as chanté___ .</div>
               <div class="mf-exercise-text">b) J'ai mangé___ des fruits.</div>
+              <div class="mf-exercise-text">c) Les pommes que nous avons cueilli___ .</div>
+              <div class="mf-exercise"><span class="mf-ex-num" style="background:#4F46E5">3</span><span class="mf-ex-type" style="color:#4F46E5;background:#EEF2FF">Avant ou après ?</span></div>
+              <div class="mf-exercise-text">a) J'ai lu ces livres. → CVD avant ou après ? → Accord ?</div>
+              <div class="mf-exercise-text">b) Les livres que j'ai lus. → CVD avant ou après ? → Accord ?</div>
             </div>
-            <div class="mf-level mf-l2">
-              <div class="mf-level-bar l2"><span>Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
+
+            <!-- NIVEAU 2 -->
+            <div class="mf-level mf-l2" data-annot="level2">
+              <div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
               <div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Transforme la phrase</span></div>
               <div class="mf-exercise-text">a) J'ai acheté ces chaussures → Les chaussures que ___</div>
               <div class="mf-exercise-text">b) Nous avons lu les lettres → Les lettres que ___</div>
-              <div class="mf-trap">Piège : « Les gâteaux que j'ai mangé » — Trouve l'erreur !</div>
+              <div class="mf-exercise-text">c) Il a peint ces tableaux → Les tableaux que ___</div>
+              <div class="mf-exercise"><span class="mf-ex-num">5</span><span class="mf-ex-type">Corrige les erreurs</span></div>
+              <div class="mf-exercise-text">a) Les gâteaux que j'ai mangé étaient délicieux.</div>
+              <div class="mf-exercise-text">b) La robe qu'elle a acheté est rouge.</div>
+              <div class="mf-trap">⚠️ Piège : « Les gâteaux que j'ai mangé » — CVD « gâteaux » est AVANT → accord m. pl. → mangés !</div>
             </div>
-            <div class="mf-level mf-l3">
-              <div class="mf-level-bar l3"><span>Niveau 3 — Expert</span><span class="mf-level-xp">+50 XP</span></div>
+
+            <!-- NIVEAU 3 -->
+            <div class="mf-level mf-l3" data-annot="level3">
+              <div class="mf-level-bar l3"><span>⭐⭐⭐ Niveau 3 — Expert</span><span class="mf-level-xp">+50 XP</span></div>
+              <div class="mf-exercise"><span class="mf-ex-num">6</span><span class="mf-ex-type">Analyse complète</span></div>
+              <div class="mf-exercise-text">Pour chaque phrase : trouve le CVD, sa position, son genre/nombre, et accorde le PP.</div>
+              <div class="mf-exercise-text">a) Les histoires qu'il a raconté___ m'ont passionné___.</div>
+              <div class="mf-exercise-text">b) La voiture que mon père a réparé___ roule bien.</div>
               <div class="mf-exercise"><span class="mf-ex-num">7</span><span class="mf-ex-type">Rédaction</span></div>
-              <div class="mf-exercise-text">Écris 4 phrases avec le PP avoir : 2 avec accord, 2 sans. Souligne le CVD.</div>
+              <div class="mf-exercise-text">Écris 4 phrases avec le PP avoir : 2 avec accord, 2 sans. Souligne le CVD et justifie chaque accord.</div>
             </div>
-            <div class="mf-meta">
-              <div class="mf-meta-head"><strong>Auto-évaluation</strong></div>
+
+            <!-- QUIZ -->
+            <div class="mf-quiz" data-annot="quiz">
+              <div class="mf-quiz-head">⚡ Quiz rapide — 30 secondes !</div>
+              <div class="mf-quiz-item">1. Le PP avec avoir s'accorde avec le ___ quand il est placé ___.</div>
+              <div class="mf-quiz-item">2. « Les pommes que j'ai mangé___ » → accord ou pas ?</div>
+              <div class="mf-quiz-item">3. « J'ai mangé des pommes » → accord ou pas ? Pourquoi ?</div>
+              <div class="mf-quiz-item">4. CVD signifie ___ (terminologie PER).</div>
+            </div>
+
+            <!-- AUTO-ÉVALUATION -->
+            <div class="mf-meta" data-annot="autoeval">
+              <div class="mf-meta-head">🪞 <strong>Auto-évaluation</strong></div>
               <div class="mf-meta-q">1. Comment trouver le CVD à coup sûr ?</div>
               <div class="mf-meta-q">2. PP avec être vs PP avec avoir : quelle différence ?</div>
+              <div class="mf-meta-q">3. Mon niveau : 😊 Facile · 😐 Moyen · 😓 Difficile</div>
+              <div class="mf-meta-q">4. Ce que je dois revoir : ___</div>
             </div>
+
+            <!-- CORRIGÉ -->
+            <div class="mf-corrige" data-annot="corrige">
+              <div class="mf-corrige-head">✅ Corrigé complet</div>
+              <div class="mf-corrige-item"><strong>Pré-test :</strong> cueilli<u>es</u> (CVD « fleurs » f. pl. avant) · mangé (CVD « pomme » après → pas d'accord) · écrit<u>es</u> (CVD « lettres » f. pl. avant) / parti<u>es</u> (être → accord sujet)</div>
+              <div class="mf-corrige-item"><strong>Ex. 1 :</strong> a) la pomme · b) Les livres · c) pas de CVD (courir = intransitif)</div>
+              <div class="mf-corrige-item"><strong>Ex. 2 :</strong> a) chantée (CVD « chanson » f. sg. avant) · b) mangé (CVD « fruits » après) · c) cueillies (CVD « pommes » f. pl. avant)</div>
+              <div class="mf-corrige-item"><strong>Ex. 4 :</strong> a) Les chaussures que j'ai achetées · b) Les lettres que nous avons lues · c) Les tableaux qu'il a peints</div>
+              <div class="mf-corrige-item"><strong>Quiz :</strong> 1. CVD, avant le verbe · 2. Oui → mangées · 3. Non, CVD après · 4. Complément de verbe direct</div>
+            </div>
+
+            <!-- FICHE OUTIL -->
+            <div class="mf-tool-sheet" data-annot="outil">
+              <div class="mf-tool-head">📌 Fiche outil — PP avec avoir</div>
+              <div class="mf-tool-item"><strong>Règle :</strong> Le PP avec avoir s'accorde en genre et en nombre avec le CVD, uniquement si celui-ci est placé AVANT le verbe.</div>
+              <div class="mf-tool-item"><strong>Comment trouver le CVD :</strong> Poser la question « quoi ? » ou « qui ? » après le verbe.</div>
+              <div class="mf-tool-item"><strong>CVD avant :</strong> pronom relatif « que » · pronom personnel « les, la, l' » · dans une question « Quelle robe as-tu choisie ? »</div>
+              <div class="mf-tool-item"><strong>Attention :</strong> Le PP avec avoir ne s'accorde JAMAIS avec le sujet !</div>
+              <div class="mf-tool-item"><strong>Terminologie PER :</strong> CVD (pas COD) · CVI (pas COI) · CP (pas complément circonstanciel)</div>
+            </div>
+
             <div class="mf-footer">Généré par <strong>Neoskool</strong> · Terminologie PER (CVD, CVI, CP) · Elaborative interrogation · Desirable difficulties</div>
           </div>
         </div>
 
-        <!-- MATHS -->
+        <!-- ========== MATHS ========== -->
         <div class="mini-fiche" id="mf-maths">
           <div class="mf-header" style="background:linear-gradient(135deg,#10B981,#34D399,#059669)">
-            <div class="mf-badge">Mission Maths · 9H VP · Nombres et opérations</div>
-            <div class="mf-title">Les fractions — Mission Cailler !</div>
-            <div class="mf-xp-bar"><div class="mf-xp-fill" style="width:0%"></div></div>
-            <div class="mf-xp-label">0 / 100 XP · Badge : Maître chocolatier</div>
+            <div class="mf-badge">🎮 Mission Maths · 9H VP · Nombres et opérations</div>
+            <div class="mf-title">🍫 Les fractions — Mission Cailler !</div>
+            <div class="mf-xp-bar"><div class="mf-xp-fill" data-width="75"></div></div>
+            <div class="mf-xp-label">0 / 100 XP · 🏆 Badge : Maître chocolatier</div>
           </div>
           <div class="mf-body">
-            <div class="mf-pretest">
-              <div class="mf-pretest-head"><strong>Teste-toi d'abord !</strong> <span style="font-size:.55rem;opacity:.7">(retrieval practice)</span></div>
+            <!-- PRÉ-TEST -->
+            <div class="mf-pretest" data-annot="pretest">
+              <div class="mf-pretest-head">🤔 <strong>Teste-toi d'abord !</strong></div>
               <div class="mf-pretest-item">3/4 + 1/2 = ___</div>
-              <div class="mf-pretest-item" style="margin-top:4px">Simplifie 12/18 = ___</div>
-              <div class="mf-pretest-item" style="margin-top:4px">2/3 × 5/4 = ___</div>
+              <div class="mf-pretest-item">Simplifie 12/18 = ___</div>
+              <div class="mf-pretest-item">2/3 × 5/4 = ___</div>
             </div>
-            <div class="mf-frac-visual">
-              <div class="mf-frac-title">Visualise 3/4</div>
-              <div class="mf-frac-bars">
-                <div class="mf-frac-bar-row">
-                  <div class="mf-frac-piece filled"></div>
-                  <div class="mf-frac-piece filled"></div>
-                  <div class="mf-frac-piece filled"></div>
-                  <div class="mf-frac-piece empty"></div>
+
+            <!-- RAPPEL EXPRESS -->
+            <div data-annot="rappel">
+              <div class="mf-recall"><div class="mf-recall-head">⚡ <strong>Rappel Express — Les fractions</strong></div></div>
+              <div class="mf-frac-visual">
+                <div class="mf-frac-title">🎯 Visualise 3/4</div>
+                <div class="mf-frac-bars">
+                  <div class="mf-frac-bar-row">
+                    <div class="mf-frac-piece filled"></div>
+                    <div class="mf-frac-piece filled"></div>
+                    <div class="mf-frac-piece filled"></div>
+                    <div class="mf-frac-piece empty"></div>
+                  </div>
+                  <div class="mf-frac-label">3 parts coloriées sur 4 = <strong>3/4</strong></div>
                 </div>
-                <div class="mf-frac-label">3 parts coloriées sur 4 = <strong>3/4</strong></div>
+              </div>
+              <div class="mf-method">
+                <div class="mf-method-title">📐 Méthode : additionner deux fractions</div>
+                <div class="mf-method-steps">
+                  <div class="mf-method-step"><div class="mf-ms-num">1</div> Trouver le dénominateur commun (PPCM)</div>
+                  <div class="mf-method-step"><div class="mf-ms-num">2</div> Adapter chaque numérateur</div>
+                  <div class="mf-method-step"><div class="mf-ms-num">3</div> Additionner les numérateurs</div>
+                  <div class="mf-method-step"><div class="mf-ms-num">4</div> Simplifier si possible (PGDC)</div>
+                </div>
+                <div class="mf-method-example">
+                  <div class="mf-me-frac">3/4</div><div class="mf-me-op">+</div>
+                  <div class="mf-me-frac">1/2</div><div class="mf-me-op">=</div>
+                  <div class="mf-me-frac">3/4</div><div class="mf-me-op">+</div>
+                  <div class="mf-me-frac">2/4</div><div class="mf-me-op">=</div>
+                  <div class="mf-me-frac mf-me-result">5/4</div>
+                </div>
               </div>
             </div>
-            <div class="mf-method">
-              <div class="mf-method-title">Méthode : additionner deux fractions</div>
-              <div class="mf-method-steps">
-                <div class="mf-method-step"><div class="mf-ms-num">1</div> Trouver le dénominateur commun (PPCM)</div>
-                <div class="mf-method-step"><div class="mf-ms-num">2</div> Adapter chaque numérateur</div>
-                <div class="mf-method-step"><div class="mf-ms-num">3</div> Additionner les numérateurs</div>
-                <div class="mf-method-step"><div class="mf-ms-num">4</div> Simplifier si possible (PGDC)</div>
-              </div>
-              <div class="mf-method-example">
-                <div class="mf-me-frac">3/4</div>
-                <div class="mf-me-op">+</div>
-                <div class="mf-me-frac">1/2</div>
-                <div class="mf-me-op">=</div>
-                <div class="mf-me-frac">3/4</div>
-                <div class="mf-me-op">+</div>
-                <div class="mf-me-frac">2/4</div>
-                <div class="mf-me-op">=</div>
-                <div class="mf-me-frac mf-me-result">5/4</div>
-              </div>
-            </div>
-            <div class="mf-level mf-l1" style="border-color:#10B981">
-              <div class="mf-level-bar" style="background:linear-gradient(135deg,#10B981,#34D399)"><span>Niveau 1 — Apprenti chocolatier</span><span class="mf-level-xp">+30 XP</span></div>
+
+            <!-- NIVEAU 1 -->
+            <div class="mf-level mf-l1" style="border-color:#10B981" data-annot="level1">
+              <div class="mf-level-bar" style="background:linear-gradient(135deg,#10B981,#34D399)"><span>⭐ Niveau 1 — Apprenti chocolatier</span><span class="mf-level-xp">+30 XP</span></div>
               <div class="mf-exercise"><span class="mf-ex-num" style="background:#10B981">1</span><span class="mf-ex-type" style="color:#059669;background:#D1FAE5">Simplifie</span></div>
               <div class="mf-exercise-text">a) 12/18 = ___ · b) 8/20 = ___ · c) 15/25 = ___</div>
               <div class="mf-exercise"><span class="mf-ex-num" style="background:#10B981">2</span><span class="mf-ex-type" style="color:#059669;background:#D1FAE5">Additionne</span></div>
               <div class="mf-exercise-text">a) 1/3 + 1/6 = ___ · b) 2/5 + 1/10 = ___</div>
+              <div class="mf-exercise"><span class="mf-ex-num" style="background:#10B981">3</span><span class="mf-ex-type" style="color:#059669;background:#D1FAE5">Compare</span></div>
+              <div class="mf-exercise-text">a) 3/4 ___ 2/3 (< , > ou =) · b) 5/6 ___ 7/9</div>
             </div>
-            <div class="mf-level mf-l2">
-              <div class="mf-level-bar l2"><span>Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
+
+            <!-- NIVEAU 2 -->
+            <div class="mf-level mf-l2" data-annot="level2">
+              <div class="mf-level-bar l2"><span>⭐⭐ Niveau 2 — Explorateur</span><span class="mf-level-xp">+40 XP</span></div>
               <div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Problème Cailler</span></div>
               <div class="mf-exercise-text">L'usine Cailler produit 180 tablettes : 2/5 au lait, 1/3 noires. Combien de blanches ?</div>
               <div class="mf-exercise"><span class="mf-ex-num">5</span><span class="mf-ex-type">Vrai ou Faux ?</span></div>
               <div class="mf-exercise-text">a) 3/4 > 5/6 · b) 2/3 = 8/12 · c) 1/2 + 1/3 = 2/5</div>
-              <div class="mf-trap">Piège : « 1/2 + 1/3 = 2/5 » — Pourquoi c'est faux ?</div>
+              <div class="mf-exercise"><span class="mf-ex-num">6</span><span class="mf-ex-type">Opérations mixtes</span></div>
+              <div class="mf-exercise-text">a) 3/4 − 1/6 = ___ · b) 2/3 × 3/5 = ___ · c) 5/6 ÷ 2/3 = ___</div>
+              <div class="mf-trap">⚠️ Piège : « 1/2 + 1/3 = 2/5 » — On n'additionne PAS les dénominateurs ! PPCM = 6 → 3/6 + 2/6 = 5/6</div>
             </div>
-            <div class="mf-level mf-l3">
-              <div class="mf-level-bar l3"><span>Niveau 3 — Maître chocolatier</span><span class="mf-level-xp">+50 XP</span></div>
+
+            <!-- NIVEAU 3 -->
+            <div class="mf-level mf-l3" data-annot="level3">
+              <div class="mf-level-bar l3"><span>⭐⭐⭐ Niveau 3 — Maître chocolatier</span><span class="mf-level-xp">+50 XP</span></div>
               <div class="mf-exercise"><span class="mf-ex-num">7</span><span class="mf-ex-type">Défi multi-étapes</span></div>
-              <div class="mf-exercise-text">Une recette demande 3/4 kg de farine. Tu veux faire 2/3 de la recette. Combien de farine ?</div>
+              <div class="mf-exercise-text">Une recette demande 3/4 kg de farine. Tu veux faire 2/3 de la recette. Combien de farine ? Montre le calcul.</div>
+              <div class="mf-exercise"><span class="mf-ex-num">8</span><span class="mf-ex-type">Problème ouvert</span></div>
+              <div class="mf-exercise-text">Trois amis se partagent une pizza : Léo mange 1/3, Emma mange 1/4, Noah mange 1/6. Quelle fraction reste-t-il ? Qui a mangé le plus ?</div>
             </div>
-            <div class="mf-meta">
-              <div class="mf-meta-head"><strong>Auto-évaluation</strong></div>
+
+            <!-- QUIZ -->
+            <div class="mf-quiz" data-annot="quiz">
+              <div class="mf-quiz-head">⚡ Quiz rapide — 30 secondes !</div>
+              <div class="mf-quiz-item">1. Pour additionner 1/3 + 1/4, le dénominateur commun est ___.</div>
+              <div class="mf-quiz-item">2. Simplifier une fraction = diviser par le ___.</div>
+              <div class="mf-quiz-item">3. 3/4 de 100 = ___.</div>
+              <div class="mf-quiz-item">4. Vrai ou Faux : 6/8 = 3/4.</div>
+            </div>
+
+            <!-- AUTO-ÉVALUATION -->
+            <div class="mf-meta" data-annot="autoeval">
+              <div class="mf-meta-head">🪞 <strong>Auto-évaluation</strong></div>
               <div class="mf-meta-q">1. Comment trouver le dénominateur commun rapidement ?</div>
               <div class="mf-meta-q">2. Pourquoi simplifier est important ?</div>
+              <div class="mf-meta-q">3. Mon niveau : 😊 Facile · 😐 Moyen · 😓 Difficile</div>
+              <div class="mf-meta-q">4. Ce que je dois revoir : ___</div>
             </div>
+
+            <!-- CORRIGÉ -->
+            <div class="mf-corrige" data-annot="corrige">
+              <div class="mf-corrige-head">✅ Corrigé complet</div>
+              <div class="mf-corrige-item"><strong>Pré-test :</strong> 3/4 + 1/2 = 3/4 + 2/4 = 5/4 · 12/18 = 2/3 · 2/3 × 5/4 = 10/12 = 5/6</div>
+              <div class="mf-corrige-item"><strong>Ex. 1 :</strong> a) 2/3 · b) 2/5 · c) 3/5</div>
+              <div class="mf-corrige-item"><strong>Ex. 2 :</strong> a) 2/6 + 1/6 = 3/6 = 1/2 · b) 4/10 + 1/10 = 5/10 = 1/2</div>
+              <div class="mf-corrige-item"><strong>Ex. 4 (Cailler) :</strong> 2/5 × 180 = 72 lait · 1/3 × 180 = 60 noires · 180 − 72 − 60 = 48 blanches</div>
+              <div class="mf-corrige-item"><strong>Ex. 5 :</strong> a) Faux (9/12 < 10/12) · b) Vrai · c) Faux (5/6 ≠ 2/5)</div>
+              <div class="mf-corrige-item"><strong>Ex. 7 :</strong> 3/4 × 2/3 = 6/12 = 1/2 kg de farine</div>
+              <div class="mf-corrige-item"><strong>Quiz :</strong> 1. 12 · 2. PGDC · 3. 75 · 4. Vrai</div>
+            </div>
+
+            <!-- FICHE OUTIL -->
+            <div class="mf-tool-sheet" data-annot="outil">
+              <div class="mf-tool-head">📌 Fiche outil — Les fractions</div>
+              <div class="mf-tool-item"><strong>Addition/Soustraction :</strong> Même dénominateur obligatoire → trouver le PPCM</div>
+              <div class="mf-tool-item"><strong>Multiplication :</strong> Numérateur × numérateur / Dénominateur × dénominateur</div>
+              <div class="mf-tool-item"><strong>Division :</strong> Multiplier par l'inverse (a/b ÷ c/d = a/b × d/c)</div>
+              <div class="mf-tool-item"><strong>Simplifier :</strong> Diviser numérateur et dénominateur par leur PGDC</div>
+              <div class="mf-tool-item"><strong>Comparer :</strong> Mettre au même dénominateur, puis comparer les numérateurs</div>
+              <div class="mf-tool-item"><strong>Fraction d'un nombre :</strong> 3/4 de 80 = 3 × 80 ÷ 4 = 60</div>
+            </div>
+
             <div class="mf-footer">Généré par <strong>Neoskool</strong> · Dual coding · Desirable difficulties · Transfer · Gamification</div>
           </div>
         </div>
 
-      </div>
-      <!-- Scroll affordance -->
-      <div class="mf-scroll-fade" id="mf-scroll-fade">
-        <div class="mf-scroll-hint" onclick="document.getElementById('mf-scroll-area').scrollBy({top:200,behavior:'smooth'})">
-          Défile pour voir toute la fiche
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
         </div>
-      </div>
+        <!-- Scroll affordance -->
+        <div class="mf-scroll-fade" id="mf-scroll-fade">
+          <div class="mf-scroll-hint" onclick="document.getElementById('mf-scroll-area').scrollBy({top:200,behavior:'smooth'})">
+            Défile pour voir toute la fiche
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1468,17 +1685,95 @@ function switchSubject(subject, btn) {
   if (sa) sa.scrollTop = 0;
   const fade = document.getElementById('mf-scroll-fade');
   if (fade) fade.classList.remove('hidden');
+  // Reset and re-trigger annotations
+  document.querySelectorAll('.fiche-annot').forEach(a => a.classList.remove('visible'));
+  // Re-trigger XP animation for new subject
+  setTimeout(() => {
+    animateXPBars();
+    updateAnnotations();
+  }, 100);
 }
-// Scroll fade: hide when near bottom
+
+// ==================== XP BAR ANIMATION ====================
+function animateXPBars() {
+  const active = document.querySelector('.mini-fiche.active');
+  if (!active) return;
+  active.querySelectorAll('.mf-xp-fill').forEach(bar => {
+    const target = bar.getAttribute('data-width') || '0';
+    bar.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bar.style.width = target + '%';
+      });
+    });
+  });
+}
+
+// ==================== ANNOTATION INTERSECTION OBSERVER ====================
+function updateAnnotations() {
+  const sa = document.getElementById('mf-scroll-area');
+  const active = document.querySelector('.mini-fiche.active');
+  if (!sa || !active) return;
+
+  const sections = active.querySelectorAll('[data-annot]');
+  const saRect = sa.getBoundingClientRect();
+  const saTop = saRect.top;
+  const saBottom = saRect.bottom;
+
+  sections.forEach(section => {
+    const key = section.getAttribute('data-annot');
+    const annot = document.querySelector('.fiche-annot[data-section="' + key + '"]');
+    if (!annot) return;
+
+    const rect = section.getBoundingClientRect();
+    // Section is visible if it overlaps the scroll area viewport
+    const visible = rect.top < saBottom - 30 && rect.bottom > saTop + 30;
+
+    if (visible) {
+      annot.classList.add('visible');
+      // Position annotation vertically relative to the showcase container
+      const showcase = document.querySelector('.fiche-showcase');
+      if (showcase) {
+        const showcaseRect = showcase.getBoundingClientRect();
+        const sectionMid = ((rect.top + rect.bottom) / 2) - showcaseRect.top;
+        const pct = (sectionMid / showcaseRect.height) * 100;
+        annot.style.top = Math.max(2, Math.min(95, pct)) + '%';
+      }
+    } else {
+      annot.classList.remove('visible');
+    }
+  });
+}
+
+// Scroll fade: hide when near bottom + update annotations on scroll
 (function(){
   const sa = document.getElementById('mf-scroll-area');
   const fade = document.getElementById('mf-scroll-fade');
-  if (sa && fade) {
+  if (sa) {
     sa.addEventListener('scroll', function() {
-      const nearBottom = sa.scrollTop + sa.clientHeight >= sa.scrollHeight - 40;
-      fade.classList.toggle('hidden', nearBottom);
+      if (fade) {
+        const nearBottom = sa.scrollTop + sa.clientHeight >= sa.scrollHeight - 40;
+        fade.classList.toggle('hidden', nearBottom);
+      }
+      updateAnnotations();
     });
   }
+})();
+
+// Trigger XP + initial annotations when showcase enters viewport
+(function(){
+  const showcase = document.querySelector('.fiche-showcase');
+  if (!showcase) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateXPBars();
+        setTimeout(updateAnnotations, 200);
+        obs.unobserve(showcase);
+      }
+    });
+  }, { threshold: 0.15 });
+  obs.observe(showcase);
 })();
 
 // ==================== SCIENCE ORBIT POPOVER ====================
