@@ -39,16 +39,16 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 /* ===== HERO ===== */
 .hero{min-height:100vh;position:relative;overflow:hidden;background:var(--warm);display:flex;flex-direction:column}
 .hero-paper{position:absolute;inset:0;background-image:linear-gradient(var(--sketch) 1px,transparent 1px),linear-gradient(90deg,var(--sketch) 1px,transparent 1px);background-size:36px 36px;mask-image:radial-gradient(ellipse 70% 65% at 50% 50%,black 30%,transparent 100%);-webkit-mask-image:radial-gradient(ellipse 70% 65% at 50% 50%,black 30%,transparent 100%)}
-.hero-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 2rem 0;position:relative;z-index:2;text-align:center}
+.hero-main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem 2rem 2rem;position:relative;z-index:2;text-align:center}
 .hero h1{font-size:clamp(2rem,4.2vw,3rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:.5rem;animation:fadeUp .6s ease-out}
 .hero-underline{position:relative}
 .hero-underline::after{content:'';position:absolute;bottom:1px;left:0;right:0;height:3px;background:var(--v-600);border-radius:2px;opacity:.4;transform:rotate(-.5deg)}
 .hero h1 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--v-600);position:relative;display:inline-block;font-size:1.2em;text-transform:uppercase;letter-spacing:.01em;-webkit-text-stroke:1.5px var(--v-600);paint-order:stroke fill}
 .hero h1 em::after{content:'';position:absolute;bottom:2px;left:-6px;right:-6px;height:40%;background:linear-gradient(to right,rgba(250,204,21,0.3),rgba(250,204,21,0.4),rgba(250,204,21,0.25));border-radius:2px;z-index:-1;transform:rotate(-.5deg) skewX(-1deg)}
-.hero-sub{font-size:1.1rem;font-weight:600;line-height:1.5;color:var(--ink-muted);margin-bottom:2.5rem;animation:fadeUp .6s ease-out .1s both;letter-spacing:.01em}
+.hero-sub{font-size:1.1rem;font-weight:600;line-height:1.5;color:var(--ink-muted);margin-bottom:1.5rem;animation:fadeUp .6s ease-out .1s both;letter-spacing:.01em}
 
 /* Note (grade card) */
-.note-wrap{position:relative;margin-bottom:2.5rem;animation:fadeUp .6s ease-out .2s both}
+.note-wrap{position:relative;margin-bottom:1.5rem;animation:fadeUp .6s ease-out .2s both}
 .note-wrap:hover .note{transform:rotate(.5deg) scale(1.02)}
 .tape{width:80px;height:26px;margin:0 auto -6px;background:linear-gradient(180deg,rgba(255,235,170,0.6),rgba(255,220,130,0.45));border-radius:1px;box-shadow:0 1px 2px rgba(0,0,0,0.04);position:relative;z-index:3}
 .tape::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 4px,rgba(255,255,255,0.12) 4px,rgba(255,255,255,0.12) 5px)}
@@ -67,7 +67,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 .note-wave{width:85px;height:5px;margin:.15rem auto 0;border-bottom:2px wavy var(--red);opacity:.15;position:relative;z-index:1}
 
 /* Hero CTA */
-.hero-cta{animation:fadeUp .6s ease-out .3s both;margin-bottom:2rem}
+.hero-cta{animation:fadeUp .6s ease-out .3s both}
 .btn-primary{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2.5rem;background:var(--v-600);color:white;font-family:inherit;font-size:1.05rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:all .3s;text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,0.05),0 4px 20px rgba(124,58,237,0.2)}
 .btn-primary:hover{background:var(--v-700);transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.3)}
 .btn-primary svg{width:18px;height:18px;opacity:.8}
