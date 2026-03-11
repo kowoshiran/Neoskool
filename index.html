@@ -2107,6 +2107,38 @@ const chapitresAllemand = {
   ]
 };
 
+const chapitresAnglais = {
+  '9H': [
+    { value: '1', label: 'Unit 1 — Free time (routines, hobbies)' },
+    { value: '2', label: 'Unit 2 — Helping out (family, housework)' },
+    { value: '3', label: 'Unit 3 — Fashion (clothes, shopping)' },
+    { value: '4', label: 'Unit 4 — World of music (music, past: was/were)' },
+    { value: '5', label: 'Unit 5 — Heroes (past simple: regular verbs)' },
+    { value: '6', label: 'Unit 6 — Then and now (comparatives, directions)' },
+    { value: '7', label: 'Unit 7 — Inventions (past simple: irregular verbs)' },
+    { value: '8', label: 'Unit 8 — Sporting extremes (superlatives, sports)' }
+  ],
+  '10H': [
+    { value: '1', label: 'Unit 1 — Learning languages (comparatives, opinions)' },
+    { value: '2', label: 'Unit 2 — Holiday time (travel plans, requests)' },
+    { value: '3', label: 'Unit 3 — Working world (obligations, jobs)' },
+    { value: '4', label: 'Unit 4 — Eat for life (food, quantities, recipes)' },
+    { value: '5', label: 'Unit 5 — Into the future (predictions with will)' },
+    { value: '6', label: 'Unit 6 — Survival (past continuous, weather)' },
+    { value: '7', label: 'Unit 7 — Good intentions (going to, phrasal verbs)' },
+    { value: '8', label: 'Unit 8 — How brave! (first conditional, personality)' }
+  ],
+  '11H': [
+    { value: '1', label: "Unit 1 — Travellers' tales (advice, directions)" },
+    { value: '2', label: 'Unit 2 — Champions (comparisons, adverbs, health)' },
+    { value: '3', label: 'Unit 3 — Our planet (environment, may/might)' },
+    { value: '4', label: 'Unit 4 — Growing up (modals, had better, feelings)' },
+    { value: '5', label: 'Unit 5 — Great idea! (passive, past continuous)' },
+    { value: '6', label: "Unit 6 — It's a crazy world! (present perfect)" },
+    { value: '7', label: 'Unit 7 — New world (question tags, 2nd conditional)' },
+    { value: '8', label: "Unit 8 — That's entertainment! (pres. perf. continuous)" }
+  ]
+};
 
 // ==================== DOMAINES / SOUS-THEMES FRANCAIS ====================
 const domainesFrancais = [
@@ -2309,6 +2341,15 @@ function updateDynamicFields() {
     chapitreGroup.style.display = 'flex';
     chapitreSelect.innerHTML = '<option value="">Tous les chapitres</option>';
     chapitresAllemand[degreKey].forEach(ch => {
+      const opt = document.createElement('option');
+      opt.value = ch.value;
+      opt.textContent = ch.label;
+      chapitreSelect.appendChild(opt);
+    });
+  } else if (matVal === 'Anglais' && chapitresAnglais[degreKey]) {
+    chapitreGroup.style.display = 'flex';
+    chapitreSelect.innerHTML = '<option value="">All units</option>';
+    chapitresAnglais[degreKey].forEach(ch => {
       const opt = document.createElement('option');
       opt.value = ch.value;
       opt.textContent = ch.label;
@@ -2891,6 +2932,12 @@ function wizBuildStep4() {
   if (mat === 'Allemand' && isCycle3 && typeof chapitresAllemand !== 'undefined' && chapitresAllemand[deg]) {
     let html = '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Chapitre</div><select class="wiz-select" id="wiz-chapitre"><option value="">Tous les chapitres</option>';
     chapitresAllemand[deg].forEach(ch => { html += '<option value="'+ch.value+'">'+ch.label+'</option>'; });
+    html += '</select></div>';
+    ctx.innerHTML = html;
+  }
+  if (mat === 'Anglais' && isCycle3 && typeof chapitresAnglais !== 'undefined' && chapitresAnglais[deg]) {
+    let html = '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Unit</div><select class="wiz-select" id="wiz-chapitre"><option value="">All units</option>';
+    chapitresAnglais[deg].forEach(ch => { html += '<option value="'+ch.value+'">'+ch.label+'</option>'; });
     html += '</select></div>';
     ctx.innerHTML = html;
   }

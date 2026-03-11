@@ -8,6 +8,9 @@ import { block2 as maths11H } from '../prompts/maths-11H.js';
 import { block2 as francais9H } from '../prompts/francais-9H.js';
 import { block2 as francais10H } from '../prompts/francais-10H.js';
 import { block2 as francais11H } from '../prompts/francais-11H.js';
+import { block2 as anglais9H } from '../prompts/anglais-9H.js';
+import { block2 as anglais10H } from '../prompts/anglais-10H.js';
+import { block2 as anglais11H } from '../prompts/anglais-11H.js';
 
 // Prompt lookup table
 const PROMPTS = {
@@ -20,6 +23,9 @@ const PROMPTS = {
   'francais-9H': francais9H,
   'francais-10H': francais10H,
   'francais-11H': francais11H,
+  'anglais-9H': anglais9H,
+  'anglais-10H': anglais10H,
+  'anglais-11H': anglais11H,
 };
 
 // Normalize matiere for lookup
