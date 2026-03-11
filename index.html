@@ -261,53 +261,36 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 .step-card p{font-size:.9rem;color:var(--ink-muted);line-height:1.6}
 .step-tag{display:inline-block;margin-top:.75rem;font-size:.75rem;font-weight:700;color:var(--v-500);background:var(--v-50);padding:4px 12px;border-radius:100px}
 
-/* ===== SCIENCE TIMELINE (Bloc 3) ===== */
-.science{padding:6rem 2rem 5rem;background:#1a1a2e;position:relative;overflow:hidden}
-.science::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,0.15) 0%,transparent 60%);pointer-events:none}
-.science-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
-.science-header{text-align:center;margin-bottom:4.5rem}
-.science-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--v-400);margin-bottom:1rem}
-.science-eyebrow::before,.science-eyebrow::after{content:'';width:24px;height:1.5px;background:var(--v-400);opacity:.3}
-.science-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:white;letter-spacing:-.04em;line-height:1.15;margin-bottom:.75rem}
-.science-sub{font-size:1.05rem;color:rgba(255,255,255,0.5);font-weight:500}
-.timeline{position:relative;display:flex;flex-direction:column;gap:0}
-.timeline-line{position:absolute;top:0;left:50%;width:3px;height:0;transform:translateX(-50%);background:linear-gradient(180deg,var(--v-600),var(--v-400),rgba(167,139,250,0.2));border-radius:3px;box-shadow:0 0 15px rgba(124,58,237,0.4),0 0 40px rgba(124,58,237,0.15)}
-.tl-item{display:flex;align-items:center;gap:0;position:relative;min-height:120px}
-.tl-item.left{flex-direction:row}
-.tl-item.right{flex-direction:row-reverse}
-.tl-card{width:calc(50% - 40px);opacity:0;transition:all .6s cubic-bezier(.16,1,.3,1)}
-.tl-item.left .tl-card{transform:translateX(-40px);text-align:right}
-.tl-item.right .tl-card{transform:translateX(40px);text-align:left}
-.tl-card.visible{opacity:1;transform:translateX(0)!important}
-.tl-dot-wrap{width:80px;display:flex;justify-content:center;flex-shrink:0;position:relative;z-index:2}
-.tl-dot{width:16px;height:16px;border-radius:50%;background:#1a1a2e;border:3px solid rgba(124,58,237,0.3);transition:all .5s;box-shadow:0 0 0 0 rgba(124,58,237,0)}
-.tl-dot.active{border-color:var(--v-500);box-shadow:0 0 20px rgba(124,58,237,0.5),0 0 40px rgba(124,58,237,0.2)}
-.tl-dot.active::after{content:'';position:absolute;inset:3px;border-radius:50%;background:var(--v-500)}
-.tl-spacer{width:calc(50% - 40px)}
-.tl-number{font-size:2.6rem;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:.4rem;background:linear-gradient(135deg,var(--v-400),#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.tl-desc{font-size:.88rem;color:rgba(255,255,255,0.7);font-weight:600;line-height:1.5;margin-bottom:.4rem}
-.tl-source{font-size:.65rem;color:rgba(255,255,255,0.22);font-weight:500;font-style:italic}
-.synth{text-align:center;margin:4rem 0 3.5rem;padding:1.5rem 0}
-.synth-text{font-size:1.15rem;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:.02em}
-.synth-text strong{color:var(--v-400)}
-.graph-wrap{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:24px;padding:2.5rem;position:relative;max-width:700px;margin:0 auto}
-.graph-title{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.3);margin-bottom:1.5rem;text-align:center}
-.graph-svg{width:100%;height:200px;display:block}
-.graph-legend{display:flex;justify-content:center;gap:2rem;margin-top:1.5rem}
-.legend-item{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:600}
-.legend-dot{width:10px;height:10px;border-radius:50%}
-.legend-classic .legend-dot{background:rgba(255,255,255,0.2)}
-.legend-classic{color:rgba(255,255,255,0.3)}
-.legend-neo .legend-dot{background:var(--v-500)}
-.legend-neo{color:var(--v-400)}
-.curve-classic,.curve-neo{stroke-dasharray:500;stroke-dashoffset:500;transition:stroke-dashoffset 1.5s cubic-bezier(.16,1,.3,1)}
-.graph-wrap.visible .curve-classic{stroke-dashoffset:0;transition-delay:.2s}
-.graph-wrap.visible .curve-neo{stroke-dashoffset:0;transition-delay:.5s}
-.area-neo{opacity:0;transition:opacity 1s ease .6s}
-.graph-wrap.visible .area-neo{opacity:1}
-.grid-line{stroke:rgba(255,255,255,0.04);stroke-width:1}
-.end-dot{opacity:0;transition:opacity .4s ease .8s}
-.graph-wrap.visible .end-dot{opacity:1}
+/* ===== DIFFERENCE BLOC (Bloc 3) ===== */
+.diff{padding:6rem 2rem;background:var(--surface);position:relative}
+.diff-inner{max-width:900px;margin:0 auto}
+.diff-header{text-align:center;margin-bottom:4rem}
+.diff-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--v-500);margin-bottom:1rem}
+.diff-eyebrow::before,.diff-eyebrow::after{content:'';width:24px;height:1.5px;background:var(--v-400);opacity:.4}
+.diff-title{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--ink);letter-spacing:-.04em;line-height:1.15;margin-bottom:.75rem}
+.diff-title em{font-style:normal;color:var(--v-600)}
+.feat-list{display:flex;flex-direction:column;gap:1.5rem}
+.feat-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:20px;overflow:hidden;border:1.5px solid var(--border);background:white;transition:all .5s cubic-bezier(.16,1,.3,1);opacity:0;transform:translateY(30px)}
+.feat-row.visible{opacity:1;transform:translateY(0)}
+.feat-row:hover{border-color:var(--v-200);box-shadow:0 12px 40px rgba(124,58,237,0.08)}
+.feat-what{padding:2rem 2.5rem;display:flex;flex-direction:column;justify-content:center;position:relative}
+.feat-what::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:1px;background:var(--border)}
+.feat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:1.2rem;flex-shrink:0}
+.feat-icon.green{background:#d1fae5;color:#059669}
+.feat-icon.blue{background:#dbeafe;color:#2563eb}
+.feat-icon.orange{background:#fef3c7;color:#d97706}
+.feat-icon.pink{background:#ffe4e6;color:#e11d48}
+.feat-icon.purple{background:var(--v-50);color:var(--v-600)}
+.feat-icon.teal{background:#ccfbf1;color:#0d9488}
+.feat-label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-muted);margin-bottom:.35rem}
+.feat-name{font-size:1.1rem;font-weight:800;color:var(--ink);letter-spacing:-.02em;line-height:1.3}
+.feat-result{padding:2rem 2.5rem;display:flex;align-items:center;gap:1.25rem;background:linear-gradient(135deg,var(--v-50) 0%,#faf9ff 100%)}
+.feat-number{font-size:2.4rem;font-weight:900;letter-spacing:-.04em;line-height:1;color:var(--v-600);flex-shrink:0}
+.feat-desc{font-size:.92rem;color:var(--ink);font-weight:600;line-height:1.5}
+.feat-desc strong{color:var(--v-600)}
+.diff-bottom{text-align:center;margin-top:3.5rem;padding-top:2rem}
+.diff-bottom-text{font-size:1.05rem;font-weight:700;color:var(--ink-muted)}
+.diff-bottom-text strong{color:var(--v-600)}
 
 /* ===== TESTIMONIALS ===== */
 .testimonials{padding:6rem 2rem;background:var(--surface-raised)}
@@ -575,18 +558,15 @@ body.has-auth-bar .navbar{top:36px}
   .note-comment{font-size:1.3rem}
   .proof-item{padding:0 .75rem}
   .proof-text{font-size:.72rem}
-  .tl-item.left,.tl-item.right{flex-direction:row}
-  .tl-item.left .tl-card,.tl-item.right .tl-card{text-align:left;transform:translateX(-30px)}
-  .tl-card.visible{transform:translateX(0)!important}
-  .tl-dot-wrap{width:50px}
-  .tl-spacer{display:none}
-  .tl-card{width:calc(100% - 50px)}
-  .timeline-line{left:25px}
-  .tl-number{font-size:2rem}
+  .feat-row{grid-template-columns:1fr}
+  .feat-what::after{display:none}
+  .feat-what{padding:1.5rem 1.5rem .75rem}
+  .feat-result{padding:1rem 1.5rem 1.5rem}
+  .feat-number{font-size:1.8rem}
   .t-grid{grid-template-columns:1fr}
   .cta-box{padding:3rem 1.5rem;border-radius:24px}
 }
-@media print{.navbar,.hero,.mid-cta,.compare,.how,.science,.testimonials,.cta,.preview,.sciences,.pricing,.generator,.footer-main,.cinema-container,.celebration-bar,.auth-bar,.email-modal-overlay{display:none!important}.result-section{display:block!important;padding:0}.result-section .result-iframe{filter:none;opacity:1}}
+@media print{.navbar,.hero,.mid-cta,.compare,.how,.diff,.testimonials,.cta,.preview,.sciences,.pricing,.generator,.footer-main,.cinema-container,.celebration-bar,.auth-bar,.email-modal-overlay{display:none!important}.result-section{display:block!important;padding:0}.result-section .result-iframe{filter:none;opacity:1}}
 
 /* ==================== WIZARD ==================== */
 .wiz-progress{display:flex;align-items:center;gap:0;margin-bottom:2rem;padding:0 1rem;max-width:680px;margin-left:auto;margin-right:auto}
@@ -1210,71 +1190,83 @@ body.has-auth-bar{padding-top:36px}
   </div>
 </section>
 
-<!-- SCIENCE TIMELINE -->
-<section class="science" id="science">
-  <div class="science-inner">
-    <div class="science-header">
-      <div class="science-eyebrow">10 principes scientifiques</div>
-      <h2 class="science-title">Développé par les sciences de l'apprentissage</h2>
-      <p class="science-sub">Des exercices motivants, des élèves souriants</p>
+<!-- CE QUI CHANGE TOUT -->
+<section class="diff" id="science">
+  <div class="diff-inner">
+    <div class="diff-header">
+      <div class="diff-eyebrow">Ce qui change tout</div>
+      <h2 class="diff-title">Chaque fiche est un <em>parcours complet</em></h2>
     </div>
-    <div class="timeline" id="timeline">
-      <div class="timeline-line" id="timeline-line"></div>
-      <div class="tl-item left">
-        <div class="tl-card"><div class="tl-number">x2.3</div><div class="tl-desc">de mémorisation quand on apprend avec des visuels et du texte</div><div class="tl-source">Paivio, Dual Coding Theory — 10 000+ études</div></div>
-        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-        <div class="tl-spacer"></div>
+    <div class="feat-list">
+      <div class="feat-row">
+        <div class="feat-what">
+          <div class="feat-icon pink"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div class="feat-label">Dans chaque fiche</div>
+          <div class="feat-name">Un pré-test pour cibler les lacunes</div>
+        </div>
+        <div class="feat-result">
+          <div class="feat-number">+80%</div>
+          <div class="feat-desc">de rétention quand l'élève <strong>se teste avant d'apprendre</strong></div>
+        </div>
       </div>
-      <div class="tl-item right">
-        <div class="tl-card"><div class="tl-number">+200%</div><div class="tl-desc">de rétention quand on révise au bon moment au lieu de tout bachoter</div><div class="tl-source">Ebbinghaus, Spaced Repetition — méta-analyse</div></div>
-        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-        <div class="tl-spacer"></div>
+      <div class="feat-row">
+        <div class="feat-what">
+          <div class="feat-icon green"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="feat-label">Dans chaque fiche</div>
+          <div class="feat-name">3 niveaux de difficulté progressive</div>
+        </div>
+        <div class="feat-result">
+          <div class="feat-number">72%</div>
+          <div class="feat-desc">de réussite quand l'élève <strong>progresse à son rythme</strong>, contre 38% sans</div>
+        </div>
       </div>
-      <div class="tl-item left">
-        <div class="tl-card"><div class="tl-number">+89%</div><div class="tl-desc">de résultats quand apprendre devient un jeu</div><div class="tl-source">Frontiers in Psychology, 2023 — méta-analyse, 41 études</div></div>
-        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-        <div class="tl-spacer"></div>
+      <div class="feat-row">
+        <div class="feat-what">
+          <div class="feat-icon blue"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="feat-label">Dans chaque fiche</div>
+          <div class="feat-name">Schémas, couleurs et arbres de décision</div>
+        </div>
+        <div class="feat-result">
+          <div class="feat-number">x2.3</div>
+          <div class="feat-desc">de mémorisation quand <strong>visuels et texte</strong> travaillent ensemble</div>
+        </div>
       </div>
-      <div class="tl-item right">
-        <div class="tl-card"><div class="tl-number">72%</div><div class="tl-desc">de réussite en mélangeant les types d'exercices, contre 38% sans</div><div class="tl-source">Nature, npj Science of Learning — maths, physique</div></div>
-        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-        <div class="tl-spacer"></div>
+      <div class="feat-row">
+        <div class="feat-what">
+          <div class="feat-icon orange"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <div class="feat-label">Dans chaque fiche</div>
+          <div class="feat-name">Un corrigé qui explique chaque erreur</div>
+        </div>
+        <div class="feat-result">
+          <div class="feat-number">+30 pts</div>
+          <div class="feat-desc">de progression quand l'élève <strong>comprend pourquoi</strong> il s'est trompé</div>
+        </div>
       </div>
-      <div class="tl-item left">
-        <div class="tl-card"><div class="tl-number">+30 pts</div><div class="tl-desc">de progression quand chaque erreur est expliquée</div><div class="tl-source">Hattie & Timperley — Review of Educational Research</div></div>
-        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-        <div class="tl-spacer"></div>
+      <div class="feat-row">
+        <div class="feat-what">
+          <div class="feat-icon purple"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="feat-label">Dans chaque fiche</div>
+          <div class="feat-name">XP, badges et missions</div>
+        </div>
+        <div class="feat-result">
+          <div class="feat-number">+89%</div>
+          <div class="feat-desc">de résultats quand <strong>apprendre devient un jeu</strong></div>
+        </div>
       </div>
-      <div class="tl-item right">
-        <div class="tl-card"><div class="tl-number">+7 mois</div><div class="tl-desc">d'avance scolaire grâce à la métacognition</div><div class="tl-source">Education Endowment Foundation — effet 0.69 à 0.92</div></div>
-        <div class="tl-dot-wrap"><div class="tl-dot"></div></div>
-        <div class="tl-spacer"></div>
+      <div class="feat-row">
+        <div class="feat-what">
+          <div class="feat-icon teal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+          <div class="feat-label">Dans chaque fiche</div>
+          <div class="feat-name">Auto-évaluation et fiche outil</div>
+        </div>
+        <div class="feat-result">
+          <div class="feat-number">+7 mois</div>
+          <div class="feat-desc">d'avance scolaire quand l'élève <strong>sait où il en est</strong></div>
+        </div>
       </div>
     </div>
-    <div class="synth">
-      <div class="synth-text"><strong>10 principes</strong> intégrés dans <strong>chaque fiche</strong>, pour <strong>chaque élève</strong>.</div>
-    </div>
-    <div class="graph-wrap" id="graph">
-      <div class="graph-title">Progression des résultats dans le temps</div>
-      <svg class="graph-svg" viewBox="0 0 500 200" preserveAspectRatio="none">
-        <line class="grid-line" x1="0" y1="50" x2="500" y2="50"/>
-        <line class="grid-line" x1="0" y1="100" x2="500" y2="100"/>
-        <line class="grid-line" x1="0" y1="150" x2="500" y2="150"/>
-        <path class="area-neo" d="M0,170 C80,160 150,130 220,100 C290,70 360,40 500,20 L500,200 L0,200 Z" fill="url(#grad-neo)" opacity=".15"/>
-        <defs>
-          <linearGradient id="grad-neo" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#7c3aed" stop-opacity=".4"/>
-            <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <path class="curve-classic" d="M0,170 C100,168 200,162 300,158 C400,154 450,150 500,148" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2.5" stroke-linecap="round"/>
-        <path class="curve-neo" d="M0,170 C80,160 150,130 220,100 C290,70 360,40 500,20" fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linecap="round"/>
-        <circle cx="500" cy="20" r="5" fill="#8b5cf6" class="end-dot"/>
-      </svg>
-      <div class="graph-legend">
-        <div class="legend-item legend-classic"><div class="legend-dot"></div>Méthode classique</div>
-        <div class="legend-item legend-neo"><div class="legend-dot"></div>Avec Neoskool</div>
-      </div>
+    <div class="diff-bottom">
+      <div class="diff-bottom-text"><strong>10 principes scientifiques</strong> intégrés dans chaque fiche. Pas un de plus, pas un de moins.</div>
     </div>
   </div>
 </section>
@@ -1728,75 +1720,22 @@ function updateAnnotations() {
   obs.observe(showcase);
 })();
 
-// ==================== SCIENCE TIMELINE (scroll-driven) ====================
+// ==================== DIFFERENCE BLOC (scroll reveal) ====================
 (function(){
-  const timeline = document.getElementById('timeline');
-  const tlLine = document.getElementById('timeline-line');
-  const graphWrap = document.getElementById('graph');
-  const synthEl = document.querySelector('.synth');
-  if (!timeline || !tlLine) return;
-
-  const tlItems = timeline.querySelectorAll('.tl-item');
-
-  // Init synth transition
-  if (synthEl) {
-    synthEl.style.transition = 'opacity .6s ease, transform .6s ease';
-    synthEl.style.opacity = '0';
-    synthEl.style.transform = 'translateY(20px)';
-  }
-
-  function onTimelineScroll() {
-    const winH = window.innerHeight;
-    const tlRect = timeline.getBoundingClientRect();
-
-    // Line height follows scroll
-    const tlStart = tlRect.top - winH * 0.8;
-    const tlEnd = tlRect.bottom - winH * 0.4;
-    const tlRange = tlEnd - tlStart;
-    var lineProgress = tlRange > 0 ? Math.max(0, Math.min(1, -tlStart / tlRange)) : 0;
-    tlLine.style.height = (lineProgress * 100) + '%';
-
-    // Cards & dots
-    tlItems.forEach(function(item) {
-      var card = item.querySelector('.tl-card');
-      var dot = item.querySelector('.tl-dot');
-      var itemRect = item.getBoundingClientRect();
-      var itemCenter = itemRect.top + itemRect.height / 2;
-      if (itemCenter < winH * 0.75) {
-        card.classList.add('visible');
-        dot.classList.add('active');
+  const featRows = document.querySelectorAll('.feat-row');
+  if (!featRows.length) return;
+  function checkFeatRows() {
+    var winH = window.innerHeight;
+    featRows.forEach(function(row) {
+      if (row.getBoundingClientRect().top < winH * 0.8) {
+        row.classList.add('visible');
       } else {
-        card.classList.remove('visible');
-        dot.classList.remove('active');
+        row.classList.remove('visible');
       }
     });
-
-    // Synth text
-    if (synthEl) {
-      var synthRect = synthEl.getBoundingClientRect();
-      if (synthRect.top < winH * 0.85) {
-        synthEl.style.opacity = '1';
-        synthEl.style.transform = 'translateY(0)';
-      } else {
-        synthEl.style.opacity = '0';
-        synthEl.style.transform = 'translateY(20px)';
-      }
-    }
-
-    // Graph
-    if (graphWrap) {
-      var graphRect = graphWrap.getBoundingClientRect();
-      if (graphRect.top < winH * 0.8) {
-        graphWrap.classList.add('visible');
-      } else {
-        graphWrap.classList.remove('visible');
-      }
-    }
   }
-
-  window.addEventListener('scroll', onTimelineScroll, { passive: true });
-  window.addEventListener('resize', onTimelineScroll, { passive: true });
-  onTimelineScroll();
+  window.addEventListener('scroll', checkFeatRows, { passive: true });
+  checkFeatRows();
 })();
 
 // ==================== SUPABASE AUTH ====================
