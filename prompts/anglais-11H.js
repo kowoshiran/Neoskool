@@ -40,6 +40,7 @@ Quand la matière est ANGLAIS :
 - Éléments culturels anglophones (UK, US, Australie, Caribbean, etc. selon les chapitres)
 - Erreurs typiques francophones (faux amis, present perfect vs past simple, conditionals, passive, question tags)
 - Structures grammaticales signalées mais pas cours de grammaire
+- APPROCHES INTERLINGUISTIQUES (PER L37) : l'anglais est la 3e langue apprise (après français et allemand). Quand c'est pertinent, fais des ponts entre les langues : faux amis (actually ≠ actuellement, library ≠ librairie, eventually ≠ éventuellement, sensible ≠ sensible), mots transparents, racines communes, emprunts. En 11H les élèves ont assez de recul pour des observations plus fines (ex: why "I have been living" ≠ "j'ai vécu"). Ne pas en faire un cours — juste des micro-remarques naturelles dans les exercices ou les aides 💡.
 - LEARNING STRATEGIES : chaque unité développe des compétences transversales (Using bullet points, Making writing more interesting, Keeping a conversation going, Doing true/false tasks, Getting ready to speak, Listening for key words, Answering multiple-choice questions). Intègre subtilement ces stratégies quand c'est pertinent.
 - 11H PRÉPARATION AUX EXAMENS : pour les VP, les exercices peuvent inclure des formats proches des examens cantonaux (compréhension écrite, production écrite guidée, exercices grammaticaux ciblés).
 
@@ -100,7 +101,7 @@ Structures disponibles par unité (cumulatif avec tout le 9H-10H) :
 
 UNIT 1 : + Present tenses revision (simple vs continuous), What + be + like?, Prepositions of movement (across, through, over, into, onto, past, etc.), should/shouldn't for advice
 UNIT 2 : + Comparatives and superlatives revision approfondie, Adverbs of manner (-ly), as...as comparisons
-UNIT 3 : + will/won't revision, First conditional revision, may/might for possibility
+UNIT 3 : + will/won't revision, First conditional revision, Zero conditional (if + present → present, pour les vérités générales : "If you heat water, it boils"), may/might for possibility
 UNIT 4 : + Modal verbs revision (must/have to/can/should), had better, will vs going to (contrast), -ed vs -ing adjectives (interested/interesting)
 UNIT 5 : + Past simple vs past continuous (contrast approfondi), Passive voice (present and past), Phrases with get
 UNIT 6 : + Present perfect (have/has + past participle), Present perfect vs past simple (contrast), been vs gone

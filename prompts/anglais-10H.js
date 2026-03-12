@@ -40,6 +40,7 @@ Quand la matière est ANGLAIS :
 - Éléments culturels anglophones (UK, US, Australie, etc. selon les chapitres)
 - Erreurs typiques francophones (faux amis, order of adjectives, present simple vs continuous, articles, prepositions, will vs going to)
 - Structures grammaticales signalées mais pas cours de grammaire
+- APPROCHES INTERLINGUISTIQUES (PER L37) : l'anglais est la 3e langue apprise (après français et allemand). Quand c'est pertinent, fais des ponts entre les langues : faux amis (actually ≠ actuellement, library ≠ librairie, eventually ≠ éventuellement), mots transparents (telephone, restaurant, information), racines communes, emprunts. Cela aide la mémorisation et évite les erreurs typiques. Ne pas en faire un cours — juste des micro-remarques naturelles dans les exercices ou les aides 💡.
 - LEARNING STRATEGIES : chaque unité développe des compétences transversales (Understanding gist, Answering specific information questions, Using connectors, Using sequencing words, etc.). Intègre subtilement ces stratégies quand c'est pertinent.
 
 === TYPES D'EXERCICES RECOMMANDÉS — ANGLAIS ===
