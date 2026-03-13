@@ -336,13 +336,17 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
           <span class="dash-account-label">Membre depuis</span>
           <span class="dash-account-value" id="account-since">—</span>
         </div>
+        <div class="dash-account-row" id="account-provider-row" style="display:none">
+          <span class="dash-account-label">Connexion via</span>
+          <span class="dash-account-value" id="account-provider">—</span>
+        </div>
         <div class="dash-account-row">
-          <span class="dash-account-label">Mot de passe</span>
-          <button class="dash-btn dash-btn-ghost dash-btn-sm" onclick="showChangePassword()">Modifier</button>
+          <span class="dash-account-label" id="password-label">Mot de passe</span>
+          <button class="dash-btn dash-btn-ghost dash-btn-sm" id="password-btn" onclick="showChangePassword()">Modifier</button>
         </div>
         <div id="password-form" style="display:none;margin-top:1rem">
           <div class="dash-field" style="margin-bottom:.75rem">
-            <label>Nouveau mot de passe</label>
+            <label id="password-field-label">Nouveau mot de passe</label>
             <input type="password" id="new-password" placeholder="Minimum 6 caractères">
           </div>
           <div style="display:flex;gap:.5rem">
@@ -597,6 +601,22 @@ async function loadPlan() {
   document.getElementById('account-email').textContent = currentUser.email;
   const since = new Date(currentUser.created_at);
   document.getElementById('account-since').textContent = since.toLocaleDateString('fr-CH', { month: 'long', year: 'numeric' });
+
+  // Detect auth provider and adapt password UI
+  const providers = (currentUser.app_metadata && currentUser.app_metadata.providers) || [];
+  const hasGoogle = providers.includes('google');
+  const hasPassword = providers.includes('email');
+
+  if (hasGoogle) {
+    document.getElementById('account-provider-row').style.display = '';
+    document.getElementById('account-provider').textContent = 'Google' + (hasPassword ? ' + Email' : '');
+  }
+
+  if (!hasPassword) {
+    document.getElementById('password-label').textContent = 'Mot de passe';
+    document.getElementById('password-btn').textContent = 'Ajouter';
+    document.getElementById('password-field-label').textContent = 'Créer un mot de passe';
+  }
 }
 
 async function loadSheets() {

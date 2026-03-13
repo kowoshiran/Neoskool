@@ -450,24 +450,39 @@ section{padding:6rem 2rem}
 footer{background:var(--slate-900);padding:3rem 2rem;text-align:center}.footer-brand{font-size:1.5rem;font-weight:800;color:white}.footer-brand span{background:linear-gradient(135deg,var(--gold-400),var(--amber-400));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.footer-tagline{color:var(--slate-400);font-size:.9rem;margin-top:.5rem}.footer-bottom{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);color:var(--slate-500);font-size:.8rem}
 
 /* Email Gate Modal */
-.email-modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.6);backdrop-filter:blur(8px);z-index:10000;align-items:center;justify-content:center}
-.email-modal-overlay.visible{display:flex;animation:fadeUp .3s ease-out}
-.email-modal{background:white;border:1px solid var(--border);border-radius:24px;padding:2.5rem;max-width:440px;width:90%;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.15)}
-.email-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--ink-muted);font-size:1.5rem;cursor:pointer;padding:.5rem;line-height:1}.email-modal-close:hover{color:var(--ink)}
-.email-modal-icon{text-align:center;font-size:3rem;margin-bottom:1rem}
-.email-modal h3{text-align:center;color:var(--ink);font-size:1.4rem;font-weight:800;margin-bottom:.5rem}
-.email-modal p{text-align:center;color:var(--ink-muted);font-size:.9rem;margin-bottom:1.5rem;line-height:1.6}
-.email-modal-input{width:100%;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;padding:1rem 1.25rem;background:var(--surface-raised);border:1.5px solid var(--border);border-radius:14px;color:var(--ink);outline:none;transition:all .3s}
-.email-modal-input:focus{border-color:var(--v-400);box-shadow:0 0 0 4px rgba(124,58,237,0.1)}
-.email-modal-input::placeholder{color:var(--ink-muted)}
-.email-modal-btn{width:100%;margin-top:1rem;padding:1rem;background:var(--v-600);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:14px;cursor:pointer;transition:all .3s}
-.email-modal-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.25);background:var(--v-700)}
-.email-modal-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-.email-modal-note{text-align:center;font-size:.75rem;color:var(--ink-muted);margin-top:1rem}
-.email-modal-success{display:none;text-align:center;padding:1rem 0}
-.email-modal-success .success-icon{font-size:3rem;margin-bottom:.75rem}
-.email-modal-success h4{color:var(--v-600);font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
-.email-modal-success p{color:var(--ink-muted);font-size:.85rem}
+/* Auth modal */
+.auth-modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.6);backdrop-filter:blur(8px);z-index:10000;align-items:center;justify-content:center}
+.auth-modal-overlay.visible{display:flex;animation:fadeUp .3s ease-out}
+.auth-modal{background:white;border:1px solid var(--border);border-radius:24px;padding:2.5rem;max-width:440px;width:90%;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.15)}
+.auth-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--ink-muted);font-size:1.5rem;cursor:pointer;padding:.5rem;line-height:1}.auth-modal-close:hover{color:var(--ink)}
+.auth-modal-icon{text-align:center;font-size:3rem;margin-bottom:1rem}
+.auth-modal h3{text-align:center;color:var(--ink);font-size:1.4rem;font-weight:800;margin-bottom:.5rem}
+.auth-modal>p{text-align:center;color:var(--ink-muted);font-size:.9rem;margin-bottom:1.5rem;line-height:1.6}
+.auth-google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.85rem;background:white;border:1.5px solid var(--border);border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:700;color:var(--ink);cursor:pointer;transition:all .2s}
+.auth-google-btn:hover{border-color:var(--v-300);box-shadow:0 4px 12px rgba(0,0,0,0.08);transform:translateY(-1px)}
+.auth-google-btn svg{width:20px;height:20px;flex-shrink:0}
+.auth-divider{display:flex;align-items:center;gap:1rem;margin:1.25rem 0;color:var(--ink-muted);font-size:.8rem;font-weight:600}
+.auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.auth-tabs{display:flex;border-radius:10px;background:var(--surface-raised);padding:3px;margin-bottom:1.25rem}
+.auth-tab{flex:1;padding:.55rem;text-align:center;font-size:.82rem;font-weight:700;color:var(--ink-muted);border:none;background:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:all .2s}
+.auth-tab.active{background:white;color:var(--v-600);box-shadow:0 1px 3px rgba(0,0,0,0.08)}
+.auth-input{width:100%;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;padding:.85rem 1rem;background:var(--surface-raised);border:1.5px solid var(--border);border-radius:12px;color:var(--ink);outline:none;transition:all .3s;margin-bottom:.6rem}
+.auth-input:focus{border-color:var(--v-400);box-shadow:0 0 0 4px rgba(124,58,237,0.1)}
+.auth-input::placeholder{color:var(--ink-faint)}
+.auth-submit-btn{width:100%;margin-top:.5rem;padding:.85rem;background:var(--v-600);color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;font-weight:800;border:none;border-radius:12px;cursor:pointer;transition:all .3s}
+.auth-submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.25);background:var(--v-700)}
+.auth-submit-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.auth-magic-link{display:block;text-align:center;margin-top:.75rem;font-size:.8rem;color:var(--v-500);font-weight:600;cursor:pointer;background:none;border:none;font-family:inherit;transition:opacity .2s}
+.auth-magic-link:hover{opacity:.7}
+.auth-note{text-align:center;font-size:.72rem;color:var(--ink-faint);margin-top:1rem;line-height:1.5}
+.auth-note a{color:var(--v-500)}
+.auth-error{background:var(--rose-100);color:var(--red);font-size:.8rem;font-weight:600;padding:.5rem .75rem;border-radius:8px;margin-bottom:.75rem;display:none;text-align:center}
+.auth-success{display:none;text-align:center;padding:1rem 0}
+.auth-success .success-icon{font-size:3rem;margin-bottom:.75rem}
+.auth-success h4{color:var(--v-600);font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+.auth-success p{color:var(--ink-muted);font-size:.85rem}
+/* Navbar login btn */
+.navbar-login{padding:.5rem 1.1rem;font-family:inherit;font-size:.82rem;font-weight:700;color:var(--ink-soft);background:transparent;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none}.navbar-login:hover{border-color:var(--v-300);color:var(--v-600)}
 
 /* ==================== NAVBAR ==================== */
 .navbar{position:fixed;top:0;left:0;right:0;z-index:8000;padding:.7rem 2rem;transition:all .4s}
@@ -565,7 +580,7 @@ body.has-auth-bar .navbar{top:36px}
   .t-grid{grid-template-columns:1fr}
   .cta-box{padding:3rem 1.5rem;border-radius:24px}
 }
-@media print{.navbar,.hero,.mid-cta,.compare,.how,.diff,.testimonials,.cta,.preview,.sciences,.pricing,.generator,.footer-main,.cinema-container,.celebration-bar,.auth-bar,.email-modal-overlay{display:none!important}.result-section{display:block!important;padding:0}.result-section .result-iframe{filter:none;opacity:1}}
+@media print{.navbar,.hero,.mid-cta,.compare,.how,.diff,.testimonials,.cta,.preview,.sciences,.pricing,.generator,.footer-main,.cinema-container,.celebration-bar,.auth-bar,.auth-modal-overlay{display:none!important}.result-section{display:block!important;padding:0}.result-section .result-iframe{filter:none;opacity:1}}
 
 /* ==================== WIZARD ==================== */
 .wiz-progress{display:flex;align-items:center;gap:0;margin-bottom:2rem;padding:0 1rem;max-width:680px;margin-left:auto;margin-right:auto}
@@ -652,7 +667,9 @@ body.has-auth-bar{padding-top:36px}
       <a class="navbar-link" href="#methode">Méthode</a>
       <a class="navbar-link" href="#science">Science</a>
       <a class="navbar-link" href="#tarifs">Tarifs</a>
-      <a class="navbar-cta" href="#generer">Essayer gratuitement</a>
+      <button class="navbar-login" id="navbar-login" onclick="showAuthModal('login')" style="display:none">Se connecter</button>
+      <a class="navbar-cta" id="navbar-cta-anon" href="#generer">Essayer gratuitement</a>
+      <a class="navbar-cta" id="navbar-cta-auth" href="/dashboard.html" style="display:none">Mon espace</a>
     </div>
   </div>
 </nav>
@@ -1545,27 +1562,56 @@ body.has-auth-bar{padding-top:36px}
     </div>
     <div class="celebration-actions">
       <button class="btn-action btn-print" onclick="printFiche()">🖨️ Imprimer</button>
+      <a href="/dashboard.html" class="btn-action btn-new" id="celebration-library" style="display:none;text-decoration:none">📚 Ma bibliothèque</a>
       <button class="btn-action btn-new" onclick="newGeneration()">✨ Nouvelle</button>
     </div>
   </div>
 </div>
 
-<!-- Email Gate Modal -->
-<div class="email-modal-overlay" id="email-modal">
-  <div class="email-modal">
-    <button class="email-modal-close" onclick="closeEmailModal()">&times;</button>
-    <div id="email-modal-form">
-      <div class="email-modal-icon">🖨️</div>
-      <h3>Imprime ta fiche</h3>
-      <p>Entre ton email pour imprimer et sauvegarder tes fiches. C'est gratuit !</p>
-      <input type="email" class="email-modal-input" id="email-modal-email" placeholder="ton.email@exemple.ch" autocomplete="email" onkeydown="if(event.key==='Enter')handleEmailGate()">
-      <button class="email-modal-btn" id="email-modal-submit" onclick="handleEmailGate()">Continuer</button>
-      <div class="email-modal-note">Pas de spam. Tu recevras un lien de confirmation.</div>
+<!-- Auth Modal -->
+<div class="auth-modal-overlay" id="auth-modal">
+  <div class="auth-modal">
+    <button class="auth-modal-close" onclick="closeAuthModal()">&times;</button>
+
+    <!-- Main form -->
+    <div id="auth-form">
+      <div class="auth-modal-icon" id="auth-modal-icon">🔑</div>
+      <h3 id="auth-modal-title">Se connecter</h3>
+      <p id="auth-modal-subtitle">Accède à ta bibliothèque et tes fiches sauvegardées.</p>
+
+      <!-- Google -->
+      <button class="auth-google-btn" onclick="handleGoogleAuth()">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Continuer avec Google
+      </button>
+
+      <div class="auth-divider">ou</div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="auth-tab-login" onclick="switchAuthTab('login')">Connexion</button>
+        <button class="auth-tab" id="auth-tab-signup" onclick="switchAuthTab('signup')">Inscription</button>
+      </div>
+
+      <!-- Error -->
+      <div class="auth-error" id="auth-error"></div>
+
+      <!-- Fields -->
+      <input type="email" class="auth-input" id="auth-email" placeholder="ton.email@exemple.ch" autocomplete="email" onkeydown="if(event.key==='Enter')document.getElementById('auth-password').focus()">
+      <input type="password" class="auth-input" id="auth-password" placeholder="Mot de passe" autocomplete="current-password" onkeydown="if(event.key==='Enter')handleAuthSubmit()">
+      <input type="password" class="auth-input" id="auth-password-confirm" placeholder="Confirmer le mot de passe" autocomplete="new-password" style="display:none" onkeydown="if(event.key==='Enter')handleAuthSubmit()">
+
+      <button class="auth-submit-btn" id="auth-submit-btn" onclick="handleAuthSubmit()">Se connecter</button>
+      <button class="auth-magic-link" onclick="handleMagicLink()">Connexion sans mot de passe (magic link)</button>
+
+      <div class="auth-note">En continuant, tu acceptes nos <a href="/terms.html">CGV</a> et notre <a href="/privacy.html">politique de confidentialité</a>.</div>
     </div>
-    <div class="email-modal-success" id="email-modal-success">
+
+    <!-- Success state -->
+    <div class="auth-success" id="auth-success">
       <div class="success-icon">✅</div>
-      <h4>C'est parti !</h4>
-      <p>Ton impression se lance. Consulte tes emails pour confirmer ton compte.</p>
+      <h4 id="auth-success-title">C'est parti !</h4>
+      <p id="auth-success-text">Consulte tes emails pour confirmer ton compte.</p>
     </div>
   </div>
 </div>
@@ -1739,18 +1785,37 @@ let currentUser = null;
 let isBetaUser = false;
 const FREE_SHEETS_PER_MONTH = 3;
 
-// Check for existing session on page load
+// ==================== AUTH UI ====================
 function showAuthBar() {
   if (!currentUser) return;
   const bar = document.getElementById('auth-bar');
   document.getElementById('auth-bar-email').textContent = currentUser.email;
   bar.classList.add('visible');
   document.body.classList.add('has-auth-bar');
+  // Update navbar: hide login + anon CTA, show Mon espace
+  const loginBtn = document.getElementById('navbar-login');
+  const ctaAnon = document.getElementById('navbar-cta-anon');
+  const ctaAuth = document.getElementById('navbar-cta-auth');
+  if (loginBtn) loginBtn.style.display = 'none';
+  if (ctaAnon) ctaAnon.style.display = 'none';
+  if (ctaAuth) ctaAuth.style.display = '';
+  // Show library link in celebration bar if visible
+  const libBtn = document.getElementById('celebration-library');
+  if (libBtn) libBtn.style.display = '';
 }
 
 function hideAuthBar() {
   document.getElementById('auth-bar').classList.remove('visible');
   document.body.classList.remove('has-auth-bar');
+  // Update navbar: show login + anon CTA, hide Mon espace
+  const loginBtn = document.getElementById('navbar-login');
+  const ctaAnon = document.getElementById('navbar-cta-anon');
+  const ctaAuth = document.getElementById('navbar-cta-auth');
+  if (loginBtn) loginBtn.style.display = '';
+  if (ctaAnon) ctaAnon.style.display = '';
+  if (ctaAuth) ctaAuth.style.display = 'none';
+  const libBtn = document.getElementById('celebration-library');
+  if (libBtn) libBtn.style.display = 'none';
 }
 
 async function handleLogout() {
@@ -1765,8 +1830,12 @@ async function handleLogout() {
   if (session) {
     currentUser = session.user;
     showAuthBar();
+  } else {
+    // Show login button in navbar for non-authenticated users
+    const loginBtn = document.getElementById('navbar-login');
+    if (loginBtn) loginBtn.style.display = '';
   }
-  // Listen for auth changes (magic link callback)
+  // Listen for auth changes (magic link callback, Google callback)
   sbClient.auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' && session) {
       currentUser = session.user;
@@ -1901,70 +1970,183 @@ function isEmailGated() {
   return false;
 }
 
-async function handleEmailGate() {
-  const emailInput = document.getElementById('email-modal-email');
-  const submitBtn = document.getElementById('email-modal-submit');
-  const email = emailInput.value.trim();
+// ==================== AUTH MODAL ====================
+let authMode = 'login'; // 'login' or 'signup'
+let authPrintAfter = false; // if true, print after successful auth
 
-  if (!email || !email.includes('@')) {
-    emailInput.style.borderColor = '#ef4444';
-    return;
+function showAuthModal(mode, printAfter) {
+  authMode = mode || 'login';
+  authPrintAfter = !!printAfter;
+  resetAuthModal();
+
+  const icon = document.getElementById('auth-modal-icon');
+  const title = document.getElementById('auth-modal-title');
+  const subtitle = document.getElementById('auth-modal-subtitle');
+
+  if (printAfter) {
+    icon.textContent = '🖨️';
+    title.textContent = 'Imprime ta fiche';
+    subtitle.textContent = 'Connecte-toi pour imprimer et sauvegarder tes fiches. C\'est gratuit !';
+  } else {
+    icon.textContent = '🔑';
+    title.textContent = 'Se connecter';
+    subtitle.textContent = 'Accède à ta bibliothèque et tes fiches sauvegardées.';
   }
 
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Envoi...';
+  switchAuthTab(authMode);
+  document.getElementById('auth-modal').classList.add('visible');
+  setTimeout(() => document.getElementById('auth-email').focus(), 100);
+}
+
+function closeAuthModal() {
+  document.getElementById('auth-modal').classList.remove('visible');
+  resetAuthModal();
+}
+
+function resetAuthModal() {
+  document.getElementById('auth-form').style.display = '';
+  document.getElementById('auth-success').style.display = 'none';
+  document.getElementById('auth-error').style.display = 'none';
+  document.getElementById('auth-email').value = '';
+  document.getElementById('auth-password').value = '';
+  document.getElementById('auth-password-confirm').value = '';
+  const btn = document.getElementById('auth-submit-btn');
+  btn.disabled = false;
+  btn.textContent = authMode === 'signup' ? 'Créer mon compte' : 'Se connecter';
+}
+
+function switchAuthTab(mode) {
+  authMode = mode;
+  document.getElementById('auth-tab-login').classList.toggle('active', mode === 'login');
+  document.getElementById('auth-tab-signup').classList.toggle('active', mode === 'signup');
+  document.getElementById('auth-password-confirm').style.display = mode === 'signup' ? '' : 'none';
+  document.getElementById('auth-password').placeholder = mode === 'signup' ? 'Créer un mot de passe (min. 6 caractères)' : 'Mot de passe';
+  document.getElementById('auth-password').autocomplete = mode === 'signup' ? 'new-password' : 'current-password';
+  document.getElementById('auth-submit-btn').textContent = mode === 'signup' ? 'Créer mon compte' : 'Se connecter';
+  document.getElementById('auth-error').style.display = 'none';
+}
+
+function showAuthError(msg) {
+  const el = document.getElementById('auth-error');
+  el.textContent = msg;
+  el.style.display = '';
+}
+
+async function handleGoogleAuth() {
+  const { error } = await sbClient.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin + '/dashboard.html' }
+  });
+  if (error) showAuthError('Erreur Google : ' + error.message);
+}
+
+async function handleAuthSubmit() {
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const btn = document.getElementById('auth-submit-btn');
+
+  if (!email || !email.includes('@')) { showAuthError('Entre une adresse email valide.'); return; }
+  if (!password || password.length < 6) { showAuthError('Le mot de passe doit faire au moins 6 caractères.'); return; }
+
+  if (authMode === 'signup') {
+    const confirm = document.getElementById('auth-password-confirm').value;
+    if (password !== confirm) { showAuthError('Les mots de passe ne correspondent pas.'); return; }
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Chargement...';
 
   try {
-    // Send magic link via Supabase
-    const { error } = await sbClient.auth.signInWithOtp({
-      email: email,
-      options: { emailRedirectTo: window.location.origin }
-    });
+    if (authMode === 'signup') {
+      const { data, error } = await sbClient.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: window.location.origin + '/dashboard.html' }
+      });
+      if (error) { showAuthError(error.message === 'User already registered' ? 'Ce compte existe déjà. Connecte-toi plutôt.' : error.message); btn.disabled = false; btn.textContent = 'Créer mon compte'; return; }
 
-    if (error) {
-      console.error('Supabase OTP error:', error);
-      // Even if Supabase email fails (rate limit etc), still unlock
+      // Store email
+      localStorage.setItem('nsk_email', email);
+
+      // Check if email confirmation is required
+      if (data.user && !data.session) {
+        document.getElementById('auth-form').style.display = 'none';
+        document.getElementById('auth-success-title').textContent = 'Vérifie tes emails !';
+        document.getElementById('auth-success-text').textContent = 'Clique sur le lien de confirmation pour activer ton compte.';
+        document.getElementById('auth-success').style.display = '';
+      } else if (data.session) {
+        // Auto-confirmed (e.g. if Supabase has confirm disabled)
+        currentUser = data.session.user;
+        showAuthBar();
+        closeAuthModal();
+        if (authPrintAfter) doPrint();
+      }
+
+      // Send welcome email via Brevo
+      if (typeof sendEmail === 'function') sendEmail('welcome', email, { profil: (typeof wizState !== 'undefined' && wizState.profil) || 'enseignant' });
+
+    } else {
+      // Login
+      const { data, error } = await sbClient.auth.signInWithPassword({ email, password });
+      if (error) {
+        const msg = error.message === 'Invalid login credentials' ? 'Email ou mot de passe incorrect.' : error.message;
+        showAuthError(msg);
+        btn.disabled = false;
+        btn.textContent = 'Se connecter';
+        return;
+      }
+      currentUser = data.session.user;
+      localStorage.setItem('nsk_email', email);
+      showAuthBar();
+      closeAuthModal();
+      if (authPrintAfter) doPrint();
     }
-
-    // Store email locally and unlock immediately
-    localStorage.setItem('nsk_email', email);
-
-    // Send welcome email via Brevo
-    sendEmail('welcome', email, { profil: (typeof wizState !== 'undefined' && wizState.profil) || 'enseignant' });
-
-    // Show success state
-    document.getElementById('email-modal-form').style.display = 'none';
-    document.getElementById('email-modal-success').style.display = 'block';
-
-    // Print after short delay
-    setTimeout(() => {
-      closeEmailModal();
-      doPrint();
-    }, 1500);
-
   } catch (err) {
-    console.error('Email gate error:', err);
-    // Fallback: still unlock
-    localStorage.setItem('nsk_email', email);
-    closeEmailModal();
-    doPrint();
+    console.error('Auth error:', err);
+    showAuthError('Erreur inattendue. Réessaie.');
+    btn.disabled = false;
+    btn.textContent = authMode === 'signup' ? 'Créer mon compte' : 'Se connecter';
   }
 }
 
-function closeEmailModal() {
-  document.getElementById('email-modal').classList.remove('visible');
-  // Reset form state
-  document.getElementById('email-modal-form').style.display = '';
-  document.getElementById('email-modal-success').style.display = 'none';
-  const submitBtn = document.getElementById('email-modal-submit');
-  submitBtn.disabled = false;
-  submitBtn.textContent = 'Continuer';
+async function handleMagicLink() {
+  const email = document.getElementById('auth-email').value.trim();
+  if (!email || !email.includes('@')) { showAuthError('Entre ton email pour recevoir le lien.'); return; }
+
+  try {
+    const { error } = await sbClient.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: window.location.origin + '/dashboard.html' }
+    });
+    if (error) { showAuthError(error.message); return; }
+
+    localStorage.setItem('nsk_email', email);
+
+    document.getElementById('auth-form').style.display = 'none';
+    document.getElementById('auth-success-title').textContent = 'Lien envoyé !';
+    document.getElementById('auth-success-text').textContent = 'Consulte tes emails et clique sur le lien pour te connecter.';
+    document.getElementById('auth-success').style.display = '';
+
+    if (authPrintAfter) {
+      setTimeout(() => { closeAuthModal(); doPrint(); }, 1500);
+    }
+  } catch (err) {
+    console.error('Magic link error:', err);
+    showAuthError('Erreur lors de l\'envoi. Réessaie.');
+  }
 }
 
-function showEmailModal() {
-  document.getElementById('email-modal').classList.add('visible');
-  setTimeout(() => document.getElementById('email-modal-email').focus(), 100);
-}
+// Close modal on backdrop click
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('auth-modal-overlay')) closeAuthModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('auth-modal').classList.contains('visible')) closeAuthModal();
+});
+
+// Legacy aliases for backward compatibility
+function showEmailModal() { showAuthModal('signup', true); }
+function closeEmailModal() { closeAuthModal(); }
 
 async function saveSheetToSupabase(metadata) {
   if (!currentUser) return;
