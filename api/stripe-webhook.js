@@ -126,7 +126,9 @@ function emailWrap(content) {
 async function handleCheckoutCompleted(session) {
   const customerId = session.customer;
   const subscriptionId = session.subscription;
-  const userId = session.metadata?.supabase_user_id || session.subscription_data?.metadata?.supabase_user_id;
+
+  // Try to get userId from session metadata, then from subscription metadata
+  let userId = session.metadata?.supabase_user_id;
 
   if (!subscriptionId) return;
 
@@ -135,6 +137,21 @@ async function handleCheckoutCompleted(session) {
     headers: { 'Authorization': `Bearer ${STRIPE_SECRET_KEY}` },
   });
   const sub = await subRes.json();
+
+  // Fallback: get userId from subscription metadata
+  if (!userId) {
+    userId = sub.metadata?.supabase_user_id;
+  }
+
+  // Fallback: lookup userId by stripe_customer_id in subscriptions table
+  if (!userId && customerId) {
+    const lookupRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/subscriptions?stripe_customer_id=eq.${customerId}&select=user_id`,
+      { headers: { 'apikey': SUPABASE_SERVICE_KEY, 'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}` } }
+    );
+    const lookupData = await lookupRes.json();
+    if (lookupData.length > 0) userId = lookupData[0].user_id;
+  }
 
   const priceId = sub.items?.data?.[0]?.price?.id || '';
   const interval = sub.items?.data?.[0]?.price?.recurring?.interval || 'month';
@@ -151,13 +168,21 @@ async function handleCheckoutCompleted(session) {
     sheets_limit: 50,
   };
 
-  // Update by customer ID or user ID
+  // Update by user ID (preferred) or customer ID (fallback)
   if (userId) {
-    await fetch(`${SUPABASE_URL}/rest/v1/subscriptions?user_id=eq.${userId}`, {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/subscriptions?user_id=eq.${userId}`, {
       method: 'PATCH',
       headers: supabaseHeaders(),
       body: JSON.stringify(updateData),
     });
+    // If no row was updated (maybe row doesn't exist), try upsert
+    if (!res.ok || res.status === 404) {
+      await fetch(`${SUPABASE_URL}/rest/v1/subscriptions`, {
+        method: 'POST',
+        headers: { ...supabaseHeaders(), 'Prefer': 'resolution=merge-duplicates' },
+        body: JSON.stringify({ user_id: userId, ...updateData }),
+      });
+    }
   } else {
     await updateSubscription(customerId, updateData);
   }

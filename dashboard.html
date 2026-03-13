@@ -1074,6 +1074,20 @@ async function openCustomerPortal() {
   if (params.get('checkout') === 'success') {
     setTimeout(() => showToast('Abonnement Pro activé ! Bienvenue.'), 500);
     window.history.replaceState({}, '', '/dashboard.html');
+    // Retry loading plan after webhook processes (may take a few seconds)
+    async function retryLoadPlan(attempts) {
+      for (let i = 0; i < attempts; i++) {
+        await new Promise(r => setTimeout(r, 2000));
+        const { data: sub } = await sb.from('subscriptions').select('plan, status').eq('user_id', currentUser?.id).single();
+        if (sub && sub.plan === 'pro' && sub.status === 'active') {
+          await loadPlan();
+          loadStats();
+          showToast('Plan Pro activé !');
+          return;
+        }
+      }
+    }
+    setTimeout(() => retryLoadPlan(5), 1000);
   } else if (params.get('checkout') === 'cancel') {
     setTimeout(() => showToast('Paiement annulé.', true), 500);
     window.history.replaceState({}, '', '/dashboard.html');

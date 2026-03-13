@@ -136,6 +136,7 @@ export default async function handler(req) {
       'line_items[0][quantity]': '1',
       'success_url': `${origin}/dashboard.html?checkout=success`,
       'cancel_url': `${origin}/dashboard.html?checkout=cancel`,
+      'metadata[supabase_user_id]': userId,
       'subscription_data[metadata][supabase_user_id]': userId,
       'allow_promotion_codes': 'true',
       'billing_address_collection': 'auto',
