@@ -546,8 +546,9 @@ async function init() {
   const initials = email.substring(0, 2).toUpperCase();
   document.getElementById('dash-avatar').textContent = initials;
 
-  // Load all data in parallel
-  await Promise.all([loadStats(), loadSheets(), loadPlan()]);
+  // Load plan first (sets quota limits), then stats and sheets in parallel
+  await loadPlan();
+  await Promise.all([loadStats(), loadSheets()]);
 }
 
 async function loadStats() {
