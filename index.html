@@ -581,6 +581,7 @@ body.has-auth-bar .navbar{top:36px}
 .pricing-cta-primary{background:var(--v-600);color:white;box-shadow:0 4px 16px rgba(124,58,237,0.2)}.pricing-cta-primary:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(124,58,237,0.3);background:var(--v-700)}
 .pricing-cta-secondary{background:var(--v-50);color:var(--v-700);border:1.5px solid var(--v-200)}.pricing-cta-secondary:hover{background:var(--v-100)}
 .pricing-cta-outline{background:transparent;color:var(--ink-muted);border:1.5px solid var(--border)}.pricing-cta-outline:hover{border-color:var(--v-300);color:var(--v-600)}
+.pricing-guarantee{text-align:center;font-size:.75rem;color:var(--emerald-500);font-weight:700;margin-top:.75rem}
 .pricing-reassurance{text-align:center;margin-top:2rem;font-size:.82rem;color:var(--ink-muted);display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap}
 .pricing-reassurance span{display:flex;align-items:center;gap:4px}
 
@@ -1334,15 +1335,15 @@ body.has-auth-bar{padding-top:36px}
 <h2 class="section-title">Gagne des heures chaque semaine</h2>
 </div>
 
-<div class="pricing-toggle">
-  <div class="pricing-toggle-group">
-    <button class="pricing-toggle-btn active" onclick="setPricingView('enseignant',this)">Enseignant</button>
-    <button class="pricing-toggle-btn" onclick="setPricingView('parent',this)">Parent</button>
-  </div>
-</div>
-
 <div class="pricing-pitch" id="pricing-pitch">
   <p id="pricing-pitch-text">Fini les soirées passées à adapter tes fiches pour 3 niveaux. Neoskool génère des exercices différenciés, alignés PER, prêts à imprimer — pour que tu puisses te concentrer sur l'essentiel : tes élèves.</p>
+</div>
+
+<div class="pricing-toggle">
+  <div class="pricing-toggle-group">
+    <button class="pricing-toggle-btn active" id="pricing-btn-monthly" onclick="setPricingInterval('month')">Mensuel</button>
+    <button class="pricing-toggle-btn" id="pricing-btn-annual" onclick="setPricingInterval('year')">Annuel <span style="color:var(--emerald-500);font-size:.75rem;font-weight:800">-33%</span></button>
+  </div>
 </div>
 
 <div class="pricing-grid">
@@ -1365,8 +1366,14 @@ body.has-auth-bar{padding-top:36px}
   <div class="pricing-card featured">
     <div class="pricing-badge">Populaire</div>
     <div class="pricing-plan">Pro</div>
-    <div class="pricing-price"><span class="pricing-amount">29.90</span><span class="pricing-currency">CHF/mois</span></div>
-    <div class="pricing-period">sans engagement</div>
+    <div id="pricing-pro-monthly">
+      <div class="pricing-price"><span class="pricing-amount">29.90</span><span class="pricing-currency">CHF/mois</span></div>
+      <div class="pricing-period">sans engagement · annulable à tout moment</div>
+    </div>
+    <div id="pricing-pro-annual" style="display:none">
+      <div class="pricing-price"><span class="pricing-amount">20.—</span><span class="pricing-currency">CHF/mois</span></div>
+      <div class="pricing-period">240 CHF/an · économise 33%</div>
+    </div>
     <ul class="pricing-features">
       <li>50 fiches par mois</li>
       <li>Tout le plan Gratuit</li>
@@ -1375,7 +1382,8 @@ body.has-auth-bar{padding-top:36px}
       <li>Support prioritaire</li>
       <li>Nouvelles matières en avant-première</li>
     </ul>
-    <a href="#generer" class="pricing-cta pricing-cta-primary">Commencer maintenant</a>
+    <button class="pricing-cta pricing-cta-primary" onclick="startCheckout()" id="pricing-pro-cta">Commencer maintenant</button>
+    <div class="pricing-guarantee">14 jours satisfait ou remboursé</div>
   </div>
 
   <!-- École -->
@@ -1396,8 +1404,8 @@ body.has-auth-bar{padding-top:36px}
 </div>
 
 <div class="pricing-reassurance">
-  <span>🔒 Paiement sécurisé</span>
-  <span>↩️ Annulable à tout moment</span>
+  <span>🔒 Paiement sécurisé Stripe</span>
+  <span>↩️ 14 jours satisfait ou remboursé</span>
   <span>🇨🇭 Hébergé en Suisse</span>
 </div>
 
@@ -1826,7 +1834,27 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let currentUser = null;
 let isBetaUser = false;
+let currentPlan = 'free';
+let currentSheetsLimit = 3;
 const FREE_SHEETS_PER_MONTH = 3;
+const PRO_SHEETS_PER_MONTH = 50;
+
+async function loadUserPlan() {
+  if (!currentUser) { currentPlan = 'free'; currentSheetsLimit = FREE_SHEETS_PER_MONTH; return; }
+  try {
+    const { data, error } = await sbClient.from('subscriptions').select('plan, sheets_limit, status, cancel_at_period_end, current_period_end').eq('user_id', currentUser.id).single();
+    if (data && data.plan === 'pro' && data.status === 'active') {
+      currentPlan = 'pro';
+      currentSheetsLimit = data.sheets_limit || PRO_SHEETS_PER_MONTH;
+    } else {
+      currentPlan = 'free';
+      currentSheetsLimit = FREE_SHEETS_PER_MONTH;
+    }
+  } catch (e) {
+    currentPlan = 'free';
+    currentSheetsLimit = FREE_SHEETS_PER_MONTH;
+  }
+}
 
 // ==================== AUTH UI ====================
 function showAuthBar() {
@@ -1874,6 +1902,7 @@ async function handleLogout() {
   const { data: { session } } = await sbClient.auth.getSession();
   if (session) {
     currentUser = session.user;
+    await loadUserPlan();
     showAuthBar();
   } else {
     // Show login button in navbar for non-authenticated users
@@ -1881,14 +1910,17 @@ async function handleLogout() {
     if (loginBtn) loginBtn.style.display = '';
   }
   // Listen for auth changes (magic link callback, Google callback)
-  sbClient.auth.onAuthStateChange((event, session) => {
+  sbClient.auth.onAuthStateChange(async (event, session) => {
     if (event === 'SIGNED_IN' && session) {
       currentUser = session.user;
+      await loadUserPlan();
       showAuthBar();
       savePendingSheet();
     }
     if (event === 'SIGNED_OUT') {
       currentUser = null;
+      currentPlan = 'free';
+      currentSheetsLimit = FREE_SHEETS_PER_MONTH;
       hideAuthBar();
     }
   });
@@ -2008,7 +2040,7 @@ async function recordGeneration(metadata) {
 async function canGenerate() {
   if (isBetaUser) return true;
   const count = await getSheetCount();
-  return count < FREE_SHEETS_PER_MONTH;
+  return count < currentSheetsLimit;
 }
 
 function isEmailGated() {
@@ -2028,10 +2060,8 @@ function closeUpgradeModal() {
   if (modal) modal.classList.remove('visible');
 }
 function goToUpgrade() {
-  // Will redirect to Stripe checkout in Sprint 3B
-  // For now, show a message
   closeUpgradeModal();
-  showStatus('L\'offre Pro arrive bientôt ! Ton quota se renouvelle le 1er du mois.', 'error');
+  startCheckout('month');
 }
 // Close upgrade modal on backdrop click / Escape
 document.addEventListener('click', e => {
@@ -2049,14 +2079,15 @@ async function updateQuotaBadge() {
     return;
   }
   const count = await getSheetCount();
+  const limit = currentSheetsLimit;
   const badge = document.getElementById('auth-bar-quota');
   if (!badge) return;
-  badge.textContent = count + '/' + FREE_SHEETS_PER_MONTH;
+  badge.textContent = (currentPlan === 'pro' ? 'Pro · ' : '') + count + '/' + limit;
   badge.style.display = '';
   badge.className = 'auth-bar-quota';
-  if (count >= FREE_SHEETS_PER_MONTH) {
+  if (count >= limit) {
     badge.classList.add('full');
-  } else if (count >= Math.ceil(FREE_SHEETS_PER_MONTH * 2 / 3)) {
+  } else if (count >= Math.ceil(limit * 2 / 3)) {
     badge.classList.add('warn');
   } else {
     badge.classList.add('ok');
@@ -2323,16 +2354,44 @@ function doPrint() {
   printWindow.onload = function() { printWindow.print(); };
 }
 
-// ==================== PRICING TOGGLE ====================
-const pricingPitches = {
-  enseignant: "Fini les soirées passées à adapter tes fiches pour 3 niveaux. Neoskool génère des exercices différenciés, alignés PER, prêts à imprimer — pour que tu puisses te concentrer sur l'essentiel : tes élèves.",
-  parent: "Ton enfant a besoin d'exercices adaptés à son vrai niveau ? Neoskool crée des fiches ludiques et progressives, fondées sur les sciences cognitives — pour l'aider à progresser sans stress."
-};
+// ==================== PRICING TOGGLE & CHECKOUT ====================
+let pricingInterval = 'month';
 
-function setPricingView(view, btn) {
-  btn.parentElement.querySelectorAll('.pricing-toggle-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('pricing-pitch-text').textContent = pricingPitches[view];
+function setPricingInterval(interval) {
+  pricingInterval = interval;
+  document.getElementById('pricing-btn-monthly').classList.toggle('active', interval === 'month');
+  document.getElementById('pricing-btn-annual').classList.toggle('active', interval === 'year');
+  document.getElementById('pricing-pro-monthly').style.display = interval === 'month' ? '' : 'none';
+  document.getElementById('pricing-pro-annual').style.display = interval === 'year' ? '' : 'none';
+}
+
+async function startCheckout(interval) {
+  const billingInterval = interval || pricingInterval;
+  if (!currentUser) {
+    openAuthModal();
+    return;
+  }
+  try {
+    const res = await fetch('/api/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: currentUser.id,
+        email: currentUser.email,
+        interval: billingInterval,
+      }),
+    });
+    const data = await res.json();
+    if (data.error) {
+      alert(data.error);
+      return;
+    }
+    if (data.url) {
+      window.location.href = data.url;
+    }
+  } catch (err) {
+    alert('Erreur : ' + err.message);
+  }
 }
 
 // ==================== WRAPPER CSS (Design Wrapper v5) ====================

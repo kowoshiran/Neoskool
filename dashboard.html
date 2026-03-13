@@ -322,7 +322,8 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
         </div>
         <div class="dash-stat-bar" style="margin-bottom:.5rem"><div class="dash-stat-fill" id="account-quota-bar" style="width:0%"></div></div>
         <div class="dash-stat-sub" id="account-quota-text" style="margin-bottom:1rem">0 / 3 fiches utilisées ce mois</div>
-        <a href="/#tarifs" class="dash-btn dash-btn-primary" id="upgrade-btn">Passer à Pro — 29.90 CHF/mois</a>
+        <button class="dash-btn dash-btn-primary" id="upgrade-btn" onclick="handleUpgrade()">Passer à Pro — 29.90 CHF/mois</button>
+        <button class="dash-btn dash-btn-ghost" id="manage-btn" style="display:none;margin-top:.5rem" onclick="openCustomerPortal()">Gérer mon abonnement</button>
       </div>
 
       <!-- Profil -->
@@ -501,6 +502,10 @@ const SHEETS_PER_PAGE = 20;
 // ===== STATE =====
 let currentUser = null;
 let userPlan = 'free';
+let userSheetsLimit = 3;
+let userCancelAtPeriodEnd = false;
+let userPeriodEnd = null;
+let userBillingInterval = null;
 let allSheets = [];
 let filteredSheets = [];
 let currentPage = 1;
@@ -567,16 +572,18 @@ async function loadStats() {
 }
 
 function updateQuotaDisplay(monthTotal) {
-  const isUnlimited = userPlan === 'pro' || userPlan === 'beta';
-  const pct = isUnlimited ? 100 : Math.min(100, (monthTotal / FREE_LIMIT) * 100);
-  const color = isUnlimited ? 'linear-gradient(90deg,#10b981,#34d399)' : '';
+  const isBeta = userPlan === 'beta';
+  const isPro = userPlan === 'pro';
+  const limit = isPro ? userSheetsLimit : FREE_LIMIT;
+  const pct = isBeta ? Math.min(100, monthTotal * 2) : Math.min(100, (monthTotal / limit) * 100);
+  const color = (isPro || isBeta) ? 'linear-gradient(90deg,#10b981,#34d399)' : '';
 
   ['dash-quota-bar', 'account-quota-bar'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.style.width = pct + '%'; if (color) el.style.background = color; }
   });
 
-  const txt = isUnlimited ? monthTotal + ' / ∞' : monthTotal + ' / ' + FREE_LIMIT + ' utilisées';
+  const txt = isBeta ? monthTotal + ' / ∞' : monthTotal + ' / ' + limit + ' utilisées';
   ['dash-quota-text', 'account-quota-text'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.textContent = txt;
@@ -585,9 +592,13 @@ function updateQuotaDisplay(monthTotal) {
 
 async function loadPlan() {
   try {
-    const { data: profile } = await sb.from('profiles').select('plan').single();
-    if (profile && profile.plan) {
-      userPlan = profile.plan;
+    const { data: sub } = await sb.from('subscriptions').select('plan, status, sheets_limit, cancel_at_period_end, current_period_end, billing_interval').eq('user_id', currentUser.id).single();
+    if (sub && sub.plan === 'pro' && sub.status === 'active') {
+      userPlan = 'pro';
+      userSheetsLimit = sub.sheets_limit || 50;
+      userCancelAtPeriodEnd = sub.cancel_at_period_end || false;
+      userPeriodEnd = sub.current_period_end;
+      userBillingInterval = sub.billing_interval;
     }
   } catch (e) {}
 
@@ -596,6 +607,7 @@ async function loadPlan() {
   const planName = document.getElementById('account-plan-name');
   const planDesc = document.getElementById('account-plan-desc');
   const upgradeBtn = document.getElementById('upgrade-btn');
+  const manageBtn = document.getElementById('manage-btn');
 
   badge.className = 'dash-plan-badge ' + userPlan;
   planIcon.className = 'dash-plan-icon ' + userPlan;
@@ -604,19 +616,28 @@ async function loadPlan() {
     badge.textContent = 'Pro';
     planIcon.textContent = '⭐';
     planName.textContent = 'Plan Pro';
-    planDesc.textContent = '50 fiches par mois';
+    const intervalLabel = userBillingInterval === 'year' ? 'annuel' : 'mensuel';
+    let desc = '50 fiches par mois · ' + intervalLabel;
+    if (userCancelAtPeriodEnd && userPeriodEnd) {
+      const endDate = new Date(userPeriodEnd).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long', year: 'numeric' });
+      desc += ' · se termine le ' + endDate;
+    }
+    planDesc.textContent = desc;
     upgradeBtn.style.display = 'none';
+    manageBtn.style.display = '';
   } else if (userPlan === 'beta') {
     badge.textContent = 'Bêta';
     planIcon.textContent = '🧪';
     planName.textContent = 'Accès Bêta';
     planDesc.textContent = 'Fiches illimitées';
     upgradeBtn.style.display = 'none';
+    manageBtn.style.display = 'none';
   } else {
     badge.textContent = 'Gratuit';
     planIcon.textContent = '🆓';
     planName.textContent = 'Plan Gratuit';
     planDesc.textContent = '3 fiches par mois';
+    manageBtn.style.display = 'none';
   }
 
   // Account info
@@ -1017,6 +1038,47 @@ async function changePassword() {
   hideChangePassword();
   showToast('Mot de passe mis à jour');
 }
+
+// ===== STRIPE CHECKOUT & PORTAL =====
+async function handleUpgrade() {
+  if (!currentUser) return;
+  try {
+    const res = await fetch('/api/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: currentUser.id, email: currentUser.email, interval: 'month' }),
+    });
+    const data = await res.json();
+    if (data.error) { showToast(data.error, true); return; }
+    if (data.url) window.location.href = data.url;
+  } catch (err) { showToast('Erreur : ' + err.message, true); }
+}
+
+async function openCustomerPortal() {
+  if (!currentUser) return;
+  try {
+    const res = await fetch('/api/customer-portal', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: currentUser.id }),
+    });
+    const data = await res.json();
+    if (data.error) { showToast(data.error, true); return; }
+    if (data.url) window.location.href = data.url;
+  } catch (err) { showToast('Erreur : ' + err.message, true); }
+}
+
+// Handle checkout success/cancel URL params
+(function checkCheckoutResult() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('checkout') === 'success') {
+    setTimeout(() => showToast('Abonnement Pro activé ! Bienvenue.'), 500);
+    window.history.replaceState({}, '', '/dashboard.html');
+  } else if (params.get('checkout') === 'cancel') {
+    setTimeout(() => showToast('Paiement annulé.', true), 500);
+    window.history.replaceState({}, '', '/dashboard.html');
+  }
+})();
 
 // ===== DELETE ACCOUNT =====
 function showDeleteConfirm() {

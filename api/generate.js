@@ -43,14 +43,41 @@ export const config = {
 const SUPABASE_URL = process.env.SUPABASE_URL || 'https://nniyltlejcdoyqtgctql.supabase.co';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const FREE_SHEETS_PER_MONTH = 3;
+const PRO_SHEETS_PER_MONTH = 50;
+
+async function getUserPlan(userId) {
+  if (!SUPABASE_SERVICE_KEY || !userId) return { plan: 'free', sheetsLimit: FREE_SHEETS_PER_MONTH };
+
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/subscriptions?user_id=eq.${userId}&select=plan,sheets_limit,status`,
+      {
+        headers: {
+          'apikey': SUPABASE_SERVICE_KEY,
+          'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+        },
+      }
+    );
+    const data = await res.json();
+    if (data.length > 0 && data[0].plan === 'pro' && data[0].status === 'active') {
+      return { plan: 'pro', sheetsLimit: data[0].sheets_limit || PRO_SHEETS_PER_MONTH };
+    }
+  } catch (err) {
+    console.error('Plan check failed:', err);
+  }
+  return { plan: 'free', sheetsLimit: FREE_SHEETS_PER_MONTH };
+}
 
 async function checkQuota(userId, email) {
   if (!SUPABASE_SERVICE_KEY) return { allowed: true }; // Skip if no key configured
 
-  const startOfMonth = new Date().toISOString().slice(0, 7) + '-01T00:00:00.000Z';
-  let url, headers;
+  // Get user plan to determine limit
+  const { plan, sheetsLimit } = await getUserPlan(userId);
 
-  headers = {
+  const startOfMonth = new Date().toISOString().slice(0, 7) + '-01T00:00:00.000Z';
+  let url;
+
+  const headers = {
     'apikey': SUPABASE_SERVICE_KEY,
     'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
     'Content-Type': 'application/json'
@@ -72,7 +99,7 @@ async function checkQuota(userId, email) {
     const countHeader = res.headers.get('content-range');
     // Format: "0-0/5" or "*/0"
     const total = countHeader ? parseInt(countHeader.split('/')[1]) || 0 : 0;
-    return { allowed: total < FREE_SHEETS_PER_MONTH, count: total, limit: FREE_SHEETS_PER_MONTH };
+    return { allowed: total < sheetsLimit, count: total, limit: sheetsLimit, plan };
   } catch (err) {
     console.error('Quota check failed:', err);
     return { allowed: true }; // Fail open
