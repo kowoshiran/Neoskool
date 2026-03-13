@@ -53,6 +53,7 @@ function supabaseHeaders() {
 }
 
 async function updateSubscription(stripeCustomerId, data) {
+  console.log('updateSubscription PATCH:', { stripeCustomerId, data });
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/subscriptions?stripe_customer_id=eq.${stripeCustomerId}`,
     {
@@ -61,8 +62,10 @@ async function updateSubscription(stripeCustomerId, data) {
       body: JSON.stringify(data),
     }
   );
+  const resText = await res.text();
+  console.log('updateSubscription result:', { status: res.status, body: resText });
   if (!res.ok) {
-    console.error('Failed to update subscription:', await res.text());
+    console.error('Failed to update subscription:', resText);
   }
 }
 
@@ -242,13 +245,17 @@ async function handleSubscriptionUpdated(sub) {
     ? new Date(sub.current_period_end * 1000).toISOString()
     : null;
 
+  const cancelAtPeriodEnd = sub.cancel_at_period_end === true;
+
+  console.log('handleSubscriptionUpdated:', { customerId, status, cancelAtPeriodEnd, isPro, periodEnd });
+
   const data = {
     stripe_subscription_id: sub.id,
     plan: isPro ? 'pro' : 'free',
     status: status === 'active' ? 'active' : status === 'past_due' ? 'past_due' : 'canceled',
     price_id: priceId,
     billing_interval: interval,
-    cancel_at_period_end: sub.cancel_at_period_end || false,
+    cancel_at_period_end: cancelAtPeriodEnd,
     sheets_limit: isPro ? 50 : 3,
   };
   if (periodEnd) data.current_period_end = periodEnd;
