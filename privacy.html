@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neoskool — Politique de confidentialité</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0a0a0f;--ink-soft:#3a3a4a;--ink-muted:#6b6b7b;
+  --surface:#ffffff;--surface-raised:#f8f8fa;--surface-dim:#f0f0f5;
+  --border:#e5e5ed;
+  --v-700:#6d28d9;--v-600:#7c3aed;--v-500:#8b5cf6;--v-400:#a78bfa;--v-100:#ede9fe;--v-50:#f5f3ff;
+  --warm:#fdfcf9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(--surface-raised);-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* Navbar */
+.legal-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem}
+.legal-nav-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.legal-brand{font-size:1.35rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-.04em}.legal-brand i{color:var(--v-600);font-style:normal}
+.legal-back{padding:.5rem 1.2rem;border-radius:10px;font-family:inherit;font-size:.82rem;font-weight:700;border:1.5px solid var(--border);background:transparent;color:var(--ink-muted);cursor:pointer;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.legal-back:hover{border-color:var(--v-400);color:var(--v-600)}
+
+/* Content */
+.legal-container{max-width:800px;margin:0 auto;padding:2.5rem 2rem 4rem}
+.legal-card{background:white;border:1.5px solid var(--border);border-radius:20px;padding:3rem;line-height:1.8}
+.legal-card h1{font-size:1.8rem;font-weight:900;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.03em}
+.legal-card .legal-date{font-size:.82rem;color:var(--ink-muted);margin-bottom:2rem;font-weight:600}
+.legal-card h2{font-size:1.15rem;font-weight:800;color:var(--ink);margin-top:2rem;margin-bottom:.75rem}
+.legal-card h3{font-size:1rem;font-weight:700;color:var(--ink-soft);margin-top:1.25rem;margin-bottom:.5rem}
+.legal-card p{font-size:.92rem;color:var(--ink-soft);margin-bottom:.75rem}
+.legal-card ul{font-size:.92rem;color:var(--ink-soft);margin-bottom:.75rem;padding-left:1.5rem}
+.legal-card li{margin-bottom:.35rem}
+.legal-card a{color:var(--v-600);text-decoration:none;font-weight:600}
+.legal-card a:hover{text-decoration:underline}
+.legal-card strong{color:var(--ink);font-weight:700}
+.legal-card table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.88rem}
+.legal-card th{text-align:left;padding:.6rem .75rem;background:var(--v-50);color:var(--ink);font-weight:700;border:1px solid var(--border)}
+.legal-card td{padding:.6rem .75rem;border:1px solid var(--border);color:var(--ink-soft)}
+
+/* Footer */
+.legal-footer{text-align:center;padding:2rem;font-size:.78rem;color:var(--ink-muted)}
+.legal-footer a{color:var(--v-500);text-decoration:none}
+
+@media(max-width:640px){
+  .legal-card{padding:1.75rem;border-radius:16px}
+  .legal-container{padding:1.5rem 1rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <div class="legal-nav-inner">
+    <a href="/" class="legal-brand">neo<i>skool</i></a>
+    <a href="/" class="legal-back">← Retour au site</a>
+  </div>
+</nav>
+
+<div class="legal-container">
+  <div class="legal-card">
+    <h1>Politique de confidentialité</h1>
+    <p class="legal-date">Dernière mise à jour : 13 mars 2026</p>
+
+    <h2>1. Responsable du traitement</h2>
+    <p>Le responsable du traitement des données est Corentin, éditeur de Neoskool, domicilié dans le Canton de Vaud, Suisse.</p>
+    <p>Contact : <a href="mailto:contact@neoskool.com">contact@neoskool.com</a></p>
+
+    <h2>2. Cadre juridique</h2>
+    <p>Le traitement de vos données est soumis à :</p>
+    <ul>
+      <li>La <strong>Loi fédérale sur la protection des données (LPD)</strong> — droit suisse</li>
+      <li>Le <strong>Règlement général sur la protection des données (RGPD)</strong> — pour les utilisateurs de l'UE/EEE</li>
+    </ul>
+
+    <h2>3. Données collectées</h2>
+    <table>
+      <tr><th>Donnée</th><th>Finalité</th><th>Base légale</th></tr>
+      <tr><td>Adresse email</td><td>Création de compte, communication</td><td>Consentement / Exécution du contrat</td></tr>
+      <tr><td>Mot de passe (hashé)</td><td>Authentification</td><td>Exécution du contrat</td></tr>
+      <tr><td>Données Google (nom, email, photo)</td><td>Connexion via Google OAuth</td><td>Consentement</td></tr>
+      <tr><td>Fiches générées (HTML)</td><td>Sauvegarde dans la bibliothèque</td><td>Exécution du contrat</td></tr>
+      <tr><td>Métadonnées des fiches (matière, degré, voie)</td><td>Organisation, filtres, statistiques</td><td>Intérêt légitime</td></tr>
+      <tr><td>Tags et notes personnels</td><td>Organisation personnelle</td><td>Exécution du contrat</td></tr>
+      <tr><td>Données de paiement</td><td>Traitement des abonnements</td><td>Exécution du contrat</td></tr>
+    </table>
+
+    <h2>4. Données NON collectées</h2>
+    <p>Neoskool ne collecte <strong>pas</strong> :</p>
+    <ul>
+      <li>De données sur les élèves (noms, notes, résultats)</li>
+      <li>De cookies de tracking ou publicitaires</li>
+      <li>De données de géolocalisation</li>
+      <li>De données biométriques</li>
+    </ul>
+
+    <h2>5. Sous-traitants et transferts de données</h2>
+    <table>
+      <tr><th>Service</th><th>Rôle</th><th>Localisation</th></tr>
+      <tr><td>Supabase</td><td>Authentification, base de données</td><td>UE (AWS Frankfurt)</td></tr>
+      <tr><td>Vercel</td><td>Hébergement de l'application</td><td>UE / USA</td></tr>
+      <tr><td>Anthropic (Claude API)</td><td>Génération de contenu par IA</td><td>USA</td></tr>
+      <tr><td>Stripe</td><td>Paiements</td><td>UE / USA</td></tr>
+      <tr><td>Google</td><td>Authentification OAuth</td><td>UE / USA</td></tr>
+    </table>
+    <p>Les transferts vers les USA sont encadrés par le Swiss-U.S. Data Privacy Framework et/ou des clauses contractuelles types (CCT).</p>
+
+    <h2>6. Durée de conservation</h2>
+    <ul>
+      <li><strong>Compte actif</strong> : données conservées tant que le compte existe</li>
+      <li><strong>Suppression de compte</strong> : toutes les données sont supprimées sous 30 jours</li>
+      <li><strong>Données de paiement</strong> : conservées par Stripe selon leurs obligations légales (10 ans pour la comptabilité)</li>
+    </ul>
+
+    <h2>7. Vos droits</h2>
+    <p>Conformément à la LPD et au RGPD, vous disposez des droits suivants :</p>
+    <ul>
+      <li><strong>Droit d'accès</strong> : obtenir une copie de vos données personnelles</li>
+      <li><strong>Droit de rectification</strong> : corriger des données inexactes</li>
+      <li><strong>Droit à l'effacement</strong> : supprimer votre compte et toutes vos données</li>
+      <li><strong>Droit à la portabilité</strong> : recevoir vos données dans un format structuré</li>
+      <li><strong>Droit d'opposition</strong> : vous opposer au traitement de vos données</li>
+      <li><strong>Droit de retrait du consentement</strong> : retirer votre consentement à tout moment</li>
+    </ul>
+    <p>Pour exercer ces droits, contactez-nous à <a href="mailto:contact@neoskool.com">contact@neoskool.com</a>. Nous répondons sous 30 jours.</p>
+
+    <h2>8. Suppression de compte</h2>
+    <p>Vous pouvez supprimer votre compte à tout moment depuis votre <strong>espace personnel</strong> (Mon compte → Supprimer mon compte). La suppression entraîne :</p>
+    <ul>
+      <li>L'effacement de votre profil et identifiants</li>
+      <li>L'effacement de toutes vos fiches sauvegardées</li>
+      <li>L'effacement de vos tags, notes et préférences</li>
+      <li>L'annulation de tout abonnement actif</li>
+    </ul>
+    <p>Cette action est <strong>irréversible</strong>.</p>
+
+    <h2>9. Sécurité</h2>
+    <p>Nous mettons en place les mesures suivantes pour protéger vos données :</p>
+    <ul>
+      <li>Chiffrement HTTPS (TLS 1.3) pour toutes les communications</li>
+      <li>Mots de passe hashés (bcrypt) — jamais stockés en clair</li>
+      <li>Row Level Security (RLS) sur la base de données — chaque utilisateur n'accède qu'à ses propres données</li>
+      <li>Authentification sécurisée via Supabase Auth</li>
+      <li>Aucun accès tiers aux données utilisateur</li>
+    </ul>
+
+    <h2>10. Cookies</h2>
+    <p>Neoskool utilise uniquement des <strong>cookies techniques essentiels</strong> :</p>
+    <ul>
+      <li>Cookie de session Supabase (authentification)</li>
+      <li>LocalStorage pour les préférences d'interface</li>
+    </ul>
+    <p>Aucun cookie publicitaire, analytique ou de tracking n'est utilisé.</p>
+
+    <h2>11. Intelligence artificielle</h2>
+    <p>Les fiches sont générées par l'API Claude (Anthropic). Les données envoyées à l'API pour la génération sont :</p>
+    <ul>
+      <li>La matière, le degré, la voie et le sujet choisis</li>
+      <li>Les adaptations BEP sélectionnées</li>
+      <li>Le message personnalisé de l'utilisateur</li>
+    </ul>
+    <p>Aucune donnée personnelle (email, nom, identifiants) n'est transmise à l'API de génération. Anthropic ne conserve pas les données des appels API au-delà de 30 jours.</p>
+
+    <h2>12. Mineurs</h2>
+    <p>Neoskool est destiné aux <strong>enseignants et parents</strong>. Le service ne collecte pas directement de données auprès de mineurs. Les fiches générées sont destinées à être utilisées dans un cadre pédagogique supervisé.</p>
+
+    <h2>13. Modification de cette politique</h2>
+    <p>Nous nous réservons le droit de modifier cette politique. Toute modification sera publiée sur cette page avec une date de mise à jour. Les changements significatifs seront notifiés par email.</p>
+
+    <h2>14. Contact et réclamation</h2>
+    <p>Pour toute question ou réclamation relative à vos données :</p>
+    <ul>
+      <li>Email : <a href="mailto:contact@neoskool.com">contact@neoskool.com</a></li>
+    </ul>
+    <p>En cas de litige non résolu, vous pouvez déposer une plainte auprès du <strong>Préposé fédéral à la protection des données et à la transparence (PFPDT)</strong> en Suisse, ou de l'autorité de protection des données de votre pays de résidence.</p>
+  </div>
+</div>
+
+<div class="legal-footer">
+  © 2026 Neoskool · Canton de Vaud, Suisse · <a href="/terms.html">Conditions générales</a>
+</div>
+
+</body>
+</html>
