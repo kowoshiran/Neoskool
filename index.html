@@ -490,6 +490,30 @@ footer{background:var(--slate-900);padding:3rem 2rem;text-align:center}.footer-b
 .auth-success .success-icon{font-size:3rem;margin-bottom:.75rem}
 .auth-success h4{color:var(--v-600);font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
 .auth-success p{color:var(--ink-muted);font-size:.85rem}
+/* Upgrade modal */
+.upgrade-modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,15,0.6);backdrop-filter:blur(8px);z-index:10000;align-items:center;justify-content:center}
+.upgrade-modal-overlay.visible{display:flex;animation:fadeUp .3s ease-out}
+.upgrade-modal{background:white;border:1px solid var(--border);border-radius:24px;padding:2.5rem;max-width:480px;width:90%;position:relative;box-shadow:0 25px 60px rgba(0,0,0,0.15);text-align:center}
+.upgrade-modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--ink-muted);font-size:1.5rem;cursor:pointer;padding:.5rem;line-height:1}.upgrade-modal-close:hover{color:var(--ink)}
+.upgrade-modal-icon{font-size:3.5rem;margin-bottom:1rem}
+.upgrade-modal h3{font-size:1.4rem;font-weight:800;color:var(--ink);margin-bottom:.5rem}
+.upgrade-modal p{color:var(--ink-muted);font-size:.9rem;line-height:1.6;margin-bottom:1.5rem}
+.upgrade-modal-quota{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1.5rem;padding:1rem;background:var(--v-50);border-radius:14px;border:1.5px solid var(--v-100)}
+.upgrade-modal-quota-bar{flex:1;height:8px;background:var(--v-100);border-radius:4px;overflow:hidden;max-width:160px}
+.upgrade-modal-quota-fill{height:100%;background:linear-gradient(90deg,var(--v-500),var(--rose-500));border-radius:4px;width:100%}
+.upgrade-modal-quota-text{font-size:.85rem;font-weight:700;color:var(--ink)}
+.upgrade-modal-features{text-align:left;margin-bottom:1.5rem}
+.upgrade-modal-feature{display:flex;align-items:center;gap:.6rem;padding:.4rem 0;font-size:.88rem;color:var(--ink-soft)}
+.upgrade-modal-feature svg{width:18px;height:18px;color:var(--emerald-500);flex-shrink:0}
+.upgrade-btn{width:100%;padding:1rem;background:linear-gradient(135deg,var(--v-600),var(--v-500));color:white;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:800;border:none;border-radius:14px;cursor:pointer;transition:all .3s;margin-bottom:.75rem}
+.upgrade-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.3)}
+.upgrade-btn-secondary{display:block;text-align:center;font-size:.82rem;color:var(--ink-muted);font-weight:600;cursor:pointer;background:none;border:none;font-family:inherit;transition:opacity .2s;width:100%}
+.upgrade-btn-secondary:hover{opacity:.7;color:var(--v-600)}
+/* Quota badge in auth-bar */
+.auth-bar-quota{display:inline-flex;align-items:center;gap:.35rem;padding:2px 8px;border-radius:6px;font-size:.72rem;font-weight:700;margin-left:.5rem}
+.auth-bar-quota.ok{background:rgba(16,185,129,0.15);color:#10b981}
+.auth-bar-quota.warn{background:rgba(245,158,11,0.2);color:#f59e0b}
+.auth-bar-quota.full{background:rgba(244,63,94,0.15);color:#f43f5e}
 /* Navbar login btn */
 .navbar-login{padding:.5rem 1.1rem;font-family:inherit;font-size:.82rem;font-weight:700;color:var(--ink-soft);background:transparent;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:all .2s;text-decoration:none}.navbar-login:hover{border-color:var(--v-300);color:var(--v-600)}
 
@@ -663,7 +687,7 @@ body.has-auth-bar{padding-top:36px}
 </head>
 <body>
 <div class="auth-bar" id="auth-bar">
-  <div class="auth-bar-left"><span class="auth-bar-dot"></span><span id="auth-bar-email"></span></div>
+  <div class="auth-bar-left"><span class="auth-bar-dot"></span><span id="auth-bar-email"></span><span class="auth-bar-quota ok" id="auth-bar-quota" style="display:none"></span></div>
   <div class="auth-bar-links">
     <a href="/dashboard.html" class="auth-bar-link">Mon espace</a>
     <button class="auth-bar-btn" onclick="handleLogout()">Quitter</button>
@@ -1613,6 +1637,28 @@ body.has-auth-bar{padding-top:36px}
   </div>
 </div>
 
+<!-- Upgrade Modal -->
+<div class="upgrade-modal-overlay" id="upgrade-modal">
+  <div class="upgrade-modal">
+    <button class="upgrade-modal-close" onclick="closeUpgradeModal()">&times;</button>
+    <div class="upgrade-modal-icon">🚀</div>
+    <h3>Tu as utilisé tes fiches gratuites !</h3>
+    <p>Tu as atteint la limite de <strong id="upgrade-quota-text">3/3 fiches</strong> ce mois. Passe en Pro pour continuer à générer des exercices sans limite.</p>
+    <div class="upgrade-modal-quota">
+      <div class="upgrade-modal-quota-bar"><div class="upgrade-modal-quota-fill"></div></div>
+      <span class="upgrade-modal-quota-text" id="upgrade-quota-label">3/3</span>
+    </div>
+    <div class="upgrade-modal-features">
+      <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>50 fiches par mois</div>
+      <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Export PDF haute qualité</div>
+      <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Accès prioritaire</div>
+      <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Support dédié</div>
+    </div>
+    <button class="upgrade-btn" onclick="goToUpgrade()">Passer en Pro — 29.90 CHF/mois</button>
+    <button class="upgrade-btn-secondary" onclick="closeUpgradeModal()">Mon quota se renouvelle le 1er du mois</button>
+  </div>
+</div>
+
 <!-- Legacy result section for print -->
 <section class="result-section" id="result-section"></section>
 
@@ -1789,6 +1835,8 @@ function showAuthBar() {
   document.getElementById('auth-bar-email').textContent = currentUser.email;
   bar.classList.add('visible');
   document.body.classList.add('has-auth-bar');
+  // Update quota badge
+  updateQuotaBadge();
   // Update navbar: hide login + anon CTA, show Mon espace
   const loginBtn = document.getElementById('navbar-login');
   const ctaAnon = document.getElementById('navbar-cta-anon');
@@ -1930,6 +1978,9 @@ async function recordGeneration(metadata) {
   // Invalidate cache so next check is fresh
   cachedSheetCount = null;
 
+  // Refresh quota badge
+  updateQuotaBadge();
+
   // Also update localStorage as fallback
   const currentMonth = new Date().toISOString().slice(0, 7);
   const data = JSON.parse(localStorage.getItem('nsk_usage') || '{}');
@@ -1965,6 +2016,51 @@ function isEmailGated() {
   if (currentUser) return false;
   if (localStorage.getItem('nsk_email')) return false;
   return false;
+}
+
+// ==================== UPGRADE MODAL ====================
+function showUpgradeModal() {
+  const modal = document.getElementById('upgrade-modal');
+  if (modal) modal.classList.add('visible');
+}
+function closeUpgradeModal() {
+  const modal = document.getElementById('upgrade-modal');
+  if (modal) modal.classList.remove('visible');
+}
+function goToUpgrade() {
+  // Will redirect to Stripe checkout in Sprint 3B
+  // For now, show a message
+  closeUpgradeModal();
+  showStatus('L\'offre Pro arrive bientôt ! Ton quota se renouvelle le 1er du mois.', 'error');
+}
+// Close upgrade modal on backdrop click / Escape
+document.addEventListener('click', e => {
+  if (e.target.id === 'upgrade-modal') closeUpgradeModal();
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeUpgradeModal();
+});
+
+// ==================== QUOTA BADGE ====================
+async function updateQuotaBadge() {
+  if (!currentUser || isBetaUser) {
+    const badge = document.getElementById('auth-bar-quota');
+    if (badge) badge.style.display = 'none';
+    return;
+  }
+  const count = await getSheetCount();
+  const badge = document.getElementById('auth-bar-quota');
+  if (!badge) return;
+  badge.textContent = count + '/' + FREE_SHEETS_PER_MONTH;
+  badge.style.display = '';
+  badge.className = 'auth-bar-quota';
+  if (count >= FREE_SHEETS_PER_MONTH) {
+    badge.classList.add('full');
+  } else if (count >= Math.ceil(FREE_SHEETS_PER_MONTH * 2 / 3)) {
+    badge.classList.add('warn');
+  } else {
+    badge.classList.add('ok');
+  }
 }
 
 // ==================== AUTH MODAL ====================
@@ -2752,7 +2848,7 @@ async function handleGenerate(e) {
 
   // Check quota for non-beta users
   if (!isBetaUser && !(await canGenerate())) {
-    showStatus(`Tu as atteint la limite de ${FREE_SHEETS_PER_MONTH} fiches gratuites ce mois. Passe en Pro pour continuer !`, 'error');
+    showUpgradeModal();
     return;
   }
 
@@ -2875,7 +2971,7 @@ async function handleGenerate(e) {
       try {
         const parsed = JSON.parse(errData);
         if (parsed.error === 'quota_exceeded') {
-          showStatus(parsed.message, 'error');
+          showUpgradeModal();
           return;
         }
       } catch(e) {}
