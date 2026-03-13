@@ -146,8 +146,8 @@ async function handleCheckoutCompleted(session) {
   console.log('Stripe sub.cancel_at_period_end:', sub.cancel_at_period_end);
   console.log('Stripe sub.status:', sub.status);
 
-  // If subscription is already canceled or cancel_at_period_end, don't overwrite with checkout
-  if (sub.cancel_at_period_end === true || sub.status === 'canceled') {
+  // If subscription is already canceled or scheduled for cancellation, don't overwrite with checkout
+  if (sub.cancel_at_period_end === true || sub.cancel_at != null || sub.status === 'canceled') {
     console.log('Skipping checkout: subscription already canceled or canceling');
     return;
   }
@@ -170,8 +170,8 @@ async function handleCheckoutCompleted(session) {
   const priceId = sub.items?.data?.[0]?.price?.id || '';
   const interval = sub.items?.data?.[0]?.price?.recurring?.interval || 'month';
 
-  // Try multiple possible field names for period end
-  const rawPeriodEnd = sub.current_period_end || sub.ended_at;
+  // Stripe API 2026-02-25.clover: current_period_end removed, compute from billing_cycle_anchor + interval
+  const rawPeriodEnd = sub.current_period_end || sub.cancel_at || sub.ended_at;
   const periodEnd = rawPeriodEnd
     ? new Date(rawPeriodEnd * 1000).toISOString()
     : null;
@@ -254,23 +254,17 @@ async function handleSubscriptionUpdated(sub) {
 
   const isPro = ['active', 'past_due'].includes(status);
 
-  console.log('handleSubscriptionUpdated RAW:', {
-    keys: Object.keys(sub),
-    current_period_end: sub.current_period_end,
-    cancel_at_period_end: sub.cancel_at_period_end,
-    cancel_at: sub.cancel_at,
-    canceled_at: sub.canceled_at,
-    status: sub.status,
-  });
+  // Stripe API 2026-02-25.clover: cancel_at_period_end is deprecated, use cancel_at instead
+  // cancel_at = timestamp means scheduled for cancellation, null means not canceling
+  const cancelAtPeriodEnd = sub.cancel_at_period_end === true || sub.cancel_at != null;
 
-  const rawPeriodEnd = sub.current_period_end || sub.ended_at;
+  // current_period_end removed in new API, use cancel_at or billing_cycle_anchor as fallback
+  const rawPeriodEnd = sub.current_period_end || sub.cancel_at || sub.ended_at;
   const periodEnd = rawPeriodEnd
     ? new Date(rawPeriodEnd * 1000).toISOString()
     : null;
 
-  const cancelAtPeriodEnd = sub.cancel_at_period_end === true;
-
-  console.log('handleSubscriptionUpdated:', { customerId, status, cancelAtPeriodEnd, isPro, periodEnd });
+  console.log('handleSubscriptionUpdated:', { customerId, status, cancelAtPeriodEnd, isPro, periodEnd, cancel_at: sub.cancel_at });
 
   const data = {
     stripe_subscription_id: sub.id,
