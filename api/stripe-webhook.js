@@ -141,6 +141,17 @@ async function handleCheckoutCompleted(session) {
   });
   const sub = await subRes.json();
 
+  console.log('Stripe subscription keys:', Object.keys(sub));
+  console.log('Stripe sub.current_period_end:', sub.current_period_end);
+  console.log('Stripe sub.cancel_at_period_end:', sub.cancel_at_period_end);
+  console.log('Stripe sub.status:', sub.status);
+
+  // If subscription is already canceled or cancel_at_period_end, don't overwrite with checkout
+  if (sub.cancel_at_period_end === true || sub.status === 'canceled') {
+    console.log('Skipping checkout: subscription already canceled or canceling');
+    return;
+  }
+
   // Fallback: get userId from subscription metadata
   if (!userId) {
     userId = sub.metadata?.supabase_user_id;
@@ -159,8 +170,10 @@ async function handleCheckoutCompleted(session) {
   const priceId = sub.items?.data?.[0]?.price?.id || '';
   const interval = sub.items?.data?.[0]?.price?.recurring?.interval || 'month';
 
-  const periodEnd = sub.current_period_end
-    ? new Date(sub.current_period_end * 1000).toISOString()
+  // Try multiple possible field names for period end
+  const rawPeriodEnd = sub.current_period_end || sub.ended_at;
+  const periodEnd = rawPeriodEnd
+    ? new Date(rawPeriodEnd * 1000).toISOString()
     : null;
 
   const updateData = {
@@ -241,8 +254,18 @@ async function handleSubscriptionUpdated(sub) {
 
   const isPro = ['active', 'past_due'].includes(status);
 
-  const periodEnd = sub.current_period_end
-    ? new Date(sub.current_period_end * 1000).toISOString()
+  console.log('handleSubscriptionUpdated RAW:', {
+    keys: Object.keys(sub),
+    current_period_end: sub.current_period_end,
+    cancel_at_period_end: sub.cancel_at_period_end,
+    cancel_at: sub.cancel_at,
+    canceled_at: sub.canceled_at,
+    status: sub.status,
+  });
+
+  const rawPeriodEnd = sub.current_period_end || sub.ended_at;
+  const periodEnd = rawPeriodEnd
+    ? new Date(rawPeriodEnd * 1000).toISOString()
     : null;
 
   const cancelAtPeriodEnd = sub.cancel_at_period_end === true;
