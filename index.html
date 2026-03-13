@@ -47,6 +47,10 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
 .hero h1 em{font-family:inherit;font-style:normal;font-weight:900;color:var(--v-600);position:relative;display:inline-block;font-size:1em;text-transform:uppercase;letter-spacing:-.04em}
 .hero h1 em::after{content:'';position:absolute;bottom:2px;left:-6px;right:-6px;height:40%;background:linear-gradient(to right,rgba(250,204,21,0.3),rgba(250,204,21,0.4),rgba(250,204,21,0.25));border-radius:2px;z-index:-1;transform:rotate(-.5deg) skewX(-1deg)}
 .hero-sub{font-size:1.1rem;font-weight:600;line-height:1.5;color:var(--ink-muted);margin-bottom:1.5rem;animation:fadeUp .6s ease-out .1s both;letter-spacing:.01em}
+.hero-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:1.8rem;animation:fadeUp .6s ease-out .15s both}
+.hero-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .9rem;background:rgba(124,58,237,0.06);border:1px solid rgba(124,58,237,0.12);border-radius:20px;font-size:.82rem;font-weight:700;color:var(--ink-soft);white-space:nowrap;transition:all .2s}
+.hero-chip:hover{background:rgba(124,58,237,0.1);border-color:rgba(124,58,237,0.2)}
+.hero-chip-icon{font-size:.95rem;line-height:1}
 
 /* Note (grade card) */
 .note-wrap{position:relative;margin-bottom:1.5rem;animation:fadeUp .6s ease-out .2s both}
@@ -680,8 +684,13 @@ body.has-auth-bar{padding-top:36px}
 
   <div class="hero-main">
 
-    <h1>Générez des exercices <span class="hero-underline">sur mesure</span><br>pour que chaque élève <em>RÉUSSISSE</em></h1>
-    <p class="hero-sub">Plus de plaisir. Plus de progrès. Plus de résultats.</p>
+    <h1>Générez des exercices pour que<br>vos élèves <em>RÉUSSISSENT</em></h1>
+    <div class="hero-chips">
+      <span class="hero-chip"><span class="hero-chip-icon">🇨🇭</span> 100% Suisse romande (PER)</span>
+      <span class="hero-chip"><span class="hero-chip-icon">⚡</span> Généré en 1 minute</span>
+      <span class="hero-chip"><span class="hero-chip-icon">🎯</span> Adapté à chaque élève</span>
+      <span class="hero-chip"><span class="hero-chip-icon">🧠</span> Sciences de l'apprentissage</span>
+    </div>
 
     <div class="note-wrap">
       <div class="tape"></div>
@@ -702,29 +711,6 @@ body.has-auth-bar{padding-top:36px}
     </div>
   </div>
 
-  <div class="proof-bar">
-    <div class="proof-bar-inner">
-      <div class="proof-item">
-        <div class="proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div>
-        <div class="proof-text">Basé sur la science</div>
-      </div>
-      <div class="proof-sep"></div>
-      <div class="proof-item">
-        <div class="proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="proof-text">Généré en 1 minute</div>
-      </div>
-      <div class="proof-sep"></div>
-      <div class="proof-item">
-        <div class="proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/><circle cx="12" cy="12" r="10"/></svg></div>
-        <div class="proof-text">100% Suisse romande <span>(PER)</span></div>
-      </div>
-      <div class="proof-sep"></div>
-      <div class="proof-item">
-        <div class="proof-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-        <div class="proof-text">Adapté à chaque élève</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- MINI-FICHE PREVIEW -->
