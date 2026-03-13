@@ -2059,7 +2059,7 @@ async function handleAuthSubmit() {
         document.getElementById('auth-form').style.display = 'none';
         document.getElementById('auth-success-title').textContent = 'Vérifie tes emails !';
         document.getElementById('auth-success-text').textContent = 'Clique sur le lien de confirmation pour activer ton compte.';
-        document.getElementById('auth-success').style.display = '';
+        document.getElementById('auth-success').style.display = 'block';
       } else if (data.session) {
         // Auto-confirmed (e.g. if Supabase has confirm disabled)
         currentUser = data.session.user;
@@ -2111,7 +2111,7 @@ async function handleMagicLink() {
     document.getElementById('auth-form').style.display = 'none';
     document.getElementById('auth-success-title').textContent = 'Lien envoyé !';
     document.getElementById('auth-success-text').textContent = 'Consulte tes emails et clique sur le lien pour te connecter.';
-    document.getElementById('auth-success').style.display = '';
+    document.getElementById('auth-success').style.display = 'block';
 
     if (authPrintAfter) {
       setTimeout(() => { closeAuthModal(); doPrint(); }, 1500);
