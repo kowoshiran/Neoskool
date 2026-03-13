@@ -5,130 +5,482 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Neoskool — Mon espace</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
-:root{
+/* ===== DESIGN SYSTEM — same as index.html ===== */
+:root {
   --ink:#0a0a0f;--ink-soft:#3a3a4a;--ink-muted:#6b6b7b;
-  --surface:#fafafa;--surface-raised:#fff;--border:#e5e5ed;
+  --surface:#ffffff;--surface-raised:#f8f8fa;--surface-dim:#f0f0f5;
+  --border:#e5e5ed;--border-light:#f0f0f5;
   --v-700:#6d28d9;--v-600:#7c3aed;--v-500:#8b5cf6;--v-400:#a78bfa;--v-300:#c4b5fd;--v-200:#ddd6fe;--v-100:#ede9fe;--v-50:#f5f3ff;
-  --emerald-500:#10b981;--emerald-100:#d1fae5;
-  --amber-500:#f59e0b;--amber-100:#fef3c7;
+  --amber-500:#f59e0b;--amber-400:#fbbf24;--amber-100:#fef3c7;
+  --emerald-500:#10b981;--emerald-100:#d1fae5;--emerald-50:#ecfdf5;
+  --rose-500:#f43f5e;--rose-100:#ffe4e6;
+  --warm:#fdfcf9;--ink-faint:#8a8a9a;--red:#dc2626;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(--surface-raised);-webkit-font-smoothing:antialiased;min-height:100vh}
 
-/* Nav */
-.dash-nav{background:white;padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(16px)}
-.dash-brand{font-size:1.3rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-.04em}
-.dash-brand i{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--v-600)}
+/* ===== NAVBAR ===== */
+.dash-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem}
+.dash-nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.dash-brand{font-size:1.35rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:-.04em}.dash-brand i{color:var(--v-600);font-style:normal}
+.dash-nav-center{display:flex;align-items:center;gap:0}
+.dash-tab{position:relative;padding:.9rem 1.25rem;font-size:.85rem;font-weight:600;color:var(--ink-muted);text-decoration:none;cursor:pointer;background:none;border:none;font-family:inherit;transition:color .2s}
+.dash-tab:hover{color:var(--ink)}
+.dash-tab.active{color:var(--v-600)}
+.dash-tab.active::after{content:'';position:absolute;bottom:0;left:.75rem;right:.75rem;height:2.5px;background:var(--v-600);border-radius:2px 2px 0 0}
 .dash-nav-right{display:flex;align-items:center;gap:.75rem}
-.dash-user{font-size:.82rem;color:var(--ink-muted);font-weight:600}
-.dash-btn{padding:.5rem 1.25rem;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.dash-plan-badge{padding:.25rem .7rem;border-radius:20px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.dash-plan-badge.free{background:var(--surface-dim);color:var(--ink-muted)}
+.dash-plan-badge.pro{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#78350f}
+.dash-plan-badge.beta{background:linear-gradient(135deg,var(--v-400),var(--v-600));color:white}
+.dash-avatar{width:34px;height:34px;border-radius:50%;background:var(--v-100);color:var(--v-600);display:flex;align-items:center;justify-content:center;font-size:.82rem;font-weight:800;cursor:pointer;transition:box-shadow .2s}
+.dash-avatar:hover{box-shadow:0 0 0 3px var(--v-200)}
+.dash-btn{padding:.5rem 1.2rem;border-radius:10px;font-family:inherit;font-size:.82rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
 .dash-btn-primary{background:var(--v-600);color:white}.dash-btn-primary:hover{background:var(--v-700);transform:translateY(-1px)}
-.dash-btn-ghost{background:transparent;color:var(--ink-muted);border:1px solid var(--border)}.dash-btn-ghost:hover{border-color:var(--v-300);color:var(--v-600)}
-.dash-btn-danger{background:transparent;color:#ef4444;border:1px solid #fecaca}.dash-btn-danger:hover{background:#fef2f2}
+.dash-btn-ghost{background:transparent;color:var(--ink-muted);border:1.5px solid var(--border)}.dash-btn-ghost:hover{border-color:var(--v-300);color:var(--v-600)}
+.dash-btn-danger{background:transparent;color:var(--red);border:1.5px solid #fecaca}.dash-btn-danger:hover{background:var(--rose-100)}
+.dash-btn-sm{padding:.35rem .75rem;font-size:.75rem;border-radius:8px}
 
-/* Container */
-.dash-container{max-width:1000px;margin:0 auto;padding:2rem}
-.dash-header{margin-bottom:2rem}
-.dash-header h1{font-size:1.8rem;font-weight:900;color:var(--ink);margin-bottom:.25rem;letter-spacing:-.03em}
-.dash-header p{color:var(--ink-muted);font-size:.95rem}
+/* ===== CONTAINER ===== */
+.dash-container{max-width:1200px;margin:0 auto;padding:1.5rem 2rem 3rem}
 
-/* Stats */
-.dash-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
-.dash-stat{background:white;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem;text-align:center;transition:all .2s}
-.dash-stat:hover{border-color:var(--v-200);box-shadow:0 4px 12px rgba(124,58,237,0.06)}
-.dash-stat-value{font-size:2rem;font-weight:900;color:var(--v-600);letter-spacing:-.03em}
-.dash-stat-label{font-size:.75rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-top:.25rem}
-.dash-stat-bar{height:6px;background:var(--v-50);border-radius:3px;margin-top:.75rem;overflow:hidden}
-.dash-stat-fill{height:100%;background:linear-gradient(90deg,var(--v-500),var(--v-400));border-radius:3px;transition:width .5s}
-.dash-stat-sub{font-size:.72rem;color:var(--ink-muted);margin-top:.4rem}
+/* ===== STATS BAR ===== */
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.dash-stat{background:white;border:1.5px solid var(--border);border-radius:16px;padding:1.25rem 1.5rem;transition:all .2s}
+.dash-stat:hover{border-color:var(--v-200);box-shadow:0 4px 16px rgba(124,58,237,0.06)}
+.dash-stat-label{font-size:.7rem;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-bottom:.35rem}
+.dash-stat-value{font-size:1.6rem;font-weight:900;color:var(--ink);letter-spacing:-.03em}
+.dash-stat-value span{color:var(--v-600)}
+.dash-stat-bar{height:5px;background:var(--v-50);border-radius:3px;margin-top:.6rem;overflow:hidden}
+.dash-stat-fill{height:100%;background:linear-gradient(90deg,var(--v-500),var(--v-400));border-radius:3px;transition:width .6s ease}
+.dash-stat-sub{font-size:.72rem;color:var(--ink-muted);margin-top:.3rem}
 
-/* Section */
-.dash-section-title{font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;letter-spacing:-.02em}
+/* ===== TOOLBAR ===== */
+.dash-toolbar{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.dash-search{flex:1;min-width:200px;position:relative}
+.dash-search input{width:100%;padding:.6rem 1rem .6rem 2.4rem;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.85rem;color:var(--ink);background:white;outline:none;transition:border-color .2s}
+.dash-search input:focus{border-color:var(--v-400);box-shadow:0 0 0 3px var(--v-50)}
+.dash-search input::placeholder{color:var(--ink-faint)}
+.dash-search-icon{position:absolute;left:.8rem;top:50%;transform:translateY(-50%);color:var(--ink-faint);font-size:.9rem;pointer-events:none}
+.dash-filter{padding:.55rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.82rem;color:var(--ink-soft);background:white;outline:none;cursor:pointer;transition:border-color .2s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b6b7b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .7rem center;padding-right:2rem}
+.dash-filter:focus{border-color:var(--v-400)}
 
-/* Sheets */
-.dash-sheets{display:flex;flex-direction:column;gap:.75rem}
-.dash-sheet{background:white;border:1.5px solid var(--border);border-radius:14px;padding:1.25rem;display:flex;align-items:center;gap:1rem;transition:all .2s}
-.dash-sheet:hover{border-color:var(--v-200);box-shadow:0 4px 12px rgba(124,58,237,0.06)}
-.dash-sheet-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.dash-sheet-icon.maths{background:var(--v-100)}.dash-sheet-icon.allemand{background:var(--amber-100)}.dash-sheet-icon.francais{background:#DBEAFE}.dash-sheet-icon.default{background:var(--surface)}
-.dash-sheet-info{flex-grow:1}
-.dash-sheet-title{font-weight:700;font-size:.95rem;color:var(--ink)}
-.dash-sheet-meta{font-size:.78rem;color:var(--ink-muted);margin-top:.15rem}
-.dash-sheet-actions{display:flex;gap:.5rem}
-.dash-sheet-btn{padding:.4rem .8rem;border-radius:8px;font-size:.78rem;font-weight:600;border:1px solid var(--border);background:white;color:var(--ink-soft);cursor:pointer;transition:all .2s;font-family:'Plus Jakarta Sans',sans-serif}
-.dash-sheet-btn:hover{border-color:var(--v-300);color:var(--v-600)}
-.dash-sheet-btn.delete{color:#ef4444;border-color:#fecaca}.dash-sheet-btn.delete:hover{background:#fef2f2}
-.dash-empty{text-align:center;padding:3rem;color:var(--ink-muted);font-size:.95rem}
-.dash-empty-icon{font-size:3rem;margin-bottom:.75rem}
-.dash-loading{text-align:center;padding:3rem;color:var(--ink-muted)}
-.dash-not-auth{text-align:center;padding:4rem 2rem}
-.dash-not-auth h2{font-size:1.5rem;font-weight:800;color:var(--ink);margin-bottom:.5rem}
+/* ===== SHEETS GRID ===== */
+.dash-sheets{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.dash-card{background:white;border:1.5px solid var(--border);border-radius:16px;padding:1.25rem;transition:all .25s;cursor:pointer;position:relative}
+.dash-card:hover{border-color:var(--v-200);box-shadow:0 6px 20px rgba(124,58,237,0.08);transform:translateY(-2px)}
+.dash-card-top{display:flex;align-items:flex-start;gap:.75rem;margin-bottom:.75rem}
+.dash-card-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.dash-card-icon.maths{background:var(--v-100)}
+.dash-card-icon.allemand{background:var(--amber-100)}
+.dash-card-icon.francais{background:#DBEAFE}
+.dash-card-icon.anglais{background:#D1FAE5}
+.dash-card-icon.default{background:var(--surface-dim)}
+.dash-card-header{flex:1;min-width:0}
+.dash-card-title{font-weight:700;font-size:.9rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dash-card-meta{font-size:.75rem;color:var(--ink-muted);margin-top:.15rem}
+.dash-card-sujet{font-size:.8rem;color:var(--ink-soft);margin-bottom:.6rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.dash-card-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.dash-card-left{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+
+/* Status badge */
+.dash-status{padding:.2rem .55rem;border-radius:6px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.dash-status.draft{background:var(--surface-dim);color:var(--ink-muted)}
+.dash-status.ready{background:var(--emerald-50);color:var(--emerald-500)}
+.dash-status.used{background:var(--amber-100);color:var(--amber-500)}
+
+/* Stars */
+.dash-stars{display:flex;gap:1px;font-size:.85rem}
+.dash-star{color:var(--border);cursor:pointer;transition:color .15s}
+.dash-star.filled{color:var(--amber-400)}
+.dash-star:hover{color:var(--amber-500)}
+
+/* Tags */
+.dash-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem}
+.dash-tag{padding:.15rem .5rem;border-radius:6px;font-size:.68rem;font-weight:600;background:var(--v-50);color:var(--v-600);border:1px solid var(--v-100)}
+
+/* Card actions overlay */
+.dash-card-actions{position:absolute;top:.75rem;right:.75rem;display:flex;gap:.3rem;opacity:0;transition:opacity .2s}
+.dash-card:hover .dash-card-actions{opacity:1}
+.dash-card-act{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:white;display:flex;align-items:center;justify-content:center;font-size:.75rem;cursor:pointer;transition:all .15s}
+.dash-card-act:hover{border-color:var(--v-300);background:var(--v-50)}
+.dash-card-act.delete:hover{border-color:#fecaca;background:var(--rose-100)}
+
+/* ===== EMPTY STATE ===== */
+.dash-empty{text-align:center;padding:5rem 2rem;grid-column:1/-1}
+.dash-empty-visual{font-size:4rem;margin-bottom:1rem;opacity:.7}
+.dash-empty h3{font-size:1.2rem;font-weight:800;color:var(--ink);margin-bottom:.5rem}
+.dash-empty p{color:var(--ink-muted);font-size:.9rem;margin-bottom:1.5rem;max-width:400px;margin-left:auto;margin-right:auto}
+
+/* ===== PAGINATION ===== */
+.dash-pagination{display:flex;align-items:center;justify-content:center;gap:.35rem;margin-top:2rem}
+.dash-page-btn{width:36px;height:36px;border-radius:10px;border:1.5px solid var(--border);background:white;font-family:inherit;font-size:.82rem;font-weight:700;color:var(--ink-soft);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.dash-page-btn:hover{border-color:var(--v-300);color:var(--v-600)}
+.dash-page-btn.active{background:var(--v-600);color:white;border-color:var(--v-600)}
+.dash-page-btn:disabled{opacity:.3;cursor:not-allowed}
+
+/* ===== MODAL ===== */
+.dash-modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,15,0.5);backdrop-filter:blur(4px);z-index:1000;align-items:center;justify-content:center;padding:1rem}
+.dash-modal-overlay.visible{display:flex}
+.dash-modal{background:white;border-radius:20px;width:100%;max-width:900px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.15);overflow:hidden}
+.dash-modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)}
+.dash-modal-title{font-size:1rem;font-weight:800;color:var(--ink)}
+.dash-modal-close{width:32px;height:32px;border-radius:8px;border:none;background:var(--surface-dim);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.dash-modal-close:hover{background:var(--v-100)}
+.dash-modal-body{flex:1;overflow-y:auto;padding:1.5rem}
+.dash-modal-footer{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-top:1px solid var(--border);gap:.75rem;flex-wrap:wrap}
+
+/* Preview iframe */
+.dash-preview-frame{width:100%;height:60vh;border:1px solid var(--border);border-radius:12px;background:white}
+
+/* ===== EDIT PANEL (inside modal) ===== */
+.dash-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.dash-field{display:flex;flex-direction:column;gap:.35rem}
+.dash-field.full{grid-column:1/-1}
+.dash-field label{font-size:.75rem;font-weight:700;color:var(--ink-muted);text-transform:uppercase;letter-spacing:.06em}
+.dash-field input,.dash-field textarea,.dash-field select{padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:.85rem;color:var(--ink);outline:none;transition:border-color .2s;background:white;resize:vertical}
+.dash-field input:focus,.dash-field textarea:focus,.dash-field select:focus{border-color:var(--v-400);box-shadow:0 0 0 3px var(--v-50)}
+.dash-edit-stars{display:flex;gap:2px;font-size:1.5rem;cursor:pointer}
+.dash-edit-stars .dash-star{transition:transform .15s}
+.dash-edit-stars .dash-star:hover{transform:scale(1.2)}
+.dash-tags-input{display:flex;flex-wrap:wrap;gap:.35rem;padding:.5rem .8rem;border:1.5px solid var(--border);border-radius:10px;min-height:42px;align-items:center;cursor:text;transition:border-color .2s}
+.dash-tags-input:focus-within{border-color:var(--v-400);box-shadow:0 0 0 3px var(--v-50)}
+.dash-tags-input .dash-tag{display:flex;align-items:center;gap:.25rem}
+.dash-tag-remove{cursor:pointer;opacity:.5;font-size:.7rem;transition:opacity .15s}
+.dash-tag-remove:hover{opacity:1}
+.dash-tags-input input{border:none;outline:none;font-family:inherit;font-size:.82rem;flex:1;min-width:80px;padding:0}
+
+/* ===== ACCOUNT SECTION ===== */
+.dash-account{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.dash-account-card{background:white;border:1.5px solid var(--border);border-radius:16px;padding:1.5rem}
+.dash-account-card h3{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:1rem}
+.dash-account-card.full{grid-column:1/-1}
+.dash-account-row{display:flex;align-items:center;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid var(--border-light)}
+.dash-account-row:last-child{border-bottom:none}
+.dash-account-label{font-size:.82rem;color:var(--ink-muted);font-weight:600}
+.dash-account-value{font-size:.85rem;color:var(--ink);font-weight:700}
+.dash-account-stat{text-align:center;padding:.5rem}
+.dash-account-stat-value{font-size:1.5rem;font-weight:900;color:var(--v-600)}
+.dash-account-stat-label{font-size:.72rem;color:var(--ink-muted);font-weight:600;margin-top:.15rem;text-transform:uppercase;letter-spacing:.06em}
+.dash-account-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.dash-plan-current{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.dash-plan-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.dash-plan-icon.free{background:var(--surface-dim)}
+.dash-plan-icon.pro{background:linear-gradient(135deg,#fef3c7,#fde68a)}
+.dash-plan-icon.beta{background:var(--v-100)}
+.dash-plan-info h4{font-size:1rem;font-weight:800;color:var(--ink)}
+.dash-plan-info p{font-size:.78rem;color:var(--ink-muted);margin-top:.1rem}
+
+/* ===== NOT AUTH ===== */
+.dash-not-auth{text-align:center;padding:6rem 2rem}
+.dash-not-auth h2{font-size:1.5rem;font-weight:900;color:var(--ink);margin-bottom:.5rem}
 .dash-not-auth p{color:var(--ink-muted);margin-bottom:1.5rem}
 
-@media(max-width:768px){
+/* ===== TOAST ===== */
+.dash-toast{position:fixed;bottom:2rem;right:2rem;z-index:2000;padding:.7rem 1.2rem;border-radius:12px;font-size:.82rem;font-weight:600;color:white;background:#10b981;box-shadow:0 8px 30px rgba(0,0,0,0.15);transform:translateY(100px);opacity:0;transition:all .3s ease}
+.dash-toast.visible{transform:translateY(0);opacity:1}
+.dash-toast.error{background:var(--red)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .dash-stats{grid-template-columns:repeat(2,1fr)}
+  .dash-account{grid-template-columns:1fr}
+  .dash-edit-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .dash-nav{padding:0 1rem}
+  .dash-container{padding:1rem}
   .dash-stats{grid-template-columns:1fr}
-  .dash-sheet{flex-direction:column;align-items:flex-start}
-  .dash-sheet-actions{width:100%}
-  .dash-nav{padding:.75rem 1rem}
+  .dash-sheets{grid-template-columns:1fr}
+  .dash-toolbar{flex-direction:column;align-items:stretch}
+  .dash-search{min-width:unset}
+  .dash-modal{max-height:95vh;border-radius:14px}
+  .dash-nav-center .dash-tab{padding:.9rem .8rem;font-size:.8rem}
 }
 </style>
 </head>
 <body>
 
+<!-- ===== NAV ===== -->
 <nav class="dash-nav">
-  <a href="/" class="dash-brand">neo<i>skool</i></a>
-  <div class="dash-nav-right">
-    <span class="dash-user" id="dash-email"></span>
-    <a href="/" class="dash-btn dash-btn-primary">Nouvelle fiche</a>
-    <button class="dash-btn dash-btn-danger" onclick="handleLogout()">Quitter</button>
+  <div class="dash-nav-inner">
+    <a href="/" class="dash-brand">neo<i>skool</i></a>
+    <div class="dash-nav-center">
+      <button class="dash-tab active" onclick="switchTab('library')" id="tab-library">Bibliothèque</button>
+      <button class="dash-tab" onclick="switchTab('account')" id="tab-account">Mon compte</button>
+    </div>
+    <div class="dash-nav-right">
+      <span class="dash-plan-badge free" id="dash-plan-badge">Gratuit</span>
+      <div class="dash-avatar" id="dash-avatar" onclick="switchTab('account')" title="Mon compte"></div>
+      <a href="/" class="dash-btn dash-btn-primary">+ Nouvelle fiche</a>
+    </div>
   </div>
 </nav>
 
-<div class="dash-container">
-  <div id="dash-not-auth" class="dash-not-auth" style="display:none;">
-    <h2>Connecte-toi pour voir tes fiches</h2>
-    <p>Tu dois avoir un compte pour accéder à ton espace personnel.</p>
-    <a href="/" class="dash-btn dash-btn-primary" style="padding:.75rem 2rem;font-size:1rem;border-radius:14px;">Retour à Neoskool</a>
-  </div>
+<!-- ===== NOT AUTH ===== -->
+<div id="dash-not-auth" class="dash-not-auth" style="display:none;">
+  <div style="font-size:4rem;margin-bottom:1rem">🔒</div>
+  <h2>Connecte-toi pour accéder à ton espace</h2>
+  <p>Tu dois avoir un compte pour voir ta bibliothèque et tes fiches.</p>
+  <a href="/" class="dash-btn dash-btn-primary" style="padding:.75rem 2rem;font-size:.95rem">Retour à Neoskool</a>
+</div>
 
-  <div id="dash-content" style="display:none;">
-    <div class="dash-header">
-      <h1>Mon espace</h1>
-      <p>Retrouve toutes tes fiches générées</p>
-    </div>
+<!-- ===== MAIN CONTENT ===== -->
+<div id="dash-content" class="dash-container" style="display:none;">
 
+  <!-- ===== LIBRARY TAB ===== -->
+  <div id="view-library">
+
+    <!-- Stats -->
     <div class="dash-stats">
       <div class="dash-stat">
-        <div class="dash-stat-value" id="dash-month-count">0</div>
         <div class="dash-stat-label">Fiches ce mois</div>
+        <div class="dash-stat-value"><span id="dash-month-count">0</span></div>
         <div class="dash-stat-bar"><div class="dash-stat-fill" id="dash-quota-bar" style="width:0%"></div></div>
         <div class="dash-stat-sub" id="dash-quota-text">0 / 3 utilisées</div>
       </div>
       <div class="dash-stat">
-        <div class="dash-stat-value" id="dash-plan">Gratuit</div>
-        <div class="dash-stat-label">Plan actuel</div>
+        <div class="dash-stat-label">Total généré</div>
+        <div class="dash-stat-value" id="dash-all-time">0</div>
       </div>
       <div class="dash-stat">
-        <div class="dash-stat-value" id="dash-all-time">0</div>
-        <div class="dash-stat-label">Total généré</div>
+        <div class="dash-stat-label">Fiches sauvegardées</div>
+        <div class="dash-stat-value" id="dash-saved-count">0</div>
+      </div>
+      <div class="dash-stat">
+        <div class="dash-stat-label">Matière favorite</div>
+        <div class="dash-stat-value" id="dash-fav-matiere" style="font-size:1.1rem">—</div>
       </div>
     </div>
 
-    <div class="dash-section-title">Mes fiches sauvegardées</div>
+    <!-- Toolbar -->
+    <div class="dash-toolbar">
+      <div class="dash-search">
+        <span class="dash-search-icon">🔍</span>
+        <input type="text" id="search-input" placeholder="Rechercher par titre, sujet, thème..." oninput="applyFilters()">
+      </div>
+      <select class="dash-filter" id="filter-matiere" onchange="applyFilters()">
+        <option value="">Toutes les matières</option>
+        <option value="Allemand">Allemand</option>
+        <option value="Anglais">Anglais</option>
+        <option value="Français">Français</option>
+        <option value="Mathématiques">Mathématiques</option>
+        <option value="Sciences">Sciences</option>
+        <option value="Histoire">Histoire</option>
+        <option value="Géographie">Géographie</option>
+      </select>
+      <select class="dash-filter" id="filter-degre" onchange="applyFilters()">
+        <option value="">Tous les degrés</option>
+        <option value="7-8H">7-8H</option>
+        <option value="9H">9H</option>
+        <option value="10H">10H</option>
+        <option value="11H">11H</option>
+      </select>
+      <select class="dash-filter" id="filter-status" onchange="applyFilters()">
+        <option value="">Tous les statuts</option>
+        <option value="draft">Brouillon</option>
+        <option value="ready">Prête</option>
+        <option value="used">Utilisée</option>
+      </select>
+      <select class="dash-filter" id="filter-sort" onchange="applyFilters()">
+        <option value="recent">Plus récentes</option>
+        <option value="oldest">Plus anciennes</option>
+        <option value="rating">Mieux notées</option>
+        <option value="alpha">Alphabétique</option>
+      </select>
+    </div>
+
+    <!-- Sheets Grid -->
     <div class="dash-sheets" id="dash-sheets">
-      <div class="dash-loading">Chargement...</div>
+      <div class="dash-empty">
+        <div class="dash-empty-visual">⏳</div>
+        <h3>Chargement...</h3>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="dash-pagination" id="dash-pagination" style="display:none;"></div>
+  </div>
+
+  <!-- ===== ACCOUNT TAB ===== -->
+  <div id="view-account" style="display:none;">
+    <div class="dash-account">
+
+      <!-- Plan -->
+      <div class="dash-account-card">
+        <h3>Mon plan</h3>
+        <div class="dash-plan-current">
+          <div class="dash-plan-icon free" id="account-plan-icon">🆓</div>
+          <div class="dash-plan-info">
+            <h4 id="account-plan-name">Plan Gratuit</h4>
+            <p id="account-plan-desc">3 fiches par mois</p>
+          </div>
+        </div>
+        <div class="dash-stat-bar" style="margin-bottom:.5rem"><div class="dash-stat-fill" id="account-quota-bar" style="width:0%"></div></div>
+        <div class="dash-stat-sub" id="account-quota-text" style="margin-bottom:1rem">0 / 3 fiches utilisées ce mois</div>
+        <a href="/#tarifs" class="dash-btn dash-btn-primary" id="upgrade-btn">Passer à Pro — 29.90 CHF/mois</a>
+      </div>
+
+      <!-- Profil -->
+      <div class="dash-account-card">
+        <h3>Mon profil</h3>
+        <div class="dash-account-row">
+          <span class="dash-account-label">Email</span>
+          <span class="dash-account-value" id="account-email">—</span>
+        </div>
+        <div class="dash-account-row">
+          <span class="dash-account-label">Membre depuis</span>
+          <span class="dash-account-value" id="account-since">—</span>
+        </div>
+        <div class="dash-account-row">
+          <span class="dash-account-label">Mot de passe</span>
+          <button class="dash-btn dash-btn-ghost dash-btn-sm" onclick="showChangePassword()">Modifier</button>
+        </div>
+        <div id="password-form" style="display:none;margin-top:1rem">
+          <div class="dash-field" style="margin-bottom:.75rem">
+            <label>Nouveau mot de passe</label>
+            <input type="password" id="new-password" placeholder="Minimum 6 caractères">
+          </div>
+          <div style="display:flex;gap:.5rem">
+            <button class="dash-btn dash-btn-primary dash-btn-sm" onclick="changePassword()">Confirmer</button>
+            <button class="dash-btn dash-btn-ghost dash-btn-sm" onclick="hideChangePassword()">Annuler</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistiques -->
+      <div class="dash-account-card full">
+        <h3>Statistiques</h3>
+        <div class="dash-account-stats">
+          <div class="dash-account-stat">
+            <div class="dash-account-stat-value" id="stat-total">0</div>
+            <div class="dash-account-stat-label">Fiches créées</div>
+          </div>
+          <div class="dash-account-stat">
+            <div class="dash-account-stat-value" id="stat-this-month">0</div>
+            <div class="dash-account-stat-label">Ce mois</div>
+          </div>
+          <div class="dash-account-stat">
+            <div class="dash-account-stat-value" id="stat-matieres">0</div>
+            <div class="dash-account-stat-label">Matières utilisées</div>
+          </div>
+        </div>
+        <div id="stat-breakdown" style="margin-top:1.25rem"></div>
+      </div>
+
+      <!-- Zone danger -->
+      <div class="dash-account-card full">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <h3 style="margin-bottom:.25rem">Se déconnecter</h3>
+            <p style="font-size:.82rem;color:var(--ink-muted)">Tu pourras te reconnecter à tout moment.</p>
+          </div>
+          <button class="dash-btn dash-btn-danger" onclick="handleLogout()">Quitter</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
 
+<!-- ===== PREVIEW MODAL ===== -->
+<div class="dash-modal-overlay" id="preview-modal">
+  <div class="dash-modal">
+    <div class="dash-modal-header">
+      <div class="dash-modal-title" id="preview-title">Prévisualisation</div>
+      <button class="dash-modal-close" onclick="closeModal('preview-modal')">✕</button>
+    </div>
+    <div class="dash-modal-body" style="padding:0">
+      <iframe class="dash-preview-frame" id="preview-iframe"></iframe>
+    </div>
+    <div class="dash-modal-footer">
+      <div style="display:flex;gap:.5rem;align-items:center">
+        <span class="dash-status draft" id="preview-status">Brouillon</span>
+        <div class="dash-stars" id="preview-stars"></div>
+      </div>
+      <div style="display:flex;gap:.5rem">
+        <button class="dash-btn dash-btn-ghost dash-btn-sm" onclick="printCurrentSheet()">🖨️ Imprimer</button>
+        <button class="dash-btn dash-btn-ghost dash-btn-sm" onclick="duplicateCurrentSheet()">📋 Dupliquer</button>
+        <button class="dash-btn dash-btn-primary dash-btn-sm" onclick="openEditModal()">✏️ Modifier</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EDIT MODAL ===== -->
+<div class="dash-modal-overlay" id="edit-modal">
+  <div class="dash-modal" style="max-width:600px">
+    <div class="dash-modal-header">
+      <div class="dash-modal-title">Modifier la fiche</div>
+      <button class="dash-modal-close" onclick="closeModal('edit-modal')">✕</button>
+    </div>
+    <div class="dash-modal-body">
+      <div class="dash-edit-grid">
+        <div class="dash-field full">
+          <label>Titre</label>
+          <input type="text" id="edit-title" placeholder="Ex: Contrôle semaine 12">
+        </div>
+        <div class="dash-field">
+          <label>Statut</label>
+          <select id="edit-status">
+            <option value="draft">Brouillon</option>
+            <option value="ready">Prête</option>
+            <option value="used">Utilisée</option>
+          </select>
+        </div>
+        <div class="dash-field">
+          <label>Note (1-5)</label>
+          <div class="dash-edit-stars" id="edit-stars">
+            <span class="dash-star" data-v="1" onclick="setEditRating(1)">★</span>
+            <span class="dash-star" data-v="2" onclick="setEditRating(2)">★</span>
+            <span class="dash-star" data-v="3" onclick="setEditRating(3)">★</span>
+            <span class="dash-star" data-v="4" onclick="setEditRating(4)">★</span>
+            <span class="dash-star" data-v="5" onclick="setEditRating(5)">★</span>
+          </div>
+        </div>
+        <div class="dash-field full">
+          <label>Tags personnels</label>
+          <div class="dash-tags-input" id="edit-tags-container" onclick="document.getElementById('edit-tags-input').focus()">
+            <input type="text" id="edit-tags-input" placeholder="Ajouter un tag + Entrée" onkeydown="handleTagKey(event)">
+          </div>
+        </div>
+        <div class="dash-field full">
+          <label>Commentaire privé</label>
+          <textarea id="edit-note" rows="3" placeholder="Tes notes sur cette fiche (ex: 'Bien marché avec les VG1')"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="dash-modal-footer">
+      <button class="dash-btn dash-btn-ghost" onclick="closeModal('edit-modal')">Annuler</button>
+      <button class="dash-btn dash-btn-primary" onclick="saveEdit()">Sauvegarder</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="dash-toast" id="dash-toast"></div>
+
 <script>
+// ===== CONFIG =====
 const SUPABASE_URL = 'https://nniyltlejcdoyqtgctql.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5uaXlsdGxlamNkb3lxdGdjdHFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDY2NjIsImV4cCI6MjA4ODM4MjY2Mn0.-AWmnnKvyL4rL5TVfKuvq0jT7i8r7yY-NMlsH5sNF3M';
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const FREE_LIMIT = 3;
+const SHEETS_PER_PAGE = 20;
+
+// ===== STATE =====
+let currentUser = null;
+let userPlan = 'free';
+let allSheets = [];
+let filteredSheets = [];
+let currentPage = 1;
+let currentSheetId = null;
+let editRating = null;
+let editTags = [];
 
 const matiereIcons = {
   'Allemand': '🇩🇪', 'Mathematiques': '🔢', 'Mathématiques': '🔢',
@@ -141,9 +493,13 @@ function getMatiereClass(m) {
   if (n.includes('math')) return 'maths';
   if (n.includes('allemand')) return 'allemand';
   if (n.includes('franc')) return 'francais';
+  if (n.includes('anglais')) return 'anglais';
   return 'default';
 }
 
+const statusLabels = { draft: 'Brouillon', ready: 'Prête', used: 'Utilisée' };
+
+// ===== INIT =====
 async function init() {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) {
@@ -151,93 +507,411 @@ async function init() {
     return;
   }
 
+  currentUser = session.user;
   document.getElementById('dash-content').style.display = '';
-  document.getElementById('dash-email').textContent = session.user.email;
-  const userId = session.user.id;
 
-  // Load generation count from generations table (real quota tracking)
+  // Avatar initials
+  const email = currentUser.email || '';
+  const initials = email.substring(0, 2).toUpperCase();
+  document.getElementById('dash-avatar').textContent = initials;
+
+  // Load all data in parallel
+  await Promise.all([loadStats(), loadSheets(), loadPlan()]);
+}
+
+async function loadStats() {
+  const userId = currentUser.id;
   const currentMonth = new Date().toISOString().slice(0, 7);
   const startOfMonth = currentMonth + '-01T00:00:00.000Z';
 
-  const { count: monthCount } = await sb
-    .from('generations')
-    .select('*', { count: 'exact', head: true })
-    .eq('user_id', userId)
-    .gte('created_at', startOfMonth);
+  const [monthRes, allTimeRes] = await Promise.all([
+    sb.from('generations').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', startOfMonth),
+    sb.from('generations').select('*', { count: 'exact', head: true }).eq('user_id', userId)
+  ]);
 
-  const { count: allTimeCount } = await sb
-    .from('generations')
-    .select('*', { count: 'exact', head: true })
-    .eq('user_id', userId);
-
-  const monthTotal = monthCount || 0;
-  const allTotal = allTimeCount || 0;
+  const monthTotal = monthRes.count || 0;
+  const allTotal = allTimeRes.count || 0;
 
   document.getElementById('dash-month-count').textContent = monthTotal;
   document.getElementById('dash-all-time').textContent = allTotal;
-  document.getElementById('dash-quota-bar').style.width = Math.min(100, (monthTotal / FREE_LIMIT) * 100) + '%';
-  document.getElementById('dash-quota-text').textContent = monthTotal + ' / ' + FREE_LIMIT + ' utilisées';
+  document.getElementById('stat-total').textContent = allTotal;
+  document.getElementById('stat-this-month').textContent = monthTotal;
 
-  // Load plan from profiles (if table exists)
+  updateQuotaDisplay(monthTotal);
+}
+
+function updateQuotaDisplay(monthTotal) {
+  const isUnlimited = userPlan === 'pro' || userPlan === 'beta';
+  const pct = isUnlimited ? 100 : Math.min(100, (monthTotal / FREE_LIMIT) * 100);
+  const color = isUnlimited ? 'linear-gradient(90deg,#10b981,#34d399)' : '';
+
+  ['dash-quota-bar', 'account-quota-bar'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.width = pct + '%'; if (color) el.style.background = color; }
+  });
+
+  const txt = isUnlimited ? monthTotal + ' / ∞' : monthTotal + ' / ' + FREE_LIMIT + ' utilisées';
+  ['dash-quota-text', 'account-quota-text'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = txt;
+  });
+}
+
+async function loadPlan() {
   try {
     const { data: profile } = await sb.from('profiles').select('plan').single();
-    if (profile) {
-      const planLabels = { free: 'Gratuit', pro: 'Pro', beta: 'Bêta' };
-      document.getElementById('dash-plan').textContent = planLabels[profile.plan] || 'Gratuit';
-      if (profile.plan === 'beta' || profile.plan === 'pro') {
-        document.getElementById('dash-quota-text').textContent = monthTotal + ' / ∞';
-        document.getElementById('dash-quota-bar').style.width = '100%';
-        document.getElementById('dash-quota-bar').style.background = 'linear-gradient(90deg, #10b981, #34d399)';
-      }
+    if (profile && profile.plan) {
+      userPlan = profile.plan;
     }
   } catch (e) {}
 
-  // Load saved sheets from sheets table
-  const { data: sheets, error } = await sb.from('sheets')
-    .select('id, matiere, degre, voie, sujet, created_at, metadata')
-    .order('created_at', { ascending: false });
+  const badge = document.getElementById('dash-plan-badge');
+  const planIcon = document.getElementById('account-plan-icon');
+  const planName = document.getElementById('account-plan-name');
+  const planDesc = document.getElementById('account-plan-desc');
+  const upgradeBtn = document.getElementById('upgrade-btn');
 
-  const container = document.getElementById('dash-sheets');
+  badge.className = 'dash-plan-badge ' + userPlan;
+  planIcon.className = 'dash-plan-icon ' + userPlan;
+
+  if (userPlan === 'pro') {
+    badge.textContent = 'Pro';
+    planIcon.textContent = '⭐';
+    planName.textContent = 'Plan Pro';
+    planDesc.textContent = '50 fiches par mois';
+    upgradeBtn.style.display = 'none';
+  } else if (userPlan === 'beta') {
+    badge.textContent = 'Bêta';
+    planIcon.textContent = '🧪';
+    planName.textContent = 'Accès Bêta';
+    planDesc.textContent = 'Fiches illimitées';
+    upgradeBtn.style.display = 'none';
+  } else {
+    badge.textContent = 'Gratuit';
+    planIcon.textContent = '🆓';
+    planName.textContent = 'Plan Gratuit';
+    planDesc.textContent = '3 fiches par mois';
+  }
+
+  // Account info
+  document.getElementById('account-email').textContent = currentUser.email;
+  const since = new Date(currentUser.created_at);
+  document.getElementById('account-since').textContent = since.toLocaleDateString('fr-CH', { month: 'long', year: 'numeric' });
+}
+
+async function loadSheets() {
+  const { data: sheets, error } = await sb.from('sheets')
+    .select('id, title, matiere, degre, voie, difficulte, sujet, theme, chapitre, domaine, sous_theme, tags, status, rating, note, created_at')
+    .order('created_at', { ascending: false });
 
   if (error) {
     console.error('Error loading sheets:', error);
-    container.innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">⚠️</div>Erreur de chargement</div>';
+    document.getElementById('dash-sheets').innerHTML = '<div class="dash-empty"><div class="dash-empty-visual">⚠️</div><h3>Erreur de chargement</h3><p>Impossible de charger tes fiches. Réessaie plus tard.</p></div>';
     return;
   }
 
-  if (!sheets || !sheets.length) {
-    container.innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">📭</div>Aucune fiche sauvegardée. Génère ta première fiche !</div>';
+  allSheets = sheets || [];
+  document.getElementById('dash-saved-count').textContent = allSheets.length;
+
+  // Compute favorite matiere
+  if (allSheets.length > 0) {
+    const counts = {};
+    allSheets.forEach(s => { counts[s.matiere] = (counts[s.matiere] || 0) + 1; });
+    const fav = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+    document.getElementById('dash-fav-matiere').textContent = fav ? fav[0] : '—';
+
+    // Stats breakdown
+    document.getElementById('stat-matieres').textContent = Object.keys(counts).length;
+    const breakdown = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([m, c]) => {
+      const icon = matiereIcons[m] || '📄';
+      return `<span style="display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;background:var(--surface-raised);border-radius:8px;font-size:.8rem;font-weight:600;margin:.2rem">${icon} ${m} <span style="color:var(--v-600)">${c}</span></span>`;
+    }).join('');
+    document.getElementById('stat-breakdown').innerHTML = breakdown;
+  }
+
+  applyFilters();
+}
+
+// ===== FILTERS & SORT =====
+function applyFilters() {
+  const search = document.getElementById('search-input').value.toLowerCase();
+  const matiere = document.getElementById('filter-matiere').value;
+  const degre = document.getElementById('filter-degre').value;
+  const status = document.getElementById('filter-status').value;
+  const sort = document.getElementById('filter-sort').value;
+
+  filteredSheets = allSheets.filter(s => {
+    if (matiere && s.matiere !== matiere) return false;
+    if (degre && !s.degre.includes(degre)) return false;
+    if (status && s.status !== status) return false;
+    if (search) {
+      const haystack = [s.title, s.sujet, s.theme, s.matiere, s.domaine, s.chapitre, ...(s.tags || [])].filter(Boolean).join(' ').toLowerCase();
+      if (!haystack.includes(search)) return false;
+    }
+    return true;
+  });
+
+  // Sort
+  filteredSheets.sort((a, b) => {
+    if (sort === 'recent') return new Date(b.created_at) - new Date(a.created_at);
+    if (sort === 'oldest') return new Date(a.created_at) - new Date(b.created_at);
+    if (sort === 'rating') return (b.rating || 0) - (a.rating || 0);
+    if (sort === 'alpha') return (a.title || '').localeCompare(b.title || '');
+    return 0;
+  });
+
+  currentPage = 1;
+  renderSheets();
+}
+
+// ===== RENDER =====
+function renderSheets() {
+  const container = document.getElementById('dash-sheets');
+  const totalPages = Math.ceil(filteredSheets.length / SHEETS_PER_PAGE);
+  const start = (currentPage - 1) * SHEETS_PER_PAGE;
+  const page = filteredSheets.slice(start, start + SHEETS_PER_PAGE);
+
+  if (allSheets.length === 0) {
+    container.innerHTML = `<div class="dash-empty">
+      <div class="dash-empty-visual">✨</div>
+      <h3>Ta bibliothèque est vide</h3>
+      <p>Crée ta première fiche et elle apparaîtra ici automatiquement.</p>
+      <a href="/" class="dash-btn dash-btn-primary">Créer une fiche</a>
+    </div>`;
+    document.getElementById('dash-pagination').style.display = 'none';
     return;
   }
 
-  container.innerHTML = sheets.map(s => {
+  if (filteredSheets.length === 0) {
+    container.innerHTML = `<div class="dash-empty">
+      <div class="dash-empty-visual">🔍</div>
+      <h3>Aucune fiche trouvée</h3>
+      <p>Essaie de modifier tes filtres ou ta recherche.</p>
+    </div>`;
+    document.getElementById('dash-pagination').style.display = 'none';
+    return;
+  }
+
+  container.innerHTML = page.map(s => {
     const icon = matiereIcons[s.matiere] || '📄';
     const cls = getMatiereClass(s.matiere);
     const date = new Date(s.created_at).toLocaleDateString('fr-CH', { day: 'numeric', month: 'short', year: 'numeric' });
     const meta = [s.degre, s.voie].filter(Boolean).join(' · ');
-    return `<div class="dash-sheet">
-      <div class="dash-sheet-icon ${cls}">${icon}</div>
-      <div class="dash-sheet-info">
-        <div class="dash-sheet-title">${s.matiere || 'Fiche'} — ${s.sujet || 'Sans titre'}</div>
-        <div class="dash-sheet-meta">${meta ? meta + ' · ' : ''}${date}</div>
+    const title = s.title || (s.matiere + ' — ' + (s.sujet || 'Sans titre'));
+    const stClass = s.status || 'draft';
+    const stLabel = statusLabels[stClass] || 'Brouillon';
+
+    const starsHtml = [1,2,3,4,5].map(v =>
+      `<span class="dash-star${(s.rating || 0) >= v ? ' filled' : ''}">★</span>`
+    ).join('');
+
+    const tagsHtml = (s.tags || []).map(t => `<span class="dash-tag">${escHtml(t)}</span>`).join('');
+
+    return `<div class="dash-card" onclick="openPreview('${s.id}')">
+      <div class="dash-card-actions">
+        <button class="dash-card-act" onclick="event.stopPropagation();openEditModalDirect('${s.id}')" title="Modifier">✏️</button>
+        <button class="dash-card-act" onclick="event.stopPropagation();printSheet('${s.id}')" title="Imprimer">🖨️</button>
+        <button class="dash-card-act delete" onclick="event.stopPropagation();deleteSheet('${s.id}')" title="Supprimer">🗑️</button>
       </div>
-      <div class="dash-sheet-actions">
-        <button class="dash-sheet-btn" onclick="viewSheet('${s.id}')">Voir</button>
-        <button class="dash-sheet-btn" onclick="printSheet('${s.id}')">🖨️</button>
-        <button class="dash-sheet-btn delete" onclick="deleteSheet('${s.id}')">✕</button>
+      <div class="dash-card-top">
+        <div class="dash-card-icon ${cls}">${icon}</div>
+        <div class="dash-card-header">
+          <div class="dash-card-title">${escHtml(title)}</div>
+          <div class="dash-card-meta">${meta ? meta + ' · ' : ''}${date}</div>
+        </div>
       </div>
+      ${s.sujet ? `<div class="dash-card-sujet">${escHtml(s.sujet)}</div>` : ''}
+      <div class="dash-card-bottom">
+        <div class="dash-card-left">
+          <span class="dash-status ${stClass}">${stLabel}</span>
+          <div class="dash-stars">${starsHtml}</div>
+        </div>
+      </div>
+      ${tagsHtml ? `<div class="dash-tags">${tagsHtml}</div>` : ''}
     </div>`;
   }).join('');
+
+  // Pagination
+  renderPagination(totalPages);
 }
 
-async function viewSheet(id) {
-  const { data } = await sb.from('sheets').select('html_content').eq('id', id).single();
+function renderPagination(totalPages) {
+  const pag = document.getElementById('dash-pagination');
+  if (totalPages <= 1) { pag.style.display = 'none'; return; }
+
+  pag.style.display = 'flex';
+  let html = `<button class="dash-page-btn" onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>◀</button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    if (totalPages > 7 && i > 3 && i < totalPages - 1 && Math.abs(i - currentPage) > 1) {
+      if (i === 4 || i === totalPages - 2) html += `<span style="padding:0 .25rem;color:var(--ink-muted)">…</span>`;
+      continue;
+    }
+    html += `<button class="dash-page-btn${i === currentPage ? ' active' : ''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  html += `<button class="dash-page-btn" onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>▶</button>`;
+  pag.innerHTML = html;
+}
+
+function goPage(p) {
+  const totalPages = Math.ceil(filteredSheets.length / SHEETS_PER_PAGE);
+  if (p < 1 || p > totalPages) return;
+  currentPage = p;
+  renderSheets();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== PREVIEW =====
+async function openPreview(id) {
+  currentSheetId = id;
+  const { data } = await sb.from('sheets').select('*').eq('id', id).single();
   if (!data) return;
-  const w = window.open('', '_blank');
-  w.document.write(data.html_content);
-  w.document.close();
+
+  document.getElementById('preview-title').textContent = data.title || data.matiere + ' — ' + (data.sujet || 'Fiche');
+  document.getElementById('preview-iframe').srcdoc = data.html_content;
+
+  // Status
+  const stEl = document.getElementById('preview-status');
+  stEl.textContent = statusLabels[data.status] || 'Brouillon';
+  stEl.className = 'dash-status ' + (data.status || 'draft');
+
+  // Stars
+  document.getElementById('preview-stars').innerHTML = [1,2,3,4,5].map(v =>
+    `<span class="dash-star${(data.rating || 0) >= v ? ' filled' : ''}" onclick="quickRate('${id}',${v})" style="cursor:pointer">★</span>`
+  ).join('');
+
+  document.getElementById('preview-modal').classList.add('visible');
 }
 
+async function quickRate(id, rating) {
+  await sb.from('sheets').update({ rating }).eq('id', id);
+  // Update local data
+  const s = allSheets.find(s => s.id === id);
+  if (s) s.rating = rating;
+  // Update preview stars
+  document.getElementById('preview-stars').innerHTML = [1,2,3,4,5].map(v =>
+    `<span class="dash-star${rating >= v ? ' filled' : ''}" onclick="quickRate('${id}',${v})" style="cursor:pointer">★</span>`
+  ).join('');
+  renderSheets();
+  showToast('Note mise à jour');
+}
+
+function printCurrentSheet() {
+  const iframe = document.getElementById('preview-iframe');
+  const w = window.open('', '_blank');
+  w.document.write(iframe.srcdoc);
+  w.document.close();
+  w.onload = function() { w.print(); };
+}
+
+function duplicateCurrentSheet() {
+  const s = allSheets.find(s => s.id === currentSheetId);
+  if (!s) return;
+  // Build URL params and redirect to generator
+  const params = new URLSearchParams();
+  if (s.matiere) params.set('matiere', s.matiere);
+  if (s.degre) params.set('degre', s.degre);
+  if (s.voie) params.set('voie', s.voie);
+  if (s.sujet) params.set('sujet', s.sujet);
+  window.location.href = '/?' + params.toString();
+}
+
+// ===== EDIT MODAL =====
+function openEditModal() {
+  closeModal('preview-modal');
+  openEditModalDirect(currentSheetId);
+}
+
+async function openEditModalDirect(id) {
+  currentSheetId = id;
+  const s = allSheets.find(s => s.id === id);
+  if (!s) return;
+
+  document.getElementById('edit-title').value = s.title || '';
+  document.getElementById('edit-status').value = s.status || 'draft';
+  document.getElementById('edit-note').value = s.note || '';
+
+  // Rating
+  editRating = s.rating || null;
+  renderEditStars();
+
+  // Tags
+  editTags = [...(s.tags || [])];
+  renderEditTags();
+
+  document.getElementById('edit-modal').classList.add('visible');
+}
+
+function setEditRating(v) {
+  editRating = editRating === v ? null : v;
+  renderEditStars();
+}
+
+function renderEditStars() {
+  document.querySelectorAll('#edit-stars .dash-star').forEach(el => {
+    el.classList.toggle('filled', editRating && parseInt(el.dataset.v) <= editRating);
+  });
+}
+
+function renderEditTags() {
+  const container = document.getElementById('edit-tags-container');
+  const input = document.getElementById('edit-tags-input');
+  // Remove existing tags (keep input)
+  container.querySelectorAll('.dash-tag').forEach(el => el.remove());
+  // Add tags before input
+  editTags.forEach((tag, i) => {
+    const el = document.createElement('span');
+    el.className = 'dash-tag';
+    el.innerHTML = escHtml(tag) + ` <span class="dash-tag-remove" onclick="removeEditTag(${i})">✕</span>`;
+    container.insertBefore(el, input);
+  });
+}
+
+function handleTagKey(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = e.target.value.trim().replace(/,/g, '');
+    if (val && !editTags.includes(val)) {
+      editTags.push(val);
+      renderEditTags();
+    }
+    e.target.value = '';
+  }
+  if (e.key === 'Backspace' && !e.target.value && editTags.length) {
+    editTags.pop();
+    renderEditTags();
+  }
+}
+
+function removeEditTag(i) {
+  editTags.splice(i, 1);
+  renderEditTags();
+}
+
+async function saveEdit() {
+  const updates = {
+    title: document.getElementById('edit-title').value.trim() || null,
+    status: document.getElementById('edit-status').value,
+    rating: editRating,
+    note: document.getElementById('edit-note').value.trim() || null,
+    tags: editTags
+  };
+
+  const { error } = await sb.from('sheets').update(updates).eq('id', currentSheetId);
+  if (error) {
+    showToast('Erreur lors de la sauvegarde', true);
+    return;
+  }
+
+  // Update local
+  const s = allSheets.find(s => s.id === currentSheetId);
+  if (s) Object.assign(s, updates);
+
+  closeModal('edit-modal');
+  renderSheets();
+  showToast('Fiche mise à jour');
+}
+
+// ===== ACTIONS =====
 async function printSheet(id) {
   const { data } = await sb.from('sheets').select('html_content').eq('id', id).single();
   if (!data) return;
@@ -248,16 +922,82 @@ async function printSheet(id) {
 }
 
 async function deleteSheet(id) {
-  if (!confirm('Supprimer cette fiche ?')) return;
-  await sb.from('sheets').delete().eq('id', id);
-  init();
+  if (!confirm('Supprimer cette fiche ? Cette action est irréversible.')) return;
+  const { error } = await sb.from('sheets').delete().eq('id', id);
+  if (error) { showToast('Erreur lors de la suppression', true); return; }
+
+  allSheets = allSheets.filter(s => s.id !== id);
+  document.getElementById('dash-saved-count').textContent = allSheets.length;
+  applyFilters();
+  showToast('Fiche supprimée');
 }
 
+// ===== TABS =====
+function switchTab(tab) {
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById('view-library').style.display = tab === 'library' ? '' : 'none';
+  document.getElementById('view-account').style.display = tab === 'account' ? '' : 'none';
+}
+
+// ===== MODAL UTILS =====
+function closeModal(id) {
+  document.getElementById(id).classList.remove('visible');
+}
+
+// Close on backdrop click
+document.querySelectorAll('.dash-modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('visible');
+  });
+});
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.dash-modal-overlay.visible').forEach(m => m.classList.remove('visible'));
+  }
+});
+
+// ===== PASSWORD =====
+function showChangePassword() {
+  document.getElementById('password-form').style.display = '';
+}
+function hideChangePassword() {
+  document.getElementById('password-form').style.display = 'none';
+  document.getElementById('new-password').value = '';
+}
+async function changePassword() {
+  const pw = document.getElementById('new-password').value;
+  if (pw.length < 6) { showToast('Le mot de passe doit faire au moins 6 caractères', true); return; }
+  const { error } = await sb.auth.updateUser({ password: pw });
+  if (error) { showToast('Erreur : ' + error.message, true); return; }
+  hideChangePassword();
+  showToast('Mot de passe mis à jour');
+}
+
+// ===== LOGOUT =====
 async function handleLogout() {
   await sb.auth.signOut();
   window.location.href = '/';
 }
 
+// ===== TOAST =====
+function showToast(msg, isError) {
+  const t = document.getElementById('dash-toast');
+  t.textContent = msg;
+  t.className = 'dash-toast visible' + (isError ? ' error' : '');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => { t.classList.remove('visible'); }, 3000);
+}
+
+// ===== UTILS =====
+function escHtml(s) {
+  if (!s) return '';
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== BOOT =====
 init();
 </script>
 </body>

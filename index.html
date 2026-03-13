@@ -1972,15 +1972,44 @@ async function saveSheetToSupabase(metadata) {
   const htmlContent = iframe.srcdoc;
   if (!htmlContent) return;
 
+  // Auto-generate title from params
+  const titleParts = [metadata.matiere, metadata.degre];
+  if (metadata.voie) titleParts.push(metadata.voie);
+  if (metadata.domaine) titleParts.push(metadata.domaine);
+  else if (metadata.chapitre) titleParts.push('Ch.' + metadata.chapitre);
+  const autoTitle = titleParts.join(' — ');
+
+  // Build system tags for future public library
+  const systemTags = {
+    matiere: (metadata.matiere || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''),
+    degre: metadata.degre || '',
+    voie: metadata.voie || '',
+    difficulte: metadata.difficulte || '',
+    domaine: metadata.domaine || '',
+    sous_theme: metadata.soustheme || '',
+    chapitre: metadata.chapitre || '',
+    adaptations: metadata.adaptations || [],
+    profil: metadata.profil || 'enseignant',
+    format: metadata.format || 'impression'
+  };
+
   try {
     await sbClient.from('sheets').insert({
       user_id: currentUser.id,
+      title: autoTitle,
       matiere: metadata.matiere || '',
       degre: metadata.degre || '',
       voie: metadata.voie || '',
       difficulte: metadata.difficulte || '',
       sujet: metadata.sujet || '',
+      theme: metadata.theme || '',
+      chapitre: metadata.chapitre || '',
+      domaine: metadata.domaine || '',
+      sous_theme: metadata.soustheme || '',
+      adaptations: metadata.adaptations || [],
       html_content: htmlContent,
+      system_tags: systemTags,
+      status: 'draft',
       metadata: metadata
     });
     console.log('Sheet saved to Supabase');
@@ -2553,7 +2582,7 @@ async function handleGenerate(e) {
   if (theme) message += `\nThème / Vocabulaire visé : ${theme}`;
   if (adaptations.length > 0) message += `\nAdaptations BEP : ${adaptations.join(', ')}`;
 
-  const metadata = { matiere, degre, voie, difficulte, chapitre, sujet, theme };
+  const metadata = { matiere, degre, voie, difficulte, chapitre, sujet, theme, domaine, soustheme, adaptations, profil: currentProfile, format: currentFormat };
 
   // ==================== UI SETUP ====================
   btn.classList.add('loading');
