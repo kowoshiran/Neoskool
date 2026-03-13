@@ -156,6 +156,10 @@ async function handleCheckoutCompleted(session) {
   const priceId = sub.items?.data?.[0]?.price?.id || '';
   const interval = sub.items?.data?.[0]?.price?.recurring?.interval || 'month';
 
+  const periodEnd = sub.current_period_end
+    ? new Date(sub.current_period_end * 1000).toISOString()
+    : null;
+
   const updateData = {
     stripe_customer_id: customerId,
     stripe_subscription_id: subscriptionId,
@@ -163,28 +167,42 @@ async function handleCheckoutCompleted(session) {
     status: 'active',
     price_id: priceId,
     billing_interval: interval,
-    current_period_end: new Date(sub.current_period_end * 1000).toISOString(),
     cancel_at_period_end: false,
     sheets_limit: 50,
   };
+  if (periodEnd) updateData.current_period_end = periodEnd;
+
+  console.log('Webhook handleCheckoutCompleted:', { userId, customerId, subscriptionId, priceId, interval, periodEnd });
 
   // Update by user ID (preferred) or customer ID (fallback)
+  let updated = false;
   if (userId) {
     const res = await fetch(`${SUPABASE_URL}/rest/v1/subscriptions?user_id=eq.${userId}`, {
       method: 'PATCH',
       headers: supabaseHeaders(),
       body: JSON.stringify(updateData),
     });
-    // If no row was updated (maybe row doesn't exist), try upsert
-    if (!res.ok || res.status === 404) {
-      await fetch(`${SUPABASE_URL}/rest/v1/subscriptions`, {
-        method: 'POST',
-        headers: { ...supabaseHeaders(), 'Prefer': 'resolution=merge-duplicates' },
-        body: JSON.stringify({ user_id: userId, ...updateData }),
-      });
-    }
-  } else {
-    await updateSubscription(customerId, updateData);
+    console.log('PATCH by user_id result:', res.status, await res.text());
+    updated = res.ok;
+  }
+  if (!updated && customerId) {
+    // Try by customer_id
+    const res2 = await fetch(`${SUPABASE_URL}/rest/v1/subscriptions?stripe_customer_id=eq.${customerId}`, {
+      method: 'PATCH',
+      headers: supabaseHeaders(),
+      body: JSON.stringify(updateData),
+    });
+    console.log('PATCH by customer_id result:', res2.status, await res2.text());
+    updated = res2.ok;
+  }
+  if (!updated && userId) {
+    // Last resort: insert new row
+    const res3 = await fetch(`${SUPABASE_URL}/rest/v1/subscriptions`, {
+      method: 'POST',
+      headers: { ...supabaseHeaders(), 'Prefer': 'resolution=merge-duplicates' },
+      body: JSON.stringify({ user_id: userId, ...updateData }),
+    });
+    console.log('INSERT result:', res3.status, await res3.text());
   }
 
   // Send welcome Pro email
@@ -220,16 +238,22 @@ async function handleSubscriptionUpdated(sub) {
 
   const isPro = ['active', 'past_due'].includes(status);
 
-  await updateSubscription(customerId, {
+  const periodEnd = sub.current_period_end
+    ? new Date(sub.current_period_end * 1000).toISOString()
+    : null;
+
+  const data = {
     stripe_subscription_id: sub.id,
     plan: isPro ? 'pro' : 'free',
     status: status === 'active' ? 'active' : status === 'past_due' ? 'past_due' : 'canceled',
     price_id: priceId,
     billing_interval: interval,
-    current_period_end: new Date(sub.current_period_end * 1000).toISOString(),
     cancel_at_period_end: sub.cancel_at_period_end || false,
     sheets_limit: isPro ? 50 : 3,
-  });
+  };
+  if (periodEnd) data.current_period_end = periodEnd;
+
+  await updateSubscription(customerId, data);
 
   // Send email for payment failure (past_due)
   if (status === 'past_due') {
