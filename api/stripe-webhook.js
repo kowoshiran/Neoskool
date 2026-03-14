@@ -53,7 +53,6 @@ function supabaseHeaders() {
 }
 
 async function updateSubscription(stripeCustomerId, data) {
-  console.log('updateSubscription PATCH:', { stripeCustomerId, data });
   const res = await fetch(
     `${SUPABASE_URL}/rest/v1/subscriptions?stripe_customer_id=eq.${stripeCustomerId}`,
     {
@@ -62,10 +61,8 @@ async function updateSubscription(stripeCustomerId, data) {
       body: JSON.stringify(data),
     }
   );
-  const resText = await res.text();
-  console.log('updateSubscription result:', { status: res.status, body: resText });
   if (!res.ok) {
-    console.error('Failed to update subscription:', resText);
+    console.error('Failed to update subscription:', await res.text());
   }
 }
 
@@ -141,14 +138,8 @@ async function handleCheckoutCompleted(session) {
   });
   const sub = await subRes.json();
 
-  console.log('Stripe subscription keys:', Object.keys(sub));
-  console.log('Stripe sub.current_period_end:', sub.current_period_end);
-  console.log('Stripe sub.cancel_at_period_end:', sub.cancel_at_period_end);
-  console.log('Stripe sub.status:', sub.status);
-
   // If subscription is already canceled or scheduled for cancellation, don't overwrite with checkout
   if (sub.cancel_at_period_end === true || sub.cancel_at != null || sub.status === 'canceled') {
-    console.log('Skipping checkout: subscription already canceled or canceling');
     return;
   }
 
@@ -188,8 +179,6 @@ async function handleCheckoutCompleted(session) {
   };
   if (periodEnd) updateData.current_period_end = periodEnd;
 
-  console.log('Webhook handleCheckoutCompleted:', { userId, customerId, subscriptionId, priceId, interval, periodEnd });
-
   // Update by user ID (preferred) or customer ID (fallback)
   let updated = false;
   if (userId) {
@@ -198,27 +187,22 @@ async function handleCheckoutCompleted(session) {
       headers: supabaseHeaders(),
       body: JSON.stringify(updateData),
     });
-    console.log('PATCH by user_id result:', res.status, await res.text());
     updated = res.ok;
   }
   if (!updated && customerId) {
-    // Try by customer_id
     const res2 = await fetch(`${SUPABASE_URL}/rest/v1/subscriptions?stripe_customer_id=eq.${customerId}`, {
       method: 'PATCH',
       headers: supabaseHeaders(),
       body: JSON.stringify(updateData),
     });
-    console.log('PATCH by customer_id result:', res2.status, await res2.text());
     updated = res2.ok;
   }
   if (!updated && userId) {
-    // Last resort: insert new row
-    const res3 = await fetch(`${SUPABASE_URL}/rest/v1/subscriptions`, {
+    await fetch(`${SUPABASE_URL}/rest/v1/subscriptions`, {
       method: 'POST',
       headers: { ...supabaseHeaders(), 'Prefer': 'resolution=merge-duplicates' },
       body: JSON.stringify({ user_id: userId, ...updateData }),
     });
-    console.log('INSERT result:', res3.status, await res3.text());
   }
 
   // Send welcome Pro email
@@ -263,8 +247,6 @@ async function handleSubscriptionUpdated(sub) {
   const periodEnd = rawPeriodEnd
     ? new Date(rawPeriodEnd * 1000).toISOString()
     : null;
-
-  console.log('handleSubscriptionUpdated:', { customerId, status, cancelAtPeriodEnd, isPro, periodEnd, cancel_at: sub.cancel_at });
 
   const data = {
     stripe_subscription_id: sub.id,
