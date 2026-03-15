@@ -3368,9 +3368,13 @@ async function handleGenerate(e) {
 
     // Save immediately (don't depend on animation timeouts)
     console.log('Stream complete, saving...');
-    recordGeneration(metadata);
+    try {
+      await recordGeneration(metadata);
+    } catch (e) { console.error('recordGeneration threw:', e); }
     if (currentUser) {
-      saveSheetToSupabase(metadata);
+      try {
+        await saveSheetToSupabase(metadata);
+      } catch (e) { console.error('saveSheetToSupabase threw:', e); }
     } else {
       localStorage.setItem('nsk_pending_sheet', JSON.stringify(metadata));
     }

@@ -113,35 +113,48 @@ async function checkQuota(userId, email) {
 }
 
 // Wikimedia Commons image search for Histoire
-async function searchWikimediaImages(query, limit = 3) {
+async function searchWikimediaImages(query, limit = 5) {
   try {
-    const searchUrl = `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query + ' filetype:bitmap')}&srnamespace=6&srlimit=${limit}&format=json&origin=*`;
-    const res = await fetch(searchUrl);
-    const data = await res.json();
-    if (!data.query || !data.query.search || data.query.search.length === 0) return [];
+    // Search in French first, then English fallback
+    const queries = [query, query.replace(/[àâäéèêëïîôùûüç]/g, c => ({à:'a',â:'a',ä:'a',é:'e',è:'e',ê:'e',ë:'e',ï:'i',î:'i',ô:'o',ù:'u',û:'u',ü:'u',ç:'c'})[c] || c)];
+    let allResults = [];
 
-    const titles = data.query.search.map(s => s.title);
-    const infoUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(titles.join('|'))}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=400&format=json&origin=*`;
-    const infoRes = await fetch(infoUrl);
-    const infoData = await infoRes.json();
+    for (const q of queries) {
+      if (allResults.length >= limit) break;
+      const searchUrl = `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q + ' filetype:bitmap')}&srnamespace=6&srlimit=${limit}&format=json&origin=*`;
+      const res = await fetch(searchUrl);
+      const data = await res.json();
+      if (!data.query || !data.query.search || data.query.search.length === 0) continue;
 
-    const results = [];
-    const pages = infoData.query?.pages || {};
-    for (const page of Object.values(pages)) {
-      if (page.imageinfo && page.imageinfo[0]) {
-        const info = page.imageinfo[0];
-        const meta = info.extmetadata || {};
-        results.push({
-          title: page.title.replace('File:', ''),
-          thumbUrl: info.thumburl || info.url,
-          descriptionUrl: info.descriptionurl,
-          artist: meta.Artist?.value?.replace(/<[^>]*>/g, '') || 'Inconnu',
-          license: meta.LicenseShortName?.value || 'Wikimedia Commons',
-          description: (meta.ImageDescription?.value || '').replace(/<[^>]*>/g, '').slice(0, 200)
-        });
+      const titles = data.query.search
+        .map(s => s.title)
+        .filter(t => !allResults.some(r => r.title === t.replace('File:', '')));
+      if (titles.length === 0) continue;
+
+      const infoUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(titles.join('|'))}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=500&format=json&origin=*`;
+      const infoRes = await fetch(infoUrl);
+      const infoData = await infoRes.json();
+
+      const pages = infoData.query?.pages || {};
+      for (const page of Object.values(pages)) {
+        if (page.imageinfo && page.imageinfo[0]) {
+          const info = page.imageinfo[0];
+          const thumbUrl = info.thumburl || info.url;
+          // Skip SVGs, tiny images, and icons
+          if (!thumbUrl || thumbUrl.endsWith('.svg') || (info.thumbwidth && info.thumbwidth < 100)) continue;
+          const meta = info.extmetadata || {};
+          allResults.push({
+            title: page.title.replace('File:', ''),
+            thumbUrl,
+            descriptionUrl: info.descriptionurl,
+            artist: meta.Artist?.value?.replace(/<[^>]*>/g, '') || 'Inconnu',
+            license: meta.LicenseShortName?.value || 'Wikimedia Commons',
+            description: (meta.ImageDescription?.value || '').replace(/<[^>]*>/g, '').slice(0, 200)
+          });
+        }
       }
     }
-    return results;
+    return allResults.slice(0, limit);
   } catch (err) {
     console.error('Wikimedia search failed:', err);
     return [];
