@@ -11,6 +11,9 @@ import { block2 as francais11H } from '../prompts/francais-11H.js';
 import { block2 as anglais9H } from '../prompts/anglais-9H.js';
 import { block2 as anglais10H } from '../prompts/anglais-10H.js';
 import { block2 as anglais11H } from '../prompts/anglais-11H.js';
+import { block2 as histoire9H } from '../prompts/histoire-9H.js';
+import { block2 as histoire10H } from '../prompts/histoire-10H.js';
+import { block2 as histoire11H } from '../prompts/histoire-11H.js';
 
 // Prompt lookup table
 const PROMPTS = {
@@ -26,6 +29,9 @@ const PROMPTS = {
   'anglais-9H': anglais9H,
   'anglais-10H': anglais10H,
   'anglais-11H': anglais11H,
+  'histoire-9H': histoire9H,
+  'histoire-10H': histoire10H,
+  'histoire-11H': histoire11H,
 };
 
 // Normalize matiere for lookup
@@ -106,6 +112,42 @@ async function checkQuota(userId, email) {
   }
 }
 
+// Wikimedia Commons image search for Histoire
+async function searchWikimediaImages(query, limit = 3) {
+  try {
+    const searchUrl = `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query + ' filetype:bitmap')}&srnamespace=6&srlimit=${limit}&format=json&origin=*`;
+    const res = await fetch(searchUrl);
+    const data = await res.json();
+    if (!data.query || !data.query.search || data.query.search.length === 0) return [];
+
+    const titles = data.query.search.map(s => s.title);
+    const infoUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(titles.join('|'))}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=400&format=json&origin=*`;
+    const infoRes = await fetch(infoUrl);
+    const infoData = await infoRes.json();
+
+    const results = [];
+    const pages = infoData.query?.pages || {};
+    for (const page of Object.values(pages)) {
+      if (page.imageinfo && page.imageinfo[0]) {
+        const info = page.imageinfo[0];
+        const meta = info.extmetadata || {};
+        results.push({
+          title: page.title.replace('File:', ''),
+          thumbUrl: info.thumburl || info.url,
+          descriptionUrl: info.descriptionurl,
+          artist: meta.Artist?.value?.replace(/<[^>]*>/g, '') || 'Inconnu',
+          license: meta.LicenseShortName?.value || 'Wikimedia Commons',
+          description: (meta.ImageDescription?.value || '').replace(/<[^>]*>/g, '').slice(0, 200)
+        });
+      }
+    }
+    return results;
+  } catch (err) {
+    console.error('Wikimedia search failed:', err);
+    return [];
+  }
+}
+
 export default async function handler(req) {
   // Only accept POST
   if (req.method !== 'POST') {
@@ -131,6 +173,10 @@ export default async function handler(req) {
     const code = formData.get('code') || '';
     const userEmail = formData.get('user_email') || '';
     const userId = formData.get('user_id') || '';
+    const histoirePeriode = formData.get('histoire-periode') || '';
+    const histoireSoustheme = formData.get('histoire-soustheme') || '';
+    const dimensions = formData.get('dimensions') || '';
+    const typesources = formData.get('typesources') || '';
 
     // Beta code bypasses quota
     const isBeta = code && code.length > 0;
@@ -172,9 +218,32 @@ export default async function handler(req) {
       if (voie) userMessage += `\nVoie : ${voie}`;
       if (difficulte) userMessage += `\nNiveau de la classe : ${difficulte}`;
       if (chapitre) userMessage += `\nChapitre : ${chapitre}`;
+      if (histoirePeriode) userMessage += `\nPériode historique : ${histoirePeriode}`;
+      if (histoireSoustheme) userMessage += `\nSous-thème historique : ${histoireSoustheme}`;
+      if (dimensions) userMessage += `\nDimensions PER : ${dimensions}`;
+      if (typesources) userMessage += `\nTypes de sources : ${typesources}`;
       userMessage += `\nObjectif : ${sujet}`;
       if (theme) userMessage += `\nThème / Vocabulaire visé : ${theme}`;
       if (adaptations) userMessage += `\nAdaptations BEP : ${adaptations}`;
+    }
+
+    // For Histoire: search Wikimedia Commons for relevant images
+    if (matiereNorm === 'histoire' && (histoirePeriode || sujet)) {
+      const searchQuery = histoireSoustheme || histoirePeriode || sujet;
+      const images = await searchWikimediaImages(searchQuery);
+      if (images.length > 0) {
+        userMessage += '\n\n=== SOURCES ICONOGRAPHIQUES WIKIMEDIA COMMONS ===';
+        userMessage += '\nVoici des images libres de droits trouvées. Intègre-les dans la fiche avec <img src="URL" alt="description"> dans une div.source-box :';
+        images.forEach((img, i) => {
+          userMessage += `\n\nImage ${i + 1} :`;
+          userMessage += `\n- Titre : ${img.title}`;
+          userMessage += `\n- URL : ${img.thumbUrl}`;
+          userMessage += `\n- Auteur : ${img.artist}`;
+          userMessage += `\n- Licence : ${img.license}`;
+          if (img.description) userMessage += `\n- Description : ${img.description}`;
+        });
+        userMessage += '\n\nUtilise ces images comme sources primaires dans les exercices d\'analyse de document.';
+      }
     }
 
     // max_tokens: assez haut pour ne jamais couper une fiche, le prompt contrôle la concision

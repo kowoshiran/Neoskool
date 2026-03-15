@@ -668,6 +668,10 @@ body.has-auth-bar .navbar{top:36px}
 .wiz-adapt{padding:.5rem 1rem;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--indigo-300);font-size:.85rem;font-weight:500;cursor:pointer;transition:all .3s}
 .wiz-adapt:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.05)}
 .wiz-adapt.on{background:rgba(250,204,21,0.08);border-color:rgba(250,204,21,0.3);color:var(--gold-300)}
+.wiz-chips-group{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+.wiz-chip{padding:.5rem 1rem;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:100px;color:var(--indigo-300);font-size:.82rem;font-weight:500;cursor:pointer;transition:all .3s;user-select:none}
+.wiz-chip:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.05)}
+.wiz-chip.on{background:rgba(108,92,231,0.12);border-color:rgba(108,92,231,0.4);color:#a78bfa}
 .wiz-code{width:100%;font-family:'Courier New',monospace;font-size:1.1rem;padding:1rem;background:rgba(255,255,255,0.04);border:2px solid rgba(255,255,255,0.08);border-radius:14px;color:white;outline:none;transition:all .3s;letter-spacing:.1em;text-transform:uppercase;text-align:center}
 .wiz-code:focus{border-color:var(--indigo-400);background:rgba(255,255,255,0.07);box-shadow:0 0 0 4px rgba(99,102,241,0.15)}
 .wiz-code::placeholder{color:rgba(255,255,255,0.25);text-transform:none;letter-spacing:normal;font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem}
@@ -691,7 +695,7 @@ body.has-auth-bar{padding-top:36px}
   <div class="auth-bar-left"><span class="auth-bar-dot"></span><span id="auth-bar-email"></span><span class="auth-bar-quota ok" id="auth-bar-quota" style="display:none"></span></div>
   <div class="auth-bar-links">
     <a href="/dashboard.html" class="auth-bar-link">Mon espace</a>
-    <button class="auth-bar-btn" onclick="handleLogout()">Quitter</button>
+    <button class="auth-bar-btn" onclick="handleLogout()">Déconnexion</button>
   </div>
 </div>
 <nav class="navbar" id="navbar">
@@ -1531,7 +1535,7 @@ body.has-auth-bar{padding-top:36px}
 
 <!-- Hidden form for API compatibility -->
 <div style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
-<form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere"><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre"><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group" id="domaine-group" style="display:none"><label for="domaine"><span class="label-icon">📂</span> Domaine</label><select id="domaine" name="domaine"><option value="">Choisir un domaine…</option></select></div><div class="form-group" id="soustheme-group" style="display:none"><label for="soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="soustheme" name="soustheme"><option value="">Choisir un sous-thème…</option></select></div><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner"></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX"></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form>
+<form id="neoskool-form"><div class="form-grid"><div class="form-group"><label for="matiere"><span class="label-icon">📚</span> Matière</label><select id="matiere" name="matiere"><option value="">Choisir…</option><option value="Mathématiques">Mathématiques</option><option value="Français">Français</option><option value="Allemand">Allemand</option><option value="Anglais">Anglais</option><option value="Sciences de la nature">Sciences</option><option value="Histoire">Histoire</option><option value="Géographie">Géographie</option></select></div><div class="form-group"><label for="degre"><span class="label-icon">🎓</span> Degré</label><select id="degre" name="degre"><option value="">Choisir…</option><optgroup label="Cycle 2"><option value="7-8H (10-12 ans)">7-8H</option></optgroup><optgroup label="Cycle 3"><option value="9H (12-13 ans)">9H</option><option value="10H (13-14 ans)">10H</option><option value="11H (14-15 ans)">11H</option></optgroup></select></div><div class="form-group" id="voie-group" style="display:none"><label for="voie"><span class="label-icon">📊</span> Voie</label><select id="voie" name="voie"><option value="">Non spécifié</option><option value="VP (voie prégymnasiale)">VP</option><option value="VG niveau 1 (exigences de base)">VG1</option><option value="VG niveau 2 (exigences supérieures)">VG2</option></select></div><div class="form-group"><label for="difficulte"><span class="label-icon">🎚️</span> Niveau</label><select id="difficulte" name="difficulte"><option value="">Non spécifié</option><option value="Débutants">🟢 Débutants</option><option value="Initiés">🟡 Initiés</option><option value="Motivés">🔴 Motivés</option></select></div><div class="form-group" id="chapitre-group" style="display:none"><label for="chapitre"><span class="label-icon">📖</span> Chapitre</label><select id="chapitre" name="chapitre"><option value="">Tous</option></select></div><div class="form-group" id="domaine-group" style="display:none"><label for="domaine"><span class="label-icon">📂</span> Domaine</label><select id="domaine" name="domaine"><option value="">Choisir un domaine…</option></select></div><div class="form-group" id="soustheme-group" style="display:none"><label for="soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="soustheme" name="soustheme"><option value="">Choisir un sous-thème…</option></select></div><div class="form-group" id="histoire-periode-group" style="display:none"><label for="histoire-periode"><span class="label-icon">📜</span> Période</label><select id="histoire-periode" name="histoire-periode"><option value="">Choisir un thème…</option></select></div><div class="form-group" id="histoire-soustheme-group" style="display:none"><label for="histoire-soustheme"><span class="label-icon">🔍</span> Sous-thème</label><select id="histoire-soustheme" name="histoire-soustheme"><option value="">Choisir un sous-thème…</option></select></div><input type="hidden" id="dimensions" name="dimensions" value=""><input type="hidden" id="typesources" name="typesources" value=""><div class="form-group full-width"><label for="sujet"><span class="label-icon">🎯</span> Objectif</label><textarea id="sujet" name="sujet" placeholder="Ex : Les fractions — comparer et additionner"></textarea></div><div class="form-group full-width"><label for="theme"><span class="label-icon">📝</span> Thème <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><textarea id="theme" name="theme" placeholder="Ex : Reiseziele, Jugendherberge"></textarea></div><div class="form-separator"></div><div class="form-group full-width"><label><span class="label-icon">🧩</span> Adaptations BEP <span style="font-weight:400;text-transform:none;opacity:.6">(optionnel)</span></label><div class="adaptations-group"><div class="adaptation-chip"><input type="checkbox" id="adapt-tdah" name="adaptations" value="TDAH"><label for="adapt-tdah"><span class="chip-dot"></span> TDAH</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dys" name="adaptations" value="Dyslexie"><label for="adapt-dys"><span class="chip-dot"></span> Dyslexie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-hpi" name="adaptations" value="HPI"><label for="adapt-hpi"><span class="chip-dot"></span> HPI</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-allo" name="adaptations" value="Allophonie"><label for="adapt-allo"><span class="chip-dot"></span> Allophonie</label></div><div class="adaptation-chip"><input type="checkbox" id="adapt-dyscalc" name="adaptations" value="Dyscalculie"><label for="adapt-dyscalc"><span class="chip-dot"></span> Dyscalculie</label></div></div></div><div class="form-separator"></div><div class="form-group full-width"><label for="code"><span class="label-icon">🔑</span> Code d'accès</label><div class="code-input-wrapper"><input type="text" id="code" name="code" placeholder="BETA-XXXXXX"></div><span class="code-hint">Code fourni par Neoskool</span></div></div><button type="submit" class="btn-generate" id="btn-generate"><span class="btn-text">⚡ Générer ma mission</span><div class="spinner"></div></button><div id="status-message" class="status-message"></div><p class="form-note">Propulsé par l'IA et les sciences cognitives</p></form>
 </div>
 
 </div>
@@ -1650,20 +1654,20 @@ body.has-auth-bar{padding-top:36px}
   <div class="upgrade-modal">
     <button class="upgrade-modal-close" onclick="closeUpgradeModal()">&times;</button>
     <div class="upgrade-modal-icon">🚀</div>
-    <h3>Tu as utilisé tes fiches gratuites !</h3>
-    <p>Tu as atteint la limite de <strong id="upgrade-quota-text">3/3 fiches</strong> ce mois. Passe en Pro pour continuer à générer des exercices sans limite.</p>
+    <h3 id="upgrade-modal-title">Tu as utilisé tes fiches gratuites !</h3>
+    <p id="upgrade-modal-desc">Tu as atteint la limite de <strong id="upgrade-quota-text">3/3 fiches</strong> ce mois. Passe en Pro pour continuer à générer des exercices sans limite.</p>
     <div class="upgrade-modal-quota">
       <div class="upgrade-modal-quota-bar"><div class="upgrade-modal-quota-fill"></div></div>
       <span class="upgrade-modal-quota-text" id="upgrade-quota-label">3/3</span>
     </div>
-    <div class="upgrade-modal-features">
+    <div id="upgrade-modal-features-block" class="upgrade-modal-features">
       <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>50 fiches par mois</div>
       <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Export PDF haute qualité</div>
       <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Accès prioritaire</div>
       <div class="upgrade-modal-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>Support dédié</div>
     </div>
-    <button class="upgrade-btn" onclick="goToUpgrade()">Passer en Pro — 29.90 CHF/mois</button>
-    <button class="upgrade-btn-secondary" onclick="closeUpgradeModal()">Mon quota se renouvelle le 1er du mois</button>
+    <button class="upgrade-btn" id="upgrade-modal-cta" onclick="goToUpgrade()">Passer en Pro — 29.90 CHF/mois</button>
+    <button class="upgrade-btn-secondary" id="upgrade-modal-dismiss" onclick="closeUpgradeModal()">Compris, je reviendrai plus tard</button>
   </div>
 </div>
 
@@ -1828,6 +1832,10 @@ function updateAnnotations() {
   checkFeatRows();
 })();
 
+// ==================== CONSOLE WARNING ====================
+console.log('%c⚠️ ATTENTION !', 'color:red;font-size:2rem;font-weight:bold');
+console.log('%cNe collez jamais de code ici que vous ne comprenez pas.\nCela pourrait compromettre votre compte Neoskool.', 'color:red;font-size:1.1rem');
+
 // ==================== SUPABASE AUTH ====================
 const SUPABASE_URL = 'https://nniyltlejcdoyqtgctql.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5uaXlsdGxlamNkb3lxdGdjdHFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDY2NjIsImV4cCI6MjA4ODM4MjY2Mn0.-AWmnnKvyL4rL5TVfKuvq0jT7i8r7yY-NMlsH5sNF3M';
@@ -1836,6 +1844,7 @@ let currentUser = null;
 let isBetaUser = false;
 let currentPlan = 'free';
 let currentSheetsLimit = 3;
+let currentPeriodEnd = null;
 const FREE_SHEETS_PER_MONTH = 3;
 const PRO_SHEETS_PER_MONTH = 50;
 
@@ -1846,9 +1855,11 @@ async function loadUserPlan() {
     if (data && data.plan === 'pro' && data.status === 'active') {
       currentPlan = 'pro';
       currentSheetsLimit = data.sheets_limit || PRO_SHEETS_PER_MONTH;
+      currentPeriodEnd = data.current_period_end || null;
     } else {
       currentPlan = 'free';
       currentSheetsLimit = FREE_SHEETS_PER_MONTH;
+      currentPeriodEnd = null;
     }
   } catch (e) {
     currentPlan = 'free';
@@ -1892,10 +1903,11 @@ function hideAuthBar() {
 }
 
 async function handleLogout() {
-  await sbClient.auth.signOut();
+  try { await sbClient.auth.signOut(); } catch(e) { console.error('signOut error:', e); }
   currentUser = null;
   hideAuthBar();
   localStorage.removeItem('nsk_email');
+  window.location.reload();
 }
 
 (async function initAuth() {
@@ -1929,24 +1941,35 @@ async function handleLogout() {
 let cachedSheetCount = null;
 let cachedSheetCountMonth = null;
 
-async function getSheetCount() {
+function getBillingPeriodStart() {
+  if (currentPlan === 'pro' && currentPeriodEnd) {
+    const end = new Date(currentPeriodEnd);
+    const start = new Date(end);
+    start.setMonth(start.getMonth() - 1);
+    return start.toISOString();
+  }
   const currentMonth = new Date().toISOString().slice(0, 7);
-  // Return cache if same month and fresh
-  if (cachedSheetCount !== null && cachedSheetCountMonth === currentMonth) {
+  return currentMonth + '-01T00:00:00.000Z';
+}
+
+async function getSheetCount() {
+  const periodKey = getBillingPeriodStart();
+  // Return cache if same period and fresh
+  if (cachedSheetCount !== null && cachedSheetCountMonth === periodKey) {
     return cachedSheetCount;
   }
 
-  const startOfMonth = currentMonth + '-01T00:00:00.000Z';
+  const startOfPeriod = periodKey;
   try {
     if (currentUser) {
       const { count, error } = await sbClient
         .from('generations')
         .select('*', { count: 'exact', head: true })
         .eq('user_id', currentUser.id)
-        .gte('created_at', startOfMonth);
+        .gte('created_at', startOfPeriod);
       if (!error) {
         cachedSheetCount = count || 0;
-        cachedSheetCountMonth = currentMonth;
+        cachedSheetCountMonth = periodKey;
         return cachedSheetCount;
       }
     }
@@ -1958,10 +1981,10 @@ async function getSheetCount() {
         .select('*', { count: 'exact', head: true })
         .eq('email', email)
         .is('user_id', null)
-        .gte('created_at', startOfMonth);
+        .gte('created_at', startOfPeriod);
       if (!error) {
         cachedSheetCount = count || 0;
-        cachedSheetCountMonth = currentMonth;
+        cachedSheetCountMonth = periodKey;
         return cachedSheetCount;
       }
     }
@@ -2053,7 +2076,18 @@ function isEmailGated() {
 // ==================== UPGRADE MODAL ====================
 function showUpgradeModal() {
   const modal = document.getElementById('upgrade-modal');
-  if (modal) modal.classList.add('visible');
+  if (!modal) return;
+  const isPro = currentPlan === 'pro';
+  document.getElementById('upgrade-modal-title').textContent = isPro ? 'Limite mensuelle atteinte' : 'Tu as utilisé tes fiches gratuites !';
+  if (isPro) {
+    const renewDate = currentPeriodEnd ? new Date(currentPeriodEnd).toLocaleDateString('fr-CH', { day: 'numeric', month: 'long' }) : 'la prochaine période';
+    document.getElementById('upgrade-modal-desc').innerHTML = 'Tu as utilisé tes <strong>50 fiches Pro</strong> ce mois. Ton quota se renouvelle le <strong>' + renewDate + '</strong>.';
+  } else {
+    document.getElementById('upgrade-modal-desc').innerHTML = 'Tu as atteint la limite de <strong>3/3 fiches</strong> ce mois. Passe en Pro pour continuer à générer des exercices sans limite.';
+  }
+  document.getElementById('upgrade-modal-features-block').style.display = isPro ? 'none' : '';
+  document.getElementById('upgrade-modal-cta').style.display = isPro ? 'none' : '';
+  modal.classList.add('visible');
 }
 function closeUpgradeModal() {
   const modal = document.getElementById('upgrade-modal');
@@ -2176,8 +2210,8 @@ async function handleAuthSubmit() {
   if (!password || password.length < 6) { showAuthError('Le mot de passe doit faire au moins 6 caractères.'); return; }
 
   if (authMode === 'signup') {
-    const confirm = document.getElementById('auth-password-confirm').value;
-    if (password !== confirm) { showAuthError('Les mots de passe ne correspondent pas.'); return; }
+    const confirmPw = document.getElementById('auth-password-confirm').value;
+    if (password !== confirmPw) { showAuthError('Les mots de passe ne correspondent pas.'); return; }
     const consent = document.getElementById('auth-consent-checkbox').checked;
     if (!consent) {
       showAuthError('Tu dois accepter les CGV et la politique de confidentialité.');
@@ -2310,7 +2344,7 @@ async function saveSheetToSupabase(metadata) {
   };
 
   try {
-    await sbClient.from('sheets').insert({
+    const { error } = await sbClient.from('sheets').insert({
       user_id: currentUser.id,
       title: autoTitle,
       matiere: metadata.matiere || '',
@@ -2328,9 +2362,9 @@ async function saveSheetToSupabase(metadata) {
       status: 'draft',
       metadata: metadata
     });
-    console.log('Sheet saved to Supabase');
+    if (error) console.error('Failed to save sheet:', error);
   } catch (err) {
-    console.error('Failed to save sheet:', err);
+    console.error('SHEET INSERT EXCEPTION:', err);
   }
 }
 
@@ -2423,7 +2457,12 @@ const WRAPPER_CSS = `<style>
 .calc-badge{display:inline-flex;align-items:center;justify-content:center;padding:2px 8px;border-radius:6px;font-size:0.75rem;font-weight:700;background:var(--primary-bg);color:var(--primary);margin-left:6px}
 p{margin:0.5rem 0}strong{font-weight:700}table{width:100%;border-collapse:collapse;margin:0.75rem 0}table:not(.vocab-table) th,table:not(.vocab-table) td{padding:8px 12px;border:1px solid var(--border);font-size:0.88rem}table:not(.vocab-table) th{background:var(--primary-bg);font-weight:700}blockquote{border-left:3px solid var(--primary);padding:10px 16px;background:var(--primary-bg);border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:0.75rem 0;font-style:italic}
 .sheet-footer{text-align:center;padding:1.5rem;font-size:0.75rem;color:var(--dark-soft);border-top:1px solid var(--border);margin-top:2rem}.sheet-footer strong{color:var(--primary)}
-@media print{body{background:white;font-size:11pt}.page-container{max-width:100%;padding:0}.mission-header{padding:1.5rem;border-radius:0}.mission-title{font-size:1.5rem}.exercise-item,.quiz-item,.quiz-card,.self-eval,.recall-box,.trap-box,.tool-ref,.grammar-card,.corrige-item,.tip-item,.aide-card,.match-grid,.word-bank,.gap-sentence,.answer-zone,.vocab-table,.per-footer,.per-objective{break-inside:avoid;page-break-inside:avoid}.level-banner,.quiz-banner,.self-eval-banner,.corrige-banner{break-after:avoid;page-break-after:avoid}.tool-sheet{page-break-before:always;margin-top:0}.corrige-section{page-break-before:always}.tool-sheet-header{break-after:avoid;page-break-after:avoid}.tool-sheet-header,.tool-sheet-body{border-radius:0}.answer-blank{border-bottom-style:dotted}.level-card{margin-top:1rem}.level-body{padding:1rem}.exercise-item{padding:1rem;margin-bottom:0.75rem}.recall-box{margin-top:1rem;padding:1.25rem}.quiz-card,.self-eval,.corrige-section{margin-top:1rem}.level-banner,.quiz-banner,.self-eval-banner,.mission-header,.tool-sheet-header,.corrige-banner,.exercise-number,.recall-icon,.info-chip,.mission-badge,.per-code,.per-dot{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@page{margin:1.5cm;size:A4}
+.source-box{background:var(--white);border:2px solid var(--sky);border-radius:var(--radius-lg);overflow:hidden;margin:1.25rem 0;box-shadow:var(--shadow-sm)}.source-box-header{background:linear-gradient(135deg,var(--sky) 0%,#A0C4FF 100%);padding:0.75rem 1.25rem;color:white;display:flex;align-items:center;gap:10px;font-family:'Fredoka',sans-serif;font-weight:700;font-size:0.95rem}.source-box-body{padding:1.25rem;display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap}.source-image{max-width:280px;width:100%;border-radius:var(--radius-sm);border:1px solid var(--border);object-fit:contain}.source-caption{font-size:0.82rem;color:var(--dark-soft);margin-top:0.5rem;font-style:italic;line-height:1.5}.source-meta{font-size:0.72rem;color:var(--dark-soft);opacity:0.7;margin-top:0.25rem}.source-questions{flex:1;min-width:250px}
+.method-box{background:linear-gradient(135deg,#E8FFFE 0%,#F0FFFE 100%);border:2px solid var(--secondary);border-radius:var(--radius-lg);padding:1.5rem;margin:1.25rem 0}.method-box-title{font-family:'Fredoka',sans-serif;font-size:1rem;font-weight:700;color:var(--secondary-dark);margin-bottom:1rem;display:flex;align-items:center;gap:8px}.method-step{display:flex;align-items:flex-start;gap:12px;padding:10px 14px;background:var(--white);border-radius:var(--radius-sm);margin-bottom:8px;border:1px solid rgba(0,206,201,0.2)}.method-step:last-child{margin-bottom:0}.method-step-num{width:28px;height:28px;background:var(--secondary);color:white;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka',sans-serif;font-size:0.85rem;font-weight:700;flex-shrink:0}.method-step-text{font-size:0.9rem;line-height:1.6}
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:var(--radius-md);overflow:hidden;border:1.5px solid var(--primary-light);font-size:0.88rem;margin:1rem 0}.compare-table thead th{background:var(--primary-bg);color:var(--primary-dark);font-weight:800;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;padding:10px 14px;text-align:left}.compare-table tbody td{padding:9px 14px;border-top:1px solid var(--border)}.compare-table tbody tr:nth-child(even){background:var(--light)}
+.timeline-box{background:var(--white);border:2px solid var(--primary-light);border-radius:var(--radius-lg);padding:1.5rem;margin:1.25rem 0}.timeline-title{font-family:'Fredoka',sans-serif;font-size:1rem;font-weight:700;color:var(--primary-dark);margin-bottom:1rem}.timeline-item{display:flex;align-items:flex-start;gap:12px;padding:8px 0;position:relative}.timeline-item:not(:last-child)::after{content:'';position:absolute;left:14px;top:32px;bottom:-8px;width:2px;background:var(--primary-light)}.timeline-date{min-width:65px;font-family:'JetBrains Mono',monospace;font-size:0.8rem;font-weight:700;color:var(--primary);background:var(--primary-bg);padding:4px 8px;border-radius:6px;text-align:center;flex-shrink:0}.timeline-text{font-size:0.88rem;line-height:1.5;padding-top:2px}
+.per-competence-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--primary-bg),#E8E0FF);border:1.5px solid var(--primary-light);padding:6px 14px;border-radius:100px;font-size:0.78rem;font-weight:700;color:var(--primary-dark);margin:4px 4px 4px 0}.per-competence-badge .per-code{margin-right:4px}
+@media print{body{background:white;font-size:11pt}.page-container{max-width:100%;padding:0}.mission-header{padding:1.5rem;border-radius:0}.mission-title{font-size:1.5rem}.exercise-item,.quiz-item,.quiz-card,.self-eval,.recall-box,.trap-box,.tool-ref,.grammar-card,.corrige-item,.tip-item,.aide-card,.match-grid,.word-bank,.gap-sentence,.answer-zone,.vocab-table,.per-footer,.per-objective,.source-box,.method-box,.compare-table,.timeline-box{break-inside:avoid;page-break-inside:avoid}.level-banner,.quiz-banner,.self-eval-banner,.corrige-banner{break-after:avoid;page-break-after:avoid}.tool-sheet{page-break-before:always;margin-top:0}.corrige-section{page-break-before:always}.tool-sheet-header{break-after:avoid;page-break-after:avoid}.tool-sheet-header,.tool-sheet-body{border-radius:0}.answer-blank{border-bottom-style:dotted}.level-card{margin-top:1rem}.level-body{padding:1rem}.exercise-item{padding:1rem;margin-bottom:0.75rem}.recall-box{margin-top:1rem;padding:1.25rem}.quiz-card,.self-eval,.corrige-section{margin-top:1rem}.level-banner,.quiz-banner,.self-eval-banner,.mission-header,.tool-sheet-header,.corrige-banner,.exercise-number,.recall-icon,.info-chip,.mission-badge,.per-code,.per-dot{-webkit-print-color-adjust:exact;print-color-adjust:exact}}@page{margin:1.5cm;size:A4}
 </style>`;
 
 // ==================== PROFILE & FORMAT ====================
@@ -2512,6 +2551,176 @@ const chapitresAnglais = {
     { value: '8', label: "Unit 8 — That's entertainment! (pres. perf. continuous)" }
   ]
 };
+
+// ==================== HISTOIRE : THEMES, DIMENSIONS PER, TYPES DE SOURCES ====================
+const themesHistoire = {
+  '9H': [
+    { value: 'antiquite-egypte-mesopotamie', label: 'Civilisations antiques (Égypte, Mésopotamie)' },
+    { value: 'grece-antique', label: 'La Grèce antique (démocratie, culture, mythologie)' },
+    { value: 'rome', label: 'Rome (République et Empire)' },
+    { value: 'christianisme-islam', label: 'Débuts du christianisme et de l\'Islam' },
+    { value: 'moyen-age', label: 'Le Moyen Âge (féodalité, vie quotidienne)' },
+    { value: 'confederation-suisse', label: 'Origines de la Confédération suisse (XIIIe-XVe)' }
+  ],
+  '10H': [
+    { value: 'renaissance', label: 'La Renaissance (art, sciences, humanisme)' },
+    { value: 'grandes-decouvertes', label: 'Grandes Découvertes et colonisation' },
+    { value: 'reforme-guerres-religion', label: 'Réforme et guerres de religion' },
+    { value: 'ancien-regime-lumieres', label: 'Ancien Régime et les Lumières' },
+    { value: 'revolution-francaise', label: 'Révolution française et ère napoléonienne' },
+    { value: 'revolution-industrielle', label: 'Révolution industrielle (XIXe siècle)' }
+  ],
+  '11H': [
+    { value: 'premiere-guerre-mondiale', label: 'La Première Guerre mondiale (1914-1918)' },
+    { value: 'totalitarismes', label: 'Les totalitarismes (fascisme, nazisme, stalinisme)' },
+    { value: 'seconde-guerre-mondiale-shoah', label: 'Seconde Guerre mondiale et la Shoah' },
+    { value: 'guerre-froide', label: 'La Guerre froide (1947-1991)' },
+    { value: 'decolonisation', label: 'La décolonisation et le monde postcolonial' },
+    { value: 'monde-contemporain', label: 'Monde contemporain (mondialisation, enjeux actuels)' }
+  ]
+};
+
+const sousThemesHistoire = {
+  '9H': {
+    'antiquite-egypte-mesopotamie': [
+      { value: 'pharaons-pyramides', label: 'Pharaons et pyramides' },
+      { value: 'ecriture-hieroglyphes', label: 'Écriture et hiéroglyphes' },
+      { value: 'vie-quotidienne-egypte', label: 'Vie quotidienne en Égypte' },
+      { value: 'mesopotamie-cuneiforme', label: 'Mésopotamie et écriture cunéiforme' }
+    ],
+    'grece-antique': [
+      { value: 'democratie-athenes', label: 'La démocratie à Athènes' },
+      { value: 'mythologie-grecque', label: 'Mythologie et religion' },
+      { value: 'jeux-olympiques', label: 'Les Jeux olympiques antiques' },
+      { value: 'sparte-vs-athenes', label: 'Sparte et Athènes' },
+      { value: 'art-architecture-grece', label: 'Art et architecture' }
+    ],
+    'rome': [
+      { value: 'fondation-republique', label: 'Fondation et République romaine' },
+      { value: 'empire-romain', label: 'L\'Empire romain' },
+      { value: 'armee-conquetes', label: 'Armée et conquêtes' },
+      { value: 'vie-quotidienne-rome', label: 'Vie quotidienne à Rome' },
+      { value: 'chute-empire', label: 'Chute de l\'Empire romain' }
+    ],
+    'christianisme-islam': [
+      { value: 'naissance-christianisme', label: 'Naissance du christianisme' },
+      { value: 'expansion-christianisme', label: 'Expansion du christianisme' },
+      { value: 'naissance-islam', label: 'Naissance de l\'Islam' },
+      { value: 'expansion-islam', label: 'Expansion de l\'Islam' }
+    ],
+    'moyen-age': [
+      { value: 'feodalite', label: 'La féodalité (seigneurs, vassaux)' },
+      { value: 'chateau-fort', label: 'Le château fort et la vie seigneuriale' },
+      { value: 'eglise-moyen-age', label: 'L\'Église au Moyen Âge' },
+      { value: 'croisades', label: 'Les Croisades' },
+      { value: 'vie-paysanne', label: 'Vie paysanne et villages' },
+      { value: 'villes-commerce', label: 'Essor des villes et du commerce' }
+    ],
+    'confederation-suisse': [
+      { value: 'pacte-1291', label: 'Le Pacte de 1291' },
+      { value: 'legendes-fondatrices', label: 'Guillaume Tell et légendes fondatrices' },
+      { value: 'batailles-suisses', label: 'Batailles (Morgarten, Sempach)' },
+      { value: 'cantons-alliance', label: 'Alliance des cantons' }
+    ]
+  },
+  '10H': {
+    'renaissance': [
+      { value: 'humanisme', label: 'L\'humanisme et ses penseurs' },
+      { value: 'art-renaissance', label: 'Art de la Renaissance (Vinci, Michel-Ange)' },
+      { value: 'imprimerie', label: 'L\'invention de l\'imprimerie' },
+      { value: 'sciences-renaissance', label: 'Révolution scientifique (Copernic, Galilée)' }
+    ],
+    'grandes-decouvertes': [
+      { value: 'explorateurs', label: 'Les grands explorateurs' },
+      { value: 'colonisation-ameriques', label: 'Colonisation des Amériques' },
+      { value: 'traite-negriere', label: 'Commerce triangulaire et traite négrière' },
+      { value: 'consequences-populations', label: 'Conséquences sur les populations' }
+    ],
+    'reforme-guerres-religion': [
+      { value: 'luther-reforme', label: 'Luther et la Réforme protestante' },
+      { value: 'calvin-geneve', label: 'Calvin et Genève' },
+      { value: 'contre-reforme', label: 'La Contre-Réforme' },
+      { value: 'guerres-religion', label: 'Les guerres de religion' }
+    ],
+    'ancien-regime-lumieres': [
+      { value: 'absolutisme', label: 'L\'absolutisme (Louis XIV)' },
+      { value: 'societe-ordres', label: 'La société d\'ordres' },
+      { value: 'philosophes-lumieres', label: 'Les philosophes des Lumières' },
+      { value: 'encyclopedie', label: 'L\'Encyclopédie' }
+    ],
+    'revolution-francaise': [
+      { value: 'causes-revolution', label: 'Causes de la Révolution' },
+      { value: 'evenements-cles', label: 'Événements clés (1789-1799)' },
+      { value: 'droits-homme', label: 'Déclaration des droits de l\'homme' },
+      { value: 'napoleon', label: 'Napoléon et l\'Empire' },
+      { value: 'suisse-revolution', label: 'La Suisse et la Révolution' }
+    ],
+    'revolution-industrielle': [
+      { value: 'inventions-techniques', label: 'Inventions et progrès techniques' },
+      { value: 'condition-ouvriere', label: 'Condition ouvrière et question sociale' },
+      { value: 'urbanisation', label: 'Urbanisation et transformations' },
+      { value: 'mouvements-sociaux', label: 'Mouvements sociaux et syndicats' },
+      { value: 'suisse-industrielle', label: 'La Suisse industrielle' }
+    ]
+  },
+  '11H': {
+    'premiere-guerre-mondiale': [
+      { value: 'causes-ww1', label: 'Causes et alliances' },
+      { value: 'tranchees', label: 'La guerre des tranchées' },
+      { value: 'guerre-totale', label: 'La guerre totale' },
+      { value: 'consequences-ww1', label: 'Conséquences et traités de paix' },
+      { value: 'suisse-ww1', label: 'La Suisse pendant la WWI' }
+    ],
+    'totalitarismes': [
+      { value: 'fascisme-italie', label: 'Le fascisme en Italie' },
+      { value: 'nazisme', label: 'Le nazisme en Allemagne' },
+      { value: 'stalinisme', label: 'Le stalinisme en URSS' },
+      { value: 'propagande', label: 'Propagande et embrigadement' },
+      { value: 'comparaison-regimes', label: 'Comparaison des régimes totalitaires' }
+    ],
+    'seconde-guerre-mondiale-shoah': [
+      { value: 'causes-ww2', label: 'Causes et déclenchement' },
+      { value: 'phases-ww2', label: 'Les grandes phases du conflit' },
+      { value: 'shoah', label: 'La Shoah et les génocides' },
+      { value: 'resistance-collaboration', label: 'Résistance et collaboration' },
+      { value: 'suisse-ww2', label: 'La Suisse pendant la WWII' }
+    ],
+    'guerre-froide': [
+      { value: 'bipolarisation', label: 'Bipolarisation du monde' },
+      { value: 'crises-guerre-froide', label: 'Crises majeures (Berlin, Cuba, Vietnam)' },
+      { value: 'course-armements', label: 'Course aux armements et espace' },
+      { value: 'chute-mur', label: 'Chute du Mur et fin de l\'URSS' }
+    ],
+    'decolonisation': [
+      { value: 'causes-decolonisation', label: 'Causes de la décolonisation' },
+      { value: 'independances-afrique', label: 'Indépendances en Afrique' },
+      { value: 'independances-asie', label: 'Indépendances en Asie' },
+      { value: 'neocolonialisme', label: 'Néocolonialisme et défis' }
+    ],
+    'monde-contemporain': [
+      { value: 'mondialisation', label: 'Mondialisation et ses enjeux' },
+      { value: 'construction-europeenne', label: 'Construction européenne' },
+      { value: 'terrorisme', label: 'Terrorisme et conflits contemporains' },
+      { value: 'enjeux-environnement', label: 'Enjeux environnementaux' },
+      { value: 'suisse-contemporaine', label: 'La Suisse contemporaine' }
+    ]
+  }
+};
+
+const dimensionsPER = [
+  { value: 'sociale-culturelle', label: 'Sociale et culturelle' },
+  { value: 'economique', label: 'Économique' },
+  { value: 'politique', label: 'Politique' },
+  { value: 'religieuse', label: 'Religieuse' }
+];
+
+const typesSources = [
+  { value: 'iconographique', label: 'Iconographique (image, tableau, photo)' },
+  { value: 'ecrite', label: 'Écrite (texte, lettre, loi)' },
+  { value: 'carte', label: 'Carte (géographique, historique)' },
+  { value: 'archeologique', label: 'Archéologique (objet, vestige)' },
+  { value: 'audiovisuelle', label: 'Audiovisuelle (film, témoignage)' }
+];
 
 // ==================== DOMAINES / SOUS-THEMES FRANCAIS ====================
 const domainesFrancais = [
@@ -2750,6 +2959,27 @@ function updateDynamicFields() {
     domaineSelect.innerHTML = '<option value="">Choisir un domaine…</option>';
     sousthemeSelect.innerHTML = '<option value="">Choisir un sous-thème…</option>';
   }
+
+  // Histoire: periode + sous-theme (hidden form)
+  const histPeriodeGroup = document.getElementById('histoire-periode-group');
+  const histPeriodeSelect = document.getElementById('histoire-periode');
+  const histSousthemeGroup = document.getElementById('histoire-soustheme-group');
+  const histSousthemeSelect = document.getElementById('histoire-soustheme');
+  if (matVal === 'Histoire' && isCycle3 && themesHistoire[degreKey]) {
+    histPeriodeGroup.style.display = 'flex';
+    histPeriodeSelect.innerHTML = '<option value="">Choisir un thème…</option>';
+    themesHistoire[degreKey].forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t.value;
+      opt.textContent = t.label;
+      histPeriodeSelect.appendChild(opt);
+    });
+  } else {
+    histPeriodeGroup.style.display = 'none';
+    histSousthemeGroup.style.display = 'none';
+    histPeriodeSelect.innerHTML = '<option value="">Choisir un thème…</option>';
+    histSousthemeSelect.innerHTML = '<option value="">Choisir un sous-thème…</option>';
+  }
 }
 
 function updateSousThemes() {
@@ -2892,6 +3122,10 @@ async function handleGenerate(e) {
   const chapitre = document.getElementById('chapitre').value;
   const domaine = document.getElementById('domaine').value;
   const soustheme = document.getElementById('soustheme').value;
+  const histoirePeriode = document.getElementById('histoire-periode').value;
+  const histoireSoustheme = document.getElementById('histoire-soustheme').value;
+  const dimensions = document.getElementById('dimensions').value;
+  const typesources = document.getElementById('typesources').value;
   const code = document.getElementById('code').value;
 
   // Track beta code usage
@@ -2912,8 +3146,8 @@ async function handleGenerate(e) {
   }
 
   const profilLabel = currentProfile === 'enseignant' ? 'Enseignant' : "Parent d'élève";
-  const formatLabel = currentFormat === 'impression' 
-    ? 'Impression (fiche exercice + fiche outil séparée, sans aides cliquables)' 
+  const formatLabel = currentFormat === 'impression'
+    ? 'Impression (fiche exercice + fiche outil séparée, sans aides cliquables)'
     : 'Digital interactif (aides intégrées cliquables dans chaque exercice)';
   let message = `Profil : ${profilLabel}\nFormat : ${formatLabel}`;
   message += `\nMatière : ${matiere}\nDegré : ${degre}`;
@@ -2922,11 +3156,15 @@ async function handleGenerate(e) {
   if (chapitre) message += `\nChapitre : ${chapitre}`;
   if (domaine) message += `\nDomaine : ${domaine}`;
   if (soustheme) message += `\nSous-theme : ${soustheme}`;
+  if (histoirePeriode) message += `\nPériode historique : ${histoirePeriode}`;
+  if (histoireSoustheme) message += `\nSous-thème historique : ${histoireSoustheme}`;
+  if (dimensions) message += `\nDimensions PER : ${dimensions}`;
+  if (typesources) message += `\nTypes de sources : ${typesources}`;
   message += `\nObjectif : ${sujet}`;
   if (theme) message += `\nThème / Vocabulaire visé : ${theme}`;
   if (adaptations.length > 0) message += `\nAdaptations BEP : ${adaptations.join(', ')}`;
 
-  const metadata = { matiere, degre, voie, difficulte, chapitre, sujet, theme, domaine, soustheme, adaptations, profil: currentProfile, format: currentFormat };
+  const metadata = { matiere, degre, voie, difficulte, chapitre, sujet, theme, domaine, soustheme, histoirePeriode, histoireSoustheme, dimensions, typesources, adaptations, profil: currentProfile, format: currentFormat };
 
   // ==================== UI SETUP ====================
   btn.classList.add('loading');
@@ -3015,6 +3253,10 @@ async function handleGenerate(e) {
     formData.append('chapitre', chapitre);
     formData.append('code', code);
     formData.append('adaptations', adaptations.join(', '));
+    if (histoirePeriode) formData.append('histoire-periode', histoirePeriode);
+    if (histoireSoustheme) formData.append('histoire-soustheme', histoireSoustheme);
+    if (dimensions) formData.append('dimensions', dimensions);
+    if (typesources) formData.append('typesources', typesources);
     formData.append('message', message);
     if (currentUser) {
       formData.append('user_id', currentUser.id);
@@ -3320,6 +3562,32 @@ function wizBuildStep4() {
     html += '</select></div><div id="wiz-soustheme-wrap"></div>';
     ctx.innerHTML = html;
   }
+  if (mat === 'Histoire' && isCycle3 && typeof themesHistoire !== 'undefined' && themesHistoire[deg]) {
+    let html = '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Période / Thème</div><select class="wiz-select" id="wiz-histoire-periode" onchange="wizUpdateHistoireSousThemes()"><option value="">Choisir un thème…</option>';
+    themesHistoire[deg].forEach(t => { html += '<option value="'+t.value+'">'+t.label+'</option>'; });
+    html += '</select></div><div id="wiz-histoire-soustheme-wrap"></div>';
+    // Dimensions PER (multi-select chips)
+    html += '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Dimensions PER <span style="font-weight:400;text-transform:none;opacity:.6">(multi-sélection)</span></div><div class="wiz-chips-group">';
+    dimensionsPER.forEach(d => { html += '<span class="wiz-chip" onclick="this.classList.toggle(\'on\')" data-val="'+d.value+'">'+d.label+'</span>'; });
+    html += '</div></div>';
+    // Types de sources (multi-select chips)
+    html += '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Types de sources <span style="font-weight:400;text-transform:none;opacity:.6">(multi-sélection, optionnel)</span></div><div class="wiz-chips-group">';
+    typesSources.forEach(s => { html += '<span class="wiz-chip" onclick="this.classList.toggle(\'on\')" data-val="'+s.value+'">'+s.label+'</span>'; });
+    html += '</div></div>';
+    ctx.innerHTML = html;
+  }
+}
+
+function wizUpdateHistoireSousThemes() {
+  const wrap = document.getElementById('wiz-histoire-soustheme-wrap');
+  const periodeVal = document.getElementById('wiz-histoire-periode').value;
+  const deg = wizState.degre;
+  if (periodeVal && sousThemesHistoire[deg] && sousThemesHistoire[deg][periodeVal]) {
+    let html = '<div style="margin-bottom:1rem;"><div style="font-size:.8rem;font-weight:600;color:var(--indigo-300);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Sous-thème</div><select class="wiz-select" id="wiz-histoire-soustheme"><option value="">Tous les sous-thèmes</option>';
+    sousThemesHistoire[deg][periodeVal].forEach(st => { html += '<option value="'+st.value+'">'+st.label+'</option>'; });
+    html += '</select></div>';
+    wrap.innerHTML = html;
+  } else { wrap.innerHTML = ''; }
 }
 
 function wizUpdateSousThemes() {
@@ -3365,6 +3633,26 @@ function wizGenerate() {
   const wizSt = document.getElementById('wiz-soustheme');
   document.getElementById('domaine').value = wizDom ? wizDom.value : '';
   document.getElementById('soustheme').value = wizSt ? wizSt.value : '';
+
+  // Histoire: periode, sous-theme, dimensions PER, types de sources
+  const wizHistPeriode = document.getElementById('wiz-histoire-periode');
+  const wizHistSt = document.getElementById('wiz-histoire-soustheme');
+  document.getElementById('histoire-periode').value = wizHistPeriode ? wizHistPeriode.value : '';
+  document.getElementById('histoire-soustheme').value = wizHistSt ? wizHistSt.value : '';
+  // Collect selected dimension chips
+  const selectedDims = [];
+  document.querySelectorAll('.wiz-chips-group .wiz-chip.on').forEach(el => {
+    const val = el.getAttribute('data-val');
+    if (dimensionsPER.some(d => d.value === val)) selectedDims.push(val);
+  });
+  document.getElementById('dimensions').value = selectedDims.join(',');
+  // Collect selected source type chips
+  const selectedSources = [];
+  document.querySelectorAll('.wiz-chips-group .wiz-chip.on').forEach(el => {
+    const val = el.getAttribute('data-val');
+    if (typesSources.some(s => s.value === val)) selectedSources.push(val);
+  });
+  document.getElementById('typesources').value = selectedSources.join(',');
 
   // Adaptations
   document.querySelectorAll('input[name="adaptations"]').forEach(cb => cb.checked = false);
