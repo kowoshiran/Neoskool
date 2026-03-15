@@ -193,14 +193,54 @@ export default async function handler(req) {
       if (adaptations) userMessage += `\nAdaptations BEP : ${adaptations}`;
     }
 
+    // Mapping: période key → list of sous-thème keys (for when no sous-thème is selected)
+    const PERIODE_SOUSTHEMES = {
+      'premiere-guerre-mondiale': ['causes-ww1', 'tranchees', 'guerre-totale', 'consequences-ww1', 'suisse-ww1'],
+      'totalitarismes': ['fascisme-italie', 'nazisme', 'stalinisme', 'propagande', 'comparaison-regimes'],
+      'seconde-guerre-mondiale-shoah': ['causes-ww2', 'phases-ww2', 'shoah', 'resistance-collaboration', 'suisse-ww2'],
+      'guerre-froide': ['bipolarisation', 'crises-guerre-froide', 'course-armements', 'chute-mur'],
+      'decolonisation': ['causes-decolonisation', 'independances-afrique', 'independances-asie', 'neocolonialisme'],
+      'monde-contemporain': ['mondialisation', 'construction-europeenne', 'terrorisme', 'enjeux-environnement', 'suisse-contemporaine'],
+      'antiquite-egypte-mesopotamie': ['pharaons-pyramides', 'ecriture-hieroglyphes', 'vie-quotidienne-egypte', 'mesopotamie-cuneiforme'],
+      'grece-antique': ['democratie-athenes', 'mythologie-grecque', 'jeux-olympiques', 'sparte-vs-athenes', 'art-architecture-grece'],
+      'rome': ['fondation-republique', 'empire-romain', 'armee-conquetes', 'vie-quotidienne-rome', 'chute-empire'],
+      'christianisme-islam': ['naissance-christianisme', 'expansion-christianisme', 'naissance-islam', 'expansion-islam'],
+      'moyen-age': ['feodalite', 'chateau-fort', 'eglise-moyen-age', 'croisades', 'vie-paysanne', 'villes-commerce'],
+      'confederation-suisse': ['pacte-1291', 'legendes-fondatrices', 'batailles-suisses', 'cantons-alliance'],
+      'renaissance': ['humanisme', 'art-renaissance', 'imprimerie', 'sciences-renaissance'],
+      'grandes-decouvertes': ['explorateurs', 'colonisation-ameriques', 'traite-negriere', 'consequences-populations'],
+      'reforme-guerres-religion': ['luther-reforme', 'calvin-geneve', 'contre-reforme', 'guerres-religion'],
+      'ancien-regime-lumieres': ['absolutisme', 'societe-ordres', 'philosophes-lumieres', 'encyclopedie'],
+      'revolution-francaise': ['causes-revolution', 'evenements-cles', 'droits-homme', 'napoleon', 'suisse-revolution'],
+      'revolution-industrielle': ['inventions-techniques', 'condition-ouvriere', 'urbanisation', 'mouvements-sociaux', 'suisse-industrielle'],
+    };
+
     // For Histoire: inject curated images as ready-to-use HTML blocks
     if (matiereNorm === 'histoire') {
       const sousThemeKey = histoireSoustheme || '';
       let images = [];
 
+      // Priority 1: exact sous-thème match
       if (sousThemeKey && HISTOIRE_IMAGES[sousThemeKey] && HISTOIRE_IMAGES[sousThemeKey].length > 0) {
         images = HISTOIRE_IMAGES[sousThemeKey];
-        console.log(`Curated images found for "${sousThemeKey}": ${images.length}`);
+        console.log(`Curated images found for sous-thème "${sousThemeKey}": ${images.length}`);
+      }
+
+      // Priority 2: no sous-thème selected → collect images from all sous-thèmes of the période
+      if (images.length === 0 && histoirePeriode) {
+        const periodeKey = histoirePeriode;
+        const sousThemes = PERIODE_SOUSTHEMES[periodeKey] || [];
+        for (const stKey of sousThemes) {
+          if (HISTOIRE_IMAGES[stKey] && HISTOIRE_IMAGES[stKey].length > 0) {
+            // Take max 2 images per sous-thème to avoid overloading
+            images.push(...HISTOIRE_IMAGES[stKey].slice(0, 2));
+          }
+        }
+        // Limit total to 4 images max
+        images = images.slice(0, 4);
+        if (images.length > 0) {
+          console.log(`Curated images found for période "${periodeKey}": ${images.length} (from sous-thèmes)`);
+        }
       }
 
       if (images.length > 0) {
