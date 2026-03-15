@@ -1,5 +1,15 @@
 export const block2 = `=== HISTOIRE 9H — ANTIQUITÉ → MOYEN ÂGE ===
 
+⚠️⚠️⚠️ OVERRIDE STRUCTURE BLOCK 1 ⚠️⚠️⚠️
+Pour l'Histoire, IGNORE COMPLÈTEMENT la structure du Block 1 (pas de recall-box, pas de level-card level-1/2/3, pas de quiz-card, pas de tool-sheet, pas de tool-ref, pas de XP, pas de gamification).
+Utilise UNIQUEMENT les 6 sections ci-dessous. Ne génère RIEN d'autre.
+
+=== CONTRAINTE DE LONGUEUR ===
+La fiche COMPLÈTE (sections 1-6 + corrigé) doit tenir en 4-6 pages A4 à l'impression.
+- Sections 1-5 : MAX 3-4 pages
+- Section 6 (corrigé) : MAX 1 page
+- Sois CONCIS dans chaque section. Pas de paragraphes inutilement longs.
+
 === STRUCTURE V3 DE LA FICHE ===
 
 Génère une fiche d'histoire en 6 sections exactement dans cet ordre. Chaque section a un rôle cognitif précis. Ne saute aucune section, n'en ajoute aucune (pas de fiche outil, pas de prétest séparé).
@@ -122,9 +132,11 @@ Adaptation par voie :
   <p>🔴 J'ai besoin d'aide — je dois revoir certaines notions</p>
 </div>
 
-3. Corrigé compact :
+3. Corrigé ULTRA-CONCIS :
 <div class="corrige-section">
-  [Réponses de TOUTES les questions des sections 2-5, numérotées et organisées]
+  Format : numéro → réponse en 1 ligne. JAMAIS recopier la question.
+  Questions fermées : juste la lettre ou le mot. Questions ouvertes : 1-2 phrases max.
+  Mission : 2-3 critères de réussite, PAS d'exemple complet. MAX 15-20 lignes HTML total.
 </div>
 
 === COMPÉTENCES PER SHS 32 ===
@@ -183,7 +195,11 @@ Mentionne explicitement les dimensions travaillées dans la fiche.
 5. ANCRAGE ADO : comparaisons passé/présent, liens avec la Suisse/Vaud, enquêtes historiques, récits immersifs.
 6. PAS DE FICHE OUTIL : ne pas générer de section "fiche outil" ou "méthode" séparée. La méthode d'analyse est intégrée dans la section Analyse de sources.
 7. PAS DE XP NI GAMIFICATION : ces fiches sont destinées à l'impression. Ne PAS inclure de XP, badges, points, niveaux gamifiés, barres de progression, ni métaphores gaming. Le ton reste motivant et engageant mais sans système de récompenses fictif.
-8. IMAGES OBLIGATOIRES : Si des URLs d'images sont fournies dans le message utilisateur, tu DOIS les utiliser avec <img src="URL" class="source-image" alt="description"> dans une div.source-box. Ne JAMAIS inventer ou décrire une image imaginaire entre crochets comme [Imagine une photo...]. Utilise UNIQUEMENT les URLs réelles fournies.
+8. IMAGES — RÈGLE ABSOLUE :
+    a) Si des blocs HTML <div class="source-box"> pré-formatés sont fournis dans le message utilisateur, COPIE-LES TEL QUEL dans la Section 4 (Analyse de sources). Ne modifie PAS les URLs.
+    b) Ne JAMAIS écrire de texte descriptif entre crochets comme [Imagine une photo...] ou [Ici, intégrez l'image...]. C'est INTERDIT.
+    c) Ne JAMAIS inventer ou deviner des URLs d'images. Utilise UNIQUEMENT les URLs fournies.
+    d) Si aucune image n'est fournie, utilise des sources textuelles (extraits, citations) à la place. Pas de placeholder.
 
 === CSS DISPONIBLES ===
 source-box, source-box-header, source-box-body, source-image, source-caption, source-meta, source-questions, timeline-box, timeline-title, timeline-item, timeline-date, timeline-text, per-competence-badge, recall-box, level-card, level-banner, level-body, exercise-item, exercise-number, exercise-type, answer-zone, answer-line, answer-blank, match-grid, match-left, match-right, match-arrow, gap-sentence, gap, word-bank, word-chip, trap-box, quiz-card, quiz-banner, quiz-body, quiz-item, self-eval, corrige-section, mission-header, compare-table`;

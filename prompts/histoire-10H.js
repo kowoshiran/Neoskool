@@ -1,5 +1,15 @@
 export const block2 = `=== HISTOIRE 10H — STRUCTURE V3 ===
 
+⚠️⚠️⚠️ OVERRIDE STRUCTURE BLOCK 1 ⚠️⚠️⚠️
+Pour l'Histoire, IGNORE COMPLÈTEMENT la structure du Block 1 (pas de recall-box, pas de level-card level-1/2/3, pas de quiz-card, pas de tool-sheet, pas de tool-ref, pas de XP, pas de gamification).
+Utilise UNIQUEMENT les 6 sections ci-dessous. Ne génère RIEN d'autre.
+
+=== CONTRAINTE DE LONGUEUR ===
+La fiche COMPLÈTE (sections 1-6 + corrigé) doit tenir en 4-6 pages A4 à l'impression.
+- Sections 1-5 : MAX 3-4 pages
+- Section 6 (corrigé) : MAX 1 page
+- Sois CONCIS dans chaque section. Pas de paragraphes inutilement longs.
+
 Période : Renaissance → 1914 (13-14 ans, Canton de Vaud)
 
 === COMPÉTENCES PER — SHS 32 ===
@@ -183,17 +193,20 @@ Auto-évaluation (self-eval) :
   <div class="answer-zone"><div class="answer-line"></div></div>
 </div>
 
-Corrigé (corrige-section) :
-- Réponses complètes et détaillées pour TOUS les exercices
-- Explications historiques supplémentaires si pertinent
-- Pour les questions ouvertes : exemple de réponse attendue
+Corrigé ULTRA-CONCIS (corrige-section) :
+- Format : numéro → réponse en 1 ligne. JAMAIS recopier la question.
+- Questions fermées : juste la lettre ou le mot (ex: « Q1: b) », « Q3: Vrai »)
+- Questions ouvertes : 1-2 phrases max d'exemple de réponse
+- Mission : 2-3 critères de réussite, PAS d'exemple de production complète.
+- Le corrigé entier doit tenir en MAXIMUM 15-20 lignes HTML.
 
 <div class="corrige-section">
   <h3>📋 Corrigé</h3>
-  [Réponses numérotées correspondant à chaque exercice]
+  [Réponses numérotées, ultra-concises]
 </div>
 
-NE PAS inclure de fiche outil (tool-sheet) pour l'histoire.
+JAMAIS de fiche outil (tool-sheet) pour l'histoire. JAMAIS de level-card, quiz-card, recall-box, tool-ref.
+La fiche se TERMINE après le corrigé. Rien d'autre après.
 
 === THÈMES 10H ===
 
@@ -245,4 +258,8 @@ NE PAS inclure de fiche outil (tool-sheet) pour l'histoire.
 - La mission doit donner ENVIE d'écrire
 - Adapter le registre à des ados de 13-14 ans : dynamique, direct, sans être infantilisant
 - PAS DE XP NI GAMIFICATION : ces fiches sont destinées à l'impression. Ne PAS inclure de XP, badges, points, niveaux gamifiés, barres de progression, ni métaphores gaming. Le ton reste motivant et engageant mais sans système de récompenses fictif.
-- IMAGES OBLIGATOIRES : Si des URLs d'images sont fournies dans le message utilisateur, tu DOIS les utiliser avec <img src="URL" class="source-image" alt="description"> dans une div.source-box. Ne JAMAIS inventer ou décrire une image imaginaire entre crochets comme [Imagine une photo...]. Utilise UNIQUEMENT les URLs réelles fournies.`;
+- IMAGES — RÈGLE ABSOLUE :
+    a) Si des blocs HTML <div class="source-box"> pré-formatés sont fournis dans le message utilisateur, COPIE-LES TEL QUEL dans la Section 4 (Analyse de sources). Ne modifie PAS les URLs.
+    b) Ne JAMAIS écrire de texte descriptif entre crochets comme [Imagine une photo...] ou [Ici, intégrez l'image...]. C'est INTERDIT.
+    c) Ne JAMAIS inventer ou deviner des URLs d'images. Utilise UNIQUEMENT les URLs fournies.
+    d) Si aucune image n'est fournie, utilise des sources textuelles (extraits, citations) à la place. Pas de placeholder.`;

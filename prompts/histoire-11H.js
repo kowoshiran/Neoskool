@@ -1,5 +1,15 @@
 export const block2 = `=== HISTOIRE 11H — XXe–XXIe SIÈCLES (v3) ===
 
+⚠️⚠️⚠️ OVERRIDE STRUCTURE BLOCK 1 ⚠️⚠️⚠️
+Pour l'Histoire, IGNORE COMPLÈTEMENT la structure du Block 1 (pas de recall-box, pas de level-card level-1/2/3, pas de quiz-card, pas de tool-sheet, pas de tool-ref, pas de XP, pas de gamification).
+Utilise UNIQUEMENT les 6 sections ci-dessous. Ne génère RIEN d'autre.
+
+=== CONTRAINTE DE LONGUEUR ===
+La fiche COMPLÈTE (sections 1-6 + corrigé) doit tenir en 4-6 pages A4 à l'impression.
+- Sections 1-5 : MAX 3-4 pages
+- Section 6 (corrigé) : MAX 1 page
+- Sois CONCIS dans chaque section. Pas de paragraphes inutilement longs.
+
 === CADRE PER : SHS 32 ===
 Compétences :
 - SHS 32.1 : Situer chronologiquement les principales périodes
@@ -102,12 +112,15 @@ Auto-évaluation avec 3 smileys :
 
 Retour sur la prédiction : « Ta prédiction de la section 2 était-elle juste ? Qu'as-tu appris de nouveau ? » → boucle métacognitive.
 
-Corrigé compact dans <div class="corrige-section"> :
-- Réponses à TOUS les exercices (découverte guidée + analyse de sources + mission)
-- Pour les questions ouvertes : exemple de réponse attendue
-- Pour la mission : critères de réussite et exemple de production
+Corrigé ULTRA-CONCIS dans <div class="corrige-section"> :
+- Format : numéro de question → réponse en 1 ligne. JAMAIS recopier la question.
+- Questions fermées : juste la lettre ou le mot (ex: « Q1: b) », « Q3: Vrai »)
+- Questions ouvertes : 1-2 phrases max d'exemple de réponse
+- Mission : 2-3 critères de réussite en une ligne chacun. PAS d'exemple de production complète.
+- Le corrigé entier doit tenir en MAXIMUM 15-20 lignes HTML.
 
-PAS de fiche outil (outil-sheet) pour l'histoire.
+JAMAIS de fiche outil (tool-sheet) pour l'histoire. JAMAIS de level-card, quiz-card, recall-box, tool-ref.
+La fiche se TERMINE après le corrigé. Rien d'autre après.
 
 === DIFFÉRENCIATION PAR VOIE (résumé) ===
 VG1 : questions fermées (QCM, vrai/faux, trous), carte d'identité pré-remplie, vocabulaire simplifié avec définitions, amorces de phrases, 1 source, consignes courtes (1 action)
@@ -151,4 +164,8 @@ Quand le thème est la Shoah ou un génocide, les règles suivantes REMPLACENT l
 7. L'histoire doit être FASCINANTE — narration vivante, détails concrets, anecdotes surprenantes
 8. Utiliser les classes CSS du design wrapper (voir liste ci-dessus)
 9. PAS DE XP NI GAMIFICATION : ces fiches sont destinées à l'impression. Ne PAS inclure de XP, badges, points, niveaux gamifiés, barres de progression, ni métaphores gaming. Le ton reste motivant et engageant mais sans système de récompenses fictif.
-10. IMAGES OBLIGATOIRES : Si des URLs d'images sont fournies dans le message utilisateur, tu DOIS les utiliser avec <img src="URL" class="source-image" alt="description"> dans une div.source-box. Ne JAMAIS inventer ou décrire une image imaginaire entre crochets comme [Imagine une photo...]. Utilise UNIQUEMENT les URLs réelles fournies.`;
+10. IMAGES — RÈGLE ABSOLUE :
+    a) Si des blocs HTML <div class="source-box"> pré-formatés sont fournis dans le message utilisateur, COPIE-LES TEL QUEL dans la Section 4 (Analyse de sources). Ne modifie PAS les URLs.
+    b) Ne JAMAIS écrire de texte descriptif entre crochets comme [Imagine une photo...] ou [Ici, intégrez l'image...]. C'est INTERDIT.
+    c) Ne JAMAIS inventer ou deviner des URLs d'images. Utilise UNIQUEMENT les URLs fournies.
+    d) Si aucune image n'est fournie, utilise des sources textuelles (extraits, citations) à la place. Pas de placeholder.`;

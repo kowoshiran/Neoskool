@@ -125,7 +125,9 @@ per-footer > per-footer-title + per-objective primary|secondary > per-dot(●|�
 Syntaxe : chaque classe = un div sauf indication contraire. > = enfant, + = frère. Utilise ces classes dans du HTML valide (<div class="...">, <span>, <table>). HTML standard aussi valide (<p>, <strong>, <table>, <ul>).
 
 === STRUCTURE OBLIGATOIRE DU HTML ===
-Ordre strict, TOUS obligatoires :
+⚠️ EXCEPTION HISTOIRE : si la matière est Histoire, IGNORE COMPLÈTEMENT cette structure. Utilise UNIQUEMENT la structure en 6 sections définie dans le Block 2 histoire. Pas de recall-box, pas de level-card, pas de quiz-card, pas de tool-sheet.
+
+Pour les AUTRES matières — ordre strict, TOUS obligatoires :
 1. per-footer (objectifs PER travaillés, ● principal ○ secondaire, 3-4 max) — EN PREMIER pour que l'enseignant voie immédiatement les objectifs
 2. recall-box (rappel express, 2-3 questions d'activation)
 3. level-card level-1 (2 exercices + tool-ref)

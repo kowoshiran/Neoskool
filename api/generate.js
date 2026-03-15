@@ -113,66 +113,6 @@ async function checkQuota(userId, email) {
   }
 }
 
-// Wikipedia Article API — searches for images from actual Wikipedia articles (much more reliable than Commons search)
-async function searchWikipediaImages(query, limit = 5) {
-  try {
-    // Step 1: Find relevant French Wikipedia articles (1 API call)
-    const searchUrl = `https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&srlimit=3&format=json&origin=*`;
-    const searchRes = await fetch(searchUrl);
-    const searchData = await searchRes.json();
-    if (!searchData.query?.search?.length) return [];
-
-    // Step 2: Get images from top 2 articles (1 API call, batched)
-    const articleTitles = searchData.query.search.slice(0, 2).map(s => s.title);
-    const imagesUrl = `https://fr.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(articleTitles.join('|'))}&prop=images&imlimit=30&format=json&origin=*`;
-    const imagesRes = await fetch(imagesUrl);
-    const imagesData = await imagesRes.json();
-
-    // Collect image titles, filter out UI junk
-    let imageTitles = [];
-    const pages = imagesData.query?.pages || {};
-    for (const page of Object.values(pages)) {
-      for (const img of (page.images || [])) {
-        imageTitles.push(img.title);
-      }
-    }
-    imageTitles = imageTitles.filter(t =>
-      !t.match(/\.(svg|gif)$/i) &&
-      !t.match(/(icon|logo|button|arrow|commons-logo|edit-clear|disambig|question_book|wiki|folder|increase|decrease|steady|flag_of|drapeau_de|blason|coat_of_arms|coa_|wikt-|crystal-|gnome-|nuvola|ambox|padlock|semi-protection|red_pog|blue_pog)/i)
-    );
-    imageTitles = [...new Set(imageTitles)];
-    if (imageTitles.length === 0) return [];
-
-    // Step 3: Get image info from Commons (1 API call, batched max 10)
-    const batchTitles = imageTitles.slice(0, 10);
-    const infoUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(batchTitles.join('|'))}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=500&format=json&origin=*`;
-    const infoRes = await fetch(infoUrl);
-    const infoData = await infoRes.json();
-
-    const results = [];
-    const infoPages = infoData.query?.pages || {};
-    for (const p of Object.values(infoPages)) {
-      if (results.length >= limit) break;
-      if (p.imageinfo?.[0]) {
-        const info = p.imageinfo[0];
-        const thumbUrl = info.thumburl || info.url;
-        if (!thumbUrl || thumbUrl.endsWith('.svg') || (info.thumbwidth && info.thumbwidth < 100)) continue;
-        const meta = info.extmetadata || {};
-        results.push({
-          title: (p.title || '').replace('File:', '').replace('Fichier:', ''),
-          thumbUrl,
-          artist: meta.Artist?.value?.replace(/<[^>]*>/g, '') || 'Inconnu',
-          license: meta.LicenseShortName?.value || 'Wikimedia Commons',
-          description: (meta.ImageDescription?.value || '').replace(/<[^>]*>/g, '').slice(0, 200)
-        });
-      }
-    }
-    return results;
-  } catch (err) {
-    console.error('Wikipedia image search failed:', err);
-    return [];
-  }
-}
 
 export default async function handler(req) {
   // Only accept POST
@@ -253,47 +193,38 @@ export default async function handler(req) {
       if (adaptations) userMessage += `\nAdaptations BEP : ${adaptations}`;
     }
 
-    // For Histoire: inject curated images (priority) + API fallback
+    // For Histoire: inject curated images as ready-to-use HTML blocks
     if (matiereNorm === 'histoire') {
+      const sousThemeKey = histoireSoustheme || '';
       let images = [];
 
-      // Priority 1: Curated image bank (100% reliable)
-      const sousThemeKey = histoireSoustheme || '';
       if (sousThemeKey && HISTOIRE_IMAGES[sousThemeKey] && HISTOIRE_IMAGES[sousThemeKey].length > 0) {
         images = HISTOIRE_IMAGES[sousThemeKey];
         console.log(`Curated images found for "${sousThemeKey}": ${images.length}`);
       }
 
-      // Priority 2: Wikipedia API fallback (if no curated images)
-      if (images.length === 0 && (histoirePeriode || sujet)) {
-        const searchQuery = histoireSoustheme || histoirePeriode || sujet;
-        const apiImages = await searchWikipediaImages(searchQuery);
-        images = apiImages.map(img => ({
-          url: img.thumbUrl,
-          title: img.title,
-          nature: 'Document iconographique',
-          date: 'Voir source',
-          auteur: img.artist,
-          description: img.description
-        }));
-        console.log(`Wikipedia API images for "${searchQuery}": ${images.length}`);
-      }
-
       if (images.length > 0) {
-        userMessage += '\n\n=== SOURCES ICONOGRAPHIQUES — IMAGES OBLIGATOIRES ===';
-        userMessage += '\nRÈGLE ABSOLUE : Tu DOIS utiliser ces images dans la section Analyse de sources avec <img src="URL" class="source-image" alt="description">.';
-        userMessage += '\nNe JAMAIS décrire une image imaginaire entre crochets [Imagine...]. Utilise UNIQUEMENT les URLs ci-dessous.';
-        userMessage += '\nSi une image ne correspond pas au thème, ignore-la, mais utilise au minimum 1 image.';
+        // Provide EXACT HTML blocks that Claude must copy-paste into Section 4
+        userMessage += '\n\n=== IMAGES PRÉ-FORMATÉES — COPIE LE HTML TEL QUEL ===';
+        userMessage += '\nRÈGLE ABSOLUE : Copie ces blocs HTML EXACTEMENT dans la Section 4 (Analyse de sources).';
+        userMessage += '\nNe modifie PAS les URLs. Ne décris PAS les images en texte. Ne génère AUCUNE image imaginaire.';
+        userMessage += '\nAjoute tes questions d\'analyse (⭐ Observer, ⭐⭐ Comprendre, ⭐⭐⭐ Interpréter) APRÈS chaque bloc source.\n';
+
         images.forEach((img, i) => {
-          userMessage += `\n\nImage ${i + 1} :`;
-          userMessage += `\n- Titre : ${img.title}`;
-          userMessage += `\n- URL : ${img.url}`;
-          userMessage += `\n- Nature : ${img.nature || 'Document iconographique'}`;
-          userMessage += `\n- Date : ${img.date || 'Voir source'}`;
-          userMessage += `\n- Auteur : ${img.auteur || 'Domaine public'}`;
-          if (img.description) userMessage += `\n- Description : ${img.description}`;
+          const alt = (img.description || img.title || '').replace(/"/g, '&quot;').slice(0, 120);
+          userMessage += `\n<div class="source-box">`;
+          userMessage += `\n  <div class="source-box-header">📄 Source ${i + 1} — ${img.title}</div>`;
+          userMessage += `\n  <div class="source-box-body">`;
+          userMessage += `\n    <p class="source-meta"><strong>Nature :</strong> ${img.nature || 'Document iconographique'} | <strong>Date :</strong> ${img.date || 'Voir source'} | <strong>Auteur :</strong> ${img.auteur || 'Domaine public'}</p>`;
+          userMessage += `\n    <img src="${img.url}" class="source-image" alt="${alt}">`;
+          userMessage += `\n  </div>`;
+          userMessage += `\n</div>\n`;
         });
-        userMessage += '\n\nIntègre ces images dans des div.source-box avec carte d\'identité complète (nature, date, auteur, contexte).';
+
+        userMessage += '\nCopie ces blocs source-box dans ta Section 4, puis ajoute les questions d\'analyse après chaque bloc.';
+      } else {
+        // No curated images — tell Claude to use text sources only
+        userMessage += '\n\nAucune image disponible pour ce sous-thème. Utilise des sources TEXTUELLES (extraits de documents, citations historiques) dans la Section 4. Ne décris JAMAIS une image imaginaire entre crochets.';
       }
     }
 
