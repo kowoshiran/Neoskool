@@ -240,7 +240,7 @@ export default async function handler(req) {
         }
       }
 
-      // Diversify: pick max 3 images with different 'nature' types
+      // Diversify: pick max 2 images with different 'nature' types (2 = optimal for 4-6 pages)
       if (images.length > 0) {
         const diversified = [];
         const usedNatures = new Set();
@@ -251,16 +251,16 @@ export default async function handler(req) {
             diversified.push(img);
             usedNatures.add(natureKey);
             usedUrls.add(img.url);
-            if (diversified.length >= 3) break;
+            if (diversified.length >= 2) break;
           }
         }
-        // If we have fewer than 2 diverse images, add more even if same nature (but not same URL)
+        // If we only found 1 diverse image, add one more even if same nature (but not same URL)
         if (diversified.length < 2) {
           for (const img of images) {
             if (!usedUrls.has(img.url)) {
               diversified.push(img);
               usedUrls.add(img.url);
-              if (diversified.length >= 3) break;
+              if (diversified.length >= 2) break;
             }
           }
         }
