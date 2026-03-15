@@ -1,351 +1,246 @@
-export const block2 = `=== ENSEIGNEMENT DE L'HISTOIRE — 10H (13-14 ANS) ===
+export const block2 = `=== HISTOIRE 10H — STRUCTURE V3 ===
 
-=== PÉRIODE COUVERTE ===
-Renaissance → 1914
-Cette année couvre les grandes transformations qui façonnent le monde moderne : de la Renaissance italienne à la veille de la Première Guerre mondiale.
+Période : Renaissance → 1914 (13-14 ans, Canton de Vaud)
 
-=== OBJECTIFS PER — SHS 32 (Sciences humaines et sociales — Histoire) ===
+=== COMPÉTENCES PER — SHS 32 ===
 
-Compétences visées :
-- SHS 32.1 : Identifier la manière dont les Hommes ont organisé leur vie collective à travers le temps
-- SHS 32.2 : Mettre en évidence des permanences et des changements dans l'organisation des sociétés
-- SHS 32.3 : S'approprier des outils et des pratiques de recherche en histoire (analyse de sources)
-- SHS 32.4 : Identifier les relations entre les activités humaines et l'organisation de l'espace à travers le temps
-- SHS 32.5 : Analyser l'organisation collective des sociétés d'ici et d'ailleurs à travers le temps
-- SHS 32.6 : Analyser des espaces géographiques et les relations établies entre les Hommes et entre les sociétés à travers le temps
-- SHS 32.7 : S'approprier, en situation, des outils pertinents pour traiter des problématiques de sciences humaines et sociales
+- SHS 32.1 : Organisation de la vie collective à travers le temps
+- SHS 32.2 : Permanences et changements dans les sociétés
+- SHS 32.3 : Outils et pratiques de recherche en histoire (analyse de sources) — CENTRAL
+- SHS 32.4 : Relations activités humaines / organisation de l'espace
+- SHS 32.5 : Organisation collective des sociétés à travers le temps
+- SHS 32.6 : Espaces géographiques et relations entre sociétés
+- SHS 32.7 : Outils pour traiter des problématiques en sciences humaines
 
-SHS 32.3 est l'objectif CENTRAL pour les fiches d'histoire : l'analyse de sources est la compétence méthodologique fondamentale.
+Affiche la compétence mobilisée avec <span class="per-competence-badge">SHS 32.X</span>.
 
-=== DIMENSIONS D'ANALYSE HISTORIQUE ===
+=== 4 DIMENSIONS D'ANALYSE ===
 
-Toute fiche doit aborder au moins 2 des 4 dimensions suivantes selon le thème :
-- POLITIQUE : organisation du pouvoir, institutions, lois, conflits, traités, révolutions
-- ÉCONOMIQUE : échanges, commerce, production, richesse, travail, industrialisation
-- SOCIALE/CULTURELLE : vie quotidienne, art, culture, éducation, classes sociales, mentalités
-- RELIGIEUSE : croyances, institutions religieuses, réformes, conflits confessionnels, sécularisation
+Chaque fiche aborde au minimum 2 dimensions parmi :
+- POLITIQUE : pouvoir, institutions, lois, conflits, révolutions
+- ÉCONOMIQUE : commerce, production, travail, industrialisation
+- SOCIALE/CULTURELLE : vie quotidienne, art, classes sociales, mentalités
+- RELIGIEUSE : croyances, réformes, conflits confessionnels
 
-Toujours préciser au début de la fiche quelles dimensions sont abordées.
+=== EXACTITUDE HISTORIQUE — RÈGLE ABSOLUE ===
 
-=== RÈGLE ABSOLUE : EXACTITUDE HISTORIQUE ===
+- Ne JAMAIS inventer de faits, dates, noms ou citations
+- Dates EXACTES uniquement
+- Sources réelles ou signalées « Source adaptée pour l'exercice »
+- Personnages avec noms corrects et dates de vie quand pertinent
 
-- Ne JAMAIS inventer de faits historiques, de dates, de noms ou de citations
-- Les dates doivent être EXACTES (vérifiées)
-- Les sources utilisées doivent être réelles ou clairement identifiées comme reconstituées/adaptées
-- Si une source est adaptée ou simplifiée, le mentionner explicitement : « Source adaptée pour l'exercice »
-- Les personnages historiques doivent être nommés correctement avec leurs dates de naissance et de mort quand pertinent
-- Les lieux géographiques doivent être exacts
+=== DIFFÉRENCIATION PAR VOIE ===
 
-=== NIVEAUX DE MAÎTRISE PAR VOIE ===
+VG1 (exigences de base) :
+- Questions fermées : QCM, vrai/faux, texte à trous, relier
+- Carte d'identité des sources PRÉ-REMPLIE (l'élève complète les trous)
+- Vocabulaire simplifié avec définitions entre parenthèses (5-8 termes max)
+- Amorces de phrases pour toute question ouverte
+- Narration plus courte, phrases simples
 
-En histoire, tous les élèves travaillent le MÊME CONTENU (mêmes thèmes, même période). La voie détermine la COMPLEXITÉ de l'analyse, le NOMBRE de sources et le degré d'AUTONOMIE attendu.
+VG2 (exigences supérieures) :
+- Questions semi-ouvertes avec amorces de phrases
+- 2 sources à comparer (tableau comparatif fourni)
+- Analyse guidée avec exemples
+- 8-12 termes de vocabulaire avec glossaire intégré
 
-Correspondance voies → niveaux :
-- VG1 (Niv 1) : exigences de base — 1 source unique, questions très guidées, vocabulaire simplifié, méthode réduite à 3 étapes
-- VG2 (Niv 2) : exigences supérieures — 2 sources à comparer, questions ouvertes guidées, méthode complète avec exemples, production semi-guidée
-- VP (Niv 3) : voie prégymnasiale — 2-3 sources de natures différentes à croiser, questions ouvertes sans guidage, analyse autonome, production argumentative libre, vocabulaire historique précis
+VP (voie prégymnasiale) :
+- Questions ouvertes sans guidage, analyse autonome
+- 2-3 sources de natures différentes à croiser
+- Production argumentative libre
+- Vocabulaire historique précis exigé dans les réponses (12-15 termes)
+- Multiperspectivité : « Comment le noble/paysan/roi voyait-il cela ? »
 
-=== MÉTHODE D'ANALYSE DE SOURCES — 5 ÉTAPES ===
+=== STRUCTURE DE LA FICHE — 6 SECTIONS OBLIGATOIRES ===
 
-La méthode est au cœur de l'enseignement de l'histoire. Elle doit être présentée dans chaque fiche sous forme de boîte méthode (method-box).
+--- SECTION 1 : ACCROCHE ---
 
-Les 5 étapes :
+But : captiver l'élève dès la première phrase. Il doit se dire « Wow, vraiment ?! »
 
-1. IDENTIFIER — Carte d'identité du document
-   - Nature (texte, image, carte, graphique, caricature, affiche, photographie, tableau, gravure, témoignage, discours, traité, loi, article de presse)
-   - Auteur (qui ? fonction ? époque ?)
-   - Date de création
-   - Contexte de production (où ? pour qui ? pourquoi ?)
-   - Destinataire
+Contenu :
+- Un fait surprenant, une question mystère, ou une situation concrète historiquement exacte
+- Ton vivant et direct, comme si on racontait une histoire incroyable
+- Mini frise chronologique (3-5 dates clés maximum) :
 
-2. DÉCRIRE — Ce que je vois / Ce que je lis
-   - Résumer le contenu objectivement
-   - Relever les éléments principaux (personnages, lieux, événements, symboles)
-   - Pour une image : décrire les plans (premier plan, second plan, arrière-plan)
-   - Pour un texte : relever les mots-clés et les idées principales
+<div class="timeline-box">
+  <div class="timeline-title">📅 Repères chronologiques</div>
+  <div class="timeline-item"><span class="timeline-date">1492</span><span class="timeline-text">Événement</span></div>
+  ...
+</div>
 
-3. CONTEXTUALISER — Ce qui se passe à cette époque
-   - Situer le document dans son époque
-   - Rappeler les événements contemporains
-   - Liens avec ce qu'on a appris en cours
+--- SECTION 2 : PRÉDICTION ---
 
-4. INTERPRÉTER — Ce que le document nous apprend
-   - Que nous apprend ce document sur la période ?
-   - Quel message l'auteur veut-il transmettre ?
-   - Quelles informations historiques peut-on en tirer ?
-   - Quels liens avec les dimensions (politique, économique, sociale, religieuse) ?
+But : activer les connaissances antérieures et créer de la curiosité (elaborative interrogation).
 
-5. CRITIQUER — Les limites du document
-   - Fiabilité : l'auteur est-il un témoin direct ?
-   - Point de vue : quel regard porte l'auteur ? Est-il neutre ou engagé ?
-   - Limites : que ne montre PAS ce document ?
-   - Confrontation : ce document confirme-t-il ou contredit-il d'autres sources ?
+Contenu :
+- 1-2 questions de prédiction AVANT le texte explicatif
+- Formulations : « Selon toi, pourquoi... ? » / « Que va-t-il se passer si... ? » / « À ton avis... ? »
+- L'élève écrit sa prédiction dans une zone de réponse :
 
-=== DIFFÉRENCIATION DE LA MÉTHODE PAR VOIE ===
+<div class="answer-zone"><p>Ta prédiction : </p><div class="answer-line"></div><div class="answer-line"></div></div>
 
-VG1 — Méthode réduite à 3 étapes :
-- Étape 1 : IDENTIFIER → Carte d'identité PRÉ-REMPLIE partiellement (l'élève complète les trous)
-- Étape 2 : DÉCRIRE → Questions fermées (QCM, vrai/faux, relier)
-- Étape 3 : CONTEXTUALISER → Texte à trous avec mots proposés
-- Les étapes Interpréter et Critiquer sont intégrées dans des questions guidées simples (ex : « Ce document montre que les gens de cette époque pensaient que… a) … b) … c) … »)
+VG1 : proposer 2-3 choix parmi lesquels prédire
+VP : question totalement ouverte
 
-VG2 — Méthode complète avec guidage :
-- Les 5 étapes sont présentes
-- Chaque étape est accompagnée d'un EXEMPLE concret
-- Les questions sont ouvertes mais avec des amorces de phrases (« Ce document nous apprend que… parce que… »)
-- Un tableau comparatif est fourni quand 2 sources sont présentées
-- La critique est guidée par des questions précises
+--- SECTION 3 : DÉCOUVERTE GUIDÉE ---
 
-VP — Méthode complète et autonome :
-- Les 5 étapes sont présentes sans guidage
-- L'élève doit formuler ses propres questions face aux sources
-- Analyse croisée de 2-3 sources de natures différentes
-- Production argumentative libre avec introduction, développement, conclusion
-- Utilisation du vocabulaire historique précis attendu
+But : raconter l'histoire de façon VIVANTE avec des questions intercalées (interpolated retrieval practice).
 
-=== GESTION DES IMAGES ET SOURCES VISUELLES ===
+Contenu :
+- 2-3 paragraphes narratifs CAPTIVANTS (pas un style manuel scolaire — faire vivre l'histoire !)
+- Utiliser des détails concrets, des personnages réels, des anecdotes surprenantes
+- APRÈS CHAQUE PARAGRAPHE : 1-2 questions de compréhension rapides
 
-Quand une image est fournie ou référencée dans un exercice, utiliser le format HTML suivant :
+Types de questions variés :
+- QCM (exercise-item avec exercise-type « QCM »)
+- Vrai/faux
+- Texte à trous (gap-sentence avec word-bank et word-chip)
+- « Trouve l'intrus »
+- Relier (match-grid avec match-left, match-right, match-arrow)
 
+Exemple de structure :
+<p>[Paragraphe narratif vivant...]</p>
+<div class="exercise-item">
+  <span class="exercise-number">1</span>
+  <span class="exercise-type">QCM</span>
+  <p>Question...</p>
+</div>
+<p>[Paragraphe suivant...]</p>
+<div class="exercise-item">
+  <span class="exercise-number">2</span>
+  <span class="exercise-type">Vrai ou faux</span>
+  <p>Question...</p>
+</div>
+
+VG1 : questions fermées uniquement, vocabulaire simplifié dans la narration
+VG2 : mix de questions fermées et semi-ouvertes
+VP : inclure des questions d'analyse dans les intercalaires
+
+--- SECTION 4 : ANALYSE DE SOURCES ---
+
+But : développer la compétence méthodologique centrale (SHS 32.3).
+
+Pour chaque source :
+1. Carte d'identité du document :
+   - Nature (texte, image, carte, caricature, gravure, affiche, etc.)
+   - Auteur (qui ? fonction ?)
+   - Date
+   - Contexte (où ? pour qui ? pourquoi ?)
+
+2. Questions progressives à 3 niveaux :
+   ⭐ OBSERVER : « Que vois-tu ? Décris... » (description objective)
+   ⭐⭐ COMPRENDRE : « Pourquoi... ? Dans quel contexte... ? » (contextualisation)
+   ⭐⭐⭐ INTERPRÉTER : « Qu'en déduis-tu ? Que nous apprend... ? » (analyse critique)
+
+3. Multiperspectivité (VP surtout) : « Comment un [noble/paysan/ouvrier] aurait-il réagi ? »
+
+Format source :
 <div class="source-box">
-  <img class="source-image" src="[URL ou placeholder]" alt="[Description de l'image]">
-  <div class="source-caption">
-    <strong>Nature :</strong> [type de document] |
-    <strong>Auteur :</strong> [nom] |
-    <strong>Date :</strong> [année] |
-    <strong>Lieu de conservation :</strong> [musée/archive]
+  <div class="source-box-header">Source [n] — [titre]</div>
+  <div class="source-box-body">
+    <div class="source-meta"><strong>Nature :</strong> ... | <strong>Auteur :</strong> ... | <strong>Date :</strong> ...</div>
+    <div class="source-questions">
+      [Questions progressives ici]
+    </div>
   </div>
 </div>
 
-Si l'image n'est pas disponible, fournir une description détaillée dans un encadré source-box avec la mention : « Image non reproductible — Description pour l'analyse : [description détaillée] »
+VG1 : 1 source, carte d'identité pré-remplie à compléter, questions ⭐ uniquement
+VG2 : 2 sources avec tableau comparatif, questions ⭐ et ⭐⭐
+VP : 2-3 sources croisées, les 3 niveaux ⭐⭐⭐, analyse autonome
 
-Pour les cartes historiques : toujours inclure une légende et une échelle temporelle.
+--- SECTION 5 : MISSION HISTORIEN ---
 
-=== STRUCTURE DE LA FICHE ===
+But : un défi créatif et concret où l'élève prend un rôle historique.
 
-Chaque fiche d'histoire suit cette structure :
+Exemples de missions selon les thèmes :
+- « Tu es un explorateur du XVe siècle, écris une page de ton journal de bord »
+- « Tu es Voltaire, rédige un court pamphlet contre l'injustice »
+- « Tu es ouvrier dans une usine en 1850, écris une lettre à ta famille »
+- « Tu es journaliste en 1789, rédige un article sur la prise de la Bastille »
+- « Tu es ambassadeur au Congrès de Vienne, défends les intérêts de ton pays »
 
-1. PRÉTEST (recall-box) — « Que sais-tu déjà ? »
-   - 3-5 questions rapides pour activer les connaissances antérieures
-   - VG1 : QCM ou vrai/faux
-   - VG2 : questions courtes avec amorces
-   - VP : questions ouvertes
+La mission doit être :
+- Historiquement fondée (contexte réel, détails vrais)
+- Amusante et motivante (l'élève doit VOULOIR la faire)
+- Adaptée à la voie :
+  VG1 : texte court (5-8 phrases) avec amorces pré-écrites et mots-clés fournis
+  VG2 : texte guidé (8-12 phrases) avec quelques amorces
+  VP : production libre (15+ phrases), argumentation attendue
 
-2. RAPPEL EXPRESS (recall-box) — Repères essentiels
-   - Frise chronologique simplifiée du thème
-   - Mots-clés avec définitions courtes
-   - Personnages principaux avec dates
-   - VG1 : 5-8 mots-clés maximum
-   - VG2 : 8-12 mots-clés
-   - VP : 12-15 mots-clés avec nuances
+<div class="answer-zone">[Zone d'écriture]</div>
 
-3. BOÎTE MÉTHODE (method-box) — Rappel de la méthode d'analyse
-   - Selon la voie : 3 ou 5 étapes (voir différenciation ci-dessus)
-   - Toujours visible, peut être repliable visuellement
+--- SECTION 6 : AUTO-ÉVALUATION + CORRIGÉ ---
 
-4. NIVEAU 1 — Apprenti historien (level-card level-1)
-   - Source unique, simple et accessible
-   - Exercices guidés : carte d'identité à compléter, QCM, vrai/faux, relier, texte à trous
-   - VG1 : cœur de l'exercice, très guidé
-   - VG2/VP : échauffement rapide
+Auto-évaluation (self-eval) :
+- 3 smileys (🟢 « J'ai bien compris » / 🟡 « J'ai encore des doutes » / 🔴 « J'ai besoin d'aide »)
+- Retour sur la prédiction : « Ta prédiction était-elle juste ? Qu'as-tu appris de nouveau ? » → boucle métacognitive
 
-5. NIVEAU 2 — Explorateur du passé (level-card level-2)
-   - 1-2 sources à analyser
-   - Exercices semi-guidés : questions ouvertes avec amorces, tableau comparatif, classement
-   - VG1 : exercice de défi (optionnel, avec aide)
-   - VG2 : cœur de l'exercice
-   - VP : exercice intermédiaire
+<div class="self-eval">
+  <h3>🎯 Comment ça s'est passé ?</h3>
+  <p>🟢 J'ai bien compris — 🟡 J'ai encore des doutes — 🔴 J'ai besoin d'aide</p>
+  <p><strong>Ta prédiction était-elle juste ?</strong> Qu'as-tu découvert que tu ne savais pas ?</p>
+  <div class="answer-zone"><div class="answer-line"></div></div>
+</div>
 
-6. NIVEAU 3 — Expert en histoire (level-card level-3)
-   - 2-3 sources de natures différentes à croiser
-   - Analyse autonome, argumentation, synthèse
-   - VG1 : exercice bonus (très optionnel)
-   - VG2 : exercice de défi
-   - VP : cœur de l'exercice
+Corrigé (corrige-section) :
+- Réponses complètes et détaillées pour TOUS les exercices
+- Explications historiques supplémentaires si pertinent
+- Pour les questions ouvertes : exemple de réponse attendue
 
-7. QUIZ MÉTACOGNITIF (quiz-card)
-   - « Qu'as-tu appris aujourd'hui ? »
-   - Auto-évaluation des compétences SHS 32
-   - Réflexion sur la méthode utilisée
+<div class="corrige-section">
+  <h3>📋 Corrigé</h3>
+  [Réponses numérotées correspondant à chaque exercice]
+</div>
 
-8. AUTO-ÉVALUATION (self-eval)
-   - Grille de compétences cochable
-   - « Je sais identifier une source » / « Je sais comparer deux sources » / « Je sais argumenter à partir de sources »
+NE PAS inclure de fiche outil (tool-sheet) pour l'histoire.
 
-9. CORRIGÉ (corrige-section)
-   - Réponses complètes et détaillées
-   - Explications historiques supplémentaires
-   - Pour les questions ouvertes : exemple de réponse attendue avec critères de réussite
+=== THÈMES 10H ===
 
-10. FICHE OUTIL (tool-sheet)
-    - Glossaire des termes historiques du thème
-    - Frise chronologique de référence
-    - Méthode d'analyse résumée
-    - Référence PER : SHS 32
+1. La Renaissance (art, sciences, humanisme, imprimerie — XVe-XVIe s.)
+   Personnages : Léonard de Vinci, Michel-Ange, Érasme, Gutenberg, Raphaël, Machiavel
+   Dimensions : sociale/culturelle, économique
+   Lien suisse : Bâle centre d'imprimerie, universités
 
-=== THÈMES 10H — RENAISSANCE À 1914 ===
+2. Les Grandes Découvertes et la colonisation (XVe-XVIe s.)
+   Personnages : Colomb (1492), Vasco de Gama (1498), Magellan (1519-1522)
+   Regard critique : « découverte » vs « invasion », choc microbien, traite négrière
+   Dimensions : économique, sociale/culturelle, politique
 
-THÈME 1 : Renaissance et Humanisme (XVe-XVIe siècles)
-- Contexte : fin du Moyen Âge, redécouverte de l'Antiquité
-- Foyers : Florence, Rome, Venise, puis Europe du Nord
-- Humanisme : l'Homme au centre, raison, éducation, esprit critique
-- Personnages : Léonard de Vinci, Michel-Ange, Érasme, Gutenberg, Raphaël, Machiavel
-- Art : perspective, portrait, mécénat
-- Imprimerie (Gutenberg, vers 1450) : révolution de la diffusion du savoir
-- Dimensions : sociale/culturelle, économique
-- Lien suisse : universités, diffusion de l'imprimerie à Bâle
+3. La Réforme et les guerres de religion (XVIe s.)
+   Personnages : Luther (95 thèses, 1517), Calvin (Genève), Zwingli (Zurich, 1519)
+   Contre-Réforme : Concile de Trente (1545-1563), Jésuites
+   Guerres : Saint-Barthélemy (1572), Édit de Nantes (1598)
+   Dimensions : religieuse, politique
+   Lien suisse : division confessionnelle durable
 
-THÈME 2 : La Réforme et les guerres de religion (XVIe siècle)
-- Causes : critiques de l'Église catholique, vente des indulgences, corruption
-- Luther : 95 thèses (1517), sola scriptura, sola fide
-- Calvin : Genève « Rome protestante », prédestination, discipline morale
-- Zwingli : Réforme à Zurich (1519)
-- Contre-Réforme catholique : Concile de Trente (1545-1563), Jésuites
-- Guerres de religion en France : Saint-Barthélemy (1572), Édit de Nantes (1598)
-- Dimensions : religieuse, politique
-- Lien suisse : Réforme à Genève, Zurich, Berne — division confessionnelle durable
+4. L'Ancien Régime et les Lumières (XVIIe-XVIIIe s.)
+   Personnages : Voltaire, Montesquieu, Rousseau, Diderot
+   Concepts : raison, tolérance, séparation des pouvoirs, contrat social, Encyclopédie (1751-1772)
+   Dimensions : politique, sociale/culturelle
+   Lien suisse : Rousseau genevois
 
-THÈME 3 : Les Grandes Découvertes (XVe-XVIe siècles)
-- Causes : recherche de routes commerciales, progrès techniques (caravelle, boussole, astrolabe)
-- Christophe Colomb : 1492, Amérique
-- Vasco de Gama : 1498, route maritime vers l'Inde
-- Magellan : premier tour du monde (1519-1522)
-- Conséquences : colonisation, échanges colombiens, traite négrière, choc microbien
-- Vision des « découverts » : destruction des civilisations précolombiennes (Aztèques, Incas)
-- Dimensions : économique, sociale/culturelle, politique
-- Regard critique : « découverte » vs « invasion » selon le point de vue
+5. La Révolution française et l'ère napoléonienne (1789-1815)
+   Événements clés : Bastille (14/07/1789), DDHC (26/08/1789), abolition des privilèges (04/08/1789), exécution de Louis XVI (21/01/1793), Terreur (1793-94)
+   Napoléon : Code civil (1804), guerres, Waterloo (1815), Congrès de Vienne (1815)
+   Personnages : Louis XVI, Robespierre, Olympe de Gouges, Napoléon
+   Dimensions : politique, sociale, économique
+   Lien suisse : République helvétique (1798), Acte de Médiation (1803), neutralité reconnue (1815)
 
-THÈME 4 : Les Lumières (XVIIIe siècle)
-- Contexte : absolutisme, inégalités sociales, progrès scientifiques
-- Philosophes : Voltaire, Montesquieu, Rousseau, Diderot, d'Alembert
-- Idées : raison, tolérance, séparation des pouvoirs, contrat social, droits naturels
-- Encyclopédie (1751-1772) : diffusion du savoir
-- Salons et cafés : espaces de débat
-- Dimensions : politique, sociale/culturelle
-- Lien suisse : Rousseau (Genève), influence sur les idées républicaines suisses
+6. La révolution industrielle et ses conséquences (XVIIIe-XIXe s.)
+   Origines : Grande-Bretagne, machine à vapeur (Watt, 1769)
+   Conséquences : exode rural, urbanisation, condition ouvrière, travail des enfants
+   Mouvements : syndicats, socialisme, marxisme
+   Colonisation : Conférence de Berlin (1884-85), empires coloniaux, « mission civilisatrice »
+   Mouvements nationaux : unité italienne (1861), unité allemande (1871), Printemps des peuples (1848)
+   Dimensions : économique, sociale, politique
+   Lien suisse : Sonderbund (1847), Constitution fédérale (1848), industrialisation horlogère
 
-THÈME 5 : Révolution française (1789-1799)
-- Causes : crise financière, inégalités des trois ordres, idées des Lumières
-- Événements clés : États généraux, serment du Jeu de paume, prise de la Bastille (14 juillet 1789), Déclaration des droits de l'homme et du citoyen (26 août 1789), abolition des privilèges (4 août 1789), fuite à Varennes (1791), chute de la monarchie (10 août 1792), Terreur (1793-1794), exécution de Louis XVI (21 janvier 1793)
-- Acteurs : Louis XVI, Marie-Antoinette, Robespierre, Danton, Olympe de Gouges
-- Conséquences : fin de l'Ancien Régime, République, droits civiques
-- Dimensions : politique, sociale, économique
-- Lien suisse : République helvétique (1798), influence directe de la Révolution française
+=== TON ET STYLE ===
 
-THÈME 6 : Napoléon et l'Empire (1799-1815)
-- Coup d'État du 18 Brumaire (1799), Consulat, Empire (1804)
-- Réformes : Code civil (1804), lycées, préfets, Banque de France, système métrique
-- Guerres napoléoniennes : conquêtes en Europe, Trafalgar (1805), Austerlitz (1805), campagne de Russie (1812)
-- Chute : Waterloo (1815), exil à Sainte-Hélène
-- Congrès de Vienne (1815) : restauration monarchique, nouvel ordre européen
-- Dimensions : politique, militaire, sociale
-- Lien suisse : Acte de Médiation (1803), neutralité suisse reconnue au Congrès de Vienne (1815)
-
-THÈME 7 : La Révolution industrielle (XVIIIe-XIXe siècles)
-- Origines : Grande-Bretagne, machine à vapeur (James Watt, 1769)
-- Secteurs : textile, métallurgie, chemins de fer, charbon
-- Conséquences sociales : exode rural, urbanisation, condition ouvrière, travail des enfants
-- Nouvelles classes : bourgeoisie industrielle, prolétariat
-- Mouvements ouvriers : syndicats, grèves, socialisme, marxisme
-- Dimensions : économique, sociale
-- Lien suisse : industrialisation horlogère, textile, premiers chemins de fer (1847 Zurich-Baden)
-
-THÈME 8 : Colonisation et impérialisme (XIXe siècle)
-- Causes : économiques (matières premières, marchés), politiques (prestige), idéologiques (« mission civilisatrice »)
-- Partage de l'Afrique : Conférence de Berlin (1884-1885)
-- Empires coloniaux : britannique, français, belge, allemand, etc.
-- Conséquences : exploitation des peuples, destruction des cultures, résistances locales
-- Regard critique : racisme institutionnel, violences coloniales, traces actuelles
-- Dimensions : politique, économique, sociale/culturelle
-- Lien suisse : la Suisse « non coloniale » mais impliquée (commerce, missions, entreprises)
-
-THÈME 9 : Mouvements libéraux et nationaux (XIXe siècle)
-- Congrès de Vienne et Restauration (1815)
-- Mouvements nationaux : unité italienne (Risorgimento, Cavour, Garibaldi, 1861), unité allemande (Bismarck, 1871)
-- Mouvements libéraux : constitutions, droits civiques, séparation des pouvoirs
-- Révolutions de 1830 et 1848 (Printemps des peuples)
-- Dimensions : politique, sociale
-- Lien suisse : guerre du Sonderbund (1847), Constitution fédérale de 1848, naissance de la Suisse moderne
-
-THÈME 10 : La Suisse de 1848
-- Contexte : Restauration, Régénération, tensions cantonales, Sonderbund
-- Constitution de 1848 : État fédéral, bicamérisme (Conseil national + Conseil des États), droits fondamentaux
-- Compromis : fédéralisme, plurilinguisme, neutralité
-- Développement : chemins de fer, industrialisation, système éducatif
-- Limites : pas de droit de vote des femmes (jusqu'en 1971), exclusions
-- Dimensions : politique, sociale, économique
-- Lien direct avec la vie civique actuelle des élèves
-
-=== VOCABULAIRE HISTORIQUE PAR VOIE ===
-
-VG1 — Vocabulaire simplifié (mots courants, définitions données systématiquement) :
-Les termes complexes sont toujours suivis d'une définition entre parenthèses ou dans un glossaire intégré. Pas plus de 5-8 termes nouveaux par fiche.
-
-VG2 — Vocabulaire standard (termes historiques courants, définitions dans la fiche outil) :
-Les termes sont utilisés dans les questions avec renvoi au glossaire. 8-12 termes par fiche.
-
-VP — Vocabulaire précis et attendu (termes historiques disciplinaires) :
-Les élèves doivent utiliser les termes dans leurs réponses. 12-15 termes par fiche.
-
-Exemples de termes par thème :
-- Renaissance : humanisme, mécénat, perspective, anthropocentrisme, imprimerie
-- Réforme : indulgences, protestant, réformé, prédestination, contre-réforme, concile
-- Grandes Découvertes : caravelle, comptoir, colonisation, échange colombien, traite
-- Lumières : philosophe, raison, tolérance, despotisme éclairé, encyclopédie, contrat social
-- Révolution française : Ancien Régime, tiers état, constitution, république, terreur, sans-culottes
-- Napoléon : coup d'État, Code civil, empire, blocus continental, congrès
-- Révolution industrielle : industrialisation, prolétariat, bourgeoisie, exode rural, syndicat, socialisme
-- Colonisation : impérialisme, métropole, colonie, indigène, mission civilisatrice, résistance
-- Mouvements nationaux : nationalisme, libéralisme, constitution, Risorgimento, Printemps des peuples
-- Suisse 1848 : fédéralisme, Sonderbund, bicamérisme, Conseil fédéral, neutralité, canton
-
-=== TYPES D'EXERCICES RECOMMANDÉS ===
-
-ANALYSE DE SOURCES :
-- Carte d'identité du document (à compléter ou à rédiger selon la voie)
-- Questions guidées ou ouvertes sur le contenu
-- Tableau comparatif de 2 sources
-- Croisement de sources (confrontation)
-- Analyse d'image (description des plans, symboles, message)
-
-REPÈRES CHRONOLOGIQUES :
-- Frise chronologique à compléter
-- Ordonner des événements
-- Associer dates et événements
-- Situer un événement dans son contexte
-
-VOCABULAIRE HISTORIQUE :
-- Définitions à relier
-- Mots croisés thématiques
-- Texte à trous avec vocabulaire ciblé
-- Utilisation de termes en contexte
-
-ARGUMENTATION ET SYNTHÈSE :
-- VG1 : phrases à compléter, QCM argumenté (choisir + justifier parmi des propositions)
-- VG2 : paragraphe guidé avec amorces, tableau causes/conséquences
-- VP : paragraphe argumenté libre, dissertation courte, synthèse de sources
-
-MISE EN PERSPECTIVE :
-- Comparer deux époques
-- Liens passé-présent
-- Points de vue différents sur un même événement
-
-=== CONTEXTES D'ANCRAGE POUR ADOLESCENTS ===
-
-Les exercices peuvent créer des ponts avec le présent pour motiver les élèves :
-- Révolution de l'information : imprimerie de Gutenberg ↔ Internet et réseaux sociaux
-- Droits et libertés : Déclaration de 1789 ↔ droits actuels, débats contemporains
-- Migrations : Grandes Découvertes et colonisation ↔ mouvements migratoires actuels
-- Inégalités : condition ouvrière XIXe siècle ↔ inégalités mondiales aujourd'hui
-- Identité nationale : formation de la Suisse ↔ identité suisse contemporaine
-- Fake news : propagande historique ↔ désinformation actuelle
-- Écologie : Révolution industrielle ↔ changement climatique
-
-Le contexte doit être au SERVICE de l'apprentissage historique, pas l'inverse. Ne jamais faire d'anachronisme dans l'analyse.
-
-=== RÉFÉRENCE PER ===
-
-Toujours terminer la fiche avec une référence PER dans le footer :
-- Objectif : SHS 32 — Relation Homme-Temps
-- Composantes mobilisées (parmi 32.1 à 32.7)
-- Capacités transversales : pensée créatrice, démarche réflexive, communication`;
+- L'histoire doit être FASCINANTE, jamais ennuyeuse
+- Narrations vivantes avec détails concrets et personnages réels
+- Anecdotes surprenantes et véridiques
+- L'accroche doit provoquer un « Wow, vraiment ?! »
+- La mission doit donner ENVIE d'écrire
+- Adapter le registre à des ados de 13-14 ans : dynamique, direct, sans être infantilisant`;
