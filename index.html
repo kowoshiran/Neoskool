@@ -3537,6 +3537,55 @@ function wizPrev() {
   document.getElementById('wf-' + wizStep).style.width = '0%';
 }
 
+// Dynamic placeholders per subject
+const wizPlaceholders = {
+  'Mathématiques': { sujet: 'Ex : Les fractions — comparer et additionner des fractions de dénominateurs différents', theme: 'Ex : Situations de la vie courante, recettes de cuisine' },
+  'Français': { sujet: 'Ex : L\'accord du participe passé avec avoir — cas où le CVD est placé avant le verbe', theme: 'Ex : Textes narratifs, articles de presse' },
+  'Allemand': { sujet: 'Ex : Les verbes de modalité — können, müssen, dürfen au présent', theme: 'Ex : Reiseziele, Jugendherberge' },
+  'Anglais': { sujet: 'Ex : Present perfect — difference with past simple', theme: 'Ex : Travel, holidays, cultural differences' },
+  'Histoire': { sujet: 'Ex : Analyser les causes de la Révolution française à travers des sources d\'époque', theme: 'Ex : La prise de la Bastille, les cahiers de doléances' },
+  'Sciences de la nature': { sujet: 'Ex : Le cycle de l\'eau — évaporation, condensation, précipitations', theme: 'Ex : Météo, changement climatique' },
+  'Géographie': { sujet: 'Ex : Les flux migratoires en Europe — causes et conséquences', theme: 'Ex : La Méditerranée, les frontières' }
+};
+
+const histoireSujetExemples = {
+  'antiquite-egypte-mesopotamie': 'Ex : Analyser une fresque égyptienne pour comprendre la société des pharaons',
+  'grece-antique': 'Ex : Comparer la démocratie athénienne avec nos démocraties modernes',
+  'rome': 'Ex : Étudier la romanisation à travers les vestiges archéologiques en Suisse',
+  'christianisme-islam': 'Ex : Comprendre l\'expansion du christianisme dans l\'Empire romain',
+  'moyen-age': 'Ex : Analyser l\'organisation de la société féodale à travers une enluminure',
+  'confederation-suisse': 'Ex : Étudier le Pacte de 1291 comme source historique',
+  'renaissance': 'Ex : Comparer une œuvre médiévale et une œuvre de la Renaissance',
+  'grandes-decouvertes': 'Ex : Analyser les conséquences des Grandes Découvertes sur les populations autochtones',
+  'reforme-guerres-religion': 'Ex : Comprendre les causes de la Réforme à travers les 95 thèses de Luther',
+  'ancien-regime-lumieres': 'Ex : Analyser un texte de Voltaire sur la tolérance',
+  'revolution-francaise': 'Ex : Analyser les causes de la Révolution française à travers des sources d\'époque',
+  'revolution-industrielle': 'Ex : Étudier les conditions ouvrières au XIXe siècle à travers des témoignages',
+  'premiere-guerre-mondiale': 'Ex : Analyser une lettre de poilu pour comprendre la vie dans les tranchées',
+  'totalitarismes': 'Ex : Comparer les mécanismes de propagande nazie et soviétique',
+  'seconde-guerre-mondiale-shoah': 'Ex : Étudier le parcours d\'un Juste parmi les Nations en Suisse',
+  'guerre-froide': 'Ex : Analyser la crise de Cuba à travers des documents américains et soviétiques',
+  'decolonisation': 'Ex : Comprendre les causes de la décolonisation en Afrique',
+  'monde-contemporain': 'Ex : Analyser les enjeux de la mondialisation à travers des données économiques'
+};
+
+function wizUpdatePlaceholders() {
+  const mat = wizState.matiere;
+  const sujetEl = document.getElementById('wiz-sujet');
+  const themeEl = document.getElementById('wiz-theme');
+  const ph = wizPlaceholders[mat] || wizPlaceholders['Mathématiques'];
+
+  // For Histoire, check if a période is selected for a more specific placeholder
+  if (mat === 'Histoire') {
+    const periodeEl = document.getElementById('wiz-histoire-periode');
+    const periodeVal = periodeEl ? periodeEl.value : '';
+    sujetEl.placeholder = histoireSujetExemples[periodeVal] || ph.sujet;
+  } else {
+    sujetEl.placeholder = ph.sujet;
+  }
+  if (themeEl) themeEl.placeholder = ph.theme;
+}
+
 function wizBuildStep4() {
   const ctx = document.getElementById('wiz-context-fields');
   ctx.innerHTML = '';
@@ -3576,6 +3625,7 @@ function wizBuildStep4() {
     html += '</div></div>';
     ctx.innerHTML = html;
   }
+  wizUpdatePlaceholders();
 }
 
 function wizUpdateHistoireSousThemes() {
@@ -3588,6 +3638,7 @@ function wizUpdateHistoireSousThemes() {
     html += '</select></div>';
     wrap.innerHTML = html;
   } else { wrap.innerHTML = ''; }
+  wizUpdatePlaceholders();
 }
 
 function wizUpdateSousThemes() {
