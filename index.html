@@ -756,6 +756,8 @@ body.has-auth-bar{padding-top:36px}
       <button class="subject-btn active" data-subject="allemand" onclick="switchSubject('allemand',this)">🇩🇪 Allemand 9H</button>
       <button class="subject-btn" data-subject="francais" onclick="switchSubject('francais',this)">📖 Français 10H</button>
       <button class="subject-btn" data-subject="maths" onclick="switchSubject('maths',this)">📐 Maths 9H</button>
+      <button class="subject-btn" data-subject="anglais" onclick="switchSubject('anglais',this)">🇬🇧 Anglais 10H</button>
+      <button class="subject-btn" data-subject="histoire" onclick="switchSubject('histoire',this)">📜 Histoire 11H</button>
     </div>
 
     <div class="fiche-showcase">
@@ -770,6 +772,13 @@ body.has-auth-bar{padding-top:36px}
         <div class="fiche-annot left" data-section="autoeval" style="top:72%;left:0"><div class="fiche-annot-label"><strong>Auto-évaluation</strong><span>Métacognition et réflexion</span></div><div class="fiche-annot-arrow"></div></div>
         <div class="fiche-annot right" data-section="corrige" style="top:81%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>Corrigé complet</strong><span>Chaque réponse expliquée</span></div></div>
         <div class="fiche-annot left" data-section="outil" style="top:92%;left:0"><div class="fiche-annot-label"><strong>Fiche outil</strong><span>Mémo à garder toute l'année</span></div><div class="fiche-annot-arrow"></div></div>
+        <!-- Histoire-specific annotations -->
+        <div class="fiche-annot left" data-section="dilemme" style="top:5%;left:0"><div class="fiche-annot-label"><strong>⚡ Le Dilemme</strong><span>Immersion dans l'époque</span></div><div class="fiche-annot-arrow"></div></div>
+        <div class="fiche-annot right" data-section="enquete" style="top:30%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>📖 L'Enquête</strong><span>Récit documentaire immersif</span></div></div>
+        <div class="fiche-annot left" data-section="faceaface" style="top:50%;left:0"><div class="fiche-annot-label"><strong>🔍 Face à Face</strong><span>Deux visions opposées</span></div><div class="fiche-annot-arrow"></div></div>
+        <div class="fiche-annot right" data-section="defis" style="top:65%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>🎯 3 Défis</strong><span>Réfléchir, pas réciter</span></div></div>
+        <div class="fiche-annot left" data-section="pont" style="top:78%;left:0"><div class="fiche-annot-label"><strong>🌉 Le Pont</strong><span>Connexion passé ↔ présent</span></div><div class="fiche-annot-arrow"></div></div>
+        <div class="fiche-annot right" data-section="verdict" style="top:90%;right:0"><div class="fiche-annot-arrow"></div><div class="fiche-annot-label"><strong>✅ Verdict</strong><span>Métacognition + fait surprenant</span></div></div>
       </div>
 
       <div class="fiche-card">
@@ -1175,6 +1184,337 @@ body.has-auth-bar{padding-top:36px}
             </div>
 
             <div class="mf-footer">Généré par <strong>Neoskool</strong> · Dual coding · Desirable difficulties · Transfer · Gamification</div>
+          </div>
+        </div>
+
+        <!-- ========== ANGLAIS ========== -->
+        <div class="mini-fiche" id="mf-anglais">
+          <div class="mf-header" style="background:linear-gradient(135deg,#DC2626,#EF4444,#B91C1C)">
+            <div class="mf-badge">🎮 Mission Anglais · 10H VP · Grammar</div>
+            <div class="mf-title">🕰️ Present Perfect vs Past Simple — Time Travel!</div>
+            <div class="mf-xp-bar"><div class="mf-xp-fill" data-width="75"></div></div>
+            <div class="mf-xp-label">0 / 100 XP · 🏆 Badge: Time Traveller</div>
+          </div>
+          <div class="mf-body">
+            <!-- PRÉ-TEST -->
+            <div class="mf-pretest" data-annot="pretest">
+              <div class="mf-pretest-head">🤔 <strong>Test yourself first!</strong> <span style="font-size:.6rem;opacity:.7">(retrieval practice)</span></div>
+              <div class="mf-pretest-item">I ___ (visit) London three times. (Present Perfect or Past Simple?)</div>
+              <div class="mf-pretest-item">She ___ (go) to the cinema yesterday.</div>
+              <div class="mf-pretest-item">We ___ (not/finish) our homework yet.</div>
+            </div>
+
+            <!-- RAPPEL EXPRESS -->
+            <div data-annot="rappel">
+              <div class="mf-recall"><div class="mf-recall-head">⚡ <strong>Express Recap — Present Perfect vs Past Simple</strong></div></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.6rem 0">
+                <div style="background:linear-gradient(135deg,#DBEAFE,#EFF6FF);border:1.5px solid #3B82F6;border-radius:10px;padding:.75rem">
+                  <div style="font-weight:800;color:#1D4ED8;font-size:.85rem;margin-bottom:.4rem">🔵 Present Perfect</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;background:white;padding:.4rem .6rem;border-radius:6px;text-align:center;margin-bottom:.4rem"><strong>have/has</strong> + <strong>past participle</strong></div>
+                  <div style="font-size:.7rem;color:#1E40AF">Lien passé → présent</div>
+                  <div style="font-size:.7rem;color:#1E40AF">• Expérience de vie</div>
+                  <div style="font-size:.7rem;color:#1E40AF">• Action récente (just/yet/already)</div>
+                  <div style="font-size:.7rem;color:#1E40AF">• Durée (for/since)</div>
+                </div>
+                <div style="background:linear-gradient(135deg,#FEF3C7,#FFFBEB);border:1.5px solid #F59E0B;border-radius:10px;padding:.75rem">
+                  <div style="font-weight:800;color:#B45309;font-size:.85rem;margin-bottom:.4rem">🟡 Past Simple</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:.75rem;background:white;padding:.4rem .6rem;border-radius:6px;text-align:center;margin-bottom:.4rem"><strong>V-ed</strong> ou <strong>2nd form</strong></div>
+                  <div style="font-size:.7rem;color:#92400E">Action terminée, datée</div>
+                  <div style="font-size:.7rem;color:#92400E">• Yesterday, last week, in 2020</div>
+                  <div style="font-size:.7rem;color:#92400E">• ago</div>
+                  <div style="font-size:.7rem;color:#92400E">• When...?</div>
+                </div>
+              </div>
+              <div style="background:#FFF;border:1.5px solid #E5E7EB;border-radius:8px;padding:.6rem;margin-top:.4rem">
+                <div style="font-size:.75rem;font-weight:700;color:#6B7280;margin-bottom:.3rem">🎯 La règle d'or</div>
+                <div style="font-size:.78rem">
+                  <strong style="color:#1D4ED8">I have visited</strong> London. → <em>expérience, pas de date précise</em><br>
+                  <strong style="color:#B45309">I visited</strong> London <strong>in 2022</strong>. → <em>date précise, terminé</em>
+                </div>
+              </div>
+              <div style="text-align:center;font-size:.7rem;font-weight:700;color:#DC2626;margin:.5rem 0 .3rem">📋 Irregular verbs — Top 10</div>
+              <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:3px;font-size:.65rem;text-align:center">
+                <div style="background:#FEE2E2;padding:3px;border-radius:4px;font-weight:700">go → gone</div>
+                <div style="background:#FEE2E2;padding:3px;border-radius:4px;font-weight:700">see → seen</div>
+                <div style="background:#FEE2E2;padding:3px;border-radius:4px;font-weight:700">eat → eaten</div>
+                <div style="background:#FEE2E2;padding:3px;border-radius:4px;font-weight:700">be → been</div>
+                <div style="background:#FEE2E2;padding:3px;border-radius:4px;font-weight:700">do → done</div>
+                <div style="background:#DBEAFE;padding:3px;border-radius:4px;font-weight:700">have → had</div>
+                <div style="background:#DBEAFE;padding:3px;border-radius:4px;font-weight:700">take → taken</div>
+                <div style="background:#DBEAFE;padding:3px;border-radius:4px;font-weight:700">write → written</div>
+                <div style="background:#DBEAFE;padding:3px;border-radius:4px;font-weight:700">give → given</div>
+                <div style="background:#DBEAFE;padding:3px;border-radius:4px;font-weight:700">make → made</div>
+              </div>
+            </div>
+
+            <!-- NIVEAU 1 -->
+            <div class="mf-level mf-l1" style="border-color:#DC2626" data-annot="level1">
+              <div class="mf-level-bar" style="background:linear-gradient(135deg,#DC2626,#EF4444)"><span>⭐ Level 1 — Explorer</span><span class="mf-level-xp">+30 XP</span></div>
+              <div class="mf-exercise"><span class="mf-ex-num" style="background:#DC2626">1</span><span class="mf-ex-type" style="color:#DC2626;background:#FEE2E2">Present Perfect or Past Simple?</span></div>
+              <div class="mf-exercise-text">a) I ___ (already/eat) lunch. → ___</div>
+              <div class="mf-exercise-text">b) They ___ (move) to Lausanne in 2019. → ___</div>
+              <div class="mf-exercise-text">c) She ___ (never/try) sushi. → ___</div>
+              <div class="mf-exercise-text">d) We ___ (watch) that film last night. → ___</div>
+              <div class="mf-exercise"><span class="mf-ex-num" style="background:#DC2626">2</span><span class="mf-ex-type" style="color:#DC2626;background:#FEE2E2">for or since?</span></div>
+              <div class="mf-exercise-text">a) I've lived here ___ 2015. · b) She's been ill ___ three days.</div>
+              <div class="mf-exercise-text">c) We've known each other ___ primary school. · d) He's worked there ___ two years.</div>
+            </div>
+
+            <!-- NIVEAU 2 -->
+            <div class="mf-level mf-l2" data-annot="level2">
+              <div class="mf-level-bar l2"><span>⭐⭐ Level 2 — Adventurer</span><span class="mf-level-xp">+40 XP</span></div>
+              <div class="mf-exercise"><span class="mf-ex-num">3</span><span class="mf-ex-type">Spot the mistake!</span></div>
+              <div class="mf-exercise-text">a) "I have went to London last summer." → ___</div>
+              <div class="mf-exercise-text">b) "She didn't never visited Paris." → ___</div>
+              <div class="mf-exercise-text">c) "Have you seen this film yesterday?" → ___</div>
+              <div class="mf-trap">⚠️ Trap: "Have you seen this film yesterday?" — "yesterday" = Past Simple! → "Did you see this film yesterday?"</div>
+              <div class="mf-exercise"><span class="mf-ex-num">4</span><span class="mf-ex-type">Complete the dialogue</span></div>
+              <div class="mf-exercise-text">— ___ you ever ___ (be) to New York?</div>
+              <div class="mf-exercise-text">— Yes! I ___ (go) there in 2023. I ___ (visit) the Statue of Liberty.</div>
+              <div class="mf-exercise-text">— Cool! I ___ (never/be) to the USA. I ___ (want) to go ___ years!</div>
+            </div>
+
+            <!-- NIVEAU 3 -->
+            <div class="mf-level mf-l3" data-annot="level3">
+              <div class="mf-level-bar l3"><span>⭐⭐⭐ Level 3 — Master</span><span class="mf-level-xp">+50 XP</span></div>
+              <div class="mf-exercise"><span class="mf-ex-num">5</span><span class="mf-ex-type">Translate to English</span></div>
+              <div class="mf-exercise-text">a) J'ai déjà visité trois pays. → ___</div>
+              <div class="mf-exercise-text">b) Elle est partie hier matin. → ___</div>
+              <div class="mf-exercise-text">c) Nous n'avons pas encore fini. → ___</div>
+              <div class="mf-exercise"><span class="mf-ex-num">6</span><span class="mf-ex-type">Write about YOU</span></div>
+              <div class="mf-exercise-text">Write 5 sentences about your life experiences. Use the Present Perfect for experiences and the Past Simple for details. Example: "I have been to Paris. I went there in 2022 with my family."</div>
+            </div>
+
+            <!-- QUIZ -->
+            <div class="mf-quiz" data-annot="quiz">
+              <div class="mf-quiz-head">⚡ Quick Quiz — 30 seconds!</div>
+              <div class="mf-quiz-item">1. Present Perfect = have/has + ___.</div>
+              <div class="mf-quiz-item">2. "yesterday" → Present Perfect or Past Simple?</div>
+              <div class="mf-quiz-item">3. "I've lived here ___ 2018." (for/since?)</div>
+              <div class="mf-quiz-item">4. Past participle of "write" = ___.</div>
+            </div>
+
+            <!-- AUTO-ÉVALUATION -->
+            <div class="mf-meta" data-annot="autoeval">
+              <div class="mf-meta-head">🪞 <strong>Self-assessment</strong></div>
+              <div class="mf-meta-q">1. How do I choose between Present Perfect and Past Simple?</div>
+              <div class="mf-meta-q">2. Can I explain the difference in ONE sentence?</div>
+              <div class="mf-meta-q">3. My level today: 😊 Easy · 😐 Medium · 😓 Hard</div>
+              <div class="mf-meta-q">4. I still need to work on: ___</div>
+            </div>
+
+            <!-- CORRIGÉ -->
+            <div class="mf-corrige" data-annot="corrige">
+              <div class="mf-corrige-head">✅ Answer Key</div>
+              <div class="mf-corrige-item"><strong>Pre-test:</strong> have visited · went · haven't finished</div>
+              <div class="mf-corrige-item"><strong>Ex. 1:</strong> a) have already eaten · b) moved · c) has never tried · d) watched</div>
+              <div class="mf-corrige-item"><strong>Ex. 2:</strong> a) since · b) for · c) since · d) for</div>
+              <div class="mf-corrige-item"><strong>Ex. 3:</strong> a) "I went to London last summer" · b) "She has never visited Paris" · c) "Did you see this film yesterday?"</div>
+              <div class="mf-corrige-item"><strong>Ex. 4:</strong> Have/been · went · visited · have never been · have wanted / for</div>
+              <div class="mf-corrige-item"><strong>Quiz:</strong> 1. past participle · 2. Past Simple · 3. since · 4. written</div>
+            </div>
+
+            <!-- FICHE OUTIL -->
+            <div class="mf-tool-sheet" data-annot="outil">
+              <div class="mf-tool-head">📌 Cheat Sheet — Present Perfect vs Past Simple</div>
+              <div class="mf-tool-item"><strong>Present Perfect:</strong> have/has + past participle → lien passé-présent</div>
+              <div class="mf-tool-item"><strong>Markers:</strong> already, yet, never, ever, just, for, since</div>
+              <div class="mf-tool-item"><strong>Past Simple:</strong> V-ed ou 2nd form → action terminée, datée</div>
+              <div class="mf-tool-item"><strong>Markers:</strong> yesterday, last week, ago, in 2020, when...?</div>
+              <div class="mf-tool-item"><strong>⚠️ Rule:</strong> Date précise = TOUJOURS Past Simple (never Present Perfect!)</div>
+            </div>
+
+            <div class="mf-footer">Généré par <strong>Neoskool</strong> · Retrieval practice · Dual coding · Gamification · Elaborated feedback</div>
+          </div>
+        </div>
+
+        <!-- ========== HISTOIRE ========== -->
+        <div class="mini-fiche" id="mf-histoire">
+          <div class="mf-header" style="background:linear-gradient(135deg,#78350F,#92400E,#B45309)">
+            <div class="mf-badge" style="background:rgba(255,255,255,0.15)">📜 Investigation Histoire · 11H VP · La Seconde Guerre mondiale</div>
+            <div class="mf-title" style="font-size:1.15rem">⚡ 1944 — Le jour le plus long</div>
+            <div style="display:flex;gap:.4rem;margin-top:.4rem;flex-wrap:wrap">
+              <span style="font-size:.6rem;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:100px;font-weight:600">SHS 32.3</span>
+              <span style="font-size:.6rem;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:100px;font-weight:600">Politique</span>
+              <span style="font-size:.6rem;background:rgba(255,255,255,0.15);padding:2px 8px;border-radius:100px;font-weight:600">Sociale</span>
+            </div>
+          </div>
+          <div class="mf-body" style="font-size:.82rem;line-height:1.65">
+
+            <!-- SECTION 1: LE DILEMME -->
+            <div data-annot="dilemme">
+              <!-- Hero Image -->
+              <div style="width:100%;border-radius:10px;overflow:hidden;margin-bottom:.75rem;box-shadow:0 2px 12px rgba(0,0,0,0.15)">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg/500px-Into_the_Jaws_of_Death_23-0455M_edit.jpg" alt="Débarquement en Normandie, 6 juin 1944" style="width:100%;max-height:180px;object-fit:cover;display:block">
+                <div style="text-align:center;font-size:.68rem;color:#6B7280;font-style:italic;padding:.35rem;background:#F9FAFB">« Into the Jaws of Death » — Omaha Beach, 6 juin 1944 (Robert F. Sargent)</div>
+              </div>
+
+              <!-- Dilemme -->
+              <div style="background:linear-gradient(135deg,#FFF8E1,#FFECB3);border:2px solid #F59E0B;border-radius:12px;padding:1rem;margin-bottom:.75rem;position:relative">
+                <div style="position:absolute;top:-10px;left:12px;font-size:1.1rem;background:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:2px solid #F59E0B">⚡</div>
+                <p style="font-style:italic;margin-bottom:.5rem;font-size:.85rem;line-height:1.7"><strong>Angleterre, 5 juin 1944, 21h.</strong> Tu es le général Eisenhower. Depuis des mois, 150 000 soldats attendent ton ordre pour traverser la Manche et libérer l'Europe. La météo est épouvantable. Si tu attends, il faudra reporter de deux semaines — et le secret risque de fuiter. Si tu lances l'assaut, des milliers d'hommes mourront peut-être dans la tempête.</p>
+                <p style="font-weight:700;color:#DC2626;margin-bottom:.4rem"><strong>Tu donnes l'ordre d'attaquer ou tu reportes ? Pourquoi ?</strong></p>
+                <div style="border:1.5px dashed #D1D5DB;border-radius:8px;padding:.5rem;background:white;min-height:40px"><em style="color:#9CA3AF;font-size:.78rem">Ton choix...</em></div>
+              </div>
+
+              <!-- Timeline -->
+              <div style="background:white;border:1.5px solid #C4B5FD;border-radius:10px;padding:.75rem;margin-bottom:.75rem">
+                <div style="font-family:'Fredoka',sans-serif;font-weight:700;color:#5B21B6;font-size:.85rem;margin-bottom:.5rem">📅 Repères chronologiques</div>
+                <div style="display:flex;flex-direction:column;gap:.35rem;font-size:.75rem">
+                  <div style="display:flex;align-items:center;gap:.5rem"><span style="background:#EDE9FE;color:#6D28D9;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.7rem;min-width:55px;text-align:center">1939</span><span>L'Allemagne envahit la Pologne — début de la guerre</span></div>
+                  <div style="display:flex;align-items:center;gap:.5rem"><span style="background:#EDE9FE;color:#6D28D9;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.7rem;min-width:55px;text-align:center">1940</span><span>La France tombe en 6 semaines — l'Europe sous domination nazie</span></div>
+                  <div style="display:flex;align-items:center;gap:.5rem"><span style="background:#EDE9FE;color:#6D28D9;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.7rem;min-width:55px;text-align:center">1942</span><span>Stalingrad — le tournant à l'Est</span></div>
+                  <div style="display:flex;align-items:center;gap:.5rem"><span style="background:#FEF3C7;color:#B45309;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.7rem;min-width:55px;text-align:center">1944</span><span><strong>6 juin : Jour J — Débarquement en Normandie</strong></span></div>
+                  <div style="display:flex;align-items:center;gap:.5rem"><span style="background:#EDE9FE;color:#6D28D9;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.7rem;min-width:55px;text-align:center">1945</span><span>Capitulation de l'Allemagne (8 mai) puis du Japon (2 sept.)</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 2: L'ENQUÊTE -->
+            <div data-annot="enquete">
+              <div style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:.95rem;color:#78350F;margin-bottom:.5rem">📖 L'Enquête</div>
+
+              <div style="float:right;width:42%;max-width:200px;margin:0 0 .6rem .8rem;padding:.4rem;background:linear-gradient(135deg,#f8f9ff,#f0f4ff);border-radius:8px;border:1.5px solid #93C5FD">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/World_War_II_in_Europe%2C_1942.svg/500px-World_War_II_in_Europe%2C_1942.svg.png" alt="Carte Europe 1942" style="width:100%;border-radius:6px">
+                <div style="font-size:.65rem;text-align:center;margin-top:.3rem;color:#6B7280;font-style:italic">L'Europe sous domination de l'Axe (1942)</div>
+              </div>
+
+              <p><strong>Été 1942.</strong> Hitler contrôle presque toute l'Europe. De l'Atlantique à Stalingrad, de la Norvège à l'Afrique du Nord, le drapeau nazi flotte sur un continent entier. La Grande-Bretagne résiste seule de l'autre côté de la Manche. Les Américains, entrés en guerre après Pearl Harbor, préparent la contre-attaque. Mais comment reprendre un continent entier ?</p>
+
+              <div style="background:#F3F4F6;border-radius:8px;padding:.5rem .7rem;margin:.5rem 0;border-left:3px solid #DC2626">
+                <div style="font-size:.7rem;font-weight:700;color:#DC2626;margin-bottom:.2rem">1 · Vrai ou faux ?</div>
+                <div style="font-size:.78rem">a) En 1942, seule la Grande-Bretagne résiste en Europe de l'Ouest. <span style="color:#9CA3AF">V / F</span></div>
+                <div style="font-size:.78rem">b) Les États-Unis sont entrés en guerre dès 1939. <span style="color:#9CA3AF">V / F</span></div>
+              </div>
+
+              <div style="clear:both"></div>
+
+              <div style="float:left;width:42%;max-width:200px;margin:0 .8rem .6rem 0;padding:.4rem;background:linear-gradient(135deg,#f8f9ff,#f0f4ff);border-radius:8px;border:1.5px solid #93C5FD">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/German_pows_stalingrad_1943.jpg/500px-German_pows_stalingrad_1943.jpg" alt="Prisonniers Stalingrad 1943" style="width:100%;border-radius:6px">
+                <div style="font-size:.65rem;text-align:center;margin-top:.3rem;color:#6B7280;font-style:italic">Prisonniers allemands à Stalingrad (fév. 1943)</div>
+              </div>
+
+              <p><strong>6 juin 1944, 6h30 du matin.</strong> Des milliers de navires apparaissent dans la brume normande. C'est l'opération Overlord — le plus grand débarquement de l'histoire. 156 000 soldats américains, britanniques, canadiens et français déferlent sur cinq plages aux noms de code : Utah, Omaha, Gold, Juno, Sword. Sur Omaha Beach, c'est un carnage : les soldats tombent sous le feu des mitrailleuses allemandes avant même de toucher le sable. À la fin de cette seule journée, 4 400 Alliés sont morts. Mais la brèche est ouverte.</p>
+
+              <div style="clear:both"></div>
+
+              <div style="background:#F3F4F6;border-radius:8px;padding:.5rem .7rem;margin:.5rem 0;border-left:3px solid #DC2626">
+                <div style="font-size:.7rem;font-weight:700;color:#DC2626;margin-bottom:.2rem">2 · Texte à trous</div>
+                <div style="font-size:.78rem">Le Jour J, ___ soldats alliés débarquent sur ___ plages en ___. L'opération s'appelle ___.</div>
+                <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-top:.3rem">
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">156 000</span>
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">cinq</span>
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">Normandie</span>
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">Overlord</span>
+                </div>
+              </div>
+
+              <p>En quelques semaines, les Alliés libèrent la France. Paris est libre le 25 août 1944. Mais la guerre n'est pas finie. Il faudra encore 11 mois de combats acharnés pour atteindre Berlin. Le 8 mai 1945, l'Allemagne capitule. En Europe, la guerre a fait plus de 40 millions de morts — dont une majorité de civils.</p>
+            </div>
+
+            <!-- SECTION 3: FACE À FACE -->
+            <div data-annot="faceaface">
+              <div style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:.95rem;color:#78350F;margin-bottom:.5rem">🔍 Face à Face — Deux visions du Jour J</div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.6rem">
+                <!-- Source 1 -->
+                <div style="background:white;border:1.5px solid #93C5FD;border-radius:10px;overflow:hidden">
+                  <div style="background:linear-gradient(135deg,#3B82F6,#60A5FA);padding:.4rem .6rem;color:white;font-weight:700;font-size:.72rem">📜 Source 1 — Communiqué allié</div>
+                  <div style="padding:.5rem;font-size:.72rem">
+                    <div style="color:#6B7280;font-size:.6rem;margin-bottom:.3rem"><strong>Nature :</strong> Communiqué officiel | <strong>Date :</strong> 6 juin 1944 | <strong>Auteur :</strong> SHAEF (Eisenhower)</div>
+                    <blockquote style="border-left:2px solid #3B82F6;padding-left:.5rem;font-style:italic;margin:.3rem 0;font-size:.72rem">« Les forces navales alliées, appuyées par de puissantes forces aériennes, ont commencé à débarquer ce matin sur la côte nord de la France. Cette opération fait partie du plan concerté des Nations unies pour la libération de l'Europe. »</blockquote>
+                  </div>
+                </div>
+                <!-- Source 2 -->
+                <div style="background:white;border:1.5px solid #F87171;border-radius:10px;overflow:hidden">
+                  <div style="background:linear-gradient(135deg,#DC2626,#EF4444);padding:.4rem .6rem;color:white;font-weight:700;font-size:.72rem">📜 Source 2 — Témoignage soldat</div>
+                  <div style="padding:.5rem;font-size:.72rem">
+                    <div style="color:#6B7280;font-size:.6rem;margin-bottom:.3rem"><strong>Nature :</strong> Témoignage | <strong>Date :</strong> 1984 | <strong>Auteur :</strong> Soldat américain, 1re Division</div>
+                    <blockquote style="border-left:2px solid #DC2626;padding-left:.5rem;font-style:italic;margin:.3rem 0;font-size:.72rem">« La rampe s'est abaissée et les gars devant moi sont tombés immédiatement. L'eau était rouge. J'ai rampé sur le sable pendant ce qui m'a semblé des heures. Sur les 30 hommes de ma barge, 11 seulement ont survécu. »</blockquote>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:#FFF7ED;border:1.5px solid #FB923C;border-radius:8px;padding:.6rem;font-size:.78rem">
+                <p>⭐ <strong>Observer :</strong> Quel ton utilise la Source 1 ? Et la Source 2 ? Relève un mot-clé de chaque.</p>
+                <p>⭐⭐ <strong>Confronter :</strong> Pourquoi ces deux textes décrivent-ils le même événement de façon si différente ?</p>
+                <p>⭐⭐⭐ <strong>Juger :</strong> Si tu devais expliquer le Jour J à quelqu'un, quelle source choisirais-tu ? Pourquoi ?</p>
+              </div>
+            </div>
+
+            <!-- SECTION 4: 3 DÉFIS -->
+            <div data-annot="defis">
+              <div style="font-family:'Fredoka',sans-serif;font-weight:700;font-size:.95rem;color:#78350F;margin-bottom:.5rem">🎯 3 Défis</div>
+
+              <div style="background:#F3F4F6;border-radius:10px;padding:.6rem;margin-bottom:.4rem;border-left:3px solid #8B5CF6">
+                <div style="font-weight:800;color:#6D28D9;font-size:.78rem;margin-bottom:.3rem">🎯 1 · Titre de Une</div>
+                <div style="font-size:.78rem">Tu es journaliste le 7 juin 1944. Écris le titre de ton journal en <strong>maximum 10 mots</strong>.</div>
+                <div style="border:1.5px dashed #D1D5DB;border-radius:6px;padding:.4rem;background:white;margin-top:.3rem;min-height:28px"><em style="color:#9CA3AF;font-size:.72rem">Ton titre...</em></div>
+              </div>
+
+              <div style="background:#F3F4F6;border-radius:10px;padding:.6rem;margin-bottom:.4rem;border-left:3px solid #059669">
+                <div style="font-weight:800;color:#047857;font-size:.78rem;margin-bottom:.3rem">🎯 2 · Trouve les 3 erreurs</div>
+                <div style="font-size:.78rem;font-style:italic">« Le 6 juin 1943, 50 000 soldats soviétiques ont débarqué en Normandie. L'opération, nommée Barbarossa, visait à libérer l'Allemagne. »</div>
+                <div style="font-size:.72rem;margin-top:.3rem">Erreur 1 : ___ · Erreur 2 : ___ · Erreur 3 : ___</div>
+              </div>
+
+              <div style="background:#F3F4F6;border-radius:10px;padding:.6rem;border-left:3px solid #0EA5E9">
+                <div style="font-weight:800;color:#0284C7;font-size:.78rem;margin-bottom:.3rem">🎯 3 · Classement</div>
+                <div style="font-size:.78rem">Classe ces 4 événements du plus au moins décisif pour la fin de la guerre. Justifie ton n°1.</div>
+                <div style="display:flex;gap:.3rem;flex-wrap:wrap;margin:.3rem 0">
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">Stalingrad (1943)</span>
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">Jour J (1944)</span>
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">Entrée en guerre des USA (1941)</span>
+                  <span style="background:#DBEAFE;padding:2px 8px;border-radius:6px;font-size:.7rem;font-weight:600">Chute de Berlin (1945)</span>
+                </div>
+                <div style="border:1.5px dashed #D1D5DB;border-radius:6px;padding:.4rem;background:white;min-height:28px"><em style="color:#9CA3AF;font-size:.72rem">1. ___ parce que...</em></div>
+              </div>
+            </div>
+
+            <!-- SECTION 5: LE PONT -->
+            <div data-annot="pont">
+              <div style="background:linear-gradient(135deg,#E8F5E9,#C8E6C9);border:2px solid #4CAF50;border-radius:12px;padding:1rem;margin:.75rem 0;position:relative">
+                <div style="position:absolute;top:-10px;left:12px;font-size:1.1rem;background:white;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:2px solid #4CAF50">🌉</div>
+                <div style="font-family:'Fredoka',sans-serif;font-weight:700;color:#2E7D32;font-size:.88rem;margin-bottom:.5rem">Et aujourd'hui ?</div>
+                <p style="font-size:.82rem;line-height:1.7;margin-bottom:.5rem">Le 6 juin 2024, les chefs d'État du monde entier étaient en Normandie pour le 80e anniversaire du Débarquement. Des vétérans de 98, 99, 100 ans étaient présents — les derniers témoins vivants. Dans quelques années, il n'y en aura plus aucun.</p>
+                <p style="font-weight:700;font-size:.82rem"><strong>Question :</strong> Comment transmettre la mémoire d'un événement quand il n'y a plus de témoins vivants ? Est-ce qu'un film, un musée ou une fiche d'histoire peuvent remplacer un témoignage direct ?</p>
+                <div style="border:1.5px dashed #D1D5DB;border-radius:6px;padding:.4rem;background:white;margin-top:.4rem;min-height:36px"><em style="color:#9CA3AF;font-size:.72rem">Ta réflexion...</em></div>
+              </div>
+            </div>
+
+            <!-- SECTION 6: VERDICT -->
+            <div data-annot="verdict">
+              <!-- Retour dilemme -->
+              <div style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:10px;padding:.6rem;margin-bottom:.5rem">
+                <p style="font-size:.82rem">⚡ <strong>Ton dilemme :</strong> Eisenhower a donné l'ordre malgré la tempête. 4 400 Alliés sont morts le premier jour. Mais l'Europe a été libérée. Ton choix a-t-il changé ? Pourquoi ?</p>
+                <div style="border:1.5px dashed #D1D5DB;border-radius:6px;padding:.4rem;background:white;min-height:28px"><em style="color:#9CA3AF;font-size:.72rem">...</em></div>
+              </div>
+
+              <!-- Auto-eval -->
+              <div style="background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:10px;padding:.5rem;margin-bottom:.5rem;font-size:.78rem">
+                <p>🟢 J'ai bien compris — je peux expliquer le Jour J à quelqu'un</p>
+                <p>🟡 J'ai compris l'essentiel — mais j'ai encore des doutes</p>
+                <p>🔴 J'ai besoin de revoir ce thème</p>
+              </div>
+
+              <!-- Le savais-tu -->
+              <div style="background:linear-gradient(135deg,#F3E5F5,#E1BEE7);border:2px solid #CE93D8;border-radius:12px;padding:.75rem;display:flex;gap:.5rem;align-items:flex-start;margin-bottom:.5rem">
+                <span style="font-size:1.3rem;flex-shrink:0">🤯</span>
+                <p style="font-size:.8rem;line-height:1.6"><strong>Le savais-tu ?</strong> Eisenhower avait écrit un communiqué de presse annonçant l'échec du débarquement — au cas où. Ce texte, retrouvé dans ses archives, disait : <em>« Si l'opération échoue, la responsabilité est entièrement la mienne. »</em> Heureusement, il n'a jamais eu à le publier.</p>
+              </div>
+
+              <!-- Corrigé -->
+              <div style="background:#F0FDF4;border:1.5px solid #86EFAC;border-radius:10px;padding:.6rem">
+                <div style="font-weight:800;font-size:.82rem;color:#166534;margin-bottom:.3rem">📋 Corrigé</div>
+                <div style="font-size:.72rem;line-height:1.8">
+                  <strong>Q1 :</strong> a) Vrai · b) Faux (1941, après Pearl Harbor)<br>
+                  <strong>Q2 :</strong> 156 000 / cinq / Normandie / Overlord<br>
+                  <strong>Défi 2 :</strong> 1943→1944 / 50 000 soviétiques→156 000 alliés / Barbarossa→Overlord<br>
+                </div>
+              </div>
+            </div>
+
+            <div class="mf-footer">Généré par <strong>Neoskool</strong> · Elaborative interrogation · Dual coding · Transfer · Metacognition</div>
           </div>
         </div>
 
