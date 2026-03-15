@@ -384,7 +384,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--ink);background:var(
             <h3 style="margin-bottom:.25rem">Se déconnecter</h3>
             <p style="font-size:.82rem;color:var(--ink-muted)">Tu pourras te reconnecter à tout moment.</p>
           </div>
-          <button class="dash-btn dash-btn-ghost" onclick="handleLogout()">Quitter</button>
+          <button class="dash-btn dash-btn-ghost" onclick="handleLogout()">Déconnexion</button>
         </div>
       </div>
 
@@ -551,13 +551,23 @@ async function init() {
   await Promise.all([loadStats(), loadSheets()]);
 }
 
+function getDashBillingPeriodStart() {
+  if (userPlan === 'pro' && userPeriodEnd) {
+    const end = new Date(userPeriodEnd);
+    const start = new Date(end);
+    start.setMonth(start.getMonth() - 1);
+    return start.toISOString();
+  }
+  const currentMonth = new Date().toISOString().slice(0, 7);
+  return currentMonth + '-01T00:00:00.000Z';
+}
+
 async function loadStats() {
   const userId = currentUser.id;
-  const currentMonth = new Date().toISOString().slice(0, 7);
-  const startOfMonth = currentMonth + '-01T00:00:00.000Z';
+  const startOfPeriod = getDashBillingPeriodStart();
 
   const [monthRes, allTimeRes] = await Promise.all([
-    sb.from('generations').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', startOfMonth),
+    sb.from('generations').select('*', { count: 'exact', head: true }).eq('user_id', userId).gte('created_at', startOfPeriod),
     sb.from('generations').select('*', { count: 'exact', head: true }).eq('user_id', userId)
   ]);
 

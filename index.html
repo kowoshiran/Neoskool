@@ -2047,18 +2047,19 @@ async function recordGeneration(metadata) {
     localStorage.setItem('nsk_usage', JSON.stringify(data));
   }
 
-  // Update Brevo contact + send quota emails when needed
-  const email = row.email;
-  if (email && email !== 'anonymous') {
-    const count = await getSheetCount();
-    const remaining = Math.max(0, FREE_SHEETS_PER_MONTH - count);
-    // Always sync SHEETS_USED to Brevo (for automation conditions)
-    sendEmail('sync_contact', email, { sheetsUsed: count });
-    // Send quota email only when it matters: 1 left or 0 left
-    if (remaining <= 1) {
-      sendEmail('quota_reminder', email, { remaining, limit: FREE_SHEETS_PER_MONTH });
+  // Update Brevo contact + send quota emails — fire and forget (never block celebration)
+  try {
+    const email = row.email;
+    if (email && email !== 'anonymous') {
+      getSheetCount().then(count => {
+        const remaining = Math.max(0, FREE_SHEETS_PER_MONTH - count);
+        sendEmail('sync_contact', email, { sheetsUsed: count });
+        if (remaining <= 1) {
+          sendEmail('quota_reminder', email, { remaining, limit: FREE_SHEETS_PER_MONTH });
+        }
+      }).catch(e => console.error('Post-gen sync error:', e));
     }
-  }
+  } catch (e) { console.error('Post-gen sync error:', e); }
 }
 
 async function canGenerate() {
@@ -3381,15 +3382,11 @@ async function handleGenerate(e) {
     const fullHTML = buildFullHTML(accumulatedHTML, metadata);
     resultIframe.srcdoc = fullHTML;
 
-    // Save immediately (don't depend on animation timeouts)
-    console.log('Stream complete, saving...');
-    try {
-      await recordGeneration(metadata);
-    } catch (e) { console.error('recordGeneration threw:', e); }
+    // Save in background — never block celebration UI
+    console.log('Stream complete, saving in background...');
+    recordGeneration(metadata).catch(e => console.error('recordGeneration:', e));
     if (currentUser) {
-      try {
-        await saveSheetToSupabase(metadata);
-      } catch (e) { console.error('saveSheetToSupabase threw:', e); }
+      saveSheetToSupabase(metadata).catch(e => console.error('saveSheet:', e));
     } else {
       localStorage.setItem('nsk_pending_sheet', JSON.stringify(metadata));
     }
