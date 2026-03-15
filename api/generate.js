@@ -240,28 +240,29 @@ export default async function handler(req) {
         }
       }
 
-      // Diversify: pick max 3 images with different 'nature' types
-      // Image 1 = illustration (in narrative), Images 2-3 = sources (in Section 4)
+      // Diversify: pick max 5 images with different 'nature' types
+      // Image 1 = hero (Section 1), Images 2-3 = narrative illustrations (Section 2), Images 4-5 = sources (Section 3 Face à Face)
       if (images.length > 0) {
         const diversified = [];
         const usedNatures = new Set();
         const usedUrls = new Set();
+        // First pass: one per nature type
         for (const img of images) {
           const natureKey = (img.nature || '').toLowerCase().replace(/[^a-z]/g, '');
           if (!usedNatures.has(natureKey) && !usedUrls.has(img.url)) {
             diversified.push(img);
             usedNatures.add(natureKey);
             usedUrls.add(img.url);
-            if (diversified.length >= 3) break;
+            if (diversified.length >= 5) break;
           }
         }
-        // Fill up to at least 2 if not enough diverse natures
-        if (diversified.length < 2) {
+        // Second pass: fill up if not enough diverse natures
+        if (diversified.length < 3) {
           for (const img of images) {
             if (!usedUrls.has(img.url)) {
               diversified.push(img);
               usedUrls.add(img.url);
-              if (diversified.length >= 2) break;
+              if (diversified.length >= 3) break;
             }
           }
         }
@@ -269,32 +270,48 @@ export default async function handler(req) {
       }
 
       if (images.length > 0) {
-        // Split: first image = illustration for narrative, rest = sources for Section 4
-        const illustration = images[0];
-        const sources = images.slice(1);
+        // Split roles: hero (1) + narrative illustrations (2) + source analysis (rest)
+        const hero = images[0];
+        const narrativeImgs = images.slice(1, 3);
+        const sourceImgs = images.slice(3);
 
-        userMessage += '\n\n=== IMAGES FOURNIES — 2 USAGES DISTINCTS ===';
+        userMessage += '\n\n=== IMAGES FOURNIES — 3 USAGES DISTINCTS ===';
         userMessage += '\nNe modifie PAS les URLs. Ne décris PAS les images en texte. Ne génère AUCUNE image imaginaire.';
 
-        // ILLUSTRATION — for Section 3 (Découverte guidée)
-        const illAlt = (illustration.description || illustration.title || '').replace(/"/g, '&quot;').slice(0, 120);
-        userMessage += '\n\n--- IMAGE ILLUSTRATION (Section 3 : Découverte guidée) ---';
-        userMessage += '\nInsère cette image DANS le récit de la Section 3, à côté du paragraphe qui parle de ce sujet.';
+        // HERO — for Section 1 (Le Dilemme)
+        const heroAlt = (hero.description || hero.title || '').replace(/"/g, '&quot;').slice(0, 120);
+        userMessage += '\n\n--- IMAGE HERO (Section 1 : Le Dilemme) ---';
+        userMessage += '\nPlace cette image EN PREMIER dans la Section 1, AVANT le dilemme. Pleine largeur, impact visuel maximum.';
         userMessage += '\nUtilise ce format HTML exact :';
-        userMessage += `\n<div class="illustration-box">`;
-        userMessage += `\n  <img src="${illustration.url}" class="source-image" alt="${illAlt}">`;
-        userMessage += `\n  <p class="source-caption">${illustration.title} (${illustration.date})</p>`;
+        userMessage += `\n<div class="hero-image">`;
+        userMessage += `\n  <img src="${hero.url}" alt="${heroAlt}">`;
+        userMessage += `\n  <p class="source-caption">${hero.title} (${hero.date})</p>`;
         userMessage += `\n</div>\n`;
 
-        // SOURCES — for Section 4 (Analyse de sources)
-        if (sources.length > 0) {
-          userMessage += '\n--- IMAGES SOURCES (Section 4 : Analyse de sources) ---';
-          userMessage += '\nCopie ces blocs HTML EXACTEMENT dans la Section 4. Ajoute les questions d\'analyse après chaque bloc.\n';
+        // NARRATIVE ILLUSTRATIONS — for Section 2 (L'Enquête)
+        if (narrativeImgs.length > 0) {
+          userMessage += '\n--- IMAGES NARRATIVES (Section 2 : L\'Enquête) ---';
+          userMessage += '\nInsère ces images DANS le récit, en alternant droite et gauche pour un effet magazine.\n';
 
-          sources.forEach((img, i) => {
+          narrativeImgs.forEach((img, i) => {
+            const alt = (img.description || img.title || '').replace(/"/g, '&quot;').slice(0, 120);
+            const boxClass = i % 2 === 0 ? 'illustration-box' : 'illustration-left';
+            userMessage += `\n<div class="${boxClass}">`;
+            userMessage += `\n  <img src="${img.url}" class="source-image" alt="${alt}">`;
+            userMessage += `\n  <p class="source-caption">${img.title} (${img.date})</p>`;
+            userMessage += `\n</div>\n`;
+          });
+        }
+
+        // SOURCES — for Section 3 (Face à Face)
+        if (sourceImgs.length > 0) {
+          userMessage += '\n--- IMAGES SOURCES (Section 3 : Face à Face) ---';
+          userMessage += '\nCopie ces blocs HTML EXACTEMENT dans la Section 3. Ajoute les questions de confrontation après.\n';
+
+          sourceImgs.forEach((img, i) => {
             const alt = (img.description || img.title || '').replace(/"/g, '&quot;').slice(0, 120);
             userMessage += `\n<div class="source-box">`;
-            userMessage += `\n  <div class="source-box-header">📄 Source ${i + 1} — ${img.title}</div>`;
+            userMessage += `\n  <div class="source-box-header">📜 Source ${i + 1} — ${img.title}</div>`;
             userMessage += `\n  <div class="source-box-body">`;
             userMessage += `\n    <p class="source-meta"><strong>Nature :</strong> ${img.nature || 'Document iconographique'} | <strong>Date :</strong> ${img.date || 'Voir source'} | <strong>Auteur :</strong> ${img.auteur || 'Domaine public'}</p>`;
             userMessage += `\n    <img src="${img.url}" class="source-image" alt="${alt}">`;
@@ -304,7 +321,7 @@ export default async function handler(req) {
         }
       } else {
         // No curated images — tell Claude to use text sources only
-        userMessage += '\n\nAucune image disponible pour ce sous-thème. Utilise des sources TEXTUELLES (extraits de documents, citations historiques) dans la Section 4. Ne décris JAMAIS une image imaginaire entre crochets.';
+        userMessage += '\n\nAucune image disponible pour ce sous-thème. Utilise des sources TEXTUELLES (extraits de documents, citations historiques) dans la Section 3 (Face à Face). Ne décris JAMAIS une image imaginaire entre crochets.';
       }
     }
 

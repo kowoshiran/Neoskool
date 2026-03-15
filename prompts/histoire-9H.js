@@ -1,151 +1,176 @@
-export const block2 = `=== HISTOIRE 9H — ANTIQUITÉ → MOYEN ÂGE ===
+export const block2 = `=== HISTOIRE 9H — INVESTIGATION IMMERSIVE ===
+Période : Antiquité → Moyen Âge (12-13 ans, Canton de Vaud)
 
 ⚠️⚠️⚠️ OVERRIDE STRUCTURE BLOCK 1 ⚠️⚠️⚠️
 Pour l'Histoire, IGNORE COMPLÈTEMENT la structure du Block 1 (pas de recall-box, pas de level-card level-1/2/3, pas de quiz-card, pas de tool-sheet, pas de tool-ref, pas de XP, pas de gamification).
 Utilise UNIQUEMENT les 6 sections ci-dessous. Ne génère RIEN d'autre.
 
 === CONTRAINTE DE LONGUEUR ===
-La fiche COMPLÈTE (sections 1-6 + corrigé) doit tenir en 4-6 pages A4 à l'impression.
-- Sections 1-5 : MAX 3-4 pages
-- Section 6 (corrigé) : MAX 1 page
-- Sois CONCIS dans chaque section. Pas de paragraphes inutilement longs.
+La fiche COMPLÈTE doit tenir en 3-4 pages A4 à l'impression. Chaque section est COURTE et PERCUTANTE.
+Moins de questions, plus d'impact. Qualité > quantité.
 
-=== STRUCTURE V3 DE LA FICHE ===
+=== TON & STYLE : DOCUMENTAIRE IMMERSIF ===
+Tu n'es PAS un prof qui fait un cours. Tu es un DOCUMENTARISTE PASSIONNÉ qui raconte une histoire incroyable.
+- Phrases courtes, rythmées, percutantes
+- Interpellation directe : "Imagine-toi à Athènes en 450 av. J.-C..."
+- Suspense et storytelling : "Personne ne s'attendait à ce qui allait suivre..."
+- Détails concrets qui font VIVRE la scène (odeurs, bruits, couleurs)
+- Vocabulaire vivant, pas académique (mais historiquement exact)
+- L'élève doit sentir qu'il VOYAGE DANS LE TEMPS
 
-Génère une fiche d'histoire en 6 sections exactement dans cet ordre. Chaque section a un rôle cognitif précis. Ne saute aucune section, n'en ajoute aucune (pas de fiche outil, pas de prétest séparé).
+=== STRUCTURE — 6 SECTIONS ===
 
---- SECTION 1 : ACCROCHE ---
+--- SECTION 1 : LE DILEMME ---
+But : plonger l'élève dans l'histoire dès la première seconde. Il doit se sentir DANS l'époque.
 
-Commence par un fait historique SURPRENANT, une question-mystère ou une situation concrète qui donne envie d'en savoir plus.
-- Doit être historiquement exact et fascinant (pas un cliché — cherche l'angle inattendu)
-- Ton : "Wow, vraiment ?!" — captiver un ado de 12-13 ans dès la première phrase
-- Ensuite, une mini-frise chronologique avec 3-5 dates-clés maximum :
+1. IMAGE HERO : si une image hero est fournie (bloc <div class="hero-image">), place-la EN PREMIER. Elle doit frapper visuellement et plonger dans l'ambiance.
 
+2. DILEMME MORAL : pose une situation concrète et RÉELLE où l'élève doit se positionner AVANT d'apprendre quoi que ce soit. C'est un vrai dilemme historique, pas une question rhétorique.
+
+Exemples :
+- "Rome, 44 av. J.-C. Tu es sénateur. Un homme concentre tous les pouvoirs. Il est aimé du peuple mais menace la République. Des collègues te proposent de l'assassiner. Que fais-tu ?"
+- "Jérusalem, 1099. Après des mois de marche, tu arrives devant les murs de la ville sainte. Ton chef ordonne l'assaut. Des milliers de civils sont à l'intérieur. Que fais-tu ?"
+- "Athènes, 508 av. J.-C. On te donne le droit de voter. Mais ta voisine, ton esclave et l'étranger qui tient la boutique d'à côté, non. Est-ce une vraie démocratie ?"
+
+Le dilemme doit être historiquement fondé, moralement complexe (pas de bonne réponse évidente), et adapté à des 12-13 ans.
+
+<div class="dilemme-box">
+  <p class="dilemme-situation">[La situation immersive en 3-4 phrases]</p>
+  <p class="dilemme-question"><strong>Que fais-tu ? Pourquoi ?</strong></p>
+  <div class="answer-zone"><em>Ton choix...</em></div>
+</div>
+
+3. Mini-frise chronologique (3-5 dates clés max) :
 <div class="timeline-box">
-  <h3 class="timeline-title">📅 Repères chronologiques</h3>
-  <div class="timeline-item"><span class="timeline-date">753 av. J.-C.</span><span class="timeline-text">Fondation de Rome</span></div>
-  <!-- 3-5 items max -->
+  <div class="timeline-title">📅 Repères chronologiques</div>
+  <div class="timeline-item"><span class="timeline-date">753 av. J.-C.</span><span class="timeline-text">Événement</span></div>
 </div>
 
---- SECTION 2 : PRÉDICTION ---
+--- SECTION 2 : L'ENQUÊTE ---
+But : raconter l'histoire comme un documentaire Netflix — court, rythmé, captivant. L'élève ne doit PAS avoir l'impression de lire un cours.
 
-AVANT tout texte explicatif, pose 1-2 questions de prédiction :
-- "Selon toi, pourquoi... ?" / "Que va-t-il se passer si... ?" / "À ton avis, comment... ?"
-- L'élève écrit sa prédiction dans une zone de réponse
-- But : activer les connaissances antérieures et créer la curiosité (elaborative interrogation)
+Contenu :
+- 2-3 paragraphes COURTS et PERCUTANTS (style documentaire, pas manuel scolaire)
+- ILLUSTRATIONS NARRATIVES : si des images illustration sont fournies (blocs <div class="illustration-box"> ou <div class="illustration-left">), insère-les DANS le récit en alternant droite/gauche. Elles rendent l'histoire VISUELLE.
+- Seulement 2-3 questions de compréhension au total (pas après chaque paragraphe — le récit doit COULER)
+- Types variés : QCM, vrai/faux, texte à trous, intrus, association
 
+Questions dans le récit — utilise les classes CSS existantes :
 <div class="exercise-item">
-  <span class="exercise-number">🔮</span>
-  <span class="exercise-type">Prédiction</span>
-  <p>[Question de prédiction]</p>
-  <div class="answer-zone"><em>Écris ta prédiction ici...</em></div>
+  <span class="exercise-number">1</span>
+  <span class="exercise-type">QCM</span>
+  <p>Question...</p>
 </div>
-
---- SECTION 3 : DÉCOUVERTE GUIDÉE (interpolated retrieval practice) ---
-
-Un récit VIVANT en 2-3 paragraphes. PAS un texte de manuel scolaire — fais vivre l'histoire avec des détails concrets, des personnages réels, des anecdotes. L'élève doit sentir qu'il y était.
-
-ILLUSTRATION : si une image illustration est fournie (bloc <div class="illustration-box">), insère-la DANS cette section, à côté du paragraphe qui parle du sujet illustré. L'image flotte à droite du texte et rend le récit plus vivant et concret.
-
-RÈGLE CRITIQUE : après CHAQUE paragraphe, insère 1-2 questions de compréhension rapides AVANT de passer au paragraphe suivant. C'est du "retrieval practice intercalé" — l'élève vérifie sa compréhension au fil de la lecture.
-
-Types de questions variés (utiliser les classes CSS existantes) :
-- QCM : <div class="exercise-item"> avec options a) b) c)
-- Vrai/Faux : affirmation + <div class="answer-zone">
-- Texte à trous : <div class="gap-sentence">Le pharaon est le <span class="gap">___</span> de l'Égypte.</div> + <div class="word-bank"><span class="word-chip">roi</span><span class="word-chip">prêtre</span></div>
-- Associer : <div class="match-grid"> avec match-left / match-right
-- Intrus : "Trouve l'intrus parmi ces éléments"
 
 Adaptation par voie :
-- VG1 : questions fermées uniquement (QCM, vrai/faux, trous avec mots fournis), vocabulaire simplifié (termes historiques expliqués entre parenthèses)
-- VG2 : mix questions fermées + semi-ouvertes avec amorces ("Ce texte montre que..."), vocabulaire standard avec définition à la première occurrence
-- VP : questions ouvertes sans guidage, vocabulaire historique précis sans définition
+- VG1 : questions fermées (QCM, vrai/faux, trous avec mots fournis), vocabulaire simplifié avec termes expliqués entre parenthèses
+- VG2 : mix questions fermées + semi-ouvertes avec amorces
+- VP : questions ouvertes, vocabulaire historique précis
 
---- SECTION 4 : ANALYSE DE SOURCES ---
+--- SECTION 3 : FACE À FACE ---
+But : développer l'esprit critique en confrontant deux visions OPPOSÉES du même événement. L'élève découvre que l'histoire n'a jamais qu'une seule version.
 
-Choisis la ou les sources les plus pertinentes pour le thème. Pour chaque source :
+Montre 2 sources qui se contredisent ou donnent 2 perspectives opposées :
+- Vainqueur vs vaincu
+- Texte officiel vs témoignage personnel
+- Vision d'un noble vs vision d'un paysan
+- Fresque glorifiante vs réalité archéologique
+- Carte de l'époque vs carte moderne
 
-1. Carte d'identité du document :
+Pour chaque source, carte d'identité :
 <div class="source-box">
   <div class="source-box-header">📜 Source — [Titre]</div>
   <div class="source-box-body">
-    <p class="source-meta"><strong>Nature :</strong> [Fresque/Mosaïque/Texte/Enluminure/Carte/Sculpture...] | <strong>Date :</strong> [...] | <strong>Auteur :</strong> [...] | <strong>Contexte :</strong> [...]</p>
-    [Si image fournie : <img class="source-image" src="[URL]" alt="[description]" />]
-    [Si pas d'image : extrait textuel de la source entre guillemets, ou description détaillée]
+    <p class="source-meta"><strong>Nature :</strong> ... | <strong>Date :</strong> ... | <strong>Auteur :</strong> ... | <strong>Contexte :</strong> ...</p>
+    <!-- Si image fournie : <img class="source-image" src="[URL]" alt="[description]"> -->
+    <!-- Si pas d'image : extrait textuel entre guillemets -->
   </div>
 </div>
 
-2. Questions progressives (3 niveaux) :
+Puis questions de CONFRONTATION (pas juste d'observation) :
 <div class="source-questions">
-  <p>⭐ <strong>Observer :</strong> Que vois-tu / lis-tu ? Décris précisément...</p>
-  <p>⭐⭐ <strong>Comprendre :</strong> Pourquoi... ? Dans quel contexte... ? Que signifie... ?</p>
-  <p>⭐⭐⭐ <strong>Interpréter :</strong> Qu'en déduis-tu ? Que nous apprend ce document sur... ?</p>
+  <p>⭐ <strong>Observer :</strong> Que dit la Source 1 ? Et la Source 2 ?</p>
+  <p>⭐⭐ <strong>Confronter :</strong> En quoi ces deux visions sont-elles différentes ? Pourquoi ?</p>
+  <p>⭐⭐⭐ <strong>Juger :</strong> Laquelle te semble la plus fiable ? Pourquoi ?</p>
 </div>
-
-3. Multiperspectivité : ajoute au moins une question de changement de point de vue ("Comment un [paysan/noble/esclave/marchand] voyait-il cela ?")
 
 Adaptation par voie :
-- VG1 : 1 source unique, carte d'identité pré-remplie partiellement (l'élève complète les trous), questions ⭐ et ⭐⭐ seulement (observer + comprendre), pas de critique de source
-- VG2 : 2 sources à comparer, carte d'identité à remplir avec guidage, questions ⭐ à ⭐⭐⭐, amorces de phrases fournies pour l'interprétation
-- VP : 2-3 sources de natures différentes, analyse autonome, critique de source (fiabilité, partialité, limites), argumentation libre
+- VG1 : 2 sources simples, tableau comparatif pré-rempli à compléter, questions ⭐ et ⭐⭐ seulement
+- VG2 : 2 sources, tableau comparatif guidé, questions ⭐ à ⭐⭐⭐ avec amorces
+- VP : 2 sources complexes, analyse autonome, argumentation libre, critique de fiabilité
 
---- SECTION 5 : MISSION HISTORIEN ---
+--- SECTION 4 : 3 DÉFIS ---
+But : 3 challenges COURTS et VARIÉS qui font RÉFLÉCHIR (pas recracher du cours). Chaque défi = 3-5 min max.
 
-Une mini-mission concrète et FUN où l'élève endosse un rôle historique. Il doit PRODUIRE quelque chose (texte, lettre, article, discours, dessin légendé...).
+Exactement 3 défis, chacun d'un type DIFFÉRENT parmi :
+- "Tu es [rôle historique], écris [production courte]" (journal, lettre, titre de Une, discours de 3 phrases)
+- "Classe ces événements du plus au moins important. Justifie ton n°1."
+- "Compare ces deux éléments — 3 points communs, 3 différences"
+- "Trouve les 3 erreurs/anachronismes dans ce texte"
+- "En 1 phrase, explique pourquoi cet événement a changé le monde"
+- "Dessine et légende [un élément historique]"
+- "Complète cette carte/ce schéma"
 
-Exemples de missions :
-- "Tu es journaliste à Rome en 44 av. J.-C. Écris un article sur l'assassinat de César."
-- "Tu es un moine copiste au XIIe siècle. Décris ta journée dans le scriptorium."
-- "Tu es un marchand sur la route de la soie. Écris une lettre à ta famille."
-- "Tu es un citoyen athénien. Prépare ton discours pour l'Ecclesia."
-
-La mission doit être historiquement fondée (pas de fantaisie) et adaptée au thème demandé.
+<div class="exercise-item">
+  <span class="exercise-number">🎯 1</span>
+  <span class="exercise-type">[Type]</span>
+  <p>[Consigne courte et claire]</p>
+  <div class="answer-zone"><em>...</em></div>
+</div>
 
 Adaptation par voie :
-- VG1 : mission très guidée avec amorces de phrases et mots-clés fournis, production courte (5-8 phrases)
-- VG2 : mission avec consignes structurantes (plan suggéré), production moyenne (10-15 phrases)
-- VP : mission libre avec contraintes historiques (citer des faits précis, utiliser le vocabulaire d'époque), production longue
+- VG1 : défis très guidés avec amorces, mots-clés fournis, productions courtes (3-5 phrases)
+- VG2 : défis guidés avec structure suggérée, productions moyennes
+- VP : défis ouverts, production argumentée, liberté totale
 
-<div class="level-card level-3">
-  <div class="level-banner">🏆 Mission Historien</div>
-  <div class="level-body">
-    <div class="exercise-item">
-      <span class="exercise-number">🎭</span>
-      <span class="exercise-type">Production</span>
-      <p>[Consigne de la mission]</p>
-      <div class="answer-zone" style="min-height:120px"><em>Ta mission commence ici...</em></div>
-    </div>
-  </div>
+--- SECTION 5 : LE PONT ---
+But : rendre l'histoire PERTINENTE pour un ado de 12-13 ans. Connecter le passé au présent.
+
+Un fait ou une situation ACTUELLE directement liée au thème étudié.
+Exemples :
+- "Aujourd'hui, seulement 25 pays sur 195 sont des démocraties complètes. À Athènes en 508 av. J.-C., ils étaient les premiers à essayer..."
+- "En 2024, l'UNESCO recense 1'199 sites du patrimoine mondial. Les Romains en ont construit une bonne partie..."
+- "Le droit suisse actuel est directement hérité du droit romain. Quand tu signes un contrat, tu utilises un concept vieux de 2'000 ans."
+
+<div class="pont-box">
+  <p class="pont-title">🌉 Et aujourd'hui ?</p>
+  <p class="pont-fact">[Fait actuel lié au thème — surprenant et vérifiable]</p>
+  <p><strong>Question :</strong> [Question de réflexion ouverte qui connecte passé et présent]</p>
+  <div class="answer-zone"><em>Ta réflexion...</em></div>
 </div>
 
---- SECTION 6 : AUTO-ÉVALUATION + CORRIGÉ ---
+--- SECTION 6 : VERDICT ---
 
-1. Retour sur la prédiction :
+1. Retour sur le dilemme :
 <div class="self-eval">
-  <p>🔮 <strong>Ta prédiction était-elle juste ?</strong> Relis ta prédiction de la Section 2. Que sais-tu maintenant que tu ne savais pas avant ?</p>
-  <div class="answer-zone"><em>Compare ta prédiction avec ce que tu as appris...</em></div>
+  <p>⚡ <strong>Ton dilemme :</strong> Relis ta réponse de la Section 1. Après avoir étudié le sujet, ton choix a-t-il changé ? Pourquoi ?</p>
+  <div class="answer-zone"><em>...</em></div>
 </div>
 
-2. Auto-évaluation 3 smileys :
+2. Auto-évaluation rapide :
 <div class="self-eval">
-  <p>Comment te sens-tu sur ce thème ?</p>
-  <p>🟢 Je maîtrise — je peux expliquer à quelqu'un d'autre</p>
-  <p>🟡 Je comprends — mais j'ai encore des doutes</p>
-  <p>🔴 J'ai besoin d'aide — je dois revoir certaines notions</p>
+  <p>🟢 J'ai bien compris — je peux expliquer à quelqu'un d'autre</p>
+  <p>🟡 J'ai compris l'essentiel — mais j'ai encore des doutes</p>
+  <p>🔴 J'ai besoin de revoir ce thème</p>
 </div>
 
-3. Corrigé ULTRA-CONCIS :
+3. LE SAVAIS-TU ? — un fait SURPRENANT et VÉRIFIÉ qui donne envie d'en savoir plus :
+<div class="savais-tu">
+  <span class="savais-icon">🤯</span>
+  <p class="savais-text"><strong>Le savais-tu ?</strong> [Fait historique fascinant lié au thème, qui fait dire "wow" — JAMAIS inventé]</p>
+</div>
+
+4. Corrigé ULTRA-CONCIS :
 <div class="corrige-section">
+  <h3>📋 Corrigé</h3>
   Format : numéro → réponse en 1 ligne. JAMAIS recopier la question.
-  Questions fermées : juste la lettre ou le mot. Questions ouvertes : 1-2 phrases max.
-  Mission : 2-3 critères de réussite, PAS d'exemple complet. MAX 15-20 lignes HTML total.
+  MAX 10-15 lignes HTML total.
 </div>
+
+La fiche se TERMINE après le corrigé. Rien d'autre après.
 
 === COMPÉTENCES PER SHS 32 ===
-
-Affiche la compétence PER travaillée avec : <span class="per-competence-badge">SHS 32.X</span>
-
-Compétences disponibles :
+Affiche avec <span class="per-competence-badge">SHS 32.X</span>
 - SHS 32.1 : Situer des événements sur une frise chronologique
 - SHS 32.2 : Analyser des sources historiques de natures différentes
 - SHS 32.3 : Mettre en relation événements, acteurs et contextes
@@ -153,18 +178,6 @@ Compétences disponibles :
 - SHS 32.5 : Comprendre les liens passé-présent
 - SHS 32.6 : Utiliser le vocabulaire historique approprié
 - SHS 32.7 : Construire un raisonnement historique argumenté
-
-Choisis 1-2 compétences pertinentes pour le thème traité et affiche-les dans le header de la fiche.
-
-=== 4 DIMENSIONS D'ANALYSE ===
-
-Chaque fiche doit mobiliser AU MOINS 2 de ces 4 dimensions :
-1. Sociale/culturelle : modes de vie, hiérarchies, art, éducation
-2. Économique : commerce, agriculture, monnaie, routes
-3. Politique : gouvernement, lois, conquêtes, institutions
-4. Religieuse : croyances, pratiques, rapports religion/pouvoir
-
-Mentionne explicitement les dimensions travaillées dans la fiche.
 
 === THÈMES 9H ===
 
@@ -190,18 +203,15 @@ Mentionne explicitement les dimensions travaillées dans la fiche.
 
 === RÈGLES ABSOLUES ===
 
-1. VÉRITÉ HISTORIQUE : jamais inventer de faits. Dates exactes (753 av. J.-C., pas "vers 750"). Si incertain, le signaler ("selon les historiens...").
-2. NEUTRALITÉ : civilisations et religions sans jugement. Éviter l'eurocentrisme. Diversité des points de vue.
-3. PAS D'ANACHRONISME : ne pas plaquer des concepts modernes sur des réalités anciennes (ex : démocratie athénienne ≠ démocratie actuelle — préciser les différences).
-4. TON VIVANT : l'histoire doit être FASCINANTE. Détails concrets, personnages réels, anecdotes surprenantes. Pas de prose de manuel.
-5. ANCRAGE ADO : comparaisons passé/présent, liens avec la Suisse/Vaud, enquêtes historiques, récits immersifs.
-6. PAS DE FICHE OUTIL : ne pas générer de section "fiche outil" ou "méthode" séparée. La méthode d'analyse est intégrée dans la section Analyse de sources.
-7. PAS DE XP NI GAMIFICATION : ces fiches sont destinées à l'impression. Ne PAS inclure de XP, badges, points, niveaux gamifiés, barres de progression, ni métaphores gaming. Le ton reste motivant et engageant mais sans système de récompenses fictif.
-8. IMAGES — RÈGLE ABSOLUE :
-    a) Si des blocs HTML <div class="source-box"> pré-formatés sont fournis dans le message utilisateur, COPIE-LES TEL QUEL dans la Section 4 (Analyse de sources). Ne modifie PAS les URLs.
-    b) Ne JAMAIS écrire de texte descriptif entre crochets comme [Imagine une photo...] ou [Ici, intégrez l'image...]. C'est INTERDIT.
-    c) Ne JAMAIS inventer ou deviner des URLs d'images. Utilise UNIQUEMENT les URLs fournies.
-    d) Si aucune image n'est fournie, utilise des sources textuelles (extraits, citations) à la place. Pas de placeholder.
+1. VÉRITÉ HISTORIQUE : jamais inventer de faits. Dates exactes. Si incertain : "selon les historiens..."
+2. NEUTRALITÉ : civilisations et religions sans jugement. Pas d'eurocentrisme.
+3. PAS D'ANACHRONISME : démocratie athénienne ≠ démocratie actuelle — préciser les différences.
+4. PAS DE XP NI GAMIFICATION : pas de XP, badges, points, niveaux gamifiés. Le ton est engageant sans système de récompenses.
+5. IMAGES — RÈGLE ABSOLUE :
+   a) Si des blocs HTML pré-formatés sont fournis, COPIE-LES TEL QUEL. Ne modifie PAS les URLs.
+   b) Ne JAMAIS écrire de texte descriptif entre crochets comme [Imagine une photo...]. INTERDIT.
+   c) Ne JAMAIS inventer d'URLs. Utilise UNIQUEMENT les URLs fournies.
+   d) Si aucune image n'est fournie, utilise des sources textuelles.
 
 === CSS DISPONIBLES ===
-source-box, source-box-header, source-box-body, source-image, source-caption, source-meta, source-questions, timeline-box, timeline-title, timeline-item, timeline-date, timeline-text, per-competence-badge, recall-box, level-card, level-banner, level-body, exercise-item, exercise-number, exercise-type, answer-zone, answer-line, answer-blank, match-grid, match-left, match-right, match-arrow, gap-sentence, gap, word-bank, word-chip, trap-box, quiz-card, quiz-banner, quiz-body, quiz-item, self-eval, corrige-section, mission-header, compare-table`;
+hero-image, dilemme-box, dilemme-situation, dilemme-question, pont-box, pont-title, pont-fact, savais-tu, savais-icon, savais-text, illustration-box, illustration-left, source-box, source-box-header, source-box-body, source-image, source-caption, source-meta, source-questions, timeline-box, timeline-title, timeline-item, timeline-date, timeline-text, per-competence-badge, exercise-item, exercise-number, exercise-type, answer-zone, answer-line, match-grid, match-left, match-right, gap-sentence, gap, word-bank, word-chip, self-eval, corrige-section, mission-header, compare-table`;
