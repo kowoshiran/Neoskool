@@ -3366,7 +3366,16 @@ async function handleGenerate(e) {
     // Final iframe update with complete content
     const fullHTML = buildFullHTML(accumulatedHTML, metadata);
     resultIframe.srcdoc = fullHTML;
-    
+
+    // Save immediately (don't depend on animation timeouts)
+    console.log('Stream complete, saving...');
+    recordGeneration(metadata);
+    if (currentUser) {
+      saveSheetToSupabase(metadata);
+    } else {
+      localStorage.setItem('nsk_pending_sheet', JSON.stringify(metadata));
+    }
+
     // Remove blur with smooth transition
     resultIframe.classList.add('revealed');
     resultIframe.style.filter = '';
@@ -3408,14 +3417,7 @@ async function handleGenerate(e) {
         celebrationBar.classList.add('visible');
         celebrationBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-        // Track usage in Supabase + save sheet
-        recordGeneration(metadata);
-        if (currentUser) {
-          saveSheetToSupabase(metadata);
-        } else {
-          // Store metadata for saving after auth
-          localStorage.setItem('nsk_pending_sheet', JSON.stringify(metadata));
-        }
+        // Save already done above (after srcdoc set)
       }, 500);
     }, 1500);
 
