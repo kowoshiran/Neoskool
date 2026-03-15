@@ -222,7 +222,7 @@ export default async function handler(req) {
 
       // Priority 1: exact sous-thème match
       if (sousThemeKey && HISTOIRE_IMAGES[sousThemeKey] && HISTOIRE_IMAGES[sousThemeKey].length > 0) {
-        images = HISTOIRE_IMAGES[sousThemeKey];
+        images = [...HISTOIRE_IMAGES[sousThemeKey]];
         console.log(`Curated images found for sous-thème "${sousThemeKey}": ${images.length}`);
       }
 
@@ -232,15 +232,39 @@ export default async function handler(req) {
         const sousThemes = PERIODE_SOUSTHEMES[periodeKey] || [];
         for (const stKey of sousThemes) {
           if (HISTOIRE_IMAGES[stKey] && HISTOIRE_IMAGES[stKey].length > 0) {
-            // Take max 2 images per sous-thème to avoid overloading
-            images.push(...HISTOIRE_IMAGES[stKey].slice(0, 2));
+            images.push(...HISTOIRE_IMAGES[stKey]);
           }
         }
-        // Limit total to 4 images max
-        images = images.slice(0, 4);
         if (images.length > 0) {
           console.log(`Curated images found for période "${periodeKey}": ${images.length} (from sous-thèmes)`);
         }
+      }
+
+      // Diversify: pick max 3 images with different 'nature' types
+      if (images.length > 0) {
+        const diversified = [];
+        const usedNatures = new Set();
+        const usedUrls = new Set();
+        for (const img of images) {
+          const natureKey = (img.nature || '').toLowerCase().replace(/[^a-z]/g, '');
+          if (!usedNatures.has(natureKey) && !usedUrls.has(img.url)) {
+            diversified.push(img);
+            usedNatures.add(natureKey);
+            usedUrls.add(img.url);
+            if (diversified.length >= 3) break;
+          }
+        }
+        // If we have fewer than 2 diverse images, add more even if same nature (but not same URL)
+        if (diversified.length < 2) {
+          for (const img of images) {
+            if (!usedUrls.has(img.url)) {
+              diversified.push(img);
+              usedUrls.add(img.url);
+              if (diversified.length >= 3) break;
+            }
+          }
+        }
+        images = diversified;
       }
 
       if (images.length > 0) {
