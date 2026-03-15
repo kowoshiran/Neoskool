@@ -3482,7 +3482,10 @@ const degreMap = {'7-8H':'7-8H (10-12 ans)','9H':'9H (12-13 ans)','10H':'10H (13
 const voieMap = {'VG1':'VG niveau 1 (exigences de base)','VG2':'VG niveau 2 (exigences supérieures)','VP':'VP (voie prégymnasiale)'};
 
 function wizSelect(el, key, val) {
-  el.parentElement.querySelectorAll('.wiz-choice').forEach(c => c.classList.remove('selected'));
+  // Deselect all choices in the same wizard step (not just the same grid row)
+  const step = el.closest('.wiz-step');
+  if (step) step.querySelectorAll('.wiz-choice').forEach(c => c.classList.remove('selected'));
+  else el.parentElement.querySelectorAll('.wiz-choice').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   wizState[key] = val;
   const btn = document.getElementById('wn-' + wizStep);
