@@ -2026,6 +2026,7 @@ async function recordGeneration(metadata) {
   try {
     const { error } = await sbClient.from('generations').insert(row);
     if (error) console.error('Failed to record generation:', error);
+    else console.log('Generation recorded OK');
   } catch (err) {
     console.error('Failed to record generation:', err);
   }
@@ -2317,10 +2318,10 @@ function showEmailModal() { showAuthModal('signup', true); }
 function closeEmailModal() { closeAuthModal(); }
 
 async function saveSheetToSupabase(metadata) {
-  if (!currentUser) return;
+  if (!currentUser) { console.warn('Save skipped: no currentUser'); return; }
   const iframe = document.getElementById('result-iframe');
   const htmlContent = iframe.srcdoc;
-  if (!htmlContent) return;
+  if (!htmlContent) { console.warn('Save skipped: empty srcdoc'); return; }
 
   // Auto-generate title from params
   const titleParts = [metadata.matiere, metadata.degre];
@@ -2363,6 +2364,7 @@ async function saveSheetToSupabase(metadata) {
       metadata: metadata
     });
     if (error) console.error('Failed to save sheet:', error);
+    else console.log('Sheet saved OK:', autoTitle);
   } catch (err) {
     console.error('SHEET INSERT EXCEPTION:', err);
   }
