@@ -112,51 +112,63 @@ async function checkQuota(userId, email) {
   }
 }
 
-// Wikimedia Commons image search for Histoire
-async function searchWikimediaImages(query, limit = 5) {
+// Wikipedia Article API — searches for images from actual Wikipedia articles (much more reliable than Commons search)
+async function searchWikipediaImages(query, limit = 5) {
   try {
-    // Search in French first, then English fallback
-    const queries = [query, query.replace(/[àâäéèêëïîôùûüç]/g, c => ({à:'a',â:'a',ä:'a',é:'e',è:'e',ê:'e',ë:'e',ï:'i',î:'i',ô:'o',ù:'u',û:'u',ü:'u',ç:'c'})[c] || c)];
-    let allResults = [];
+    // Step 1: Find relevant French Wikipedia articles (1 API call)
+    const searchUrl = `https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&srlimit=3&format=json&origin=*`;
+    const searchRes = await fetch(searchUrl);
+    const searchData = await searchRes.json();
+    if (!searchData.query?.search?.length) return [];
 
-    for (const q of queries) {
-      if (allResults.length >= limit) break;
-      const searchUrl = `https://commons.wikimedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(q + ' filetype:bitmap')}&srnamespace=6&srlimit=${limit}&format=json&origin=*`;
-      const res = await fetch(searchUrl);
-      const data = await res.json();
-      if (!data.query || !data.query.search || data.query.search.length === 0) continue;
+    // Step 2: Get images from top 2 articles (1 API call, batched)
+    const articleTitles = searchData.query.search.slice(0, 2).map(s => s.title);
+    const imagesUrl = `https://fr.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(articleTitles.join('|'))}&prop=images&imlimit=30&format=json&origin=*`;
+    const imagesRes = await fetch(imagesUrl);
+    const imagesData = await imagesRes.json();
 
-      const titles = data.query.search
-        .map(s => s.title)
-        .filter(t => !allResults.some(r => r.title === t.replace('File:', '')));
-      if (titles.length === 0) continue;
-
-      const infoUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(titles.join('|'))}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=500&format=json&origin=*`;
-      const infoRes = await fetch(infoUrl);
-      const infoData = await infoRes.json();
-
-      const pages = infoData.query?.pages || {};
-      for (const page of Object.values(pages)) {
-        if (page.imageinfo && page.imageinfo[0]) {
-          const info = page.imageinfo[0];
-          const thumbUrl = info.thumburl || info.url;
-          // Skip SVGs, tiny images, and icons
-          if (!thumbUrl || thumbUrl.endsWith('.svg') || (info.thumbwidth && info.thumbwidth < 100)) continue;
-          const meta = info.extmetadata || {};
-          allResults.push({
-            title: page.title.replace('File:', ''),
-            thumbUrl,
-            descriptionUrl: info.descriptionurl,
-            artist: meta.Artist?.value?.replace(/<[^>]*>/g, '') || 'Inconnu',
-            license: meta.LicenseShortName?.value || 'Wikimedia Commons',
-            description: (meta.ImageDescription?.value || '').replace(/<[^>]*>/g, '').slice(0, 200)
-          });
-        }
+    // Collect image titles, filter out UI junk
+    let imageTitles = [];
+    const pages = imagesData.query?.pages || {};
+    for (const page of Object.values(pages)) {
+      for (const img of (page.images || [])) {
+        imageTitles.push(img.title);
       }
     }
-    return allResults.slice(0, limit);
+    imageTitles = imageTitles.filter(t =>
+      !t.match(/\.(svg|gif)$/i) &&
+      !t.match(/(icon|logo|button|arrow|commons-logo|edit-clear|disambig|question_book|wiki|folder|increase|decrease|steady|flag_of|drapeau_de|blason|coat_of_arms|coa_|wikt-|crystal-|gnome-|nuvola|ambox|padlock|semi-protection|red_pog|blue_pog)/i)
+    );
+    imageTitles = [...new Set(imageTitles)];
+    if (imageTitles.length === 0) return [];
+
+    // Step 3: Get image info from Commons (1 API call, batched max 10)
+    const batchTitles = imageTitles.slice(0, 10);
+    const infoUrl = `https://commons.wikimedia.org/w/api.php?action=query&titles=${encodeURIComponent(batchTitles.join('|'))}&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=500&format=json&origin=*`;
+    const infoRes = await fetch(infoUrl);
+    const infoData = await infoRes.json();
+
+    const results = [];
+    const infoPages = infoData.query?.pages || {};
+    for (const p of Object.values(infoPages)) {
+      if (results.length >= limit) break;
+      if (p.imageinfo?.[0]) {
+        const info = p.imageinfo[0];
+        const thumbUrl = info.thumburl || info.url;
+        if (!thumbUrl || thumbUrl.endsWith('.svg') || (info.thumbwidth && info.thumbwidth < 100)) continue;
+        const meta = info.extmetadata || {};
+        results.push({
+          title: (p.title || '').replace('File:', '').replace('Fichier:', ''),
+          thumbUrl,
+          artist: meta.Artist?.value?.replace(/<[^>]*>/g, '') || 'Inconnu',
+          license: meta.LicenseShortName?.value || 'Wikimedia Commons',
+          description: (meta.ImageDescription?.value || '').replace(/<[^>]*>/g, '').slice(0, 200)
+        });
+      }
+    }
+    return results;
   } catch (err) {
-    console.error('Wikimedia search failed:', err);
+    console.error('Wikipedia image search failed:', err);
     return [];
   }
 }
@@ -243,7 +255,7 @@ export default async function handler(req) {
     // For Histoire: search Wikimedia Commons for relevant images
     if (matiereNorm === 'histoire' && (histoirePeriode || sujet)) {
       const searchQuery = histoireSoustheme || histoirePeriode || sujet;
-      const images = await searchWikimediaImages(searchQuery);
+      const images = await searchWikipediaImages(searchQuery);
       if (images.length > 0) {
         userMessage += '\n\n=== SOURCES ICONOGRAPHIQUES WIKIMEDIA COMMONS ===';
         userMessage += '\nVoici des images libres de droits trouvées. Intègre-les dans la fiche avec <img src="URL" alt="description"> dans une div.source-box :';

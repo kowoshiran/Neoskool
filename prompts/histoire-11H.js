@@ -149,4 +149,5 @@ Quand le thème est la Shoah ou un génocide, les règles suivantes REMPLACENT l
 5. Multiperspectivité sans parti pris, tout en condamnant clairement les crimes contre l'humanité
 6. Ancrage suisse quand pertinent (neutralité, CICR, J sur les passeports, vote des femmes 1971, Genève internationale)
 7. L'histoire doit être FASCINANTE — narration vivante, détails concrets, anecdotes surprenantes
-8. Utiliser les classes CSS du design wrapper (voir liste ci-dessus)`;
+8. Utiliser les classes CSS du design wrapper (voir liste ci-dessus)
+9. PAS DE XP NI GAMIFICATION : ces fiches sont destinées à l'impression. Ne PAS inclure de XP, badges, points, niveaux gamifiés, barres de progression, ni métaphores gaming. Le ton reste motivant et engageant mais sans système de récompenses fictif.`;

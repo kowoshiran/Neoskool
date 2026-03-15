@@ -243,4 +243,5 @@ NE PAS inclure de fiche outil (tool-sheet) pour l'histoire.
 - Anecdotes surprenantes et véridiques
 - L'accroche doit provoquer un « Wow, vraiment ?! »
 - La mission doit donner ENVIE d'écrire
-- Adapter le registre à des ados de 13-14 ans : dynamique, direct, sans être infantilisant`;
+- Adapter le registre à des ados de 13-14 ans : dynamique, direct, sans être infantilisant
+- PAS DE XP NI GAMIFICATION : ces fiches sont destinées à l'impression. Ne PAS inclure de XP, badges, points, niveaux gamifiés, barres de progression, ni métaphores gaming. Le ton reste motivant et engageant mais sans système de récompenses fictif.`;
