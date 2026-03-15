@@ -240,7 +240,8 @@ export default async function handler(req) {
         }
       }
 
-      // Diversify: pick max 2 images with different 'nature' types (2 = optimal for 4-6 pages)
+      // Diversify: pick max 3 images with different 'nature' types
+      // Image 1 = illustration (in narrative), Images 2-3 = sources (in Section 4)
       if (images.length > 0) {
         const diversified = [];
         const usedNatures = new Set();
@@ -251,10 +252,10 @@ export default async function handler(req) {
             diversified.push(img);
             usedNatures.add(natureKey);
             usedUrls.add(img.url);
-            if (diversified.length >= 2) break;
+            if (diversified.length >= 3) break;
           }
         }
-        // If we only found 1 diverse image, add one more even if same nature (but not same URL)
+        // Fill up to at least 2 if not enough diverse natures
         if (diversified.length < 2) {
           for (const img of images) {
             if (!usedUrls.has(img.url)) {
@@ -268,32 +269,47 @@ export default async function handler(req) {
       }
 
       if (images.length > 0) {
-        // Provide EXACT HTML blocks that Claude must copy-paste into Section 4
-        userMessage += '\n\n=== IMAGES PRÉ-FORMATÉES — COPIE LE HTML TEL QUEL ===';
-        userMessage += '\nRÈGLE ABSOLUE : Copie ces blocs HTML EXACTEMENT dans la Section 4 (Analyse de sources).';
+        // Split: first image = illustration for narrative, rest = sources for Section 4
+        const illustration = images[0];
+        const sources = images.slice(1);
+
+        userMessage += '\n\n=== IMAGES FOURNIES — 2 USAGES DISTINCTS ===';
         userMessage += '\nNe modifie PAS les URLs. Ne décris PAS les images en texte. Ne génère AUCUNE image imaginaire.';
-        userMessage += '\nAjoute tes questions d\'analyse (⭐ Observer, ⭐⭐ Comprendre, ⭐⭐⭐ Interpréter) APRÈS chaque bloc source.\n';
 
-        images.forEach((img, i) => {
-          const alt = (img.description || img.title || '').replace(/"/g, '&quot;').slice(0, 120);
-          userMessage += `\n<div class="source-box">`;
-          userMessage += `\n  <div class="source-box-header">📄 Source ${i + 1} — ${img.title}</div>`;
-          userMessage += `\n  <div class="source-box-body">`;
-          userMessage += `\n    <p class="source-meta"><strong>Nature :</strong> ${img.nature || 'Document iconographique'} | <strong>Date :</strong> ${img.date || 'Voir source'} | <strong>Auteur :</strong> ${img.auteur || 'Domaine public'}</p>`;
-          userMessage += `\n    <img src="${img.url}" class="source-image" alt="${alt}">`;
-          userMessage += `\n  </div>`;
-          userMessage += `\n</div>\n`;
-        });
+        // ILLUSTRATION — for Section 3 (Découverte guidée)
+        const illAlt = (illustration.description || illustration.title || '').replace(/"/g, '&quot;').slice(0, 120);
+        userMessage += '\n\n--- IMAGE ILLUSTRATION (Section 3 : Découverte guidée) ---';
+        userMessage += '\nInsère cette image DANS le récit de la Section 3, à côté du paragraphe qui parle de ce sujet.';
+        userMessage += '\nUtilise ce format HTML exact :';
+        userMessage += `\n<div class="illustration-box">`;
+        userMessage += `\n  <img src="${illustration.url}" class="source-image" alt="${illAlt}">`;
+        userMessage += `\n  <p class="source-caption">${illustration.title} (${illustration.date})</p>`;
+        userMessage += `\n</div>\n`;
 
-        userMessage += '\nCopie ces blocs source-box dans ta Section 4, puis ajoute les questions d\'analyse après chaque bloc.';
+        // SOURCES — for Section 4 (Analyse de sources)
+        if (sources.length > 0) {
+          userMessage += '\n--- IMAGES SOURCES (Section 4 : Analyse de sources) ---';
+          userMessage += '\nCopie ces blocs HTML EXACTEMENT dans la Section 4. Ajoute les questions d\'analyse après chaque bloc.\n';
+
+          sources.forEach((img, i) => {
+            const alt = (img.description || img.title || '').replace(/"/g, '&quot;').slice(0, 120);
+            userMessage += `\n<div class="source-box">`;
+            userMessage += `\n  <div class="source-box-header">📄 Source ${i + 1} — ${img.title}</div>`;
+            userMessage += `\n  <div class="source-box-body">`;
+            userMessage += `\n    <p class="source-meta"><strong>Nature :</strong> ${img.nature || 'Document iconographique'} | <strong>Date :</strong> ${img.date || 'Voir source'} | <strong>Auteur :</strong> ${img.auteur || 'Domaine public'}</p>`;
+            userMessage += `\n    <img src="${img.url}" class="source-image" alt="${alt}">`;
+            userMessage += `\n  </div>`;
+            userMessage += `\n</div>\n`;
+          });
+        }
       } else {
         // No curated images — tell Claude to use text sources only
         userMessage += '\n\nAucune image disponible pour ce sous-thème. Utilise des sources TEXTUELLES (extraits de documents, citations historiques) dans la Section 4. Ne décris JAMAIS une image imaginaire entre crochets.';
       }
     }
 
-    // max_tokens: assez haut pour ne jamais couper une fiche, le prompt contrôle la concision
-    const maxTokens = 12288;
+    // max_tokens: 16384 pour histoire (images + 6 sections), 12288 pour les autres matières
+    const maxTokens = matiereNorm === 'histoire' ? 16384 : 12288;
 
     // Call Anthropic with streaming
     const anthropicResponse = await fetch('https://api.anthropic.com/v1/messages', {

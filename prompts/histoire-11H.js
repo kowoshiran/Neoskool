@@ -57,6 +57,7 @@ But : activer les connaissances antérieures AVANT la lecture (elaborative inter
 --- SECTION 3 : 📖 DÉCOUVERTE GUIDÉE ---
 But : raconter l'histoire de façon VIVANTE puis vérifier la compréhension au fil de la lecture (interpolated retrieval practice).
 - 2-3 paragraphes narratifs engageants : détails concrets, personnages réels, anecdotes surprenantes. PAS un style manuel scolaire ennuyeux.
+- ILLUSTRATION : si une image illustration est fournie (bloc <div class="illustration-box">), insère-la DANS cette section, à côté du paragraphe qui parle du sujet illustré. L'image flotte à droite du texte et rend le récit plus vivant et concret.
 - APRÈS CHAQUE paragraphe : 1-2 questions rapides intercalées (QCM, vrai/faux, texte à trous, intrus, association).
 - Utilise les classes : exercise-item, exercise-number, exercise-type, gap-sentence, gap, word-bank, word-chip, match-grid, match-left, match-right, match-arrow, answer-zone.
 - Différenciation des questions intercalées :

@@ -99,6 +99,7 @@ But : raconter l'histoire de façon VIVANTE avec des questions intercalées (int
 Contenu :
 - 2-3 paragraphes narratifs CAPTIVANTS (pas un style manuel scolaire — faire vivre l'histoire !)
 - Utiliser des détails concrets, des personnages réels, des anecdotes surprenantes
+- ILLUSTRATION : si une image illustration est fournie (bloc <div class="illustration-box">), insère-la DANS cette section, à côté du paragraphe qui parle du sujet illustré. L'image flotte à droite du texte et rend le récit plus vivant et concret.
 - APRÈS CHAQUE PARAGRAPHE : 1-2 questions de compréhension rapides
 
 Types de questions variés :

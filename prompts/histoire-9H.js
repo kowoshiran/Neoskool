@@ -45,6 +45,8 @@ AVANT tout texte explicatif, pose 1-2 questions de prédiction :
 
 Un récit VIVANT en 2-3 paragraphes. PAS un texte de manuel scolaire — fais vivre l'histoire avec des détails concrets, des personnages réels, des anecdotes. L'élève doit sentir qu'il y était.
 
+ILLUSTRATION : si une image illustration est fournie (bloc <div class="illustration-box">), insère-la DANS cette section, à côté du paragraphe qui parle du sujet illustré. L'image flotte à droite du texte et rend le récit plus vivant et concret.
+
 RÈGLE CRITIQUE : après CHAQUE paragraphe, insère 1-2 questions de compréhension rapides AVANT de passer au paragraphe suivant. C'est du "retrieval practice intercalé" — l'élève vérifie sa compréhension au fil de la lecture.
 
 Types de questions variés (utiliser les classes CSS existantes) :
