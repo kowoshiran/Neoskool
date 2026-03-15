@@ -14,6 +14,7 @@ import { block2 as anglais11H } from '../prompts/anglais-11H.js';
 import { block2 as histoire9H } from '../prompts/histoire-9H.js';
 import { block2 as histoire10H } from '../prompts/histoire-10H.js';
 import { block2 as histoire11H } from '../prompts/histoire-11H.js';
+import { HISTOIRE_IMAGES } from '../prompts/histoire-images.js';
 
 // Prompt lookup table
 const PROMPTS = {
@@ -252,22 +253,47 @@ export default async function handler(req) {
       if (adaptations) userMessage += `\nAdaptations BEP : ${adaptations}`;
     }
 
-    // For Histoire: search Wikimedia Commons for relevant images
-    if (matiereNorm === 'histoire' && (histoirePeriode || sujet)) {
-      const searchQuery = histoireSoustheme || histoirePeriode || sujet;
-      const images = await searchWikipediaImages(searchQuery);
+    // For Histoire: inject curated images (priority) + API fallback
+    if (matiereNorm === 'histoire') {
+      let images = [];
+
+      // Priority 1: Curated image bank (100% reliable)
+      const sousThemeKey = histoireSoustheme || '';
+      if (sousThemeKey && HISTOIRE_IMAGES[sousThemeKey] && HISTOIRE_IMAGES[sousThemeKey].length > 0) {
+        images = HISTOIRE_IMAGES[sousThemeKey];
+        console.log(`Curated images found for "${sousThemeKey}": ${images.length}`);
+      }
+
+      // Priority 2: Wikipedia API fallback (if no curated images)
+      if (images.length === 0 && (histoirePeriode || sujet)) {
+        const searchQuery = histoireSoustheme || histoirePeriode || sujet;
+        const apiImages = await searchWikipediaImages(searchQuery);
+        images = apiImages.map(img => ({
+          url: img.thumbUrl,
+          title: img.title,
+          nature: 'Document iconographique',
+          date: 'Voir source',
+          auteur: img.artist,
+          description: img.description
+        }));
+        console.log(`Wikipedia API images for "${searchQuery}": ${images.length}`);
+      }
+
       if (images.length > 0) {
-        userMessage += '\n\n=== SOURCES ICONOGRAPHIQUES WIKIMEDIA COMMONS ===';
-        userMessage += '\nVoici des images libres de droits trouvées. Intègre-les dans la fiche avec <img src="URL" alt="description"> dans une div.source-box :';
+        userMessage += '\n\n=== SOURCES ICONOGRAPHIQUES — IMAGES OBLIGATOIRES ===';
+        userMessage += '\nRÈGLE ABSOLUE : Tu DOIS utiliser ces images dans la section Analyse de sources avec <img src="URL" class="source-image" alt="description">.';
+        userMessage += '\nNe JAMAIS décrire une image imaginaire entre crochets [Imagine...]. Utilise UNIQUEMENT les URLs ci-dessous.';
+        userMessage += '\nSi une image ne correspond pas au thème, ignore-la, mais utilise au minimum 1 image.';
         images.forEach((img, i) => {
           userMessage += `\n\nImage ${i + 1} :`;
           userMessage += `\n- Titre : ${img.title}`;
-          userMessage += `\n- URL : ${img.thumbUrl}`;
-          userMessage += `\n- Auteur : ${img.artist}`;
-          userMessage += `\n- Licence : ${img.license}`;
+          userMessage += `\n- URL : ${img.url}`;
+          userMessage += `\n- Nature : ${img.nature || 'Document iconographique'}`;
+          userMessage += `\n- Date : ${img.date || 'Voir source'}`;
+          userMessage += `\n- Auteur : ${img.auteur || 'Domaine public'}`;
           if (img.description) userMessage += `\n- Description : ${img.description}`;
         });
-        userMessage += '\n\nUtilise ces images comme sources primaires dans les exercices d\'analyse de document.';
+        userMessage += '\n\nIntègre ces images dans des div.source-box avec carte d\'identité complète (nature, date, auteur, contexte).';
       }
     }
 

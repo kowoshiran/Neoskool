@@ -183,6 +183,7 @@ Mentionne explicitement les dimensions travaillées dans la fiche.
 5. ANCRAGE ADO : comparaisons passé/présent, liens avec la Suisse/Vaud, enquêtes historiques, récits immersifs.
 6. PAS DE FICHE OUTIL : ne pas générer de section "fiche outil" ou "méthode" séparée. La méthode d'analyse est intégrée dans la section Analyse de sources.
 7. PAS DE XP NI GAMIFICATION : ces fiches sont destinées à l'impression. Ne PAS inclure de XP, badges, points, niveaux gamifiés, barres de progression, ni métaphores gaming. Le ton reste motivant et engageant mais sans système de récompenses fictif.
+8. IMAGES OBLIGATOIRES : Si des URLs d'images sont fournies dans le message utilisateur, tu DOIS les utiliser avec <img src="URL" class="source-image" alt="description"> dans une div.source-box. Ne JAMAIS inventer ou décrire une image imaginaire entre crochets comme [Imagine une photo...]. Utilise UNIQUEMENT les URLs réelles fournies.
 
 === CSS DISPONIBLES ===
 source-box, source-box-header, source-box-body, source-image, source-caption, source-meta, source-questions, timeline-box, timeline-title, timeline-item, timeline-date, timeline-text, per-competence-badge, recall-box, level-card, level-banner, level-body, exercise-item, exercise-number, exercise-type, answer-zone, answer-line, answer-blank, match-grid, match-left, match-right, match-arrow, gap-sentence, gap, word-bank, word-chip, trap-box, quiz-card, quiz-banner, quiz-body, quiz-item, self-eval, corrige-section, mission-header, compare-table`;
